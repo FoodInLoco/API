@@ -9,6 +9,7 @@ namespace FoodInLoco.API.Controllers;
 public class UserController : ControllerBase
 {
     private readonly Application.Data.FoodInLocoDb _dbContext;
+
     public UserController(Application.Data.FoodInLocoDb dbContext)
     {
         _dbContext = dbContext;
@@ -17,16 +18,20 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAsync()
     {
-        var cakes = await _dbContext.User.ToListAsync();
-        return Ok(cakes);
+        var user = await _dbContext.User.ToListAsync();
+        if (user == null)
+        {
+            return NotFound();
+        }
+        return Ok(user);
     }
 
     [HttpGet]
     [Route("get-user-by-id")]
     public async Task<IActionResult> GetUserById(int id)
     {
-        var cake = await _dbContext.User.FindAsync(id);
-        return Ok(cake);
+        var user = await _dbContext.User.FindAsync(id);
+        return Ok(user);
     }
 
     [HttpPost]
@@ -49,12 +54,12 @@ public class UserController : ControllerBase
     [HttpDelete]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        var cakeToDelete = await _dbContext.User.FindAsync(id);
-        if (cakeToDelete == null)
+        var userToDelete = await _dbContext.User.FindAsync(id);
+        if (userToDelete == null)
         {
             return NotFound();
         }
-        _dbContext.User.Remove(cakeToDelete);
+        _dbContext.User.Remove(userToDelete);
         await _dbContext.SaveChangesAsync();
         return NoContent();
     }
