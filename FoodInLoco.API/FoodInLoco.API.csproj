@@ -6,6 +6,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+	<Target Name="PrePublishTarget" AfterTargets="Publish">
+		<Exec Command="dotnet ef database update" />
+	</Target>
+
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
             <PrivateAssets>all</PrivateAssets>
@@ -23,5 +27,13 @@
 			<UserProperties properties_4launchsettings_1json__JsonSchema="" />
 		</VisualStudio>
 	</ProjectExtensions>
+
+	<PropertyGroup Condition=" '$(Configuration)' == '' Or '$(Configuration)' == 'Debug'">
+		<EnvironmentName>Development</EnvironmentName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' != '' AND '$(Configuration)' != 'Debug' ">
+		<EnvironmentName>Production</EnvironmentName>
+	</PropertyGroup>
 
 </Project>
