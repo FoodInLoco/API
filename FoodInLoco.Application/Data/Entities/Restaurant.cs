@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FoodInLoco.Application.Data.Entities;
 
-public class User : Entity
+public class Restaurant : Entity
 {
     [JsonProperty("email")]
     [DataType(DataType.EmailAddress)]

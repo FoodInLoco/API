@@ -11,4 +11,5 @@ public class FoodInLocoDb : DbContext
     }
 
     public DbSet<User> User { get; set; }
+    public DbSet<Restaurant> Restaurant { get; set; }
 }

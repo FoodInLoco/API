@@ -9,7 +9,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSqlite<FoodInLoco.Application.Data.FoodInLocoDb>(builder.Configuration.GetConnectionString("DbConnection"));
+builder.Services.AddDbContext<FoodInLocoDb>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
 
 var app = builder.Build();
 
