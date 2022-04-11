@@ -1,66 +1,71 @@
-using FoodInLoco.Application.Data.Entities;
+using FoodInLoco.Application.Contracts.Models;
+using FoodInLoco.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace FoodInLoco.API.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class UserController : ControllerBase
+namespace FoodInLoco.API.Controllers
 {
-    private readonly Application.Data.FoodInLocoDb _dbContext;
-
-    public UserController(Application.Data.FoodInLocoDb dbContext)
+    [ApiController]
+    [Route("[controller]")]
+    public class UserController : ControllerBase
     {
-        _dbContext = dbContext;
-    }
+        private readonly IUserService _userService;
 
-    [HttpGet]
-    public async Task<IActionResult> GetAsync()
-    {
-        var user = await _dbContext.User.ToListAsync();
-        if (user == null)
+        public UserController(IUserService userService)
         {
+            _userService = userService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAsync()
+        {
+            var users = await _userService.ListAsync();
+            if (users == null)
+            {
+                return NotFound();
+            }
+            return Ok(users);
+        }
+
+        [HttpGet]
+        [Route("get-user-by-id")]
+        public async Task<IActionResult> GetUserById(long id)
+        {
+            var user = await _userService.GetAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostAsync(UserModel user)
+        {
+            var result = await _userService.AddAsync(user);
+            if (result.Succeeded)
+                return Created($"/get-user-by-id?id={user.Id}", user);
+            return BadRequest();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> PutAsync(UserModel userToUpdate)
+        {
+            var result = await _userService.UpdateAsync(userToUpdate);
+            if (result.Succeeded)
+                return NoContent();
+            return BadRequest();
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var result = await _userService.DeleteAsync(id);
+            if (result.Succeeded)
+            {
+                return NoContent();
+            }
             return NotFound();
         }
-        return Ok(user);
-    }
-
-    [HttpGet]
-    [Route("get-user-by-id")]
-    public async Task<IActionResult> GetUserById(int id)
-    {
-        var user = await _dbContext.User.FindAsync(id);
-        return Ok(user);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> PostAsync(User user)
-    {
-        _dbContext.User.Add(user);
-        await _dbContext.SaveChangesAsync();
-        return Created($"/get-user-by-id?id={user.Id}", user);
-    }
-
-    [HttpPut]
-    public async Task<IActionResult> PutAsync(User userToUpdate)
-    {
-        _dbContext.User.Update(userToUpdate);
-        await _dbContext.SaveChangesAsync();
-        return NoContent();
-    }
-
-    [Route("{id}")]
-    [HttpDelete]
-    public async Task<IActionResult> DeleteAsync(int id)
-    {
-        var userToDelete = await _dbContext.User.FindAsync(id);
-        if (userToDelete == null)
-        {
-            return NotFound();
-        }
-        _dbContext.User.Remove(userToDelete);
-        await _dbContext.SaveChangesAsync();
-        return NoContent();
     }
 }

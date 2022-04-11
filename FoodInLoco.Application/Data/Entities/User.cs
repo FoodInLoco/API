@@ -1,22 +1,53 @@
-using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
+using DotNetCore.Domain;
+using FoodInLoco.Application.Data.Enums;
+using FoodInLoco.Application.Data.ValueObjects;
 
-namespace FoodInLoco.Application.Data.Entities;
-
-public class User : Entity
+namespace FoodInLoco.Application.Data.Entities
 {
-    [JsonProperty("email")]
-    [DataType(DataType.EmailAddress)]
-    public string Email { get; set; }
+    public class User : Entity<long>
+    {
+        public User
+        (
+            Name name,
+            Email email,
+            Phone phone,
+            Auth auth
+        )
+        {
+            Name = name;
+            Email = email;
+            CellPhone = phone;
+            Auth = auth;
+            Activate();
+        }
 
-    [JsonProperty("password")]
-    [StringLength(100, MinimumLength = 8)]
-    [DataType(DataType.Password)]
-    public string Password { get; set; }
+        public User(long id) => Id = id;
 
-    [JsonProperty("name")]
-    public string Name { get; set; }
+        public Name Name { get; private set; }
 
-    [JsonProperty("phone_number")]
-    public string PhoneNumber { get; set; }
+        public Email Email { get; private set; }
+
+        public Phone CellPhone { get; private set; }
+
+        public Status Status { get; private set; }
+
+        public Auth Auth { get; private set; }
+
+        public void Activate()
+        {
+            Status = Status.Active;
+        }
+
+        public void Inactivate()
+        {
+            Status = Status.Inactive;
+        }
+
+        public void Update(string firstName, string lastName, string email, string ddd, string number)
+        {
+            Name = new Name(firstName, lastName);
+            Email = new Email(email);
+            CellPhone = new Phone(ddd, number);
+        }
+    }
 }

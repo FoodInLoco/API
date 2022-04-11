@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodInLoco.Application.Migrations
 {
-    [DbContext(typeof(FoodInLocoDb))]
+    [DbContext(typeof(Context))]
     [Migration("20220314231919_restaurant")]
     partial class restaurant
     {

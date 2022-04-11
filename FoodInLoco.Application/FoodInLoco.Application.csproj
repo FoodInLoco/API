@@ -7,6 +7,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="DotNetCore.Domain" Version="16.26.0" />
+		<PackageReference Include="DotNetCore.EntityFrameworkCore" Version="16.26.0" />
+		<PackageReference Include="DotNetCore.Objects" Version="16.26.0" />
+		<PackageReference Include="DotNetCore.Results" Version="16.28.0" />
+		<PackageReference Include="DotNetCore.Security" Version="16.28.0" />
+		<PackageReference Include="DotNetCore.Validation" Version="16.28.0" />
+		<PackageReference Include="FluentValidation" Version="10.4.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
 			<PrivateAssets>all</PrivateAssets>

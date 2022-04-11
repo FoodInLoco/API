@@ -1,6 +1,6 @@
 ﻿namespace FoodInLoco.Application.Services.Interfaces
 {
-    internal interface IRestaurantService
+    public interface IRestaurantService
     {
     }
 }

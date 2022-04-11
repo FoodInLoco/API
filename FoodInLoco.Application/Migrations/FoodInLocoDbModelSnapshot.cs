@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodInLoco.Application.Migrations
 {
-    [DbContext(typeof(FoodInLocoDb))]
+    [DbContext(typeof(Context))]
     partial class FoodInLocoDbModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
