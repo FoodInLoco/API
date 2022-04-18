@@ -52,6 +52,13 @@ namespace FoodInLoco.Application.Data
                     UserId = 1L,
                     Value = "letter.pedro@gmail.com"
                 });
+
+                user.OwnsOne(userPhone => userPhone.CellPhone).HasData(new
+                {
+                    UserId = 1L,
+                    DDD = "85",
+                    PhoneNumber = "997851936"
+                });
             });
         }
     }

@@ -17,10 +17,10 @@ namespace FoodInLoco.Application.Data.Repositories.Interfaces
 
         Task UpdateStatusAsync(User user);
 
-        Task<List<User>> GetAsync();
-        Task<User> GetById(long id);
-        Task<User> PostAsync(User user);
-        Task<User> PutAsync(User userToUpdate);
-        Task DeleteAsync(long id);
+        //Task<List<User>> GetAsync();
+        //Task<User> GetById(long id);
+        //Task<User> PostAsync(User user);
+        //Task<User> PutAsync(User userToUpdate);
+        //Task DeleteAsync(long id);
     }
 }

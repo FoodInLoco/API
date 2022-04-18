@@ -47,35 +47,35 @@ namespace FoodInLoco.Application.Data.Repositories
             return await Queryable.Select(Z => Z).ToListAsync();
         }
 
-        public async Task<User> GetById(long id)
-        {
-            var user = await _dbContext.User.FindAsync(id);
-            return user;
-        }
+        //public async Task<User> GetById(long id)
+        //{
+        //    var user = await _dbContext.User.FindAsync(id);
+        //    return user;
+        //}
 
-        public async Task<User> PostAsync(User user)
-        {
-            _dbContext.User.Add(user);
-            await _dbContext.SaveChangesAsync();
-            return await GetById(user.Id);
-        }
+        //public async Task<User> PostAsync(User user)
+        //{
+        //    _dbContext.User.Add(user);
+        //    await _dbContext.SaveChangesAsync();
+        //    return await GetById(user.Id);
+        //}
 
-        public async Task<User> PutAsync(User userToUpdate)
-        {
-            _dbContext.User.Update(userToUpdate);
-            await _dbContext.SaveChangesAsync();
-            return await GetById(userToUpdate.Id);
-        }
+        //public async Task<User> PutAsync(User userToUpdate)
+        //{
+        //    _dbContext.User.Update(userToUpdate);
+        //    await _dbContext.SaveChangesAsync();
+        //    return await GetById(userToUpdate.Id);
+        //}
 
-        public async Task DeleteAsync(long id)
-        {
-            var userToDelete = await GetById(id);
-            if (userToDelete == null)
-            {
-                return;
-            }
-            _dbContext.User.Remove(userToDelete);
-            await _dbContext.SaveChangesAsync();
-        }
+        //public async Task DeleteAsync(long id)
+        //{
+        //    var userToDelete = await GetById(id);
+        //    if (userToDelete == null)
+        //    {
+        //        return;
+        //    }
+        //    _dbContext.User.Remove(userToDelete);
+        //    await _dbContext.SaveChangesAsync();
+        //}
     }
 }

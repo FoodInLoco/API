@@ -1,8 +1,6 @@
 using DotNetCore.Domain;
 using FoodInLoco.Application.Data.Enums;
 using FoodInLoco.Application.Data.ValueObjects;
-using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
 
 namespace FoodInLoco.Application.Data.Entities
 {
