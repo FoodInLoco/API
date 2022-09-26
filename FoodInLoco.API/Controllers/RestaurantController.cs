@@ -23,7 +23,8 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpPost]
+        [Route("grid")]
         public async Task<IActionResult> GetGridAsync(GridParameters parameters)
         {
             var result = await _restaurantService.GridAsync(parameters);
