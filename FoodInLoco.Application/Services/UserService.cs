@@ -1,0 +1,130 @@
+﻿using DotNetCore.Objects;
+using DotNetCore.Results;
+using DotNetCore.Validation;
+using FoodInLoco.Application.Data;
+using FoodInLoco.Application.Data.Entities;
+using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Data.Repositories.Interfaces;
+using FoodInLoco.Application.Factories.Interfaces;
+using FoodInLoco.Application.Services.Interfaces;
+
+namespace FoodInLoco.Application.Services
+{
+    public sealed class UserService : IUserService
+    {
+        private readonly IAuthService _authService;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserRepository _userRepository;
+        private readonly IUserFactory _userFactory;
+
+        public UserService
+        (
+            IAuthService authService,
+            IUnitOfWork unitOfWork,
+            IUserRepository userRepository,
+            IUserFactory userFactory
+        )
+        {
+            _authService = authService;
+            _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
+            _userFactory = userFactory;
+        }
+
+        public async Task<IResult<long>> AddAsync(UserModel model)
+        {
+            var validation = new AddUserModelValidator().Validation(model);
+
+            if (validation.Failed)
+                return validation.Fail<long>();
+
+            var auth = await _authService.AddAsync(model.Auth);
+
+            if (auth.Failed)
+                return auth.Fail<long>();
+
+            var user = _userFactory.Create(model, auth.Data);
+
+            await _userRepository.AddAsync(user);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return user.Id.Success();
+        }
+
+        public async Task<DotNetCore.Results.IResult> DeleteAsync(long id)
+        {
+            var authId = await _userRepository.GetAuthIdByUserIdAsync(id);
+
+            await _userRepository.DeleteAsync(id);
+
+            await _authService.DeleteAsync(authId);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+
+        public Task<UserModel> GetAsync(long id)
+        {
+            return _userRepository.GetModelByIdAsync(id);
+        }
+
+        public Task<Grid<UserModel>> GridAsync(GridParameters parameters)
+        {
+            return _userRepository.GridAsync(parameters);
+        }
+
+        public async Task<DotNetCore.Results.IResult> InactivateAsync(long id)
+        {
+            var user = new User(id);
+
+            user.Inactivate();
+
+            await _userRepository.UpdateStatusAsync(user);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+        
+        public async Task<DotNetCore.Results.IResult> ActivateAsync(long id)
+        {
+            var user = new User(id);
+
+            user.Activate();
+
+            await _userRepository.UpdateStatusAsync(user);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+
+        public async Task<IEnumerable<UserModel>> ListAsync()
+        {
+            return await _userRepository.ListModelAsync();
+        }
+
+        public async Task<DotNetCore.Results.IResult> UpdateAsync(UserModel model)
+        {
+            var validation = new UpdateUserModelValidator().Validation(model);
+
+            if (validation.Failed)
+                return validation;
+
+            var user = await _userRepository.GetAsync(model.Id);
+
+            if (user is null)
+                return Result.Success();
+
+            user.Update(model.FirstName, model.LastName, model.Email, model.DDD, model.PhoneNumber);
+
+            await _userRepository.UpdateAsync(user);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+    }
+}

@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "89d0d536-2dd6-401a-abd9-0a4acf4d8c2e",
+		"name": "FoodInLoco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{foodInLocoHost}}User",
+					"host": [
+						"{{foodInLocoHost}}User"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{foodInLocoHost}}User/get-user-by-id?id=3",
+					"host": [
+						"{{foodInLocoHost}}User"
+					],
+					"path": [
+						"get-user-by-id"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{foodInLocoHost}}User/2",
+					"host": [
+						"{{foodInLocoHost}}User"
+					],
+					"path": [
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"stringst\",\r\n  \"name\": \"string\",\r\n  \"phoneNumber\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{foodInLocoHost}}User",
+					"host": [
+						"{{foodInLocoHost}}User"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 2,\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"stringstssss\",\r\n  \"name\": \"string\",\r\n  \"phoneNumber\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{foodInLocoHost}}User",
+					"host": [
+						"{{foodInLocoHost}}User"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
