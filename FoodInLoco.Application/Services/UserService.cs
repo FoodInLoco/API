@@ -52,7 +52,7 @@ namespace FoodInLoco.Application.Services
             return user.Id.Success();
         }
 
-        public async Task<DotNetCore.Results.IResult> DeleteAsync(long id)
+        public async Task<IResult> DeleteAsync(long id)
         {
             var authId = await _userRepository.GetAuthIdByUserIdAsync(id);
 
@@ -75,7 +75,7 @@ namespace FoodInLoco.Application.Services
             return _userRepository.GridAsync(parameters);
         }
 
-        public async Task<DotNetCore.Results.IResult> InactivateAsync(long id)
+        public async Task<IResult> InactivateAsync(long id)
         {
             var user = new User(id);
 
@@ -88,7 +88,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
         
-        public async Task<DotNetCore.Results.IResult> ActivateAsync(long id)
+        public async Task<IResult> ActivateAsync(long id)
         {
             var user = new User(id);
 
@@ -106,7 +106,7 @@ namespace FoodInLoco.Application.Services
             return await _userRepository.ListModelAsync();
         }
 
-        public async Task<DotNetCore.Results.IResult> UpdateAsync(UserModel model)
+        public async Task<IResult> UpdateAsync(UserModel model)
         {
             var validation = new UpdateUserModelValidator().Validation(model);
 

@@ -7,7 +7,7 @@ namespace FoodInLoco.Application.Data
     {
         public Context CreateDbContext(string[] args)
         {
-            const string connectionString = "Host=ec2-44-207-253-50.compute-1.amazonaws.com;Database=d5l5apig829nrt;Username=lkagcwvzznyyeh;Password=9858fa2603ac764902f174a7df75e241169f9c5f18fa2c3460f1ee29d3a8cf60";
+            const string connectionString = "Host=ec2-52-70-45-163.compute-1.amazonaws.com;Database=dehd7sqq8cqgmn;Username=tetnyugdhyakpy;Password=a7d40faaa9c9f010ffb57aae4813b3725db2bf567d5c0c4f87f3a7a8b3fdfcfa";
 
             return new Context(new DbContextOptionsBuilder<Context>().UseNpgsql(connectionString).Options);
         }

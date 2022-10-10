@@ -1,31 +1,31 @@
 namespace FoodInLoco.Application.Data.Models
 {
-    public class RestaurantModel
+    public sealed record RestaurantModel
     {
-        public long Id { get; set; }
+        public long Id { get; init; }
 
-        public string CompanyName { get; set; }
+        public string CompanyName { get; init; }
 
-        public string TradingName { get; set; }
+        public string TradingName { get; init; }
 
-        public string Email { get; set; }
+        public string Email { get; init; }
 
-        public string DDD { get; set; }
+        public string DDD { get; init; }
 
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; init; }
 
-        public string State { get; set; }
+        public string State { get; init; }
 
-        public string City { get; set; }
+        public string City { get; init; }
 
-        public string ZipCode { get; set; }
+        public string ZipCode { get; init; }
 
-        public string Street { get; set; }
+        public string Street { get; init; }
 
-        public long Number { get; set; }
+        public long Number { get; init; }
 
-        public string Complement { get; set; }
+        public string Complement { get; init; }
 
-        public AuthModel? Auth { get; set; }
+        public AuthModel? Auth { get; init; }
     }
 }

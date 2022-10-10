@@ -1,4 +1,5 @@
 ﻿using DotNetCore.Results;
+using DotNetCore.Validation;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.Repositories.Interfaces;
@@ -29,12 +30,10 @@ namespace FoodInLoco.Application.Services
 
         public async Task<IResult<Auth>> AddAsync(AuthModel model)
         {
-            var failResult = Result<Auth>.Fail("Alguma das validações não passaram!");
+            var validation = new AuthModelValidator().Validation(model);
 
-            var validation = new AuthModelValidator().Validate(model);
-
-            if (!validation.IsValid)
-                return failResult;
+            if (validation.Failed)
+                return validation.Fail<Auth>();
 
             if (await _authRepository.AnyByLoginAsync(model.Login))
                 return Result<Auth>.Fail("Login já existe!");
@@ -59,9 +58,9 @@ namespace FoodInLoco.Application.Services
         {
             var failResult = Result<TokenModel>.Fail("Usuário ou senha inválidos!");
 
-            var validation = new SignInModelValidator().Validate(model);
+            var validation = new SignInModelValidator().Validation(model);
 
-            if (!validation.IsValid)
+            if (validation.Failed)
                 return failResult;
 
             var auth = await _authRepository.GetByLoginAsync(model.Login);
