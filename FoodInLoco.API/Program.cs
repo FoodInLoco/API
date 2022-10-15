@@ -65,6 +65,8 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddResponseCompression();
 
+builder.Services.AddCors();
+
 builder.Services.AddContext<Context>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
 
@@ -112,6 +114,8 @@ app.UseResponseCompression();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.MapControllers();
 
