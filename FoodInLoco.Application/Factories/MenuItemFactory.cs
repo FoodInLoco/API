@@ -1,6 +1,5 @@
-using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.Entities;
-using FoodInLoco.Application.Data.Enums;
+using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Factories.Interfaces;
 
 namespace FoodInLoco.Application.Factories

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace FoodInLoco.Application.Data.Repositories
+namespace FoodInLoco.Application.Repositories
 {
     public class EFRepository<T> : Repository<T> where T : class
     {

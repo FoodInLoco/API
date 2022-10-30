@@ -4,7 +4,7 @@ namespace FoodInLoco.Application.Data.Models
     {
         public AddUserModelValidator()
         {
-            FirstName(); LastName(); Email(); DDD(); PhoneNumber(); Auth();
+            FirstName(); LastName(); Email(); DDD(); PhoneNumber(); Roles();
         }
     }
 }

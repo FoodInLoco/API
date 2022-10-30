@@ -53,9 +53,5 @@ public sealed class RestaurantConfiguration : IEntityTypeConfiguration<Restauran
         });
 
         builder.HasMany(obj => obj.Menus).WithOne(obj => obj.Restaurant).HasForeignKey("RestaurantId");
-
-        builder.HasOne(obj => obj.Auth).WithOne().HasForeignKey<Restaurant>("AuthId").IsRequired();
-
-        builder.HasIndex("AuthId").IsUnique();
     }
 }

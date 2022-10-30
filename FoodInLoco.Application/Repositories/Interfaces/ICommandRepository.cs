@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace FoodInLoco.Application.Data.Repositories.Interfaces
+namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface ICommandRepository<T> where T : class
     {

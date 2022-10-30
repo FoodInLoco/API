@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using FoodInLoco.Application.Data.Repositories.Interfaces;
+using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Extensions;
 
-namespace FoodInLoco.Application.Data.Repositories
+namespace FoodInLoco.Application.Repositories
 {
     public class EFQueryRepository<T> : IQueryRepository<T> where T : class
     {

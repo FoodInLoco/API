@@ -6,8 +6,6 @@ namespace FoodInLoco.Application.Data.Expressions
 {
     public static class RestaurantExpression
     {
-        public static Expression<Func<Restaurant, long>> AuthId => restaurant => restaurant.Auth.Id;
-
         public static Expression<Func<Restaurant, RestaurantModel>> Model => restaurant => new RestaurantModel
         {
             Id = restaurant.Id,
@@ -21,7 +19,7 @@ namespace FoodInLoco.Application.Data.Expressions
             ZipCode = restaurant.Address.ZipCode,
             Street = restaurant.Address.Street,
             Number = restaurant.Address.Number,
-            Complement = restaurant.Address.Complement,
+            Complement = restaurant.Address.Complement
         };
 
         public static Expression<Func<Restaurant, bool>> Id(long id)

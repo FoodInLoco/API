@@ -8,7 +8,7 @@ namespace FoodInLoco.Application.Helpers
 {
     public static class TokenService
     {
-        public static string GenerateToken(Auth auth)
+        public static string GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
@@ -16,8 +16,9 @@ namespace FoodInLoco.Application.Helpers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, auth.Login.ToString()),
-                    new Claim(ClaimTypes.Role, auth.Roles.ToString())
+                    new Claim(ClaimTypes.Email, user.Email.Value),
+                    new Claim(ClaimTypes.Role, user.Roles.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)

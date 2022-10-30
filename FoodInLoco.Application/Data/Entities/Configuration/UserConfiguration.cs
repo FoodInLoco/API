@@ -37,8 +37,10 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
             objPhone.Property(phone => phone.PhoneNumber).HasColumnName(nameof(Phone.PhoneNumber)).HasMaxLength(9).IsRequired();
         });
 
-        builder.HasOne(obj => obj.Auth).WithOne().HasForeignKey<User>("AuthId").IsRequired();
+        builder.Property(obj => obj.Password).HasMaxLength(1000).IsRequired();
 
-        builder.HasIndex("AuthId").IsUnique();
+        builder.Property(obj => obj.Salt).HasMaxLength(1000).IsRequired();
+
+        builder.Property(obj => obj.Roles).IsRequired();
     }
 }

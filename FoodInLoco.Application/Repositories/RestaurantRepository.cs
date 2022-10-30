@@ -1,11 +1,12 @@
 ﻿using DotNetCore.Objects;
+using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Expressions;
 using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Data.Repositories.Interfaces;
+using FoodInLoco.Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace FoodInLoco.Application.Data.Repositories
+namespace FoodInLoco.Application.Repositories
 {
     public sealed class RestaurantRepository : EFRepository<Restaurant>, IRestaurantRepository
     {
@@ -14,11 +15,6 @@ namespace FoodInLoco.Application.Data.Repositories
         public RestaurantRepository(Context context) : base(context)
         {
             _dbContext = context;
-        }
-
-        public Task<long> GetAuthIdByRestaurantIdAsync(long id)
-        {
-            return Queryable.Where(RestaurantExpression.Id(id)).Select(RestaurantExpression.AuthId).SingleOrDefaultAsync();
         }
 
         public Task<RestaurantModel> GetModelByIdAsync(long id)
@@ -36,9 +32,9 @@ namespace FoodInLoco.Application.Data.Repositories
             return await Queryable.Select(RestaurantExpression.Model).ToListAsync();
         }
 
-        public Task UpdateStatusAsync(Restaurant user)
+        public Task UpdateStatusAsync(Restaurant restaurant)
         {
-            return UpdatePartialAsync(new { user.Id, user.Status });
+            return UpdatePartialAsync(new { restaurant.Id, restaurant.Status });
         }
     }
 }

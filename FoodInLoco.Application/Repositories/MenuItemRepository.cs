@@ -1,7 +1,8 @@
+using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
-using FoodInLoco.Application.Data.Repositories.Interfaces;
+using FoodInLoco.Application.Repositories.Interfaces;
 
-namespace FoodInLoco.Application.Data.Repositories
+namespace FoodInLoco.Application.Repositories
 {
     public sealed class MenuItemRepository : EFRepository<MenuItem>, IMenuItemRepository
     {

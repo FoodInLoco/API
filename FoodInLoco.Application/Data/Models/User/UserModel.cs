@@ -1,3 +1,5 @@
+using FoodInLoco.Application.Data.Enums;
+
 namespace FoodInLoco.Application.Data.Models
 {
     public sealed record UserModel
@@ -14,6 +16,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public string PhoneNumber { get; init; }
 
-        public AuthModel? Auth { get; init; }
+        public string Password { get; set; }
+
+        public Roles Roles { get; init; }
     }
 }

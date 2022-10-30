@@ -3,6 +3,7 @@ using System;
 using FoodInLoco.Application.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,16 +12,78 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FoodInLoco.Application.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20221024092256_atualiza auth")]
+    partial class atualizaauth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Auth", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<long?>("RestaurantId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Roles")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Auth", "Auth");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Password = "AMBUbAtpVz8KgjjypcusZY5csFQvwdTEBs49fm8oqptFK2qDnVo8oTMVj+7t3jblUzzALYXy1jwqm0xGO0k0eJqlHb9EkqTQBSHQRWHgqR10Pu7xFQBHZU+78P/4exmbtR9Z24Gca+/n/d9Wk8SLHfE0+3GduNTIxhz/JfFISVKY22MmnpTk4OF6ja4jiLJwTvq2ZBLI1UwSJKJ7luf6cN06IbHDI+m4jLMfQ2+bUB3bARv37Bx2ZFwrMCcyrLq+JXTAVO1SbSXed85iAsuvCFUNiSifKzvLyB3f161nc/p7T7N3dlpJP9/B6Q79nrPcO/VbomzML9eQJEX2zESpN2CxgEsUjNFhOGj/CuirW0mzweoO6xiyiCydYJEvfa+7Y3FjPIu+BtYSFgLUYLJgMG7CCbX5zMG0pcSfzciAwYJH1CT/ZAFrj7Epa+sArpD+eS8M2aF7Iik9tLyWf2g4mjgu42tGzu+6E2RP54PFFZ7lu+36o4SnMrLTtTZAvDhOc4lt/6CHb6dWOsa37Yc5WQ39Cus8vQj4cqHyQ2Bg/1Ault/4eovlvMEVUoF3gJhsXqu5iHAg6L2I7zUCV5/hCMOICTjBaPL28PByw3XxZ919P8l5rHzMplDjnIHdClLxWUlCSoNE1n3xJs0h0j8URTohAN97VMNIohJrN9WVpLI=",
+                            Roles = 3,
+                            Salt = "ab4fa790-1ebd-4b65-a33b-0c8c5cbfbbd7"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Password = "sz6XQQpxdSbaBN6UPKSJXt9viQo4n1dwaciIDTlj2YgfgernIN6aeC13cjUijhRDCF3xejyLS/Xo4eU7TfQxllIJw57P/rkyV5iwmsisoEdnMGK1ru3DygJxX5iPAzl9jnUBdqSV+ORzQ7i8l8YMMaP2yhLcvXRO0oe/4HSM0wytdKg9V2Zr9q1fIBRSUfSOJN89j6CUxQC3MPmcDGQqPwS1LHqA7/9cZHmyLqVvY7ptNyJYf8WeJTmXXvo73dVTV4VB9vOUgBj9mj/PpSskpTuSXb3Pq/Q16un/lKCoKCMc3wVxxpZsic/s8uPC8sqgjJbMSNqt0MWEnSdxqyQcAgXUYNvKYufjUPB0reJ7cGW8gA+hntqNynz0icmzJiCeoq3GJ3tzETV8gMqbU1JRWjxv/8V02QCD8TrbYaA2ikuwwb+aRDFwIrK9qnKFDVVtFMa+PHVTh1je5uctubYWj4/fP2CIk3Loo7P8H1tu80Bohsby4735gWgYWTIktNI7oQmqF6Ep0Y25vDmbIHvn1+M4SwqD+mJ5Xxw5cKaGltwR5rIEzkgGSqM2qQK88vGQrYqjCvsC9w/eq8rjkhy/Iicwt2ueYbdapcrrfDBpF3/V5O2FjwRYLjy1TpSy+TuRwUYuot9AW+Tv78uBj8/M4v8qP/ZF1uwW4ALR65aQZtI=",
+                            Roles = 4,
+                            Salt = "e1460931-6535-41e0-b6de-4a7d86768c61"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Password = "gMz9ZdqfuJYjc4SmopC/g2seudzNeHmNZapn9J+gQqH5GdoLFsu35nZpEoqPXAGBDaTIUAEr8RjvhVUF2HhgIr56QwrzXeN0id3og9qAnIuOkmRjhDJg17xHWHBNlf2TaKoibyOObKsN8NzbgzwXfR8VLwXDot1ZG42Tf7zAGAv89nPZ3e008WokdjAvyJv4J8lJOY1oPu5VyK6cAn4CS/SpUndJMCaQvb4Qpf8Gqk8aHnsnFypyyHJEN5GA9Xq4bOxI/UoL9uG141fUfBDU0BBtEDzvx+KDW+UpDhLwfpUTrYBiWvuta/MCZFW+w0+JE+PkR9tYQlXPKzUH/+gSoxXqcUmeebti3Oq6FaF+GZ5RgNrs3MfCut18ivYaiiikuAfnGUt7UBWOGFOCCFKr+UxsOzCwkno+CqGSf3hQ9Ssc8rG80YVl4DdFKUbl7pRDl9L+qCNJtHq23Y/KUjuOQVvyBDoIBV0nwLqYbYLh1NUPXJDxCCoyBDNV4N4YZCIq5njncKCYd6+ccM2ZiZsElDGiOnmCA1xzF7El5VYpFN6IqIsfS81/mJ10BehEtDWIkjRwE/cjmrNVJNYZxVsEcljtEXEi2ShdEOmOg4ZUTMfF/WvuDS6l0TiqPu3BdzSEp8i1xUKX9efusG7tupIWCLY3UeqcHLTU0/xr3vXVCXQ=",
+                            Roles = 1,
+                            Salt = "5698c8b4-c81b-4e87-8201-b9363f24845b"
+                        });
+                });
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Menu", b =>
                 {
@@ -36,7 +99,7 @@ namespace FoodInLoco.Application.Migrations
                     b.Property<DateTime>("InitialDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2022, 10, 30, 9, 10, 14, 63, DateTimeKind.Utc).AddTicks(1346));
+                        .HasDefaultValue(new DateTime(2022, 10, 24, 9, 22, 56, 87, DateTimeKind.Utc).AddTicks(1131));
 
                     b.Property<long>("RestaurantId")
                         .HasColumnType("bigint");
@@ -52,7 +115,7 @@ namespace FoodInLoco.Application.Migrations
                         new
                         {
                             Id = 1L,
-                            InitialDate = new DateTime(2022, 10, 30, 9, 10, 14, 251, DateTimeKind.Utc).AddTicks(6241),
+                            InitialDate = new DateTime(2022, 10, 24, 9, 22, 56, 264, DateTimeKind.Utc).AddTicks(4320),
                             RestaurantId = 1L
                         });
                 });
@@ -109,10 +172,16 @@ namespace FoodInLoco.Application.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<long>("AuthId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthId")
+                        .IsUnique();
 
                     b.ToTable("Restaurant", "Restaurant");
 
@@ -120,6 +189,7 @@ namespace FoodInLoco.Application.Migrations
                         new
                         {
                             Id = 1L,
+                            AuthId = 2L,
                             Status = 1
                         });
                 });
@@ -132,23 +202,16 @@ namespace FoodInLoco.Application.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
-
-                    b.Property<int>("Roles")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Salt")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+                    b.Property<long>("AuthId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthId")
+                        .IsUnique();
 
                     b.ToTable("User", "User");
 
@@ -156,19 +219,72 @@ namespace FoodInLoco.Application.Migrations
                         new
                         {
                             Id = 1L,
-                            Password = "MgpcGfZdk9zZHEpZDFSwoNl83Jpsh8dsyF1GXo5SRbLM5Ufz2VutzdiJPpKgVwWjQsiTkcRRSMwmVJKEFAGT4iSdI7VV8cgcjwe0noDbgDsSWu0PT+3rHjQD8CGCjpw8zy61iBRJjHMkZtIqj1KQGp8Afx/2aA7+b8FpqwWfAvIuBsVlk2nsfJ/bUx5wLMm+COI2Oqa5KF7tqBVqeS4o7fxpm8MpHWTsZw8Yus5Ve8in29elbzMlEJ0ib8JfIyYiusEyz4nnUVHS0XXKa18cszcubgssNU4tLtYcrC+Q6eTxB40Ue7IbgYeKBusfFEjJgXIdvn9RK4fwfRq+BrIIHLwszLfPAf0otqgPfieJi6y3OLBJj1Z26UIDmVCv3Vvb+IXEaPz9+h2i5PCP7tf/vu7yr6sws4mBiH65P9d5oiuvzkjxheoJLzdKALmsZa3SCmZsvLA+GsJf4M5uo6kWRyCBaUxXT++wn2a8UUg7H2rQD5bUqyr/XzK/MGiTDqXrDfW4AuNdXWSM03L2Oyyv45KyLwrkFaF1R9MrSpwPjObn3X1VtM3nXF0GHyfXXkGcOW4qG7MVW0ebJ/v6cpQPUvJxyUOimp7UuZYsRKCv2KVUhZWA4N/9j//4TBg7TO+2IKOj6o/KioGjBiQiTg1D8xxyAcjYoouvaHsLabAlvBk=",
-                            Roles = 3,
-                            Salt = "a21e371e-7db0-4809-aa62-4d8bb33535c1",
+                            AuthId = 1L,
                             Status = 1
                         },
                         new
                         {
                             Id = 2L,
-                            Password = "y2EOamUBVjnb1XIERBJz/fe17z7igtjh8Y3VmOP6wZrRXxkpp2AHNj7921qxZYUMJRWQHC/XXzl0vtiTLPiCfKAOYmh+rUxfnj1R1SyXBxpl2tu4auUC659y+jlGq/H1/T6swrDGJ/ZZblBiZM6nrfvTexNGK1NWB57hPgtskCeFSz38iPyaBfOwmnSJsvqHCgKdAU423Q5eKXk24FuZUIrfAXJbdF8hvMOVvko6VPJv/xGfOWOL1l4s8SchgA9rgRG2+S8M3UNpR/T/K/4b0/TOJbGSu0fIX8wS76XXrtZZUBW8NjpQPLMCpI/tUpabUxPtHVVxrXEsppJCFVt0EaHBymuyWpLTrErTZTdcpjedNti7+CQ19UR2tGI9QbdLjEOyW5TKI2w6tJrqztc9hQ7VGmTjwp9RXXfLTBRnkdYwZooBVeKqSdFYpXESS4XxWrFBqLZF2WneO3bc2vJm0DnxlKOI5DtwBNcjR8qSmR3bGm3vLDBAQvrUiZsu7BOiH9snrVlh4xrHlO0syCldQUJKbDyxqOujaSR3N3WhCqByghjBf9qmRQyUopNx9WOun8jsHE6WqcVC5G3+8xbFwlGO7Ku03mdCkYlkV79n6dF7bxpZExe9beT9M6lzn77tt6T/exuwUGZcCCuY79QREOBoWDcgoVI0wHUm+0YqVSg=",
-                            Roles = 1,
-                            Salt = "1f414507-de3c-4835-9844-11de08995d7f",
+                            AuthId = 3L,
                             Status = 1
                         });
+                });
+
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Auth", b =>
+                {
+                    b.HasOne("FoodInLoco.Application.Data.Entities.Restaurant", "Restaurant")
+                        .WithOne()
+                        .HasForeignKey("FoodInLoco.Application.Data.Entities.Auth", "RestaurantId");
+
+                    b.HasOne("FoodInLoco.Application.Data.Entities.User", "User")
+                        .WithOne()
+                        .HasForeignKey("FoodInLoco.Application.Data.Entities.Auth", "UserId");
+
+                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Email", "Email", b1 =>
+                        {
+                            b1.Property<long>("AuthId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(300)
+                                .HasColumnType("character varying(300)")
+                                .HasColumnName("Email");
+
+                            b1.HasKey("AuthId");
+
+                            b1.HasIndex("Value")
+                                .IsUnique();
+
+                            b1.ToTable("Auth", "Auth");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AuthId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    AuthId = 1L,
+                                    Value = "admin@foodinloco.com"
+                                },
+                                new
+                                {
+                                    AuthId = 2L,
+                                    Value = "mcdonalds@foodinloco.com"
+                                },
+                                new
+                                {
+                                    AuthId = 3L,
+                                    Value = "letter.pedro@gmail.com"
+                                });
+                        });
+
+                    b.Navigation("Email")
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Menu", b =>
@@ -302,6 +418,12 @@ namespace FoodInLoco.Application.Migrations
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Restaurant", b =>
                 {
+                    b.HasOne("FoodInLoco.Application.Data.Entities.Auth", "Auth")
+                        .WithOne()
+                        .HasForeignKey("FoodInLoco.Application.Data.Entities.Restaurant", "AuthId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Phone", "CellPhone", b1 =>
                         {
                             b1.Property<long>("RestaurantId")
@@ -459,6 +581,8 @@ namespace FoodInLoco.Application.Migrations
                     b.Navigation("Address")
                         .IsRequired();
 
+                    b.Navigation("Auth");
+
                     b.Navigation("CellPhone")
                         .IsRequired();
 
@@ -471,6 +595,12 @@ namespace FoodInLoco.Application.Migrations
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.User", b =>
                 {
+                    b.HasOne("FoodInLoco.Application.Data.Entities.Auth", "Auth")
+                        .WithOne()
+                        .HasForeignKey("FoodInLoco.Application.Data.Entities.User", "AuthId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Phone", "CellPhone", b1 =>
                         {
                             b1.Property<long>("UserId")
@@ -582,6 +712,8 @@ namespace FoodInLoco.Application.Migrations
                                     LastName = "Lopes"
                                 });
                         });
+
+                    b.Navigation("Auth");
 
                     b.Navigation("CellPhone")
                         .IsRequired();

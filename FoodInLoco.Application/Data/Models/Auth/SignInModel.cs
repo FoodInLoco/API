@@ -1,4 +1,4 @@
 namespace FoodInLoco.Application.Data.Models
 {
-    public sealed record SignInModel(string Login, string Password);
+    public sealed record SignInModel(string Email, string Password);
 }

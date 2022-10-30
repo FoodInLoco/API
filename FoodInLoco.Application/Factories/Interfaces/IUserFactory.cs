@@ -5,6 +5,6 @@ namespace FoodInLoco.Application.Factories.Interfaces
 {
     public interface IUserFactory
     {
-        User Create(UserModel model, Auth auth);
+        User Create(UserModel model);
     }
 }

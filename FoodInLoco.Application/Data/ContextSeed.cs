@@ -14,44 +14,10 @@ namespace FoodInLoco.Application.Data
 
         public static void Seed(this ModelBuilder builder)
         {
-            builder.SeedAuths();
             builder.SeedUsers();
             builder.SeedRestaurants();
             builder.SeedMenus();
             builder.SeedItemsMenu();
-        }
-
-        private static void SeedAuths(this ModelBuilder builder)
-        {
-            builder.Entity<Auth>(auth =>
-            {
-                auth.HasData(new
-                {
-                    Id = 1L,
-                    Login = "admin",
-                    Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(guid1.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
-                    Salt = guid1.ToString(),
-                    Roles = Roles.User | Roles.Admin
-                });
-
-                auth.HasData(new
-                {
-                    Id = 2L,
-                    Login = "macdonalds",
-                    Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(guid2.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
-                    Salt = guid2.ToString(),
-                    Roles = Roles.Restaurant
-                });
-
-                auth.HasData(new
-                {
-                    Id = 3L,
-                    Login = "pedro",
-                    Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(guid3.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
-                    Salt = guid3.ToString(),
-                    Roles = Roles.User
-                });
-            });
         }
 
         private static void SeedUsers(this ModelBuilder builder)
@@ -62,7 +28,9 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = 1L,
                     Status = Status.Active,
-                    AuthId = 1L
+                    Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(guid1.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
+                    Salt = guid1.ToString(),
+                    Roles = Roles.User | Roles.Admin
                 });
 
                 user.OwnsOne(userName => userName.Name).HasData(new
@@ -75,7 +43,7 @@ namespace FoodInLoco.Application.Data
                 user.OwnsOne(userEmail => userEmail.Email).HasData(new
                 {
                     UserId = 1L,
-                    Value = "letter.pedro@gmail.com"
+                    Value = "admin@foodinloco.com"
                 });
 
                 user.OwnsOne(userPhone => userPhone.CellPhone).HasData(new
@@ -92,7 +60,9 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = 2L,
                     Status = Status.Active,
-                    AuthId = 3L
+                    Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(guid3.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
+                    Salt = guid3.ToString(),
+                    Roles = Roles.User
                 });
 
                 user.OwnsOne(userName => userName.Name).HasData(new
@@ -105,7 +75,7 @@ namespace FoodInLoco.Application.Data
                 user.OwnsOne(userEmail => userEmail.Email).HasData(new
                 {
                     UserId = 2L,
-                    Value = "letter@gmail.com"
+                    Value = "letter.pedro@gmail.com"
                 });
 
                 user.OwnsOne(userPhone => userPhone.CellPhone).HasData(new
@@ -124,28 +94,27 @@ namespace FoodInLoco.Application.Data
                 restaurant.HasData(new
                 {
                     Id = 1L,
-                    Status = Status.Active,
-                    AuthId = 2L
+                    Status = Status.Active
                 });
 
                 restaurant.OwnsOne(restaurantName => restaurantName.Company).HasData(new
                 {
                     RestaurantId = 1L,
-                    CompanyName = "Mac Donalds",
+                    CompanyName = "Mc Donalds",
                     TradingName = "Méqui"
                 });
 
                 restaurant.OwnsOne(restaurantEmail => restaurantEmail.Email).HasData(new
                 {
                     RestaurantId = 1L,
-                    Value = "letter.pedro@gmail.com"
+                    Value = "mcdonalds@foodinloco.com"
                 });
 
                 restaurant.OwnsOne(restaurantPhone => restaurantPhone.CellPhone).HasData(new
                 {
                     RestaurantId = 1L,
                     DDD = "85",
-                    PhoneNumber = "997851936"
+                    PhoneNumber = "998888888"
                 });
 
                 restaurant.OwnsOne(restaurantPhone => restaurantPhone.Address).HasData(new

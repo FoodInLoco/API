@@ -25,7 +25,5 @@ namespace FoodInLoco.Application.Data.Models
         public long Number { get; init; }
 
         public string Complement { get; init; }
-
-        public AuthModel? Auth { get; init; }
     }
 }

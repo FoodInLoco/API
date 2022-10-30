@@ -11,6 +11,8 @@ namespace FoodInLoco.Application.Services.Interfaces
         Task<IResult> DeleteAsync(long id);
 
         Task<UserModel> GetAsync(long id);
+        
+        Task<UserModel> GetByEmail(string email);
 
         Task<Grid<UserModel>> GridAsync(GridParameters parameters);
 
@@ -21,5 +23,7 @@ namespace FoodInLoco.Application.Services.Interfaces
         Task<IEnumerable<UserModel>> ListAsync();
 
         Task<IResult> UpdateAsync(UserModel model);
+
+        Task<IResult<TokenModel>> SignInAsync(SignInModel model);
     }
 }

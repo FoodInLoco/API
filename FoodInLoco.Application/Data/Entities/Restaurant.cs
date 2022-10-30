@@ -1,4 +1,5 @@
 using FoodInLoco.Application.Data.Enums;
+using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.ValueObjects;
 
 namespace FoodInLoco.Application.Data.Entities
@@ -10,15 +11,13 @@ namespace FoodInLoco.Application.Data.Entities
             Company company,
             Email email,
             Phone phone,
-            Address address,
-            Auth auth
+            Address address
         )
         {
             Company = company;
             Email = email;
             CellPhone = phone;
             Address = address;
-            Auth = auth;
             Activate();
         }
 
@@ -33,8 +32,6 @@ namespace FoodInLoco.Application.Data.Entities
         public Address Address { get; private set; }
 
         public Status Status { get; private set; }
-
-        public Auth Auth { get; private set; }
 
         public ICollection<Menu> Menus { get; private set; }
 
@@ -55,6 +52,25 @@ namespace FoodInLoco.Application.Data.Entities
             Email = new Email(email);
             CellPhone = new Phone(ddd, phoneNumber);
             Address = new Address(state, city, zipCode, street, addressNumber, complement);
+        }
+
+        public static implicit operator RestaurantModel(Restaurant restaurant)
+        {
+            return new RestaurantModel()
+            {
+                Id = restaurant.Id,
+                CompanyName = restaurant.Company.CompanyName,
+                TradingName = restaurant.Company.TradingName,
+                Email = restaurant.Email.Value,
+                DDD = restaurant.CellPhone.DDD,
+                PhoneNumber = restaurant.CellPhone.PhoneNumber,
+                State = restaurant.Address.State,
+                City = restaurant.Address.City,
+                ZipCode = restaurant.Address.ZipCode,
+                Street = restaurant.Address.Street,
+                Number = restaurant.Address.Number,
+                Complement = restaurant.Address.Complement
+            };
         }
     }
 }

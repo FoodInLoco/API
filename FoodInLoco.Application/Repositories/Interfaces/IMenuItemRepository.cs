@@ -1,6 +1,6 @@
 using FoodInLoco.Application.Data.Entities;
 
-namespace FoodInLoco.Application.Data.Repositories.Interfaces
+namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface IMenuItemRepository : IRepository<MenuItem>
     {

@@ -6,7 +6,7 @@ namespace FoodInLoco.Application.Data.Models
     {
         public SignInModelValidator()
         {
-            RuleFor(signIn => signIn.Login).NotEmpty();
+            RuleFor(signIn => signIn.Email).NotEmpty().EmailAddress();
             RuleFor(signIn => signIn.Password).NotEmpty();
         }
     }

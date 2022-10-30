@@ -4,31 +4,34 @@ using DotNetCore.Validation;
 using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Data.Repositories.Interfaces;
 using FoodInLoco.Application.Factories.Interfaces;
+using FoodInLoco.Application.Helpers;
+using FoodInLoco.Application.Helpers.Interfaces;
+using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
+using System.Security.Claims;
 
 namespace FoodInLoco.Application.Services
 {
     public sealed class UserService : IUserService
     {
-        private readonly IAuthService _authService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserRepository _userRepository;
         private readonly IUserFactory _userFactory;
+        private readonly IHashService _hashService;
 
         public UserService
         (
-            IAuthService authService,
             IUnitOfWork unitOfWork,
             IUserRepository userRepository,
-            IUserFactory userFactory
+            IUserFactory userFactory,
+            IHashService hashService
         )
         {
-            _authService = authService;
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
             _userFactory = userFactory;
+            _hashService = hashService;
         }
 
         public async Task<IResult<long>> AddAsync(UserModel model)
@@ -38,12 +41,14 @@ namespace FoodInLoco.Application.Services
             if (validation.Failed)
                 return validation.Fail<long>();
 
-            var auth = await _authService.AddAsync(model.Auth);
+            if (await _userRepository.AnyByEmailAsync(model.Email))
+                return Result<long>.Fail("Login já existe!");
 
-            if (auth.Failed)
-                return auth.Fail<long>();
+            var user = _userFactory.Create(model);
 
-            var user = _userFactory.Create(model, auth.Data);
+            var password = _hashService.Create(model.Password, user.Salt);
+
+            user.UpdatePassword(password);
 
             await _userRepository.AddAsync(user);
 
@@ -54,11 +59,9 @@ namespace FoodInLoco.Application.Services
 
         public async Task<IResult> DeleteAsync(long id)
         {
-            var authId = await _userRepository.GetAuthIdByUserIdAsync(id);
-
             await _userRepository.DeleteAsync(id);
 
-            await _authService.DeleteAsync(authId);
+            // adicionar deleção de restaurantes do usuário
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -68,6 +71,11 @@ namespace FoodInLoco.Application.Services
         public Task<UserModel> GetAsync(long id)
         {
             return _userRepository.GetModelByIdAsync(id);
+        }
+        
+        public Task<UserModel> GetByEmail(string email)
+        {
+            return _userRepository.GetModelByEmailAsync(email);
         }
 
         public Task<Grid<UserModel>> GridAsync(GridParameters parameters)
@@ -125,6 +133,35 @@ namespace FoodInLoco.Application.Services
             await _unitOfWork.SaveChangesAsync();
 
             return Result.Success();
+        }
+
+        public async Task<IResult<TokenModel>> SignInAsync(SignInModel model)
+        {
+            var failResult = Result<TokenModel>.Fail("Usuário ou senha inválidos!");
+
+            var validation = new SignInModelValidator().Validation(model);
+
+            if (validation.Failed)
+                return failResult;
+
+            var user = await _userRepository.GetByEmailAsync(model.Email);
+
+            if (user is null)
+                return failResult;
+
+            var password = _hashService.Create(model.Password, user.Salt);
+
+            if (user.Password != password)
+                return failResult;
+
+            return CreateToken(user);
+        }
+
+        private static IResult<TokenModel> CreateToken(User user)
+        {
+            var token = TokenService.GenerateToken(user);
+
+            return new TokenModel(token, user.Id, user.Name.FirstName, user.Name.LastName, user.Email.Value).Success();
         }
     }
 }

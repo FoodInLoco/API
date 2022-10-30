@@ -3,7 +3,7 @@ using DotNetCore.Security;
 using DotNetCore.Validation;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Data.Repositories.Interfaces;
+using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Factories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
 

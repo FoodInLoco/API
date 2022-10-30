@@ -1,4 +1,5 @@
 using FoodInLoco.Application.Data.Enums;
+using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.ValueObjects;
 
 namespace FoodInLoco.Application.Data.Entities
@@ -10,13 +11,14 @@ namespace FoodInLoco.Application.Data.Entities
             Name name,
             Email email,
             Phone phone,
-            Auth auth
+            Roles roles
         )
         {
             Name = name;
             Email = email;
             CellPhone = phone;
-            Auth = auth;
+            Roles = roles;
+            Salt = Guid.NewGuid().ToString();
             Activate();
         }
 
@@ -30,7 +32,11 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Status Status { get; private set; }
 
-        public Auth Auth { get; private set; }
+        public Roles Roles { get; private set; }
+
+        public string Password { get; private set; }
+
+        public string Salt { get; private set; }
 
         public void Activate()
         {
@@ -47,6 +53,25 @@ namespace FoodInLoco.Application.Data.Entities
             Name = new Name(firstName, lastName);
             Email = new Email(email);
             CellPhone = new Phone(ddd, number);
+        }
+
+        public void UpdatePassword(string password)
+        {
+            Password = password;
+        }
+
+        public static implicit operator UserModel(User user)
+        {
+            return new UserModel()
+            {
+                Id = user.Id,
+                FirstName = user.Name.FirstName,
+                LastName = user.Name.LastName,
+                Email = user.Email.Value,
+                DDD = user.CellPhone.DDD,
+                PhoneNumber = user.CellPhone.PhoneNumber,
+                Roles = user.Roles
+            };
         }
     }
 }

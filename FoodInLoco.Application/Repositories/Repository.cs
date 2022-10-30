@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using FoodInLoco.Application.Data.Repositories.Interfaces;
+using FoodInLoco.Application.Repositories.Interfaces;
 
-namespace FoodInLoco.Application.Data.Repositories
+namespace FoodInLoco.Application.Repositories
 {
     public abstract class Repository<T> : IRepository<T> where T : class
     {

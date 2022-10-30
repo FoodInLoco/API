@@ -4,7 +4,7 @@ using DotNetCore.Validation;
 using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Data.Repositories.Interfaces;
+using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Factories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
 
@@ -12,20 +12,17 @@ namespace FoodInLoco.Application.Services
 {
     public sealed class RestaurantService : IRestaurantService
     {
-        private readonly IAuthService _authService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRestaurantRepository _restaurantRepository;
         private readonly IRestaurantFactory _restaurantFactory;
 
         public RestaurantService
         (
-            IAuthService authService,
             IUnitOfWork unitOfWork,
             IRestaurantRepository restaurantRepository,
             IRestaurantFactory restaurantFactory
         )
         {
-            _authService = authService;
             _unitOfWork = unitOfWork;
             _restaurantRepository = restaurantRepository;
             _restaurantFactory = restaurantFactory;
@@ -38,12 +35,7 @@ namespace FoodInLoco.Application.Services
             if (validation.Failed)
                 return validation.Fail<long>();
 
-            var auth = await _authService.AddAsync(model.Auth);
-
-            if (auth.Failed)
-                return auth.Fail<long>();
-
-            var restaurant = _restaurantFactory.Create(model, auth.Data);
+            var restaurant = _restaurantFactory.Create(model);
 
             await _restaurantRepository.AddAsync(restaurant);
 
@@ -54,11 +46,7 @@ namespace FoodInLoco.Application.Services
 
         public async Task<IResult> DeleteAsync(long id)
         {
-            var authId = await _restaurantRepository.GetAuthIdByRestaurantIdAsync(id);
-
             await _restaurantRepository.DeleteAsync(id);
-
-            await _authService.DeleteAsync(authId);
 
             await _unitOfWork.SaveChangesAsync();
 

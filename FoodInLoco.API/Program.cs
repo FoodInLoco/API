@@ -1,7 +1,7 @@
 using FoodInLoco.Application;
 using FoodInLoco.Application.Data;
-using FoodInLoco.Application.Data.Repositories;
-using FoodInLoco.Application.Data.Repositories.Interfaces;
+using FoodInLoco.Application.Repositories;
+using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Extensions;
 using FoodInLoco.Application.Factories;
 using FoodInLoco.Application.Factories.Interfaces;
@@ -72,18 +72,15 @@ builder.Services.AddContext<Context>(options =>
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
 builder.Services.AddScoped(typeof(ICommandRepository<>), typeof(EFCommandRepository<>));
 builder.Services.AddScoped(typeof(IQueryRepository<>), typeof(EFQueryRepository<>));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 builder.Services.AddScoped<IUserFactory, UserFactory>();
 builder.Services.AddScoped<IRestaurantFactory, RestaurantFactory>();
-builder.Services.AddScoped<IAuthFactory, AuthFactory>();
 
 builder.Services.AddSingleton<IHashService, HashService>();
 var app = builder.Build();
