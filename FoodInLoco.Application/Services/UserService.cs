@@ -161,7 +161,7 @@ namespace FoodInLoco.Application.Services
         {
             var token = TokenService.GenerateToken(user);
 
-            return new TokenModel(token, user.Id, user.Name.FirstName, user.Name.LastName, user.Email.Value).Success();
+            return new TokenModel(token, new UserTokenModel(user.Id, user.Name.FirstName, user.Name.LastName, user.Email.Value)).Success();
         }
     }
 }
