@@ -36,6 +36,11 @@ namespace FoodInLoco.Application.Data.Entities
 
         public ICollection<MenuItem> Items { get; private set; }
 
+        public bool IsActive()
+        {
+            return !(ExpirationDate?.CompareTo(DateTime.Now) < 0);
+        }
+
         public void Update(string name, string description, DateTime? expirationDate, bool happyHour, int? startAt, int? endAt)
         {
             NameDescription = new NameDescription(name, description);

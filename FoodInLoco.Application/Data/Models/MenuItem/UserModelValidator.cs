@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public abstract class MenuModelValidator : AbstractValidator<MenuModel>
+    public abstract class MenuItemModelValidator : AbstractValidator<MenuItemModel>
     {
         public void Id() => RuleFor(user => user.Id).NotEmpty();
 
