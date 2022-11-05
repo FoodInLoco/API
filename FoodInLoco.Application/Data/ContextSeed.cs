@@ -138,7 +138,9 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = 1L,
                     RestaurantId = 1L,
-                    InitialDate = DateTime.UtcNow
+                    Photo = "https://www.underconsideration.com/artofthemenu/project_images/the_urban_tap_PHOTO_01.jpg",
+                    InitialDate = DateTime.UtcNow,
+                    Status = Status.Active
                 });
 
                 menu.OwnsOne(menuName => menuName.NameDescription).HasData(new
@@ -164,10 +166,10 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = 1L,
                     MenuId = 1L,
-                    Status = Status.Active,
-                    Photo = "foto qualquer",
+                    Photo = "https://www.underconsideration.com/artofthemenu/project_images/the_urban_tap_PHOTO_01.jpg",
                     Quantity = 1,
-                    Value = 11.99
+                    Value = 11.99,
+                    Status = Status.Active
                 });
 
                 item.OwnsOne(restaurantName => restaurantName.NameDescription).HasData(new
