@@ -6,25 +6,21 @@ namespace FoodInLoco.Application.Data.Expressions
 {
     public static class MenuItemExpression
     {
-        public static Expression<Func<Restaurant, RestaurantModel>> Model => restaurant => new RestaurantModel
+        public static Expression<Func<MenuItem, MenuItemModel>> Model => menuItem => new MenuItemModel
         {
-            Id = restaurant.Id,
-            CompanyName = restaurant.Company.CompanyName,
-            TradingName = restaurant.Company.TradingName,
-            Email = restaurant.Email.Value,
-            DDD = restaurant.CellPhone.DDD,
-            PhoneNumber = restaurant.CellPhone.PhoneNumber,
-            State = restaurant.Address.State,
-            City = restaurant.Address.City,
-            ZipCode = restaurant.Address.ZipCode,
-            Street = restaurant.Address.Street,
-            Number = restaurant.Address.Number,
-            Complement = restaurant.Address.Complement
+            Id = menuItem.Id,
+            MenuId = menuItem.MenuId,
+            Name = menuItem.NameDescription.Name,
+            Description = menuItem.NameDescription.Description,
+            Quantity = menuItem.Quantity,
+            Value = menuItem.Value,
+            Photo = menuItem.Photo,
+            Status = menuItem.Status
         };
 
-        public static Expression<Func<Restaurant, bool>> Id(long id)
+        public static Expression<Func<MenuItem, bool>> Id(long id)
         {
-            return restaurant => restaurant.Id == id;
+            return menuItem => menuItem.Id == id;
         }
     }
 }

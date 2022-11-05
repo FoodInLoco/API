@@ -14,12 +14,12 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<Grid<MenuItemModel>> GridAsync(GridParameters parameters);
 
-        Task<IResult> InactivateAsync(long id);
-
-        Task<IResult> ActivateAsync(long id);
-
         Task<IEnumerable<MenuItemModel>> ListAsync();
 
         Task<IResult> UpdateAsync(MenuItemModel model);
+
+        Task<IResult> InactivateAsync(long id);
+
+        Task<IResult> ActivateAsync(long id);
     }
 }

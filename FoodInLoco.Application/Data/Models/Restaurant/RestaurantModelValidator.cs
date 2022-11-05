@@ -5,19 +5,19 @@ namespace FoodInLoco.Application.Data.Models
 {
     public abstract class RestaurantModelValidator : AbstractValidator<RestaurantModel>
     {
-        public void Id() => RuleFor(user => user.Id).NotEmpty();
+        public void Id() => RuleFor(_ => _.Id).NotEmpty();
 
-        public void CompanyName() => RuleFor(user => user.CompanyName).NotEmpty();
+        public void CompanyName() => RuleFor(_ => _.CompanyName).NotEmpty();
 
-        public void TradingName() => RuleFor(user => user.TradingName).NotEmpty();
+        public void TradingName() => RuleFor(_ => _.TradingName).NotEmpty();
 
-        public void Email() => RuleFor(user => user.Email).EmailAddress();
+        public void Email() => RuleFor(_ => _.Email).EmailAddress();
 
-        public void DDD() => RuleFor(user => user.DDD)
+        public void DDD() => RuleFor(_ => _.DDD)
             .Length(2).WithMessage("DDD precisa ter 2 caracteres.")
             .Matches(new Regex(@"\d{2}")).WithMessage("DDD inválido.");
 
-        public void PhoneNumber() => RuleFor(user => user.PhoneNumber)
+        public void PhoneNumber() => RuleFor(_ => _.PhoneNumber)
             .NotNull().WithMessage("Telefone é obrigatório.")
             .NotEmpty().WithMessage("Telefone não pode estar vazio.")
             .MinimumLength(8).WithMessage("Telefone precisa ter pelo menos 8 caracteres.")

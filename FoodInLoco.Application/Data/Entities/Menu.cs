@@ -1,3 +1,4 @@
+using FoodInLoco.Application.Data.Enums;
 using FoodInLoco.Application.Data.ValueObjects;
 
 namespace FoodInLoco.Application.Data.Entities
@@ -8,6 +9,7 @@ namespace FoodInLoco.Application.Data.Entities
         (
             long restaurantId,
             NameDescription nameDescription,
+            string photo,
             DateTime initialDate,
             DateTime expirationDate,
             HappyHour happyHour
@@ -15,6 +17,7 @@ namespace FoodInLoco.Application.Data.Entities
         {
             RestaurantId = restaurantId;
             NameDescription = nameDescription;
+            Photo = photo;
             InitialDate = initialDate;
             ExpirationDate = expirationDate;
             HappyHour = happyHour;
@@ -26,19 +29,33 @@ namespace FoodInLoco.Application.Data.Entities
 
         public NameDescription NameDescription { get; private set; }
 
+        public string Photo { get; private set; }
+
         public DateTime InitialDate { get; private set; }
         
         public DateTime? ExpirationDate { get; private set; }
         
         public HappyHour HappyHour { get; private set; }
 
+        public Status Status { get; private set; }
+
         public Restaurant Restaurant { get; private set; }
 
         public ICollection<MenuItem> Items { get; private set; }
 
+        public void Activate()
+        {
+            Status = Status.Active;
+        }
+
+        public void Inactivate()
+        {
+            Status = Status.Inactive;
+        }
+
         public bool IsActive()
         {
-            return !(ExpirationDate?.CompareTo(DateTime.Now) < 0);
+            return !(ExpirationDate?.CompareTo(DateTime.Now) < 0) && Status == Status.Active;
         }
 
         public void Update(string name, string description, DateTime? expirationDate, bool happyHour, int? startAt, int? endAt)

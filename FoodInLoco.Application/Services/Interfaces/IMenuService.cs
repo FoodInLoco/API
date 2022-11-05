@@ -14,5 +14,9 @@ namespace FoodInLoco.Application.Services.Interfaces
         Task<IEnumerable<MenuModel>> ListAsync();
 
         Task<IResult> UpdateAsync(MenuModel model);
+
+        Task<IResult> InactivateAsync(long id);
+
+        Task<IResult> ActivateAsync(long id);
     }
 }

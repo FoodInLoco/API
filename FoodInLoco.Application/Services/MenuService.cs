@@ -8,6 +8,7 @@ using FoodInLoco.Application.Factories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
 using FoodInLoco.Application.Data;
 using DotNetCore.Objects;
+using FoodInLoco.Application.Repositories;
 
 namespace FoodInLoco.Application.Services
 {
@@ -79,6 +80,30 @@ namespace FoodInLoco.Application.Services
             menu.Update(model.Name, model.Description, model.ExpirationDate, model.HappyHour, model.StartAt, model.EndAt);
 
             await _menuRepository.UpdateAsync(menu);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+
+        public async Task<IResult> InactivateAsync(long id)
+        {
+            var menu = new Menu(id);
+            menu.Inactivate();
+
+            await _menuRepository.UpdateStatusAsync(menu);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+
+        public async Task<IResult> ActivateAsync(long id)
+        {
+            var menu = new Menu(id);
+            menu.Activate();
+
+            await _menuRepository.UpdateStatusAsync(menu);
 
             await _unitOfWork.SaveChangesAsync();
 

@@ -64,32 +64,6 @@ namespace FoodInLoco.Application.Services
             return _menuItemRepository.GridAsync(parameters);
         }
 
-        public async Task<IResult> InactivateAsync(long id)
-        {
-            var restaurant = new MenuItem(id);
-
-            restaurant.Inactivate();
-
-            await _menuItemRepository.UpdateStatusAsync(restaurant);
-
-            await _unitOfWork.SaveChangesAsync();
-
-            return Result.Success();
-        }
-
-        public async Task<IResult> ActivateAsync(long id)
-        {
-            var restaurant = new MenuItem(id);
-
-            restaurant.Activate();
-
-            await _menuItemRepository.UpdateStatusAsync(restaurant);
-
-            await _unitOfWork.SaveChangesAsync();
-
-            return Result.Success();
-        }
-
         public async Task<IEnumerable<MenuItemModel>> ListAsync()
         {
             return await _menuItemRepository.ListModelAsync();
@@ -110,6 +84,32 @@ namespace FoodInLoco.Application.Services
             restaurant.Update(model.Name, model.Description, model.Photo, model.Quantity, model.Value);
 
             await _menuItemRepository.UpdateAsync(restaurant);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+
+        public async Task<IResult> InactivateAsync(long id)
+        {
+            var menuItem = new MenuItem(id);
+
+            menuItem.Inactivate();
+
+            await _menuItemRepository.UpdateStatusAsync(menuItem);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+
+        public async Task<IResult> ActivateAsync(long id)
+        {
+            var menuItem = new MenuItem(id);
+
+            menuItem.Activate();
+
+            await _menuItemRepository.UpdateStatusAsync(menuItem);
 
             await _unitOfWork.SaveChangesAsync();
 

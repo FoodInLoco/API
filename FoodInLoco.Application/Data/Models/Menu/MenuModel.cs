@@ -8,20 +8,24 @@ namespace FoodInLoco.Application.Data.Models
     {
         public long Id { get; init; }
 
-        public long RestaurantId { get; private set; }
+        public long RestaurantId { get; init; }
 
-        public string Name { get; private set; }
+        public string Name { get; init; }
 
-        public string Description { get; private set; }
+        public string Description { get; init; }
 
-        public DateTime InitialDate { get; private set; }
+        public string Photo { get; init; }
 
-        public DateTime? ExpirationDate { get; private set; }
+        public DateTime InitialDate { get; init; }
 
-        public bool HappyHour { get; private set; }
+        public DateTime? ExpirationDate { get; init; }
 
-        public int? StartAt { get; private set; }
+        public bool HappyHour { get; init; }
 
-        public int? EndAt { get; private set; }
+        public int? StartAt { get; init; }
+
+        public int? EndAt { get; init; }
+
+        public Status Status { get; init; }
     }
 }

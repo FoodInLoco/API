@@ -1,8 +1,10 @@
 using DotNetCore.Objects;
 using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
+using FoodInLoco.Application.Data.Expressions;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodInLoco.Application.Repositories
 {
@@ -20,19 +22,19 @@ namespace FoodInLoco.Application.Repositories
             return Queryable.Where(MenuItemExpression.Id(id)).Select(MenuItemExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<Grid<MenuModel>> GridAsync(GridParameters parameters)
+        public Task<Grid<MenuItemModel>> GridAsync(GridParameters parameters)
         {
             return Queryable.Select(MenuItemExpression.Model).GridAsync(parameters);
         }
 
-        public async Task<IEnumerable<MenuModel>> ListModelAsync()
+        public async Task<IEnumerable<MenuItemModel>> ListModelAsync()
         {
             return await Queryable.Select(MenuItemExpression.Model).ToListAsync();
         }
 
-        public Task UpdateStatusAsync(Menu menu)
+        public Task UpdateStatusAsync(MenuItem menuItem)
         {
-            return UpdatePartialAsync(new { menu.Id, menu.Status });
+            return UpdatePartialAsync(new { menuItem.Id, menuItem.Status });
         }
 
     }

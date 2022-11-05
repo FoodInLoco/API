@@ -1,7 +1,9 @@
 using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
+using FoodInLoco.Application.Data.Expressions;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodInLoco.Application.Repositories
 {
