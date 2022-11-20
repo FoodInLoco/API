@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodInLoco.Application.Data.Entities.Configuration;
 
-public sealed class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
+public sealed class AttractionConfiguration : IEntityTypeConfiguration<Attraction>
 {
-    public void Configure(EntityTypeBuilder<MenuItem> builder)
+    public void Configure(EntityTypeBuilder<Attraction> builder)
     {
-        builder.ToTable(nameof(MenuItem), nameof(MenuItem));
+        builder.ToTable(nameof(Attraction), nameof(Attraction));
 
         builder.HasKey(obj => obj.Id);
 
@@ -16,13 +16,13 @@ public sealed class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
 
         builder.Property(obj => obj.IdGuid).ValueGeneratedOnAdd().IsRequired();
 
+        builder.Property(obj => obj.Date).IsRequired();
+
         builder.Property(obj => obj.Status).IsRequired();
 
-        builder.Property(obj => obj.Quantity).IsRequired();
-
-        builder.Property(obj => obj.Value).IsRequired();
-
         builder.Property(obj => obj.Photo).HasMaxLength(1000);
+
+        builder.Property(obj => obj.CoverTax).IsRequired();
 
         builder.OwnsOne(obj => obj.NameDescription, obj =>
         {
@@ -31,6 +31,6 @@ public sealed class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
             obj.Property(nameDescription => nameDescription.Description).HasColumnName(nameof(NameDescription.Description)).HasMaxLength(300);
         });
 
-        builder.HasIndex("MenuId").IsUnique(); //TODO: verificar se será isso mesmo
+        builder.HasIndex("RestaurantId").IsUnique(); //TODO: verificar se será isso mesmo
     }
 }

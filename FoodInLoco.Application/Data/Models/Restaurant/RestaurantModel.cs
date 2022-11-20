@@ -1,3 +1,5 @@
+using FoodInLoco.Application.Data.Enums;
+
 namespace FoodInLoco.Application.Data.Models
 {
     public sealed record RestaurantModel
@@ -25,5 +27,11 @@ namespace FoodInLoco.Application.Data.Models
         public long Number { get; init; }
 
         public string Complement { get; init; }
+
+        public bool Kids { get; set; }
+
+        public string Photo { get; set; }
+
+        public Status Status { get; set; }
     }
 }

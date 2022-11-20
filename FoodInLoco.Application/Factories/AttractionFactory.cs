@@ -5,17 +5,17 @@ using FoodInLoco.Application.Factories.Interfaces;
 
 namespace FoodInLoco.Application.Factories
 {
-    public sealed class MenuItemFactory : IMenuItemFactory
+    public sealed class AttractionFactory : IAttractionFactory
     {
-        public MenuItem Create(MenuItemModel model)
+        public Attraction Create(AttractionModel model)
         {
-            return new MenuItem
+            return new Attraction
             (
-                model.MenuId,
+                model.RestaurantId,
                 new NameDescription(model.Name, model.Description),
                 model.Photo,
-                model.Quantity,
-                model.Value
+                model.Date,
+                model.CoverTax
             );
         }
     }

@@ -31,6 +31,10 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Address Address { get; private set; }
 
+        public bool Kids { get; private set; }
+
+        public string Photo { get; private set; }
+
         public Status Status { get; private set; }
 
         public ICollection<Menu> Menus { get; private set; }
@@ -46,12 +50,13 @@ namespace FoodInLoco.Application.Data.Entities
         }
 
         public void Update(string companyName, string tradingName, string email, string ddd, string phoneNumber, 
-            string state, string city, string zipCode, string street, long addressNumber, string complement)
+            string state, string city, string zipCode, string street, long addressNumber, string complement, bool kids)
         {
             Company = new Company(companyName, tradingName);
             Email = new Email(email);
             CellPhone = new Phone(ddd, phoneNumber);
             Address = new Address(state, city, zipCode, street, addressNumber, complement);
+            Kids = kids;
         }
 
         public static implicit operator RestaurantModel(Restaurant restaurant)
@@ -69,7 +74,8 @@ namespace FoodInLoco.Application.Data.Entities
                 ZipCode = restaurant.Address.ZipCode,
                 Street = restaurant.Address.Street,
                 Number = restaurant.Address.Number,
-                Complement = restaurant.Address.Complement
+                Complement = restaurant.Address.Complement,
+                Kids = restaurant.Kids
             };
         }
     }

@@ -6,25 +6,26 @@ namespace FoodInLoco.Application.Data.Expressions
 {
     public static class UserExpression
     {
-        public static Expression<Func<User, UserModel>> Model => user => new UserModel
+        public static Expression<Func<User, UserModel>> Model => _ => new UserModel
         {
-            Id = user.Id,
-            FirstName = user.Name.FirstName,
-            LastName = user.Name.LastName,
-            Email = user.Email.Value,
-            DDD = user.CellPhone.DDD,
-            PhoneNumber = user.CellPhone.PhoneNumber,
-            Roles = user.Roles
+            Id = _.Id,
+            FirstName = _.Name.FirstName,
+            LastName = _.Name.LastName,
+            Email = _.Email.Value,
+            DDD = _.CellPhone.DDD,
+            PhoneNumber = _.CellPhone.PhoneNumber,
+            Roles = _.Roles,
+            Photo = _.Photo
         };
 
         public static Expression<Func<User, bool>> Id(long id)
         {
-            return user => user.Id == id;
+            return _ => _.Id == id;
         }
 
         public static Expression<Func<User, bool>> Email(string email)
         {
-            return user => user.Email.Value == email;
+            return _ => _.Email.Value == email;
         }
     }
 }

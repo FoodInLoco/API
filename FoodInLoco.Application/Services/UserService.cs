@@ -126,7 +126,7 @@ namespace FoodInLoco.Application.Services
             if (user is null)
                 return Result.Success();
 
-            user.Update(model.FirstName, model.LastName, model.Email, model.DDD, model.PhoneNumber);
+            user.Update(model.FirstName, model.LastName, model.Email, model.DDD, model.PhoneNumber, model.Photo);
 
             await _userRepository.UpdateAsync(user);
 

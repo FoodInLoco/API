@@ -4,6 +4,8 @@
     {
         public TId Id { get; protected set; }
 
+        public Guid IdGuid { get; protected set; }
+
         protected sealed override IEnumerable<object> Equals()
         {
             yield return Id;

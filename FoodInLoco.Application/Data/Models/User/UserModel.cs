@@ -17,7 +17,9 @@ namespace FoodInLoco.Application.Data.Models
         public string PhoneNumber { get; init; }
 
         public string Password { get; set; }
-
+        
         public Roles Roles { get; init; }
+
+        public string Photo { get; set; }
     }
 }

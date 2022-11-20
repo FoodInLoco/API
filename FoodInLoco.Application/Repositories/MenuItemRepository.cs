@@ -32,9 +32,9 @@ namespace FoodInLoco.Application.Repositories
             return await Queryable.Select(MenuItemExpression.Model).ToListAsync();
         }
 
-        public Task UpdateStatusAsync(MenuItem menuItem)
+        public Task UpdateStatusAsync(MenuItem obj)
         {
-            return UpdatePartialAsync(new { menuItem.Id, menuItem.Status });
+            return UpdatePartialAsync(new { obj.Id, obj.Status });
         }
 
     }

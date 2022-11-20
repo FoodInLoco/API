@@ -3,11 +3,11 @@ using System.Text.RegularExpressions;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public abstract class MenuItemModelValidator : AbstractValidator<MenuItemModel>
+    public abstract class AttractionModelValidator : AbstractValidator<AttractionModel>
     {
         public void Id() => RuleFor(_ => _.Id).NotEmpty();
 
-        public void Menu() => RuleFor(_ => _.MenuId).NotEmpty();
+        public void Restaurant() => RuleFor(_ => _.RestaurantId).NotEmpty();
 
         public void Name() => RuleFor(_ => _.Name).NotEmpty();
 
@@ -15,9 +15,9 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Photo() => RuleFor(_ => _.Photo).NotEmpty().MaximumLength(1000);
 
-        public void Quantity() => RuleFor(_ => _.Quantity).NotEmpty();
+        public void Date() => RuleFor(_ => _.Date).GreaterThanOrEqualTo(DateTime.Now);
 
-        public void Value() => RuleFor(_ => _.Value).NotEmpty();
+        public void Cover() => RuleFor(_ => _.CoverTax).NotEmpty();
 
         public void Status() => RuleFor(_ => _.Status).NotEmpty();
     }

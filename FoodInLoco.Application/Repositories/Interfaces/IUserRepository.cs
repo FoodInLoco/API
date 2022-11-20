@@ -14,7 +14,7 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 
         Task<IEnumerable<UserModel>> ListModelAsync();
 
-        Task UpdateStatusAsync(User user);
+        Task UpdateStatusAsync(User obj);
 
         Task<bool> AnyByEmailAsync(string email);
 

@@ -13,18 +13,21 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Description() => RuleFor(_ => _.Description).NotEmpty();
 
-        public void Photo() => RuleFor(_ => _.Photo).NotEmpty();
+        public void Photo() => RuleFor(_ => _.Photo).NotEmpty().MaximumLength(1000);
 
         public void InitialDate() => RuleFor(_ => _.InitialDate).NotEmpty();
 
         public void ExpirationDate() => RuleFor(_ => _.ExpirationDate).NotEmpty();
 
-        public void HappyHour() => RuleFor(_ => _.HappyHour).NotEmpty();
+        public void HappyHour() => RuleFor(_ => _.HappyHour).NotEmpty().DependentRules(() =>
+        {
+            When(_ => _.HappyHour == true, () => 
+            {
+                RuleFor(_ => _.StartAt).NotEmpty();
+                RuleFor(_ => _.EndAt).NotEmpty();
+            });
+        });
 
-        public void StartAt() => RuleFor(_ => _.StartAt).NotEmpty();
-
-        public void EndAt() => RuleFor(_ => _.EndAt).NotEmpty();
-        
         public void Status() => RuleFor(_ => _.Status).NotEmpty();
     }
 }

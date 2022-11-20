@@ -3,27 +3,25 @@ using FoodInLoco.Application.Data.ValueObjects;
 
 namespace FoodInLoco.Application.Data.Entities
 {
-    public class Menu : Entity<long>
+    public class Attraction : Entity<long>
     {
-        public Menu
+        public Attraction
         (
             long restaurantId,
             NameDescription nameDescription,
             string photo,
-            DateTime initialDate,
-            DateTime? expirationDate,
-            HappyHour happyHour
+            DateTime date,
+            decimal coverTax
         )
         {
             RestaurantId = restaurantId;
             NameDescription = nameDescription;
             Photo = photo;
-            InitialDate = initialDate;
-            ExpirationDate = expirationDate;
-            HappyHour = happyHour;
+            Date = date;
+            CoverTax = coverTax;
         }
 
-        public Menu(long id) => Id = id;
+        public Attraction(long id) => Id = id;
 
         public long RestaurantId { get; private set; }
 
@@ -31,17 +29,13 @@ namespace FoodInLoco.Application.Data.Entities
 
         public string Photo { get; private set; }
 
-        public DateTime InitialDate { get; private set; }
-        
-        public DateTime? ExpirationDate { get; private set; }
-        
-        public HappyHour HappyHour { get; private set; }
+        public DateTime Date { get; private set; }
+
+        public decimal CoverTax { get; private set; }
 
         public Status Status { get; private set; }
 
         public Restaurant Restaurant { get; private set; }
-
-        public ICollection<MenuItem> Items { get; private set; }
 
         public void Activate()
         {
@@ -55,14 +49,15 @@ namespace FoodInLoco.Application.Data.Entities
 
         public bool IsActive()
         {
-            return !(ExpirationDate?.CompareTo(DateTime.Now) < 0) && Status == Status.Active;
+            return Status == Status.Active;
         }
 
-        public void Update(string name, string description, DateTime? expirationDate, bool happyHour, int? startAt, int? endAt)
+        public void Update(string name, string description, string photo, DateTime date, decimal coverTax)
         {
             NameDescription = new NameDescription(name, description);
-            ExpirationDate = expirationDate;
-            HappyHour = new HappyHour(happyHour, startAt, endAt);
+            Photo = photo;
+            Date = date;
+            CoverTax = coverTax;
         }
     }
 }

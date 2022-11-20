@@ -37,9 +37,9 @@ namespace FoodInLoco.Application.Repositories
             return await Queryable.Select(UserExpression.Model).ToListAsync();
         }
 
-        public Task UpdateStatusAsync(User user)
+        public Task UpdateStatusAsync(User obj)
         {
-            return UpdatePartialAsync(new { user.Id, user.Status });
+            return UpdatePartialAsync(new { obj.Id, obj.Status });
         }
 
         public Task<bool> AnyByEmailAsync(string email)

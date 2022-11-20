@@ -4,24 +4,21 @@ using System.Linq.Expressions;
 
 namespace FoodInLoco.Application.Data.Expressions
 {
-    public static class MenuExpression
+    public static class AttractionExpression
     {
-        public static Expression<Func<Menu, MenuModel>> Model => _ => new MenuModel
+        public static Expression<Func<Attraction, AttractionModel>> Model => _ => new AttractionModel
         {
             Id = _.Id,
             RestaurantId = _.RestaurantId,
             Name = _.NameDescription.Name,
             Description = _.NameDescription.Description,
             Photo = _.Photo,
-            InitialDate = _.InitialDate,
-            ExpirationDate = _.ExpirationDate,
-            HappyHour = _.HappyHour.Value,
-            StartAt = _.HappyHour.StartAt,
-            EndAt = _.HappyHour.EndAt,
+            CoverTax = _.CoverTax,
+            Date = _.Date,
             Status = _.Status
         };
 
-        public static Expression<Func<Menu, bool>> Id(long id)
+        public static Expression<Func<Attraction, bool>> Id(long id)
         {
             return _ => _.Id == id;
         }

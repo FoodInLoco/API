@@ -38,6 +38,8 @@ namespace FoodInLoco.Application.Data.Entities
 
         public string Salt { get; private set; }
 
+        public string Photo { get; private set; }
+
         public void Activate()
         {
             Status = Status.Active;
@@ -48,11 +50,12 @@ namespace FoodInLoco.Application.Data.Entities
             Status = Status.Inactive;
         }
 
-        public void Update(string firstName, string lastName, string email, string ddd, string number)
+        public void Update(string firstName, string lastName, string email, string ddd, string number, string photo)
         {
             Name = new Name(firstName, lastName);
             Email = new Email(email);
             CellPhone = new Phone(ddd, number);
+            Photo = photo;
         }
 
         public void UpdatePassword(string password)
@@ -70,7 +73,8 @@ namespace FoodInLoco.Application.Data.Entities
                 Email = user.Email.Value,
                 DDD = user.CellPhone.DDD,
                 PhoneNumber = user.CellPhone.PhoneNumber,
-                Roles = user.Roles
+                Roles = user.Roles,
+                Photo = user.Photo
             };
         }
     }

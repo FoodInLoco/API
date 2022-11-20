@@ -4,8 +4,8 @@ namespace FoodInLoco.Application.Data.Models
     {
         public AddMenuModelValidator()
         {
-            Restaurant(); Name(); Description(); Photo(); InitialDate(); ExpirationDate();
-            HappyHour(); StartAt(); EndAt(); Status();
+            Restaurant(); Name(); Description(); InitialDate();
+            HappyHour(); Status();
         }
     }
 }

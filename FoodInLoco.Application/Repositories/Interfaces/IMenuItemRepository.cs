@@ -12,6 +12,6 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 
         Task<IEnumerable<MenuItemModel>> ListModelAsync();
 
-        Task UpdateStatusAsync(MenuItem menuItem);
+        Task UpdateStatusAsync(MenuItem obj);
     }
 }

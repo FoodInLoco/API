@@ -107,7 +107,7 @@ namespace FoodInLoco.Application.Services
                 return Result.Success();
 
             restaurant.Update(model.CompanyName, model.TradingName, model.Email, model.DDD, model.PhoneNumber,
-                model.State, model.City, model.ZipCode, model.Street, model.Number, model.Complement);
+                model.State, model.City, model.ZipCode, model.Street, model.Number, model.Complement, model.Kids);
 
             await _restaurantRepository.UpdateAsync(restaurant);
 

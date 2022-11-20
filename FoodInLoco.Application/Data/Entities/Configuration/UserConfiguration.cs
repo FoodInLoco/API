@@ -14,7 +14,17 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(obj => obj.Id).ValueGeneratedOnAdd().IsRequired();
 
+        builder.Property(obj => obj.IdGuid).ValueGeneratedOnAdd().IsRequired();
+
         builder.Property(obj => obj.Status).IsRequired();
+
+        builder.Property(obj => obj.Photo).HasMaxLength(1000);
+
+        builder.Property(obj => obj.Password).HasMaxLength(1000).IsRequired();
+
+        builder.Property(obj => obj.Salt).HasMaxLength(1000).IsRequired();
+
+        builder.Property(obj => obj.Roles).IsRequired();
 
         builder.OwnsOne(obj => obj.Name, objName =>
         {
@@ -36,11 +46,5 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
             objPhone.Property(phone => phone.PhoneNumber).HasColumnName(nameof(Phone.PhoneNumber)).HasMaxLength(9).IsRequired();
         });
-
-        builder.Property(obj => obj.Password).HasMaxLength(1000).IsRequired();
-
-        builder.Property(obj => obj.Salt).HasMaxLength(1000).IsRequired();
-
-        builder.Property(obj => obj.Roles).IsRequired();
     }
 }

@@ -13,6 +13,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Email() => RuleFor(_ => _.Email).EmailAddress();
 
+        public void Photo() => RuleFor(_ => _.Photo).NotEmpty().MaximumLength(1000);
+
         public void DDD() => RuleFor(_ => _.DDD)
             .Length(2).WithMessage("DDD precisa ter 2 caracteres.")
             .Matches(new Regex(@"\d{2}")).WithMessage("DDD inválido.");
