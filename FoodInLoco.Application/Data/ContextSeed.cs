@@ -45,7 +45,7 @@ namespace FoodInLoco.Application.Data
                     Id = GuidUser1,
                     Status = Status.Active,
                     Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid1.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
-                    Salt = SaltGuid1,
+                    Salt = SaltGuid1.ToString(),
                     Roles = Roles.User | Roles.Admin
                 });
 
@@ -341,7 +341,7 @@ namespace FoodInLoco.Application.Data
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
                 {
-                    MenuItemId = GuidItemMenu1,
+                    MenuItemId = GuidItemMenu4,
                     Name = "Hamburguer",
                     Description = "Hamburguer feito com pão brioche (homemade), 90g de blend, queijo cheddar, cebola caramelizada, picles e molho da casa."
                 });
@@ -360,7 +360,7 @@ namespace FoodInLoco.Application.Data
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
                 {
-                    MenuItemId = GuidItemMenu1,
+                    MenuItemId = GuidItemMenu5,
                     Name = "Porção de batata",
                     Description = "Porção de batata feita com a melhor batata que existe (Burger King)."
                 });

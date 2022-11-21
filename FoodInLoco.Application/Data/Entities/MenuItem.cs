@@ -7,11 +7,11 @@ namespace FoodInLoco.Application.Data.Entities
     {
         public MenuItem
         (
-            long menuId,
+            Guid menuId,
             NameDescription nameDescription,
             string photo,
-            short quantity,
-            decimal value
+            int quantity,
+            double value
         )
         {
             MenuId = menuId;
@@ -24,15 +24,15 @@ namespace FoodInLoco.Application.Data.Entities
 
         public MenuItem(Guid id) => Id = id;
 
-        public long MenuId { get; private set; }
+        public Guid MenuId { get; private set; }
 
         public NameDescription NameDescription { get; private set; }
 
         public string Photo { get; private set; }
 
-        public short Quantity { get; private set; }
+        public int Quantity { get; private set; }
 
-        public decimal Value { get; private set; }
+        public double Value { get; private set; }
 
         public Status Status { get; private set; }
 
@@ -48,7 +48,7 @@ namespace FoodInLoco.Application.Data.Entities
             Status = Status.Inactive;
         }
 
-        public void Update(string name, string description, string photo, short quantity, decimal value)
+        public void Update(string name, string description, string photo, int quantity, double value)
         {
             NameDescription = new NameDescription(name, description);
             Photo = photo;

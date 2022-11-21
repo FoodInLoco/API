@@ -7,7 +7,7 @@ namespace FoodInLoco.Application.Data.Entities
     {
         public Menu
         (
-            long restaurantId,
+            Guid restaurantId,
             NameDescription nameDescription,
             string photo,
             DateTime initialDate,
@@ -25,7 +25,7 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Menu(Guid id) => Id = id;
 
-        public long RestaurantId { get; private set; }
+        public Guid RestaurantId { get; private set; }
 
         public NameDescription NameDescription { get; private set; }
 

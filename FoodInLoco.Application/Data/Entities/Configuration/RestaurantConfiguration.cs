@@ -17,11 +17,11 @@ public sealed class RestaurantConfiguration : IEntityTypeConfiguration<Restauran
 
         builder.Property(obj => obj.InsertDate).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnUpdate();
+        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnAddOrUpdate();
 
         builder.Property(obj => obj.Status).HasDefaultValue(Status.Active).IsRequired();
 
-        builder.Property(obj => obj.Photo).HasMaxLength(10000).HasDefaultValue("https://img.freepik.com/free-vector/restaurant-logo_23-2147506959.jpg?w=826&t=st=1668952356~exp=1668952956~hmac=49402768c6b8d28e62ceaf62db752e285911d5b9ec57bb827b2118d98f046d74");
+        builder.Property(obj => obj.Photo).HasMaxLength(10000).HasDefaultValue("https://img.freepik.com/free-vector/restaurant-logo_23-2147506959.jpg?w=826&t=st=1668952356~exp=1668952956~hmac=49402768c6b8d28e62ceaf62db752e285911d5b9ec57bb827b2118d98f046d74").IsRequired(false);
 
         builder.Property(obj => obj.Kids).IsRequired();
 

@@ -17,13 +17,13 @@ public sealed class AttractionConfiguration : IEntityTypeConfiguration<Attractio
 
         builder.Property(obj => obj.InsertDate).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnUpdate();
+        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnAddOrUpdate();
 
         builder.Property(obj => obj.Date).IsRequired();
 
         builder.Property(obj => obj.Status).HasDefaultValue(Status.Active).IsRequired();
 
-        builder.Property(obj => obj.Photo).HasMaxLength(10000);
+        builder.Property(obj => obj.Photo).HasMaxLength(10000).IsRequired(false);
 
         builder.Property(obj => obj.CoverTax).IsRequired();
 

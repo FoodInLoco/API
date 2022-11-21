@@ -17,7 +17,7 @@ public sealed class ReviewConfiguration : IEntityTypeConfiguration<Review>
 
         builder.Property(obj => obj.InsertDate).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnUpdate();
+        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnAddOrUpdate();
 
         builder.Property(obj => obj.Rate).IsRequired();
 

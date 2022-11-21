@@ -10,7 +10,7 @@ namespace FoodInLoco.Application.Data.Models
 
         public DateTime? UpdateDate { get; init; }
 
-        public long RestaurantId { get; init; }
+        public Guid RestaurantId { get; init; }
 
         public string Name { get; init; }
 

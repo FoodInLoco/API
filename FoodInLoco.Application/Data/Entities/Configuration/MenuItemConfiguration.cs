@@ -17,7 +17,7 @@ public sealed class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
 
         builder.Property(obj => obj.InsertDate).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnUpdate();
+        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnAddOrUpdate();
 
         builder.Property(obj => obj.Status).HasDefaultValue(Status.Active).IsRequired();
 
@@ -25,7 +25,7 @@ public sealed class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
 
         builder.Property(obj => obj.Value).IsRequired();
 
-        builder.Property(obj => obj.Photo).HasMaxLength(10000);
+        builder.Property(obj => obj.Photo).HasMaxLength(10000).IsRequired(false);
 
         builder.OwnsOne(obj => obj.NameDescription, obj =>
         {

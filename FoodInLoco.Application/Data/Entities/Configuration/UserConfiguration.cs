@@ -17,11 +17,11 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(obj => obj.InsertDate).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnUpdate();
+        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnAddOrUpdate();
 
         builder.Property(obj => obj.Status).HasDefaultValue(Status.Active).IsRequired();
 
-        builder.Property(obj => obj.Photo).HasMaxLength(10000);
+        builder.Property(obj => obj.Photo).HasMaxLength(10000).IsRequired(false);
 
         builder.Property(obj => obj.Password).HasMaxLength(1000).IsRequired();
 

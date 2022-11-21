@@ -7,8 +7,8 @@ namespace FoodInLoco.Application.Data.Entities
     {
         public Review
         (
-            long restaurantId,
-            long reservationId,
+            Guid restaurantId,
+            Guid reservationId,
             NameDescription nameDescription,
             Rate rate
         )
@@ -21,9 +21,9 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Review(Guid id) => Id = id;
 
-        public long RestaurantId { get; private set; }
+        public Guid RestaurantId { get; private set; }
 
-        public long ReservationId { get; private set; }
+        public Guid ReservationId { get; private set; }
 
         public NameDescription NameDescription { get; private set; }
 

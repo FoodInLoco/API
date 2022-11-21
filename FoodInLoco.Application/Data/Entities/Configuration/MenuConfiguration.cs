@@ -17,13 +17,13 @@ public sealed class MenuConfiguration : IEntityTypeConfiguration<Menu>
 
         builder.Property(obj => obj.InsertDate).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnUpdate();
+        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnAddOrUpdate();
 
         builder.Property(obj => obj.InitialDate).HasDefaultValue(DateTime.Now).IsRequired();
 
         builder.Property(obj => obj.ExpirationDate);
 
-        builder.Property(obj => obj.Photo).HasMaxLength(10000).HasDefaultValue("https://menubrands.com.br/wp-content/uploads/2020/04/Menu-300x300.png");
+        builder.Property(obj => obj.Photo).HasMaxLength(10000).HasDefaultValue("https://menubrands.com.br/wp-content/uploads/2020/04/Menu-300x300.png").IsRequired(false);
 
         builder.Property(obj => obj.Status).HasDefaultValue(Status.Active).IsRequired();
 
