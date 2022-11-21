@@ -29,7 +29,7 @@ namespace FoodInLoco.Application.Data.Entities
 
         public NameDescription NameDescription { get; private set; }
 
-        public string Photo { get; private set; }
+        public string? Photo { get; private set; }
 
         public int Quantity { get; private set; }
 

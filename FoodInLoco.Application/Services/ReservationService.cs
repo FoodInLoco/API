@@ -66,6 +66,11 @@ namespace FoodInLoco.Application.Services
         {
             return await _reservationRepository.ListModelByDateFromRestaurantAsync(id, date);
         }
+        
+        public async Task<IEnumerable<ReservationModel>> ListByDateFromUserAsync(Guid id, DateTime? date)
+        {
+            return await _reservationRepository.ListModelByDateFromUserAsync(id, date);
+        }
 
         public async Task<IResult> UpdateAsync(ReservationModel model)
         {

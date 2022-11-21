@@ -28,6 +28,13 @@ namespace FoodInLoco.API.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> GetByUserAsync(Guid id, DateTime? date)
+        {
+            var result = await _reservationService.ListByDateFromUserAsync(id, date);
+            return Ok(result);
+        }
+
+        [HttpGet]
         [Route("get-by-id")]
         public async Task<IActionResult> GetById(Guid id)
         {

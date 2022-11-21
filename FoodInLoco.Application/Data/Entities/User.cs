@@ -39,7 +39,7 @@ namespace FoodInLoco.Application.Data.Entities
 
         public string Salt { get; private set; }
 
-        public string Photo { get; private set; }
+        public string? Photo { get; private set; }
 
         public ICollection<Review> Reviews { get; private set; }
 

@@ -28,13 +28,13 @@ namespace FoodInLoco.Application.Data.Models
 
         public string Street { get; init; }
 
-        public long Number { get; init; }
+        public long? Number { get; init; }
 
-        public string Complement { get; init; }
+        public string? Complement { get; init; }
 
         public bool Kids { get; set; }
 
-        public string Photo { get; set; }
+        public string? Photo { get; set; }
 
         public Status Status { get; set; }
     }

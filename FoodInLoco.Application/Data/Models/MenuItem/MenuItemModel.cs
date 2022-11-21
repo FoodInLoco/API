@@ -18,7 +18,7 @@ namespace FoodInLoco.Application.Data.Models
 
         public string Description { get; init; }
 
-        public string Photo { get; init; }
+        public string? Photo { get; init; }
 
         public int Quantity { get; init; }
 

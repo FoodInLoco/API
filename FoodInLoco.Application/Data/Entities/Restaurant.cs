@@ -13,7 +13,7 @@ namespace FoodInLoco.Application.Data.Entities
             Phone phone,
             Address address,
             bool kids,
-            string photo
+            string? photo
         )
         {
             Company = company;
@@ -38,7 +38,7 @@ namespace FoodInLoco.Application.Data.Entities
 
         public bool Kids { get; private set; }
 
-        public string Photo { get; private set; }
+        public string? Photo { get; private set; }
 
         public Status Status { get; private set; }
 
@@ -63,7 +63,7 @@ namespace FoodInLoco.Application.Data.Entities
         }
 
         public void Update(string companyName, string tradingName, string email, string ddd, string phoneNumber, 
-            string state, string city, string zipCode, string street, long addressNumber, string complement, bool kids, string photo)
+            string state, string city, string zipCode, string street, long? addressNumber, string? complement, bool kids, string photo)
         {
             Company = new Company(companyName, tradingName);
             Email = new Email(email);
