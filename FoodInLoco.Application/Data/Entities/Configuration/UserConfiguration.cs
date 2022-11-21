@@ -13,9 +13,9 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasKey(obj => obj.Id);
 
-        builder.Property(obj => obj.Id).HasDefaultValueSql("NEWID()").IsRequired();
+        builder.Property(obj => obj.Id).HasDefaultValueSql("uuid_generate_v4()").IsRequired();
 
-        builder.Property(obj => obj.CreatedAt).HasDefaultValueSql("GETUTCDATE()").IsRequired();
+        builder.Property(obj => obj.CreatedAt).HasDefaultValueSql("now()").IsRequired();
 
         builder.Property(obj => obj.LastUpdatedAt).IsRequired(false);
 
