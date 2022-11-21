@@ -1,5 +1,6 @@
 using DotNetCore.Objects;
 using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Services;
 using FoodInLoco.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,7 +34,7 @@ namespace FoodInLoco.API.Controllers
 
         [HttpGet]
         [Route("get-by-id")]
-        public async Task<IActionResult> GetById(long id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var result = await _restaurantService.GetAsync(id);
             if (result == null)
@@ -61,7 +62,7 @@ namespace FoodInLoco.API.Controllers
 
         [HttpGet]
         [Route("activate")]
-        public async Task<IActionResult> ActivateById(long id)
+        public async Task<IActionResult> ActivateById(Guid id)
         {
             var result = await _restaurantService.ActivateAsync(id);
             if (result == null)
@@ -71,7 +72,7 @@ namespace FoodInLoco.API.Controllers
 
         [HttpGet]
         [Route("inactivate")]
-        public async Task<IActionResult> InactivateById(long id)
+        public async Task<IActionResult> InactivateById(Guid id)
         {
             var result = await _restaurantService.InactivateAsync(id);
             if (result == null)
@@ -81,7 +82,7 @@ namespace FoodInLoco.API.Controllers
 
         [Route("{id}")]
         [HttpDelete]
-        public async Task<IActionResult> DeleteAsync(long id)
+        public async Task<IActionResult> DeleteAsync(Guid id)
         {
             var result = await _restaurantService.DeleteAsync(id);
             if (result.Succeeded)

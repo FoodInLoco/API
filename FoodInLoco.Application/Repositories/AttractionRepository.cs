@@ -4,6 +4,7 @@ using FoodInLoco.Application.Data.Expressions;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace FoodInLoco.Application.Repositories
 {
@@ -16,7 +17,7 @@ namespace FoodInLoco.Application.Repositories
             _dbContext = context;
         }
 
-        public Task<AttractionModel> GetModelByIdAsync(long id)
+        public Task<AttractionModel> GetModelByIdAsync(Guid id)
         {
             return Queryable.Where(AttractionExpression.Id(id)).Select(AttractionExpression.Model).SingleOrDefaultAsync();
         }

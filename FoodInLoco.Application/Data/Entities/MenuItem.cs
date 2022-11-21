@@ -1,17 +1,17 @@
-﻿using FoodInLoco.Application.Data.Enums;
-using FoodInLoco.Application.Data.ValueObjects;
+﻿using FoodInLoco.Application.Data.ValueObjects;
+using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Entities
 {
-    public class MenuItem : Entity<long>
+    public class MenuItem : Entity<Guid>
     {
         public MenuItem
         (
             long menuId,
             NameDescription nameDescription,
             string photo,
-            int quantity,
-            double value
+            short quantity,
+            decimal value
         )
         {
             MenuId = menuId;
@@ -22,7 +22,7 @@ namespace FoodInLoco.Application.Data.Entities
             Activate();
         }
 
-        public MenuItem(long id) => Id = id;
+        public MenuItem(Guid id) => Id = id;
 
         public long MenuId { get; private set; }
 
@@ -30,9 +30,9 @@ namespace FoodInLoco.Application.Data.Entities
 
         public string Photo { get; private set; }
 
-        public int Quantity { get; private set; }
+        public short Quantity { get; private set; }
 
-        public double Value { get; private set; }
+        public decimal Value { get; private set; }
 
         public Status Status { get; private set; }
 
@@ -48,7 +48,7 @@ namespace FoodInLoco.Application.Data.Entities
             Status = Status.Inactive;
         }
 
-        public void Update(string name, string description, string photo, int quantity, double value)
+        public void Update(string name, string description, string photo, short quantity, decimal value)
         {
             NameDescription = new NameDescription(name, description);
             Photo = photo;

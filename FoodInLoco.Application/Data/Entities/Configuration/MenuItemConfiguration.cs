@@ -1,4 +1,5 @@
 using FoodInLoco.Application.Data.ValueObjects;
+using FoodInLoco.Application.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,15 +15,17 @@ public sealed class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
 
         builder.Property(obj => obj.Id).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.IdGuid).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(obj => obj.InsertDate).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.Status).IsRequired();
+        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnUpdate();
+
+        builder.Property(obj => obj.Status).HasDefaultValue(Status.Active).IsRequired();
 
         builder.Property(obj => obj.Quantity).IsRequired();
 
         builder.Property(obj => obj.Value).IsRequired();
 
-        builder.Property(obj => obj.Photo).HasMaxLength(1000);
+        builder.Property(obj => obj.Photo).HasMaxLength(10000);
 
         builder.OwnsOne(obj => obj.NameDescription, obj =>
         {
@@ -31,6 +34,6 @@ public sealed class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
             obj.Property(nameDescription => nameDescription.Description).HasColumnName(nameof(NameDescription.Description)).HasMaxLength(300);
         });
 
-        builder.HasIndex("MenuId").IsUnique(); //TODO: verificar se será isso mesmo
+        builder.HasIndex("MenuId");
     }
 }

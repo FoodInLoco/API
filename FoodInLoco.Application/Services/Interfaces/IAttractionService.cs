@@ -5,18 +5,18 @@ namespace FoodInLoco.Application.Services.Interfaces
 {
     public interface IAttractionService
     {
-        Task<IResult<long>> AddAsync(AttractionModel model);
+        Task<IResult<Guid>> AddAsync(AttractionModel model);
 
-        Task<IResult> DeleteAsync(long id);
+        Task<IResult> DeleteAsync(Guid id);
 
-        Task<AttractionModel> GetAsync(long id);
-
+        Task<AttractionModel> GetAsync(Guid id);
+        
         Task<IEnumerable<AttractionModel>> ListAsync();
 
         Task<IResult> UpdateAsync(AttractionModel model);
 
-        Task<IResult> InactivateAsync(long id);
+        Task<IResult> InactivateAsync(Guid id);
 
-        Task<IResult> ActivateAsync(long id);
+        Task<IResult> ActivateAsync(Guid id);
     }
 }

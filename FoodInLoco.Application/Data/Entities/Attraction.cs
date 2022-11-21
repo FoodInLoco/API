@@ -1,9 +1,9 @@
-using FoodInLoco.Application.Data.Enums;
 using FoodInLoco.Application.Data.ValueObjects;
+using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Entities
 {
-    public class Attraction : Entity<long>
+    public class Attraction : Entity<Guid>
     {
         public Attraction
         (
@@ -21,7 +21,7 @@ namespace FoodInLoco.Application.Data.Entities
             CoverTax = coverTax;
         }
 
-        public Attraction(long id) => Id = id;
+        public Attraction(Guid id) => Id = id;
 
         public long RestaurantId { get; private set; }
 

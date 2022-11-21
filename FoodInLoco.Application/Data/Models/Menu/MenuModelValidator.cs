@@ -9,13 +9,13 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Restaurant() => RuleFor(_ => _.RestaurantId).NotEmpty();
 
-        public void Name() => RuleFor(_ => _.Name).NotEmpty();
+        public void Name() => RuleFor(_ => _.Name).MaximumLength(100).NotEmpty();
 
-        public void Description() => RuleFor(_ => _.Description).NotEmpty();
+        public void Description() => RuleFor(_ => _.Description).MaximumLength(300).NotEmpty();
 
-        public void Photo() => RuleFor(_ => _.Photo).NotEmpty().MaximumLength(1000);
+        public void Photo() => RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
 
-        public void InitialDate() => RuleFor(_ => _.InitialDate).NotEmpty();
+        public void InitialDate() => RuleFor(_ => _.InitialDate.Date).GreaterThanOrEqualTo(DateTime.Now.Date).NotEmpty();
 
         public void ExpirationDate() => RuleFor(_ => _.ExpirationDate).NotEmpty();
 
@@ -23,8 +23,12 @@ namespace FoodInLoco.Application.Data.Models
         {
             When(_ => _.HappyHour == true, () => 
             {
-                RuleFor(_ => _.StartAt).NotEmpty();
-                RuleFor(_ => _.EndAt).NotEmpty();
+                RuleFor(_ => _.StartAt)
+                    .Matches(new Regex(@"^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")).WithMessage("Formato de horário preenchido é inválido.")
+                    .NotEmpty();
+                RuleFor(_ => _.EndAt)
+                    .Matches(new Regex(@"^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")).WithMessage("Formato de horário preenchido é inválido.")
+                    .NotEmpty();
             });
         });
 

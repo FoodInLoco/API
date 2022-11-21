@@ -9,6 +9,8 @@ namespace FoodInLoco.Application.Data.Expressions
         public static Expression<Func<User, UserModel>> Model => _ => new UserModel
         {
             Id = _.Id,
+            InsertDate = _.InsertDate,
+            UpdateDate = _.UpdateDate,
             FirstName = _.Name.FirstName,
             LastName = _.Name.LastName,
             Email = _.Email.Value,
@@ -18,7 +20,7 @@ namespace FoodInLoco.Application.Data.Expressions
             Photo = _.Photo
         };
 
-        public static Expression<Func<User, bool>> Id(long id)
+        public static Expression<Func<User, bool>> Id(Guid id)
         {
             return _ => _.Id == id;
         }

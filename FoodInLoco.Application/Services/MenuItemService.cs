@@ -1,13 +1,12 @@
-﻿using DotNetCore.Results;
-using DotNetCore.Security;
+﻿using DotNetCore.Objects;
+using DotNetCore.Results;
 using DotNetCore.Validation;
+using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Factories.Interfaces;
+using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
-using DotNetCore.Objects;
-using FoodInLoco.Application.Data;
 
 namespace FoodInLoco.Application.Services
 {
@@ -29,12 +28,12 @@ namespace FoodInLoco.Application.Services
             _menuItemFactory = menuItemFactory;
         }
 
-        public async Task<IResult<long>> AddAsync(MenuItemModel model)
+        public async Task<IResult<Guid>> AddAsync(MenuItemModel model)
         {
             var validation = new AddMenuItemModelValidator().Validation(model);
 
             if (validation.Failed)
-                return validation.Fail<long>();
+                return validation.Fail<Guid>();
 
             var restaurant = _menuItemFactory.Create(model);
 
@@ -45,7 +44,7 @@ namespace FoodInLoco.Application.Services
             return restaurant.Id.Success();
         }
 
-        public async Task<IResult> DeleteAsync(long id)
+        public async Task<IResult> DeleteAsync(Guid id)
         {
             await _menuItemRepository.DeleteAsync(id);
 
@@ -54,11 +53,11 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<MenuItemModel> GetAsync(long id)
+        public Task<MenuItemModel> GetAsync(Guid id)
         {
             return _menuItemRepository.GetModelByIdAsync(id);
         }
-
+        
         public Task<Grid<MenuItemModel>> GridAsync(GridParameters parameters)
         {
             return _menuItemRepository.GridAsync(parameters);
@@ -90,7 +89,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public async Task<IResult> InactivateAsync(long id)
+        public async Task<IResult> InactivateAsync(Guid id)
         {
             var menuItem = new MenuItem(id);
 
@@ -103,7 +102,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public async Task<IResult> ActivateAsync(long id)
+        public async Task<IResult> ActivateAsync(Guid id)
         {
             var menuItem = new MenuItem(id);
 

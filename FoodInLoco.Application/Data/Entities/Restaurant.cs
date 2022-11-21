@@ -1,27 +1,31 @@
-using FoodInLoco.Application.Data.Enums;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.ValueObjects;
+using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Entities
 {
-    public class Restaurant : Entity<long>
+    public class Restaurant : Entity<Guid>
     {
         public Restaurant
         (
             Company company,
             Email email,
             Phone phone,
-            Address address
+            Address address,
+            bool kids,
+            string photo
         )
         {
             Company = company;
             Email = email;
             CellPhone = phone;
             Address = address;
+            Kids = kids;
+            Photo = photo;
             Activate();
         }
 
-        public Restaurant(long id) => Id = id;
+        public Restaurant(Guid id) => Id = id;
 
         public Company Company { get; private set; }
 
@@ -39,6 +43,10 @@ namespace FoodInLoco.Application.Data.Entities
 
         public ICollection<Menu> Menus { get; private set; }
 
+        public ICollection<Reservation> Reservations { get; private set; }
+
+        public ICollection<Review> Reviews { get; private set; }
+
         public void Activate()
         {
             Status = Status.Active;
@@ -50,13 +58,14 @@ namespace FoodInLoco.Application.Data.Entities
         }
 
         public void Update(string companyName, string tradingName, string email, string ddd, string phoneNumber, 
-            string state, string city, string zipCode, string street, long addressNumber, string complement, bool kids)
+            string state, string city, string zipCode, string street, long addressNumber, string complement, bool kids, string photo)
         {
             Company = new Company(companyName, tradingName);
             Email = new Email(email);
             CellPhone = new Phone(ddd, phoneNumber);
             Address = new Address(state, city, zipCode, street, addressNumber, complement);
             Kids = kids;
+            Photo = photo;
         }
 
         public static implicit operator RestaurantModel(Restaurant restaurant)
@@ -75,7 +84,8 @@ namespace FoodInLoco.Application.Data.Entities
                 Street = restaurant.Address.Street,
                 Number = restaurant.Address.Number,
                 Complement = restaurant.Address.Complement,
-                Kids = restaurant.Kids
+                Kids = restaurant.Kids,
+                Photo = restaurant.Photo
             };
         }
     }

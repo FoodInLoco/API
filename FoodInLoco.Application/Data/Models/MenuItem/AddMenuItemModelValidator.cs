@@ -4,7 +4,7 @@ namespace FoodInLoco.Application.Data.Models
     {
         public AddMenuItemModelValidator()
         {
-            Menu(); Name(); Description(); Photo(); Quantity(); Value(); Status();
+            Menu(); Name(); Description(); Photo(); Quantity(); Value();
         }
     }
 }

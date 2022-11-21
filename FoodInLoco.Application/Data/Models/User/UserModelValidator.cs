@@ -7,13 +7,13 @@ namespace FoodInLoco.Application.Data.Models
     {
         public void Id() => RuleFor(_ => _.Id).NotEmpty();
 
-        public void FirstName() => RuleFor(_ => _.FirstName).NotEmpty();
+        public void FirstName() => RuleFor(_ => _.FirstName).MaximumLength(100).NotEmpty();
 
-        public void LastName() => RuleFor(_ => _.LastName).NotEmpty();
+        public void LastName() => RuleFor(_ => _.LastName).MaximumLength(200).NotEmpty();
 
-        public void Email() => RuleFor(_ => _.Email).EmailAddress();
+        public void Email() => RuleFor(_ => _.Email).MaximumLength(300).EmailAddress();
 
-        public void Photo() => RuleFor(_ => _.Photo).NotEmpty().MaximumLength(1000);
+        public void Photo() => RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
 
         public void DDD() => RuleFor(_ => _.DDD)
             .Length(2).WithMessage("DDD precisa ter 2 caracteres.")

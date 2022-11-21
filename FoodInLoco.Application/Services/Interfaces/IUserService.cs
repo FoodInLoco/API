@@ -6,19 +6,19 @@ namespace FoodInLoco.Application.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<IResult<long>> AddAsync(UserModel model);
+        Task<IResult<Guid>> AddAsync(UserModel model);
 
-        Task<IResult> DeleteAsync(long id);
+        Task<IResult> DeleteAsync(Guid id);
 
-        Task<UserModel> GetAsync(long id);
+        Task<UserModel> GetAsync(Guid id);
         
         Task<UserModel> GetByEmail(string email);
 
         Task<Grid<UserModel>> GridAsync(GridParameters parameters);
 
-        Task<IResult> InactivateAsync(long id);
+        Task<IResult> InactivateAsync(Guid id);
 
-        Task<IResult> ActivateAsync(long id);
+        Task<IResult> ActivateAsync(Guid id);
 
         Task<IEnumerable<UserModel>> ListAsync();
 

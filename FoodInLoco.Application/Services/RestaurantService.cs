@@ -4,8 +4,9 @@ using DotNetCore.Validation;
 using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Factories.Interfaces;
+using FoodInLoco.Application.Repositories;
+using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
 
 namespace FoodInLoco.Application.Services
@@ -28,12 +29,12 @@ namespace FoodInLoco.Application.Services
             _restaurantFactory = restaurantFactory;
         }
 
-        public async Task<IResult<long>> AddAsync(RestaurantModel model)
+        public async Task<IResult<Guid>> AddAsync(RestaurantModel model)
         {
             var validation = new AddRestaurantModelValidator().Validation(model);
 
             if (validation.Failed)
-                return validation.Fail<long>();
+                return validation.Fail<Guid>();
 
             var restaurant = _restaurantFactory.Create(model);
 
@@ -44,7 +45,7 @@ namespace FoodInLoco.Application.Services
             return restaurant.Id.Success();
         }
 
-        public async Task<IResult> DeleteAsync(long id)
+        public async Task<IResult> DeleteAsync(Guid id)
         {
             await _restaurantRepository.DeleteAsync(id);
 
@@ -53,7 +54,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<RestaurantModel> GetAsync(long id)
+        public Task<RestaurantModel> GetAsync(Guid id)
         {
             return _restaurantRepository.GetModelByIdAsync(id);
         }
@@ -63,7 +64,7 @@ namespace FoodInLoco.Application.Services
             return _restaurantRepository.GridAsync(parameters);
         }
 
-        public async Task<IResult> InactivateAsync(long id)
+        public async Task<IResult> InactivateAsync(Guid id)
         {
             var restaurant = new Restaurant(id);
 
@@ -76,7 +77,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
         
-        public async Task<IResult> ActivateAsync(long id)
+        public async Task<IResult> ActivateAsync(Guid id)
         {
             var restaurant = new Restaurant(id);
 
@@ -106,8 +107,8 @@ namespace FoodInLoco.Application.Services
             if (restaurant is null)
                 return Result.Success();
 
-            restaurant.Update(model.CompanyName, model.TradingName, model.Email, model.DDD, model.PhoneNumber,
-                model.State, model.City, model.ZipCode, model.Street, model.Number, model.Complement, model.Kids);
+            restaurant.Update(model.CompanyName, model.TradingName, model.Email, model.DDD, model.PhoneNumber, model.State, 
+                model.City, model.ZipCode, model.Street, model.Number, model.Complement, model.Kids, model.Photo);
 
             await _restaurantRepository.UpdateAsync(restaurant);
 

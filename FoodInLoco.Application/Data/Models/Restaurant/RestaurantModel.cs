@@ -1,10 +1,14 @@
-using FoodInLoco.Application.Data.Enums;
+using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Models
 {
     public sealed record RestaurantModel
     {
-        public long Id { get; init; }
+        public Guid Id { get; init; }
+
+        public DateTime InsertDate { get; init; }
+
+        public DateTime? UpdateDate { get; init; }
 
         public string CompanyName { get; init; }
 

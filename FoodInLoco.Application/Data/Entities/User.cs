@@ -1,10 +1,10 @@
-using FoodInLoco.Application.Data.Enums;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.ValueObjects;
+using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Entities
 {
-    public class User : Entity<long>
+    public class User : Entity<Guid>
     {
         public User
         (
@@ -22,7 +22,7 @@ namespace FoodInLoco.Application.Data.Entities
             Activate();
         }
 
-        public User(long id) => Id = id;
+        public User(Guid id) => Id = id;
 
         public Name Name { get; private set; }
 

@@ -7,9 +7,9 @@ using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Factories.Interfaces;
 using FoodInLoco.Application.Helpers;
 using FoodInLoco.Application.Helpers.Interfaces;
+using FoodInLoco.Application.Repositories;
 using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
-using System.Security.Claims;
 
 namespace FoodInLoco.Application.Services
 {
@@ -34,15 +34,15 @@ namespace FoodInLoco.Application.Services
             _hashService = hashService;
         }
 
-        public async Task<IResult<long>> AddAsync(UserModel model)
+        public async Task<IResult<Guid>> AddAsync(UserModel model)
         {
             var validation = new AddUserModelValidator().Validation(model);
 
             if (validation.Failed)
-                return validation.Fail<long>();
+                return validation.Fail<Guid>();
 
             if (await _userRepository.AnyByEmailAsync(model.Email))
-                return Result<long>.Fail("Login já existe!");
+                return Result<Guid>.Fail("Login já existe!");
 
             var user = _userFactory.Create(model);
 
@@ -57,7 +57,7 @@ namespace FoodInLoco.Application.Services
             return user.Id.Success();
         }
 
-        public async Task<IResult> DeleteAsync(long id)
+        public async Task<IResult> DeleteAsync(Guid id)
         {
             await _userRepository.DeleteAsync(id);
 
@@ -68,11 +68,11 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<UserModel> GetAsync(long id)
+        public Task<UserModel> GetAsync(Guid id)
         {
             return _userRepository.GetModelByIdAsync(id);
         }
-        
+
         public Task<UserModel> GetByEmail(string email)
         {
             return _userRepository.GetModelByEmailAsync(email);
@@ -83,7 +83,7 @@ namespace FoodInLoco.Application.Services
             return _userRepository.GridAsync(parameters);
         }
 
-        public async Task<IResult> InactivateAsync(long id)
+        public async Task<IResult> InactivateAsync(Guid id)
         {
             var user = new User(id);
 
@@ -96,7 +96,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
         
-        public async Task<IResult> ActivateAsync(long id)
+        public async Task<IResult> ActivateAsync(Guid id)
         {
             var user = new User(id);
 

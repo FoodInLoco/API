@@ -4,7 +4,9 @@
     {
         public TId Id { get; protected set; }
 
-        public Guid IdGuid { get; protected set; }
+        public DateTime InsertDate { get; protected set; }
+
+        public DateTime UpdateDate { get; protected set; }
 
         protected sealed override IEnumerable<object> Equals()
         {

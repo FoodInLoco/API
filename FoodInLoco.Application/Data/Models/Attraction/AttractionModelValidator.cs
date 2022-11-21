@@ -9,13 +9,13 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Restaurant() => RuleFor(_ => _.RestaurantId).NotEmpty();
 
-        public void Name() => RuleFor(_ => _.Name).NotEmpty();
+        public void Name() => RuleFor(_ => _.Name).MaximumLength(100).NotEmpty();
 
-        public void Description() => RuleFor(_ => _.Description).NotEmpty();
+        public void Description() => RuleFor(_ => _.Description).MaximumLength(300).NotEmpty();
 
-        public void Photo() => RuleFor(_ => _.Photo).NotEmpty().MaximumLength(1000);
+        public void Photo() => RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
 
-        public void Date() => RuleFor(_ => _.Date).GreaterThanOrEqualTo(DateTime.Now);
+        public void Date() => RuleFor(_ => _.Date.Date).GreaterThanOrEqualTo(DateTime.Now.Date).NotEmpty();
 
         public void Cover() => RuleFor(_ => _.CoverTax).NotEmpty();
 

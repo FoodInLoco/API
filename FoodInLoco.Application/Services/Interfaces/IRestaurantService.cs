@@ -6,20 +6,20 @@ namespace FoodInLoco.Application.Services.Interfaces
 {
     public interface IRestaurantService
     {
-        Task<IResult<long>> AddAsync(RestaurantModel model);
-
-        Task<IResult> DeleteAsync(long id);
-
-        Task<RestaurantModel> GetAsync(long id);
-
-        Task<Grid<RestaurantModel>> GridAsync(GridParameters parameters);
-
-        Task<IResult> InactivateAsync(long id);
-
-        Task<IResult> ActivateAsync(long id);
+        Task<IResult<Guid>> AddAsync(RestaurantModel model);
 
         Task<IEnumerable<RestaurantModel>> ListAsync();
 
+        Task<RestaurantModel> GetAsync(Guid id);
+        
+        Task<Grid<RestaurantModel>> GridAsync(GridParameters parameters);
+
         Task<IResult> UpdateAsync(RestaurantModel model);
+
+        Task<IResult> InactivateAsync(Guid id);
+
+        Task<IResult> ActivateAsync(Guid id);
+
+        Task<IResult> DeleteAsync(Guid id);
     }
 }

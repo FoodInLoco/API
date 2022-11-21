@@ -1,12 +1,14 @@
-using FoodInLoco.Application.Data.Entities;
-using FoodInLoco.Application.Data.Enums;
-using FoodInLoco.Application.Data.ValueObjects;
+using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Models
 {
     public sealed record MenuModel
     {
-        public long Id { get; init; }
+        public Guid Id { get; init; }
+
+        public DateTime InsertDate { get; init; }
+
+        public DateTime? UpdateDate { get; init; }
 
         public long RestaurantId { get; init; }
 
@@ -22,9 +24,9 @@ namespace FoodInLoco.Application.Data.Models
 
         public bool HappyHour { get; init; }
 
-        public int? StartAt { get; init; }
+        public string? StartAt { get; init; }
 
-        public int? EndAt { get; init; }
+        public string? EndAt { get; init; }
 
         public Status Status { get; init; }
     }

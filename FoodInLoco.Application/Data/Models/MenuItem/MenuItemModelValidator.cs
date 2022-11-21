@@ -9,11 +9,11 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Menu() => RuleFor(_ => _.MenuId).NotEmpty();
 
-        public void Name() => RuleFor(_ => _.Name).NotEmpty();
+        public void Name() => RuleFor(_ => _.Name).MaximumLength(100).NotEmpty();
 
-        public void Description() => RuleFor(_ => _.Description).NotEmpty();
+        public void Description() => RuleFor(_ => _.Description).MaximumLength(300).NotEmpty();
 
-        public void Photo() => RuleFor(_ => _.Photo).NotEmpty().MaximumLength(1000);
+        public void Photo() => RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
 
         public void Quantity() => RuleFor(_ => _.Quantity).NotEmpty();
 

@@ -1,14 +1,12 @@
 ﻿using DotNetCore.Results;
-using DotNetCore.Security;
 using DotNetCore.Validation;
+using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Factories.Interfaces;
-using FoodInLoco.Application.Services.Interfaces;
-using FoodInLoco.Application.Data;
-using DotNetCore.Objects;
 using FoodInLoco.Application.Repositories;
+using FoodInLoco.Application.Repositories.Interfaces;
+using FoodInLoco.Application.Services.Interfaces;
 
 namespace FoodInLoco.Application.Services
 {
@@ -30,12 +28,12 @@ namespace FoodInLoco.Application.Services
             _attractionFactory = attractionFactory;
         }
 
-        public async Task<IResult<long>> AddAsync(AttractionModel model)
+        public async Task<IResult<Guid>> AddAsync(AttractionModel model)
         {
             var validation = new AddAttractionModelValidator().Validation(model);
 
             if (validation.Failed)
-                return validation.Fail<long>();
+                return validation.Fail<Guid>();
 
             var restaurant = _attractionFactory.Create(model);
 
@@ -46,7 +44,7 @@ namespace FoodInLoco.Application.Services
             return restaurant.Id.Success();
         }
 
-        public async Task<IResult> DeleteAsync(long id)
+        public async Task<IResult> DeleteAsync(Guid id)
         {
             await _attractionRepository.DeleteAsync(id);
 
@@ -55,11 +53,11 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<AttractionModel> GetAsync(long id)
+        public Task<AttractionModel> GetAsync(Guid id)
         {
             return _attractionRepository.GetModelByIdAsync(id);
         }
-
+        
         public async Task<IEnumerable<AttractionModel>> ListAsync()
         {
             return await _attractionRepository.ListModelAsync();
@@ -86,7 +84,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public async Task<IResult> InactivateAsync(long id)
+        public async Task<IResult> InactivateAsync(Guid id)
         {
             var obj = new Attraction(id);
             obj.Inactivate();
@@ -98,7 +96,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public async Task<IResult> ActivateAsync(long id)
+        public async Task<IResult> ActivateAsync(Guid id)
         {
             var obj = new Attraction(id);
             obj.Activate();

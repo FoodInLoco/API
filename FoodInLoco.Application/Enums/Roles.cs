@@ -1,4 +1,4 @@
-namespace FoodInLoco.Application.Data.Enums
+namespace FoodInLoco.Application.Enums
 {
     [Flags]
     public enum Roles

@@ -1,4 +1,5 @@
 using FoodInLoco.Application.Data.ValueObjects;
+using FoodInLoco.Application.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,15 +15,17 @@ public sealed class MenuConfiguration : IEntityTypeConfiguration<Menu>
 
         builder.Property(obj => obj.Id).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.IdGuid).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(obj => obj.InsertDate).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.InitialDate).HasDefaultValue(DateTime.UtcNow).IsRequired();
+        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnUpdate();
+
+        builder.Property(obj => obj.InitialDate).HasDefaultValue(DateTime.Now).IsRequired();
 
         builder.Property(obj => obj.ExpirationDate);
 
-        builder.Property(obj => obj.Photo).HasMaxLength(1000).HasDefaultValue("https://menubrands.com.br/wp-content/uploads/2020/04/Menu-300x300.png");
+        builder.Property(obj => obj.Photo).HasMaxLength(10000).HasDefaultValue("https://menubrands.com.br/wp-content/uploads/2020/04/Menu-300x300.png");
 
-        builder.Property(obj => obj.Status).IsRequired();
+        builder.Property(obj => obj.Status).HasDefaultValue(Status.Active).IsRequired();
 
         builder.OwnsOne(obj => obj.NameDescription, obj =>
         {
@@ -42,6 +45,6 @@ public sealed class MenuConfiguration : IEntityTypeConfiguration<Menu>
 
         builder.HasMany(obj => obj.Items).WithOne(obj => obj.Menu).HasForeignKey("MenuId");
 
-        builder.HasIndex("RestaurantId").IsUnique(); //TODO: verificar se será isso mesmo
+        builder.HasIndex("RestaurantId");
     }
 }
