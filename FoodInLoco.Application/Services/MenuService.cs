@@ -74,7 +74,7 @@ namespace FoodInLoco.Application.Services
             if (menu is null)
                 return Result.Success();
 
-            menu.Update(model.Name, model.Description, model.ExpirationDate, model.HappyHour, model.StartAt, model.EndAt);
+            menu.Update(model.Name, model.Description, model.ExpirationDate, model.HappyHour, !String.IsNullOrEmpty(model.StartAt) ? TimeOnly.Parse(model.StartAt) : null, !String.IsNullOrEmpty(model.EndAt) ? TimeOnly.Parse(model.EndAt) : null);
 
             await _menuRepository.UpdateAsync(menu);
 

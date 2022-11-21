@@ -5,7 +5,6 @@ using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Factories.Interfaces;
-using FoodInLoco.Application.Repositories;
 using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
 

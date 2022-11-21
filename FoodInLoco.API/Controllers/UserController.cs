@@ -1,5 +1,4 @@
 using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Services;
 using FoodInLoco.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

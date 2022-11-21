@@ -3,6 +3,7 @@ using FoodInLoco.Application.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using static System.Net.WebRequestMethods;
 
 namespace FoodInLoco.Application.Data
 {
@@ -15,12 +16,15 @@ namespace FoodInLoco.Application.Data
         internal static Guid GuidMenu1 = Guid.NewGuid();
         internal static Guid GuidMenu2 = Guid.NewGuid();
         internal static Guid GuidMenu3 = Guid.NewGuid();
-        internal static Guid GuidItemMenu1 = Guid.NewGuid();
-        internal static Guid GuidItemMenu2 = Guid.NewGuid();
-        internal static Guid GuidItemMenu3 = Guid.NewGuid();
-        internal static Guid GuidItemMenu4 = Guid.NewGuid();
-        internal static Guid GuidItemMenu5 = Guid.NewGuid();
-        internal static Guid GuidItemMenu6 = Guid.NewGuid();
+        internal static Guid GuidMenuItem1 = Guid.NewGuid();
+        internal static Guid GuidMenuItem2 = Guid.NewGuid();
+        internal static Guid GuidMenuItem3 = Guid.NewGuid();
+        internal static Guid GuidMenuItem4 = Guid.NewGuid();
+        internal static Guid GuidMenuItem5 = Guid.NewGuid();
+        internal static Guid GuidMenuItem6 = Guid.NewGuid();
+        internal static Guid GuidAttraction1 = Guid.NewGuid();
+        internal static Guid GuidAttraction2 = Guid.NewGuid();
+        internal static Guid GuidAttraction3 = Guid.NewGuid();
         
         internal static Guid SaltGuid1 = Guid.NewGuid();
         internal static Guid SaltGuid2 = Guid.NewGuid();
@@ -30,8 +34,8 @@ namespace FoodInLoco.Application.Data
             builder.SeedUsers();
             builder.SeedRestaurants();
             builder.SeedMenus();
-            builder.SeedItemsMenu();
-            //builder.SeedAttraction();
+            builder.SeedMenuItems();
+            builder.SeedAttractions();
             //builder.SeedReservation();
             //builder.SeedReview();
         }
@@ -47,7 +51,7 @@ namespace FoodInLoco.Application.Data
                     Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid1.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
                     Salt = SaltGuid1.ToString(),
                     Roles = Roles.User | Roles.Admin,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.Name).HasData(new
@@ -80,7 +84,7 @@ namespace FoodInLoco.Application.Data
                     Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid2.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
                     Salt = SaltGuid2.ToString(),
                     Roles = Roles.User,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.Name).HasData(new
@@ -115,7 +119,7 @@ namespace FoodInLoco.Application.Data
                     Status = Status.Active,
                     Kids = false,
                     Photo = "https://www.mcdonalds.com.br/images/layout/mcdonalds-logo-footer-bg-white.png",
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.Company).HasData(new
@@ -158,7 +162,7 @@ namespace FoodInLoco.Application.Data
                     Status = Status.Active,
                     Kids = true,
                     Photo = "https://d3sn2rlrwxy0ce.cloudfront.net/_800x600_crop_center-center_none/Burger-King-Novo-logo.png?mtime=20210125152539&focal=none&tmtime=20210726130340",
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.Company).HasData(new
@@ -202,9 +206,9 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = GuidMenu1,
                     RestaurantId = GuidRestaurant1,
-                    InitialDate = DateOnly.FromDateTime(DateTime.Now),
+                    InitialDate = DateTime.UtcNow,
                     Status = Status.Active,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -227,9 +231,9 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = GuidMenu2,
                     RestaurantId = GuidRestaurant1,
-                    InitialDate = DateOnly.FromDateTime(DateTime.Now),
+                    InitialDate = DateTime.UtcNow,
                     Status = Status.Active,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -254,9 +258,9 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = GuidMenu3,
                     RestaurantId = GuidRestaurant2,
-                    InitialDate = DateOnly.FromDateTime(DateTime.Now),
+                    InitialDate = DateTime.UtcNow,
                     Status = Status.Active,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -276,23 +280,23 @@ namespace FoodInLoco.Application.Data
             });
         }
 
-        private static void SeedItemsMenu(this ModelBuilder builder)
+        private static void SeedMenuItems(this ModelBuilder builder)
         {
             builder.Entity<MenuItem>(obj =>
             {
                 obj.HasData(new
                 {
-                    Id = GuidItemMenu1,
+                    Id = GuidMenuItem1,
                     MenuId = GuidMenu1,
                     Quantity = 1,
                     Value = 90.00,
                     Status = Status.Active,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
                 {
-                    MenuItemId = GuidItemMenu1,
+                    MenuItemId = GuidMenuItem1,
                     Name = "Vinho Quinta do Morgado",
                     Description = "Vinho de uva."
                 });
@@ -302,17 +306,17 @@ namespace FoodInLoco.Application.Data
             {
                 obj.HasData(new
                 {
-                    Id = GuidItemMenu2,
+                    Id = GuidMenuItem2,
                     MenuId = GuidMenu2,
                     Quantity = 1,
                     Value = 4.90,
                     Status = Status.Active,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
                 {
-                    MenuItemId = GuidItemMenu2,
+                    MenuItemId = GuidMenuItem2,
                     Name = "Chopp",
                     Description = "Chopp de Brahma."
                 });
@@ -322,17 +326,17 @@ namespace FoodInLoco.Application.Data
             {
                 obj.HasData(new
                 {
-                    Id = GuidItemMenu3,
+                    Id = GuidMenuItem3,
                     MenuId = GuidMenu3,
                     Quantity = 1,
                     Value = 5.40,
                     Status = Status.Active,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
                 {
-                    MenuItemId = GuidItemMenu3,
+                    MenuItemId = GuidMenuItem3,
                     Name = "Chopp",
                     Description = "Chopp de Brahma."
                 });
@@ -342,17 +346,17 @@ namespace FoodInLoco.Application.Data
             {
                 obj.HasData(new
                 {
-                    Id = GuidItemMenu4,
+                    Id = GuidMenuItem4,
                     MenuId = GuidMenu3,
                     Quantity = 1,
                     Value = 22.00,
                     Status = Status.Active,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
                 {
-                    MenuItemId = GuidItemMenu4,
+                    MenuItemId = GuidMenuItem4,
                     Name = "Hamburguer",
                     Description = "Hamburguer feito com pão brioche (homemade), 90g de blend, queijo cheddar, cebola caramelizada, picles e molho da casa."
                 });
@@ -362,17 +366,17 @@ namespace FoodInLoco.Application.Data
             {
                 obj.HasData(new
                 {
-                    Id = GuidItemMenu5,
+                    Id = GuidMenuItem5,
                     MenuId = GuidMenu3,
                     Quantity = 1,
                     Value = 11.00,
                     Status = Status.Active,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
                 {
-                    MenuItemId = GuidItemMenu5,
+                    MenuItemId = GuidMenuItem5,
                     Name = "Porção de batata",
                     Description = "Porção de batata feita com a melhor batata que existe (Burger King)."
                 });
@@ -382,22 +386,87 @@ namespace FoodInLoco.Application.Data
             {
                 obj.HasData(new
                 {
-                    Id = GuidItemMenu6,
+                    Id = GuidMenuItem6,
                     MenuId = GuidMenu2,
                     Quantity = 6,
                     Value = 14.00,
                     Status = Status.Active,
-                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+                    CreatedAt = DateTime.UtcNow
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
                 {
-                    MenuItemId = GuidItemMenu6,
+                    MenuItemId = GuidMenuItem6,
                     Name = "Chicken Nuggets",
                     Description = "Empanados de frango recheados com queijo."
                 });
             });
+        }
 
+        private static void SeedAttractions(this ModelBuilder builder)
+        {
+            builder.Entity<Attraction>(obj =>
+            {
+                obj.HasData(new
+                {
+                    Id = GuidAttraction1,
+                    RestaurantId = GuidRestaurant1,
+                    Photo = "https://scontent.fjdo1-1.fna.fbcdn.net/v/t39.30808-6/292709447_483405863791805_379209062390556101_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGjo-OBezYn3E16VwXa7mkQ6JZ7t6ANUJbolnu3oA1Qlg3ohBa-81hGAF7BKDuc7tzeYDnnYjaFTra0RtF1YD7d&_nc_ohc=cq57dZpXtzcAX_RAgvH&_nc_ht=scontent.fjdo1-1.fna&oh=00_AfCxsShn3s5eflRMUoUlKFMJbrzj_PU5tNfuDHGVeRlJ0Q&oe=63811EEA",
+                    Date = DateTime.UtcNow.AddDays(1),
+                    CoverTax = 20.00,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.OwnsOne(_ => _.NameDescription).HasData(new
+                {
+                    AttractionId = GuidAttraction1,
+                    Name = "Fets Domino",
+                    Description = "Excelente banda."
+                });
+            });
+
+            builder.Entity<Attraction>(obj =>
+            {
+                obj.HasData(new
+                {
+                    Id = GuidAttraction2,
+                    RestaurantId = GuidRestaurant2,
+                    Photo = "https://scontent.fjdo1-1.fna.fbcdn.net/v/t39.30808-6/292709447_483405863791805_379209062390556101_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGjo-OBezYn3E16VwXa7mkQ6JZ7t6ANUJbolnu3oA1Qlg3ohBa-81hGAF7BKDuc7tzeYDnnYjaFTra0RtF1YD7d&_nc_ohc=cq57dZpXtzcAX_RAgvH&_nc_ht=scontent.fjdo1-1.fna&oh=00_AfCxsShn3s5eflRMUoUlKFMJbrzj_PU5tNfuDHGVeRlJ0Q&oe=63811EEA",
+                    Date = DateTime.UtcNow.AddDays(2),
+                    CoverTax = 20.00,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.OwnsOne(_ => _.NameDescription).HasData(new
+                {
+                    AttractionId = GuidAttraction2,
+                    Name = "Fets Domino",
+                    Description = "Excelente banda."
+                });
+            });
+
+            builder.Entity<Attraction>(obj =>
+            {
+                obj.HasData(new
+                {
+                    Id = GuidAttraction3,
+                    RestaurantId = GuidRestaurant2,
+                    Photo = "https://scontent.fjdo1-1.fna.fbcdn.net/v/t39.30808-6/292709447_483405863791805_379209062390556101_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGjo-OBezYn3E16VwXa7mkQ6JZ7t6ANUJbolnu3oA1Qlg3ohBa-81hGAF7BKDuc7tzeYDnnYjaFTra0RtF1YD7d&_nc_ohc=cq57dZpXtzcAX_RAgvH&_nc_ht=scontent.fjdo1-1.fna&oh=00_AfCxsShn3s5eflRMUoUlKFMJbrzj_PU5tNfuDHGVeRlJ0Q&oe=63811EEA",
+                    Date = DateTime.UtcNow.AddDays(7),
+                    CoverTax = 20.00,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.OwnsOne(_ => _.NameDescription).HasData(new
+                {
+                    AttractionId = GuidAttraction3,
+                    Name = "Fets Domino",
+                    Description = "Excelente banda."
+                });
+            });
         }
     }
 }

@@ -17,7 +17,6 @@ namespace FoodInLoco.Application.Data.Expressions
             Photo = _.Photo,
             CoverTax = _.CoverTax,
             Date = _.Date,
-            Time = _.Time,
             Status = _.Status
         };
 

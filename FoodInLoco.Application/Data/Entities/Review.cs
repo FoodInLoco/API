@@ -17,7 +17,7 @@ namespace FoodInLoco.Application.Data.Entities
             ReservationId = reservationId;
             NameDescription = nameDescription;
             Rate = rate;
-            CreatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            CreatedAt = DateTime.UtcNow;
             Activate();
         }
 
@@ -40,13 +40,13 @@ namespace FoodInLoco.Application.Data.Entities
         public void Activate()
         {
             Status = Status.Active;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
 
         public void Inactivate()
         {
             Status = Status.Inactive;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
 
         public bool IsActive()
@@ -58,7 +58,7 @@ namespace FoodInLoco.Application.Data.Entities
         {
             NameDescription = new NameDescription(name, description);
             Rate = rate;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
     }
 }

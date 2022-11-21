@@ -19,7 +19,7 @@ namespace FoodInLoco.Application.Data.Entities
             Photo = photo;
             Quantity = quantity;
             Value = value;
-            CreatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            CreatedAt = DateTime.UtcNow;
             Activate();
         }
 
@@ -42,13 +42,13 @@ namespace FoodInLoco.Application.Data.Entities
         public void Activate()
         {
             Status = Status.Active;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
 
         public void Inactivate()
         {
             Status = Status.Inactive;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
 
         public void Update(string name, string description, string photo, int quantity, double value)
@@ -57,7 +57,7 @@ namespace FoodInLoco.Application.Data.Entities
             Photo = photo;
             Quantity = quantity;
             Value = value;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
     }
 }

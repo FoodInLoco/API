@@ -15,7 +15,6 @@ namespace FoodInLoco.Application.Factories
                 new NameDescription(model.Name, model.Description),
                 model.Photo,
                 model.Date,
-                model.Time,
                 model.CoverTax
             );
         }

@@ -14,10 +14,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using Microsoft.AspNetCore.Http.Json;
+using FoodInLoco.Application.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog();
+
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.Converters.Add(new DateOnlyConverter());
+    options.SerializerOptions.Converters.Add(new TimeOnlyConverter());
+});
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -70,17 +78,32 @@ builder.Services.AddCors();
 builder.Services.AddContext<Context>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
 
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
 builder.Services.AddScoped(typeof(ICommandRepository<>), typeof(EFCommandRepository<>));
 builder.Services.AddScoped(typeof(IQueryRepository<>), typeof(EFQueryRepository<>));
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddScoped<IMenuItemService, MenuItemService>();
+builder.Services.AddScoped<IAttractionService, AttractionService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+builder.Services.AddScoped<IMenuRepository, MenuRepository>();
+builder.Services.AddScoped<IMenuItemRepository, MenuItemRepository>();
+builder.Services.AddScoped<IAttractionRepository, AttractionRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 builder.Services.AddScoped<IUserFactory, UserFactory>();
 builder.Services.AddScoped<IRestaurantFactory, RestaurantFactory>();
+builder.Services.AddScoped<IMenuFactory, MenuFactory>();
+builder.Services.AddScoped<IMenuItemFactory, MenuItemFactory>();
+builder.Services.AddScoped<IAttractionFactory, AttractionFactory>();
+builder.Services.AddScoped<IReservationFactory, ReservationFactory>();
+builder.Services.AddScoped<IReviewFactory, ReviewFactory>();
 
 builder.Services.AddSingleton<IHashService, HashService>();
 var app = builder.Build();

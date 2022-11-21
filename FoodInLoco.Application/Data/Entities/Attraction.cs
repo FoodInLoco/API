@@ -10,18 +10,16 @@ namespace FoodInLoco.Application.Data.Entities
             Guid restaurantId,
             NameDescription nameDescription,
             string photo,
-            DateOnly date,
-            TimeOnly time,
-            decimal coverTax
+            DateTime date,
+            double coverTax
         )
         {
             RestaurantId = restaurantId;
             NameDescription = nameDescription;
             Photo = photo;
             Date = date;
-            Time = time;
             CoverTax = coverTax;
-            CreatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            CreatedAt = DateTime.UtcNow;
             Activate();
         }
 
@@ -33,11 +31,9 @@ namespace FoodInLoco.Application.Data.Entities
 
         public string Photo { get; private set; }
 
-        public DateOnly Date { get; private set; }
+        public DateTime Date { get; private set; }
 
-        public TimeOnly Time { get; private set; }
-
-        public decimal CoverTax { get; private set; }
+        public double CoverTax { get; private set; }
 
         public Status Status { get; private set; }
 
@@ -46,13 +42,13 @@ namespace FoodInLoco.Application.Data.Entities
         public void Activate()
         {
             Status = Status.Active;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
 
         public void Inactivate()
         {
             Status = Status.Inactive;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
 
         public bool IsActive()
@@ -60,14 +56,13 @@ namespace FoodInLoco.Application.Data.Entities
             return Status == Status.Active;
         }
 
-        public void Update(string name, string description, string photo, DateOnly date, TimeOnly time, decimal coverTax)
+        public void Update(string name, string description, string photo, DateTime date, double coverTax)
         {
             NameDescription = new NameDescription(name, description);
             Photo = photo;
             Date = date;
-            Time = time;
             CoverTax = coverTax;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
     }
 }

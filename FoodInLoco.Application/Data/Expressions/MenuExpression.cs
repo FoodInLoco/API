@@ -18,8 +18,8 @@ namespace FoodInLoco.Application.Data.Expressions
             InitialDate = _.InitialDate,
             ExpirationDate = _.ExpirationDate,
             HappyHour = _.HappyHour.Value,
-            StartAt = _.HappyHour.StartAt,
-            EndAt = _.HappyHour.EndAt,
+            StartAt = _.HappyHour.StartAt.ToString(),
+            EndAt = _.HappyHour.EndAt.ToString(),
             Status = _.Status
         };
 

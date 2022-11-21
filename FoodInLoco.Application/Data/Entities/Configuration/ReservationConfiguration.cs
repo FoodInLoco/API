@@ -23,7 +23,7 @@ public sealed class ReservationConfiguration : IEntityTypeConfiguration<Reservat
 
         builder.Property(obj => obj.SeatQuantity).IsRequired();
 
-        builder.Property(obj => obj.Date).IsRequired();
+        builder.Property(obj => obj.Date).HasDefaultValueSql("now()").IsRequired();
 
         builder.Property(obj => obj.Status).HasDefaultValue(Status.Active).IsRequired();
 

@@ -22,7 +22,7 @@ namespace FoodInLoco.Application.Data.Entities
             Address = address;
             Kids = kids;
             Photo = photo;
-            CreatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            CreatedAt = DateTime.UtcNow;
             Activate();
         }
 
@@ -51,13 +51,13 @@ namespace FoodInLoco.Application.Data.Entities
         public void Activate()
         {
             Status = Status.Active;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
 
         public void Inactivate()
         {
             Status = Status.Inactive;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
 
         public void Update(string companyName, string tradingName, string email, string ddd, string phoneNumber, 
@@ -69,7 +69,7 @@ namespace FoodInLoco.Application.Data.Entities
             Address = new Address(state, city, zipCode, street, addressNumber, complement);
             Kids = kids;
             Photo = photo;
-            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            LastUpdatedAt = DateTime.UtcNow;
         }
 
         public static implicit operator RestaurantModel(Restaurant restaurant)
