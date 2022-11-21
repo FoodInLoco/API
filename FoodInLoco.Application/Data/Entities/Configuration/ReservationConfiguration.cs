@@ -1,4 +1,3 @@
-using FoodInLoco.Application.Data.ValueObjects;
 using FoodInLoco.Application.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

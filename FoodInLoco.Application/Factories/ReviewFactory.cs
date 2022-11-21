@@ -14,6 +14,7 @@ namespace FoodInLoco.Application.Factories
             (
                 model.RestaurantId,
                 model.ReservationId,
+                model.UserId,
                 new NameDescription(model.Name, model.Description),
                 model.Rate
             );

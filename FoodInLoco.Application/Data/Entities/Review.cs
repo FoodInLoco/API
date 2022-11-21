@@ -9,12 +9,14 @@ namespace FoodInLoco.Application.Data.Entities
         (
             Guid restaurantId,
             Guid reservationId,
+            Guid userId,
             NameDescription nameDescription,
             Rate rate
         )
         {
             RestaurantId = restaurantId;
             ReservationId = reservationId;
+            UserId = userId;
             NameDescription = nameDescription;
             Rate = rate;
             CreatedAt = DateTime.UtcNow;
@@ -27,6 +29,8 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Guid ReservationId { get; private set; }
 
+        public Guid UserId { get; private set; }
+
         public NameDescription NameDescription { get; private set; }
 
         public Rate Rate { get; private set; }
@@ -36,6 +40,8 @@ namespace FoodInLoco.Application.Data.Entities
         public Restaurant Restaurant { get; private set; }
 
         public Reservation Reservation { get; private set; }
+
+        public User User { get; private set; }
 
         public void Activate()
         {

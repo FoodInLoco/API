@@ -13,6 +13,7 @@ namespace FoodInLoco.Application.Data.Expressions
             LastUpdatedAt = _.LastUpdatedAt,
             RestaurantId = _.RestaurantId,
             ReservationId = _.ReservationId,
+            UserId = _.UserId,
             Name = _.NameDescription.Name,
             Description = _.NameDescription.Description,
             Rate = _.Rate,

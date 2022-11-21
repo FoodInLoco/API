@@ -44,6 +44,8 @@ namespace FoodInLoco.Application.Data.Entities
 
         public ICollection<Menu> Menus { get; private set; }
 
+        public ICollection<Attraction> Attractions { get; private set; }
+
         public ICollection<Reservation> Reservations { get; private set; }
 
         public ICollection<Review> Reviews { get; private set; }

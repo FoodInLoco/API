@@ -14,6 +14,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public Guid ReservationId { get; init; }
 
+        public Guid UserId { get; init; }
+
         public string Name { get; init; }
 
         public string Description { get; init; }

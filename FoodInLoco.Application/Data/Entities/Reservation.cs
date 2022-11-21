@@ -39,6 +39,8 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Status Confirmation { get; private set; }
 
+        public Review Review { get; set; }
+
         public Restaurant Restaurant { get; private set; }
 
         public User User { get; private set; }

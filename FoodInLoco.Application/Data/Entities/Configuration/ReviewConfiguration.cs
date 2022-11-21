@@ -33,5 +33,7 @@ public sealed class ReviewConfiguration : IEntityTypeConfiguration<Review>
         builder.HasIndex("RestaurantId");
 
         builder.HasIndex("ReservationId").IsUnique();
+
+        builder.HasIndex("UserId");
     }
 }
