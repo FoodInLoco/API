@@ -17,7 +17,7 @@ public sealed class AttractionConfiguration : IEntityTypeConfiguration<Attractio
 
         builder.Property(obj => obj.CreatedAt).ValueGeneratedOnAdd().HasDefaultValueSql("GETUTCDATE()").IsRequired();
 
-        builder.Property(obj => obj.LastUpdatedAt).ValueGeneratedOnAddOrUpdate();
+        builder.Property(obj => obj.LastUpdatedAt).ValueGeneratedOnAddOrUpdate().HasDefaultValueSql("GETUTCDATE()");
 
         builder.Property(obj => obj.Date).IsRequired();
 

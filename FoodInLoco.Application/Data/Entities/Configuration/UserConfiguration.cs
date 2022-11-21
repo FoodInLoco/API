@@ -17,7 +17,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(obj => obj.CreatedAt).ValueGeneratedOnAdd().HasDefaultValueSql("GETUTCDATE()").IsRequired();
 
-        builder.Property(obj => obj.LastUpdatedAt).ValueGeneratedOnAddOrUpdate();
+        builder.Property(obj => obj.LastUpdatedAt).ValueGeneratedOnAddOrUpdate().HasDefaultValueSql("GETUTCDATE()");
 
         builder.Property(obj => obj.Status).HasDefaultValue(Status.Active).IsRequired();
 
