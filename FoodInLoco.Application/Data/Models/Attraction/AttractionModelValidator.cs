@@ -15,7 +15,7 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Photo() => RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
 
-        public void Date() => RuleFor(_ => _.Date.Date).GreaterThanOrEqualTo(DateTime.Now.Date).NotEmpty();
+        public void Date() => RuleFor(_ => _.Date.Date).GreaterThanOrEqualTo(DateTime.UtcNow.Date).NotEmpty();
 
         public void Cover() => RuleFor(_ => _.CoverTax).NotEmpty();
 

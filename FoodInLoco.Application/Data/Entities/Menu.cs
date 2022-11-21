@@ -55,7 +55,7 @@ namespace FoodInLoco.Application.Data.Entities
 
         public bool IsActive()
         {
-            return !(ExpirationDate?.CompareTo(DateTime.Now) < 0) && Status == Status.Active;
+            return !(ExpirationDate?.CompareTo(DateTime.UtcNow) < 0) && Status == Status.Active;
         }
 
         public void Update(string name, string description, DateTime? expirationDate, bool happyHour, string? startAt, string? endAt)

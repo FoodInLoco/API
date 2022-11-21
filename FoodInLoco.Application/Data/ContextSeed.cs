@@ -198,7 +198,7 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = GuidMenu1,
                     RestaurantId = GuidRestaurant1,
-                    InitialDate = DateTime.Now,
+                    InitialDate = DateTime.UtcNow,
                     Status = Status.Active
                 });
 
@@ -222,7 +222,7 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = GuidMenu2,
                     RestaurantId = GuidRestaurant1,
-                    InitialDate = DateTime.Now,
+                    InitialDate = DateTime.UtcNow,
                     Status = Status.Active
                 });
 
@@ -248,7 +248,7 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = GuidMenu3,
                     RestaurantId = GuidRestaurant2,
-                    InitialDate = DateTime.Now,
+                    InitialDate = DateTime.UtcNow,
                     Status = Status.Active
                 });
 
