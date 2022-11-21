@@ -6,9 +6,9 @@ namespace FoodInLoco.Application.Data.Models
     {
         public Guid Id { get; init; }
 
-        public DateTime CreatedAt { get; init; }
+        public DateOnly CreatedAt { get; init; }
 
-        public DateTime? LastUpdatedAt { get; init; }
+        public DateOnly? LastUpdatedAt { get; init; }
 
         public Guid RestaurantId { get; init; }
 
@@ -18,15 +18,15 @@ namespace FoodInLoco.Application.Data.Models
 
         public string Photo { get; init; }
 
-        public DateTime InitialDate { get; init; }
+        public DateOnly InitialDate { get; init; }
 
-        public DateTime? ExpirationDate { get; init; }
+        public DateOnly? ExpirationDate { get; init; }
 
         public bool HappyHour { get; init; }
 
-        public string? StartAt { get; init; }
+        public TimeOnly? StartAt { get; init; }
 
-        public string? EndAt { get; init; }
+        public TimeOnly? EndAt { get; init; }
 
         public Status Status { get; init; }
     }

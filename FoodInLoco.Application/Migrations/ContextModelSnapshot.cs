@@ -22,57 +22,13 @@ namespace FoodInLoco.Application.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Attraction", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<decimal>("CoverTax")
-                        .HasColumnType("numeric");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<string>("Photo")
-                        .HasMaxLength(10000)
-                        .HasColumnType("character varying(10000)");
-
-                    b.Property<Guid>("RestaurantId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RestaurantId");
-
-                    b.ToTable("Attraction", "Attraction");
-                });
-
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Menu", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("ExpirationDate")
                         .HasColumnType("timestamp with time zone");
@@ -80,229 +36,90 @@ namespace FoodInLoco.Application.Migrations
                     b.Property<DateTime>("InitialDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2022, 11, 21, 0, 11, 53, 281, DateTimeKind.Local).AddTicks(7230));
-
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasDefaultValue(new DateTime(2022, 11, 5, 21, 19, 35, 84, DateTimeKind.Utc).AddTicks(4740));
 
                     b.Property<string>("Photo")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(10000)
-                        .HasColumnType("character varying(10000)")
-                        .HasDefaultValue("https://menubrands.com.br/wp-content/uploads/2020/04/Menu-300x300.png");
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<Guid>("RestaurantId")
-                        .HasColumnType("uuid");
+                    b.Property<long>("RestaurantId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1);
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RestaurantId");
+                    b.HasIndex("RestaurantId")
+                        .IsUnique();
 
                     b.ToTable("Menu", "Menu");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ad7b79f6-d6d9-470a-9da3-8ba077fc2e11"),
-                            InitialDate = new DateTime(2022, 11, 21, 0, 11, 53, 514, DateTimeKind.Local).AddTicks(2077),
-                            RestaurantId = new Guid("5c9b0659-938a-486a-8424-046b502974e9"),
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("c132e8b6-6fb2-405f-a942-a737eb11d981"),
-                            InitialDate = new DateTime(2022, 11, 21, 0, 11, 53, 514, DateTimeKind.Local).AddTicks(2781),
-                            RestaurantId = new Guid("5c9b0659-938a-486a-8424-046b502974e9"),
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("66088142-38a0-490b-addb-4943dd261887"),
-                            InitialDate = new DateTime(2022, 11, 21, 0, 11, 53, 514, DateTimeKind.Local).AddTicks(4809),
-                            RestaurantId = new Guid("908693dd-3714-4674-9015-34321a8e263b"),
+                            Id = 1L,
+                            InitialDate = new DateTime(2022, 11, 5, 21, 19, 35, 207, DateTimeKind.Utc).AddTicks(7568),
+                            Photo = "https://www.underconsideration.com/artofthemenu/project_images/the_urban_tap_PHOTO_01.jpg",
+                            RestaurantId = 1L,
                             Status = 1
                         });
                 });
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.MenuItem", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<Guid>("MenuId")
-                        .HasColumnType("uuid");
+                    b.Property<long>("MenuId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Photo")
-                        .HasMaxLength(10000)
-                        .HasColumnType("character varying(10000)");
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1);
+                        .HasColumnType("integer");
 
                     b.Property<double>("Value")
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MenuId");
+                    b.HasIndex("MenuId")
+                        .IsUnique();
 
                     b.ToTable("MenuItem", "MenuItem");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a44fe5cd-8c60-4064-adf4-c4c1e3ae51bf"),
-                            MenuId = new Guid("ad7b79f6-d6d9-470a-9da3-8ba077fc2e11"),
+                            Id = 1L,
+                            MenuId = 1L,
+                            Photo = "https://www.underconsideration.com/artofthemenu/project_images/the_urban_tap_PHOTO_01.jpg",
                             Quantity = 1,
                             Status = 1,
-                            Value = 90.0
-                        },
-                        new
-                        {
-                            Id = new Guid("7cd6a7d2-7cf1-4b08-94d7-940b79dc9436"),
-                            MenuId = new Guid("c132e8b6-6fb2-405f-a942-a737eb11d981"),
-                            Quantity = 1,
-                            Status = 1,
-                            Value = 4.9000000000000004
-                        },
-                        new
-                        {
-                            Id = new Guid("9600ff62-3b8f-4e1f-8ed5-13eaabb22cca"),
-                            MenuId = new Guid("66088142-38a0-490b-addb-4943dd261887"),
-                            Quantity = 1,
-                            Status = 1,
-                            Value = 5.4000000000000004
-                        },
-                        new
-                        {
-                            Id = new Guid("1c413564-4f6d-4e12-a463-e44d6afadf36"),
-                            MenuId = new Guid("66088142-38a0-490b-addb-4943dd261887"),
-                            Quantity = 1,
-                            Status = 1,
-                            Value = 22.0
-                        },
-                        new
-                        {
-                            Id = new Guid("ec889c58-6182-4808-a2a5-cdfa8d226650"),
-                            MenuId = new Guid("66088142-38a0-490b-addb-4943dd261887"),
-                            Quantity = 1,
-                            Status = 1,
-                            Value = 11.0
-                        },
-                        new
-                        {
-                            Id = new Guid("63c2da29-e5ab-4c28-bfaa-51d353668387"),
-                            MenuId = new Guid("c132e8b6-6fb2-405f-a942-a737eb11d981"),
-                            Quantity = 6,
-                            Status = 1,
-                            Value = 14.0
+                            Value = 11.99
                         });
-                });
-
-            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Reservation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Confirmation")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(0);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("character varying(300)");
-
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<Guid>("RestaurantId")
-                        .HasColumnType("uuid");
-
-                    b.Property<short>("SeatQuantity")
-                        .HasColumnType("smallint");
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1);
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RestaurantId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Reservation", "Reservation");
                 });
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Restaurant", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<bool>("Kids")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<string>("Photo")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(10000)
-                        .HasColumnType("character varying(10000)")
-                        .HasDefaultValue("https://img.freepik.com/free-vector/restaurant-logo_23-2147506959.jpg?w=826&t=st=1668952356~exp=1668952956~hmac=49402768c6b8d28e62ceaf62db752e285911d5b9ec57bb827b2118d98f046d74");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1);
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -311,84 +128,23 @@ namespace FoodInLoco.Application.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5c9b0659-938a-486a-8424-046b502974e9"),
-                            Kids = false,
-                            Photo = "https://www.mcdonalds.com.br/images/layout/mcdonalds-logo-footer-bg-white.png",
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("908693dd-3714-4674-9015-34321a8e263b"),
-                            Kids = true,
-                            Photo = "https://d3sn2rlrwxy0ce.cloudfront.net/_800x600_crop_center-center_none/Burger-King-Novo-logo.png?mtime=20210125152539&focal=none&tmtime=20210726130340",
+                            Id = 1L,
                             Status = 1
                         });
                 });
 
-            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Review", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<int>("Rate")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("ReservationId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("RestaurantId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReservationId")
-                        .IsUnique();
-
-                    b.HasIndex("RestaurantId");
-
-                    b.ToTable("Review", "Review");
-                });
-
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)");
-
-                    b.Property<string>("Photo")
-                        .HasMaxLength(10000)
-                        .HasColumnType("character varying(10000)");
 
                     b.Property<int>("Roles")
                         .HasColumnType("integer");
@@ -399,9 +155,7 @@ namespace FoodInLoco.Application.Migrations
                         .HasColumnType("character varying(1000)");
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(1);
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -410,59 +164,20 @@ namespace FoodInLoco.Application.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0854ab7a-8271-4ef4-9dd5-230bdf918602"),
-                            Password = "xacYFz3OZvFqSGbGtmrtuQbGyCRF3Cg7aNLeNgJhayLOpQIU3ecylKSePmz47GvdLMFbpMQwm+zRwJhu2mhR2821yj9iwfGt4kWQbXUChFlSa4vxaN8HS8OUQySgLnS9qdB0PKGfFScGWsboOivSt/2FD3I33YqskeUyg5H0wLwjostebEVG6jLUyGKGZpPO2cid66dC0Ux3s7/BD+A3nPreBFehxS62U/ZJE1MvmCX7S882iIpKTVZAUAPMd+CjyPlgqQ0pqj2624odOX7Ovz7HvcrSWBj7Weq4f7HJ+WQJzxEZkEssg1RvbClUky++VdJqIEC9dSPfE+14gvd8YRODd6wNLbmvWx4PNnE4220ncMSfR3lE78FcjALNZAUeTocsrJZWPhtRx1OYwVtr1wCwCDh3+LW+TouYa3YpRu+EgWx9z4Px+IWHBPUQ9fuPLv8aKw2J2WehYO1T7pKyXfi5oBHI+CapYEhrMZZqtT2OC1ZF5mO0UWSp4fdyHLtrWUpBf0SX8asYBpSZx7eilT6HO5K3OznHAXI/jnNp3FxmyQoxBsYr/RM1p0pKrIGxZ64EmgRuiKYuLVQVWIieG5dUg+JbSfRZZS6/0Cqf0F4Dq8D5N524JGHp5CgknxQgYSHPG3MLierS8yPbloQMr9rXjoWPIdoMyeifYoyxcQM=",
+                            Id = 1L,
+                            Password = "q87KdHFXZl0erFi1C71Rp9miF/QFSKU3SQwNb87Kk42+AI9Xs1yfApzhZfXNzicnPOBXlgHLdSf98NRpwJS9JxGyvBdGpAN2J3Tj4xCxSKLhArwHghQieo4fLQEAOyL98XC41PbvZn6IVMvymhWCfbJbf3UedlXZxpODqPPi/bp4XmRc9xCK4Tp+rTBivGP5Og71cOSVDeQHwTO4At6n65fyQkKRih7Zxq0MqQ+FLnkgniTMF+yJHeaC+lNPmtUs2ffuDlJ2qL6fi5d0xYc/RI9lLXkd5JOuwpFf95lBruY+k3JJursLNoIWq7R2Qm2FMELd4C/81f1LtzdbMK8aUzFpw7MEIHMOjbCNJBqJicrXRXVs550PluDIuKFgG0wGsfoyNgunQrKB/WVNpPJB96luVwtTFlEEamjO7EgFUwdMKMtQFokK6nSYVBnpTZilR87irEdx5S8CqPdcUeruFecyZLXeujOy08vaNrXvioiETqIO8kC2fZnTIljmxlEUJIV4bhq0do3gRJMm8Y4AZizUp7L+9LAeEMC5R5MUsB4/9GbOT3FxXWpF3m0vFzPvfqokn3YuGLKCNMXi2H71sV2TKIBqUCCG7SFnVBTZgswpUfmgGc/d6xP2/Mga5EtJp/c63lNAKY+pzWo5WWP3mdqpfjuaBWibchMv0Og91Qk=",
                             Roles = 3,
-                            Salt = "c60e8af1-f66c-4a3b-8c67-f4edcf219f8a",
+                            Salt = "a936717c-0a12-4db8-9bea-debe9f499a95",
                             Status = 1
                         },
                         new
                         {
-                            Id = new Guid("c3416ab2-b50c-4e56-8d68-639b2dd2c05d"),
-                            Password = "jmD0puYE06y2ea/wtgEMxIfsA5fUs5rP/0exo5hvnRl6K1oVhURb4dzWICmvZq9gxxgfBVGlO87vPum33EEm0kWCmyL0JHqmYMaKx7s9RxKR91zWlYfcJEsYkTMOBFibUIrGSaH/2I7ML5EWL//ZLpaxVbh+iHmEoIJKkraPJsWAQqvv2u6FBS+GCOhE6UVqPkLr5SWOzsqp6F0JpniO55587k/IkBQmBwWklLctIlJ1j+n04fU4oM7+XQdzXvh7+fLzY5mEj4s1VOmxwjRL33b7/pb3DLc7ezK7YjcOabsylxlWPsvtNAT5rwxBPAOzmIyhEaOUqiBW/1RpJLE23E8gc5A9zKB2kNM5b8KRjwU36qGcAL39FDhN5FstwBzAYyesCUbu7Tr16aoYXH6HRo3D52Lu85xa+PtZxE0Smlyi3RnfdWjOSDpjzTxDO6T6Jh0393stX48H6qvrv2HoJx+gizc7Y+4yv+qS8jipHbGNntVLBEW4PamSv7n4tqIAsXkT0nP358JQ3s3rkXfB9vv2WW2uMIaONfZivIkqh7CA5ghM1ut/i3Lf4EPGMjNEqbBju4vPpqsrz1fzpZdt+BzorYE5LUJxcsJycTyR0YtXBtTWO0DONeoMXftecLOVeF8TJkDxKlSX04VUdQY52DrtwTM69CQ3FB5VZGuHc+s=",
+                            Id = 2L,
+                            Password = "S4WQ0xO1c+FtWb8kWIRS2or7aG/QH9kqZgspnCWPBMrS0t9jVWVwjpVco146JLPxMgkNn5sitUCfjdlP7EaCKRQCue7MBa5d7/RyuAAXAcXiSKIi6hZgi7zjHtInflnCj6vaTG8b8/JIFg4m21oIasan4ZZQ1r7P4K1Qri6ujRLOIyuaD0rv3MiW1X+U5osHU0dJPf893oV0fEKVTbIwRGwak0rXQr75K9sP43HdyclASwuU7Km4CFiYLYYEXqCcI5wAJbhksR/Z7puV7hyEmTPHXL+gJSfChzymVf282kXZWHk5aWfoQGKcHpWg0utRwGUHozt8I+qDf68i3ZsXJp+dv+OW2gBm/JmZr4Uwsq982e7YETOGSEyr9EG83SXXu1N/4JMiBzfUz8xcLWI5RReKTpHJUAcv70VGeKYQK5bqSiXmtg1jKNX/Ig8LzKncxp+WWd3F5M0JGUlYPf/eowN+2M9HBGNB/NkR4jSvvooMQmtFCmQD4onGGHLjxEUqUt3chGiZVrGHidyFlxqgvJqtp8MKLYwyr34fqfQcP3bAGzgcHQk3CecpHRzoySZm8lkbeYJCQ1xvHuv32Y6iI7hVwhp7ckFQQWnWAYbtCiHfzGUZ3d3dwMcS0sjfJLI+nxnsHygumf8lQ7mdCagzACP3pD3a+aaCJeCFCIuSTZk=",
                             Roles = 1,
-                            Salt = "c35e0a5b-af40-48f8-8ab6-6cf33106203d",
+                            Salt = "0991f2f3-1dbb-4c4a-8dbc-7a6bd9a83027",
                             Status = 1
                         });
-                });
-
-            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Attraction", b =>
-                {
-                    b.HasOne("FoodInLoco.Application.Data.Entities.Restaurant", "Restaurant")
-                        .WithMany()
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.NameDescription", "NameDescription", b1 =>
-                        {
-                            b1.Property<Guid>("AttractionId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("Description")
-                                .IsRequired()
-                                .HasMaxLength(300)
-                                .HasColumnType("character varying(300)")
-                                .HasColumnName("Description");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
-                                .HasColumnName("Name");
-
-                            b1.HasKey("AttractionId");
-
-                            b1.ToTable("Attraction", "Attraction");
-
-                            b1.WithOwner()
-                                .HasForeignKey("AttractionId");
-                        });
-
-                    b.Navigation("NameDescription")
-                        .IsRequired();
-
-                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Menu", b =>
@@ -473,62 +188,17 @@ namespace FoodInLoco.Application.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.NameDescription", "NameDescription", b1 =>
+                    b.OwnsOne("FoodInLoco.Application.Data.Entities.Menu.HappyHour#FoodInLoco.Application.Data.ValueObjects.HappyHour", "HappyHour", b1 =>
                         {
-                            b1.Property<Guid>("MenuId")
-                                .HasColumnType("uuid");
+                            b1.Property<long>("MenuId")
+                                .HasColumnType("bigint");
 
-                            b1.Property<string>("Description")
-                                .IsRequired()
-                                .HasMaxLength(300)
-                                .HasColumnType("character varying(300)")
-                                .HasColumnName("Description");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
-                                .HasColumnName("Name");
-
-                            b1.HasKey("MenuId");
-
-                            b1.ToTable("Menu", "Menu");
-
-                            b1.WithOwner()
-                                .HasForeignKey("MenuId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    MenuId = new Guid("ad7b79f6-d6d9-470a-9da3-8ba077fc2e11"),
-                                    Description = "Cardápio de vinhos.",
-                                    Name = "Wine"
-                                },
-                                new
-                                {
-                                    MenuId = new Guid("c132e8b6-6fb2-405f-a942-a737eb11d981"),
-                                    Description = "Cardápio de Happy Hour.",
-                                    Name = "Happy Hour"
-                                },
-                                new
-                                {
-                                    MenuId = new Guid("66088142-38a0-490b-addb-4943dd261887"),
-                                    Description = "Cardápio de Happy Hour.",
-                                    Name = "Happy Hour"
-                                });
-                        });
-
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.HappyHour", "HappyHour", b1 =>
-                        {
-                            b1.Property<Guid>("MenuId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("EndAt")
-                                .HasColumnType("text")
+                            b1.Property<int?>("EndAt")
+                                .HasColumnType("integer")
                                 .HasColumnName("EndAt");
 
-                            b1.Property<string>("StartAt")
-                                .HasColumnType("text")
+                            b1.Property<int?>("StartAt")
+                                .HasColumnType("integer")
                                 .HasColumnName("StartAt");
 
                             b1.Property<bool>("Value")
@@ -545,22 +215,41 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    MenuId = new Guid("ad7b79f6-d6d9-470a-9da3-8ba077fc2e11"),
+                                    MenuId = 1L,
                                     Value = false
-                                },
+                                });
+                        });
+
+                    b.OwnsOne("FoodInLoco.Application.Data.Entities.Menu.NameDescription#FoodInLoco.Application.Data.ValueObjects.NameDescription", "NameDescription", b1 =>
+                        {
+                            b1.Property<long>("MenuId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Description")
+                                .IsRequired()
+                                .HasMaxLength(300)
+                                .HasColumnType("character varying(300)")
+                                .HasColumnName("Description");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("character varying(100)")
+                                .HasColumnName("Name");
+
+                            b1.HasKey("MenuId");
+
+                            b1.ToTable("Menu", "Menu");
+
+                            b1.WithOwner()
+                                .HasForeignKey("MenuId");
+
+                            b1.HasData(
                                 new
                                 {
-                                    MenuId = new Guid("c132e8b6-6fb2-405f-a942-a737eb11d981"),
-                                    EndAt = "20:00",
-                                    StartAt = "16:30",
-                                    Value = true
-                                },
-                                new
-                                {
-                                    MenuId = new Guid("66088142-38a0-490b-addb-4943dd261887"),
-                                    EndAt = "20:00",
-                                    StartAt = "16:30",
-                                    Value = true
+                                    MenuId = 1L,
+                                    Description = "Cardápio de vinhos.",
+                                    Name = "Wine"
                                 });
                         });
 
@@ -581,10 +270,10 @@ namespace FoodInLoco.Application.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.NameDescription", "NameDescription", b1 =>
+                    b.OwnsOne("FoodInLoco.Application.Data.Entities.MenuItem.NameDescription#FoodInLoco.Application.Data.ValueObjects.NameDescription", "NameDescription", b1 =>
                         {
-                            b1.Property<Guid>("MenuItemId")
-                                .HasColumnType("uuid");
+                            b1.Property<long>("MenuItemId")
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("Description")
                                 .IsRequired()
@@ -608,39 +297,9 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    MenuItemId = new Guid("a44fe5cd-8c60-4064-adf4-c4c1e3ae51bf"),
-                                    Description = "Vinho de uva.",
-                                    Name = "Vinho Quinta do Morgado"
-                                },
-                                new
-                                {
-                                    MenuItemId = new Guid("7cd6a7d2-7cf1-4b08-94d7-940b79dc9436"),
-                                    Description = "Chopp de Brahma.",
-                                    Name = "Chopp"
-                                },
-                                new
-                                {
-                                    MenuItemId = new Guid("9600ff62-3b8f-4e1f-8ed5-13eaabb22cca"),
-                                    Description = "Chopp de Brahma.",
-                                    Name = "Chopp"
-                                },
-                                new
-                                {
-                                    MenuItemId = new Guid("1c413564-4f6d-4e12-a463-e44d6afadf36"),
+                                    MenuItemId = 1L,
                                     Description = "Hamburguer feito com pão brioche (homemade), 90g de blend, queijo cheddar, cebola caramelizada, picles e molho da casa.",
                                     Name = "Hamburguer"
-                                },
-                                new
-                                {
-                                    MenuItemId = new Guid("ec889c58-6182-4808-a2a5-cdfa8d226650"),
-                                    Description = "Porção de batata feita com a melhor batata que existe (Burger King).",
-                                    Name = "Porção de batata"
-                                },
-                                new
-                                {
-                                    MenuItemId = new Guid("63c2da29-e5ab-4c28-bfaa-51d353668387"),
-                                    Description = "Empanados de frango recheados com queijo.",
-                                    Name = "Chicken Nuggets"
                                 });
                         });
 
@@ -650,104 +309,12 @@ namespace FoodInLoco.Application.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Reservation", b =>
-                {
-                    b.HasOne("FoodInLoco.Application.Data.Entities.Restaurant", "Restaurant")
-                        .WithMany("Reservations")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FoodInLoco.Application.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Restaurant");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Restaurant", b =>
                 {
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Phone", "CellPhone", b1 =>
+                    b.OwnsOne("FoodInLoco.Application.Data.Entities.Restaurant.Address#FoodInLoco.Application.Data.ValueObjects.Address", "Address", b1 =>
                         {
-                            b1.Property<Guid>("RestaurantId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("DDD")
-                                .IsRequired()
-                                .HasMaxLength(2)
-                                .HasColumnType("character varying(2)")
-                                .HasColumnName("DDD");
-
-                            b1.Property<string>("PhoneNumber")
-                                .IsRequired()
-                                .HasMaxLength(9)
-                                .HasColumnType("character varying(9)")
-                                .HasColumnName("PhoneNumber");
-
-                            b1.HasKey("RestaurantId");
-
-                            b1.ToTable("Restaurant", "Restaurant");
-
-                            b1.WithOwner()
-                                .HasForeignKey("RestaurantId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    RestaurantId = new Guid("5c9b0659-938a-486a-8424-046b502974e9"),
-                                    DDD = "85",
-                                    PhoneNumber = "998888888"
-                                },
-                                new
-                                {
-                                    RestaurantId = new Guid("908693dd-3714-4674-9015-34321a8e263b"),
-                                    DDD = "85",
-                                    PhoneNumber = "997777777"
-                                });
-                        });
-
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Email", "Email", b1 =>
-                        {
-                            b1.Property<Guid>("RestaurantId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(300)
-                                .HasColumnType("character varying(300)")
-                                .HasColumnName("Email");
-
-                            b1.HasKey("RestaurantId");
-
-                            b1.HasIndex("Value")
-                                .IsUnique();
-
-                            b1.ToTable("Restaurant", "Restaurant");
-
-                            b1.WithOwner()
-                                .HasForeignKey("RestaurantId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    RestaurantId = new Guid("5c9b0659-938a-486a-8424-046b502974e9"),
-                                    Value = "mcdonalds@foodinloco.com"
-                                },
-                                new
-                                {
-                                    RestaurantId = new Guid("908693dd-3714-4674-9015-34321a8e263b"),
-                                    Value = "burgerking@foodinloco.com"
-                                });
-                        });
-
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Address", "Address", b1 =>
-                        {
-                            b1.Property<Guid>("RestaurantId")
-                                .HasColumnType("uuid");
+                            b1.Property<long>("RestaurantId")
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("City")
                                 .IsRequired()
@@ -793,19 +360,9 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    RestaurantId = new Guid("5c9b0659-938a-486a-8424-046b502974e9"),
+                                    RestaurantId = 1L,
                                     City = "Fortaleza",
                                     Complement = "Apto 004, Bloco D",
-                                    Number = 150L,
-                                    State = "Ceará",
-                                    Street = "Travessa Elisiário Mendes",
-                                    ZipCode = "60841477"
-                                },
-                                new
-                                {
-                                    RestaurantId = new Guid("908693dd-3714-4674-9015-34321a8e263b"),
-                                    City = "Fortaleza",
-                                    Complement = "Apto 001, Bloco D",
                                     Number = 150L,
                                     State = "Ceará",
                                     Street = "Travessa Elisiário Mendes",
@@ -813,10 +370,43 @@ namespace FoodInLoco.Application.Migrations
                                 });
                         });
 
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Company", "Company", b1 =>
+                    b.OwnsOne("FoodInLoco.Application.Data.Entities.Restaurant.CellPhone#FoodInLoco.Application.Data.ValueObjects.Phone", "CellPhone", b1 =>
                         {
-                            b1.Property<Guid>("RestaurantId")
-                                .HasColumnType("uuid");
+                            b1.Property<long>("RestaurantId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("DDD")
+                                .IsRequired()
+                                .HasMaxLength(2)
+                                .HasColumnType("character varying(2)")
+                                .HasColumnName("DDD");
+
+                            b1.Property<string>("PhoneNumber")
+                                .IsRequired()
+                                .HasMaxLength(9)
+                                .HasColumnType("character varying(9)")
+                                .HasColumnName("PhoneNumber");
+
+                            b1.HasKey("RestaurantId");
+
+                            b1.ToTable("Restaurant", "Restaurant");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RestaurantId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    RestaurantId = 1L,
+                                    DDD = "85",
+                                    PhoneNumber = "998888888"
+                                });
+                        });
+
+                    b.OwnsOne("FoodInLoco.Application.Data.Entities.Restaurant.Company#FoodInLoco.Application.Data.ValueObjects.Company", "Company", b1 =>
+                        {
+                            b1.Property<long>("RestaurantId")
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("CompanyName")
                                 .IsRequired()
@@ -840,15 +430,38 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    RestaurantId = new Guid("5c9b0659-938a-486a-8424-046b502974e9"),
+                                    RestaurantId = 1L,
                                     CompanyName = "Mc Donalds",
                                     TradingName = "Méqui"
-                                },
+                                });
+                        });
+
+                    b.OwnsOne("FoodInLoco.Application.Data.Entities.Restaurant.Email#FoodInLoco.Application.Data.ValueObjects.Email", "Email", b1 =>
+                        {
+                            b1.Property<long>("RestaurantId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(300)
+                                .HasColumnType("character varying(300)")
+                                .HasColumnName("Email");
+
+                            b1.HasKey("RestaurantId");
+
+                            b1.HasIndex("Value")
+                                .IsUnique();
+
+                            b1.ToTable("Restaurant", "Restaurant");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RestaurantId");
+
+                            b1.HasData(
                                 new
                                 {
-                                    RestaurantId = new Guid("908693dd-3714-4674-9015-34321a8e263b"),
-                                    CompanyName = "Burger King",
-                                    TradingName = "BK"
+                                    RestaurantId = 1L,
+                                    Value = "mcdonalds@foodinloco.com"
                                 });
                         });
 
@@ -865,59 +478,12 @@ namespace FoodInLoco.Application.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Review", b =>
-                {
-                    b.HasOne("FoodInLoco.Application.Data.Entities.Reservation", "Reservation")
-                        .WithMany()
-                        .HasForeignKey("ReservationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FoodInLoco.Application.Data.Entities.Restaurant", "Restaurant")
-                        .WithMany("Reviews")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.NameDescription", "NameDescription", b1 =>
-                        {
-                            b1.Property<Guid>("ReviewId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("Description")
-                                .IsRequired()
-                                .HasMaxLength(300)
-                                .HasColumnType("character varying(300)")
-                                .HasColumnName("Description");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
-                                .HasColumnName("Name");
-
-                            b1.HasKey("ReviewId");
-
-                            b1.ToTable("Review", "Review");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ReviewId");
-                        });
-
-                    b.Navigation("NameDescription")
-                        .IsRequired();
-
-                    b.Navigation("Reservation");
-
-                    b.Navigation("Restaurant");
-                });
-
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.User", b =>
                 {
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Phone", "CellPhone", b1 =>
+                    b.OwnsOne("FoodInLoco.Application.Data.Entities.User.CellPhone#FoodInLoco.Application.Data.ValueObjects.Phone", "CellPhone", b1 =>
                         {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uuid");
+                            b1.Property<long>("UserId")
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("DDD")
                                 .IsRequired()
@@ -941,22 +507,22 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    UserId = new Guid("0854ab7a-8271-4ef4-9dd5-230bdf918602"),
+                                    UserId = 1L,
                                     DDD = "85",
-                                    PhoneNumber = "999999999"
+                                    PhoneNumber = "997851936"
                                 },
                                 new
                                 {
-                                    UserId = new Guid("c3416ab2-b50c-4e56-8d68-639b2dd2c05d"),
+                                    UserId = 2L,
                                     DDD = "85",
-                                    PhoneNumber = "997851936"
+                                    PhoneNumber = "999999999"
                                 });
                         });
 
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Email", "Email", b1 =>
+                    b.OwnsOne("FoodInLoco.Application.Data.Entities.User.Email#FoodInLoco.Application.Data.ValueObjects.Email", "Email", b1 =>
                         {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uuid");
+                            b1.Property<long>("UserId")
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("Value")
                                 .IsRequired()
@@ -977,20 +543,20 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    UserId = new Guid("0854ab7a-8271-4ef4-9dd5-230bdf918602"),
+                                    UserId = 1L,
                                     Value = "admin@foodinloco.com"
                                 },
                                 new
                                 {
-                                    UserId = new Guid("c3416ab2-b50c-4e56-8d68-639b2dd2c05d"),
+                                    UserId = 2L,
                                     Value = "letter.pedro@gmail.com"
                                 });
                         });
 
-                    b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Name", "Name", b1 =>
+                    b.OwnsOne("FoodInLoco.Application.Data.Entities.User.Name#FoodInLoco.Application.Data.ValueObjects.Name", "Name", b1 =>
                         {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uuid");
+                            b1.Property<long>("UserId")
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("FirstName")
                                 .IsRequired()
@@ -1014,15 +580,15 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    UserId = new Guid("0854ab7a-8271-4ef4-9dd5-230bdf918602"),
-                                    FirstName = "Admin",
-                                    LastName = "FoodInLoco"
+                                    UserId = 1L,
+                                    FirstName = "Pedro",
+                                    LastName = "Oliveira"
                                 },
                                 new
                                 {
-                                    UserId = new Guid("c3416ab2-b50c-4e56-8d68-639b2dd2c05d"),
+                                    UserId = 2L,
                                     FirstName = "Pedro",
-                                    LastName = "Lopes de Oliveira"
+                                    LastName = "Lopes"
                                 });
                         });
 
@@ -1044,10 +610,6 @@ namespace FoodInLoco.Application.Migrations
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Restaurant", b =>
                 {
                     b.Navigation("Menus");
-
-                    b.Navigation("Reservations");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

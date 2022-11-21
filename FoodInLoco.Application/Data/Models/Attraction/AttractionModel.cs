@@ -6,9 +6,9 @@ namespace FoodInLoco.Application.Data.Models
     {
         public Guid Id { get; init; }
 
-        public DateTime CreatedAt { get; init; }
+        public DateOnly CreatedAt { get; init; }
 
-        public DateTime? LastUpdatedAt { get; init; }
+        public DateOnly? LastUpdatedAt { get; init; }
 
         public Guid RestaurantId { get; init; }
 
@@ -18,7 +18,9 @@ namespace FoodInLoco.Application.Data.Models
 
         public string Photo { get; init; }
 
-        public DateTime Date { get; init; }
+        public DateOnly Date { get; init; }
+
+        public TimeOnly Time { get; init; }
 
         public decimal CoverTax { get; init; }
 

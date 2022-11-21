@@ -40,7 +40,7 @@ namespace FoodInLoco.Application.Repositories
 
         public Task UpdateStatusAsync(User obj)
         {
-            return UpdatePartialAsync(new { obj.Id, obj.Status });
+            return UpdatePartialAsync(new { obj.Id, obj.Status, LastUpdatedAt = DateTime.UtcNow });
         }
 
         public Task<bool> AnyByEmailAsync(string email)

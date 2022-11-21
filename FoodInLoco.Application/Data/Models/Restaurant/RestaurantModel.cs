@@ -6,9 +6,9 @@ namespace FoodInLoco.Application.Data.Models
     {
         public Guid Id { get; init; }
 
-        public DateTime CreatedAt { get; init; }
+        public DateOnly CreatedAt { get; init; }
 
-        public DateTime? LastUpdatedAt { get; init; }
+        public DateOnly? LastUpdatedAt { get; init; }
 
         public string CompanyName { get; init; }
 

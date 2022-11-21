@@ -35,7 +35,7 @@ namespace FoodInLoco.Application.Repositories
 
         public Task UpdateStatusAsync(MenuItem obj)
         {
-            return UpdatePartialAsync(new { obj.Id, obj.Status });
+            return UpdatePartialAsync(new { obj.Id, obj.Status, LastUpdatedAt = DateTime.UtcNow });
         }
 
     }

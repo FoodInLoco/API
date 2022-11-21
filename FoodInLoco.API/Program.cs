@@ -85,6 +85,8 @@ builder.Services.AddScoped<IRestaurantFactory, RestaurantFactory>();
 builder.Services.AddSingleton<IHashService, HashService>();
 var app = builder.Build();
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
 
 //if (app.Environment.IsDevelopment())
 //{

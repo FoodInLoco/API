@@ -10,7 +10,8 @@ namespace FoodInLoco.Application.Data.Entities
             Guid restaurantId,
             NameDescription nameDescription,
             string photo,
-            DateTime date,
+            DateOnly date,
+            TimeOnly time,
             decimal coverTax
         )
         {
@@ -18,7 +19,10 @@ namespace FoodInLoco.Application.Data.Entities
             NameDescription = nameDescription;
             Photo = photo;
             Date = date;
+            Time = time;
             CoverTax = coverTax;
+            CreatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            Activate();
         }
 
         public Attraction(Guid id) => Id = id;
@@ -29,7 +33,9 @@ namespace FoodInLoco.Application.Data.Entities
 
         public string Photo { get; private set; }
 
-        public DateTime Date { get; private set; }
+        public DateOnly Date { get; private set; }
+
+        public TimeOnly Time { get; private set; }
 
         public decimal CoverTax { get; private set; }
 
@@ -40,11 +46,13 @@ namespace FoodInLoco.Application.Data.Entities
         public void Activate()
         {
             Status = Status.Active;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public void Inactivate()
         {
             Status = Status.Inactive;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public bool IsActive()
@@ -52,12 +60,14 @@ namespace FoodInLoco.Application.Data.Entities
             return Status == Status.Active;
         }
 
-        public void Update(string name, string description, string photo, DateTime date, decimal coverTax)
+        public void Update(string name, string description, string photo, DateOnly date, TimeOnly time, decimal coverTax)
         {
             NameDescription = new NameDescription(name, description);
             Photo = photo;
             Date = date;
+            Time = time;
             CoverTax = coverTax;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
     }
 }

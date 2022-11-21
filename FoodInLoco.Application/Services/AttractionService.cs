@@ -75,7 +75,7 @@ namespace FoodInLoco.Application.Services
             if (attraction is null)
                 return Result.Success();
 
-            attraction.Update(model.Name, model.Description, model.Photo, model.Date, model.CoverTax);
+            attraction.Update(model.Name, model.Description, model.Photo, model.Date, model.Time, model.CoverTax);
 
             await _attractionRepository.UpdateAsync(attraction);
 

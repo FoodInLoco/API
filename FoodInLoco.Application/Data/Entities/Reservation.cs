@@ -19,6 +19,8 @@ namespace FoodInLoco.Application.Data.Entities
             Description = description;
             SeatQuantity = seatQuantity;
             Date = date;
+            CreatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            Activate();
         }
 
         public Reservation(Guid id) => Id = id;
@@ -44,21 +46,25 @@ namespace FoodInLoco.Application.Data.Entities
         public void Activate()
         {
             Status = Status.Active;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public void Inactivate()
         {
             Status = Status.Inactive;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public void Confirm()
         {
             Confirmation = Status.Active;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public void Disconfirm()
         {
             Confirmation = Status.Inactive;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public bool IsActive()
@@ -72,6 +78,7 @@ namespace FoodInLoco.Application.Data.Entities
             SeatQuantity = seatQuantity;
             Date = date;
             Confirmation = Status.None;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
     }
 }

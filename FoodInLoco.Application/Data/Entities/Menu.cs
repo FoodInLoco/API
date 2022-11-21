@@ -10,8 +10,8 @@ namespace FoodInLoco.Application.Data.Entities
             Guid restaurantId,
             NameDescription nameDescription,
             string photo,
-            DateTime initialDate,
-            DateTime? expirationDate,
+            DateOnly initialDate,
+            DateOnly? expirationDate,
             HappyHour happyHour
         )
         {
@@ -21,6 +21,8 @@ namespace FoodInLoco.Application.Data.Entities
             InitialDate = initialDate;
             ExpirationDate = expirationDate;
             HappyHour = happyHour;
+            CreatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
+            Activate();
         }
 
         public Menu(Guid id) => Id = id;
@@ -31,9 +33,9 @@ namespace FoodInLoco.Application.Data.Entities
 
         public string Photo { get; private set; }
 
-        public DateTime InitialDate { get; private set; }
+        public DateOnly InitialDate { get; private set; }
         
-        public DateTime? ExpirationDate { get; private set; }
+        public DateOnly? ExpirationDate { get; private set; }
         
         public HappyHour HappyHour { get; private set; }
 
@@ -46,11 +48,13 @@ namespace FoodInLoco.Application.Data.Entities
         public void Activate()
         {
             Status = Status.Active;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public void Inactivate()
         {
             Status = Status.Inactive;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public bool IsActive()
@@ -58,11 +62,12 @@ namespace FoodInLoco.Application.Data.Entities
             return !(ExpirationDate?.CompareTo(DateTime.Now) < 0) && Status == Status.Active;
         }
 
-        public void Update(string name, string description, DateTime? expirationDate, bool happyHour, string? startAt, string? endAt)
+        public void Update(string name, string description, DateOnly? expirationDate, bool happyHour, TimeOnly? startAt, TimeOnly? endAt)
         {
             NameDescription = new NameDescription(name, description);
             ExpirationDate = expirationDate;
             HappyHour = new HappyHour(happyHour, startAt, endAt);
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
     }
 }

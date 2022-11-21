@@ -46,7 +46,8 @@ namespace FoodInLoco.Application.Data
                     Status = Status.Active,
                     Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid1.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
                     Salt = SaltGuid1.ToString(),
-                    Roles = Roles.User | Roles.Admin
+                    Roles = Roles.User | Roles.Admin,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.Name).HasData(new
@@ -78,7 +79,8 @@ namespace FoodInLoco.Application.Data
                     Status = Status.Active,
                     Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid2.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
                     Salt = SaltGuid2.ToString(),
-                    Roles = Roles.User
+                    Roles = Roles.User,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.Name).HasData(new
@@ -112,7 +114,8 @@ namespace FoodInLoco.Application.Data
                     Id = GuidRestaurant1,
                     Status = Status.Active,
                     Kids = false,
-                    Photo = "https://www.mcdonalds.com.br/images/layout/mcdonalds-logo-footer-bg-white.png"
+                    Photo = "https://www.mcdonalds.com.br/images/layout/mcdonalds-logo-footer-bg-white.png",
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.Company).HasData(new
@@ -154,7 +157,8 @@ namespace FoodInLoco.Application.Data
                     Id = GuidRestaurant2,
                     Status = Status.Active,
                     Kids = true,
-                    Photo = "https://d3sn2rlrwxy0ce.cloudfront.net/_800x600_crop_center-center_none/Burger-King-Novo-logo.png?mtime=20210125152539&focal=none&tmtime=20210726130340"
+                    Photo = "https://d3sn2rlrwxy0ce.cloudfront.net/_800x600_crop_center-center_none/Burger-King-Novo-logo.png?mtime=20210125152539&focal=none&tmtime=20210726130340",
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.Company).HasData(new
@@ -198,8 +202,9 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = GuidMenu1,
                     RestaurantId = GuidRestaurant1,
-                    InitialDate = DateTime.Now,
-                    Status = Status.Active
+                    InitialDate = DateOnly.FromDateTime(DateTime.Now),
+                    Status = Status.Active,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -222,8 +227,9 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = GuidMenu2,
                     RestaurantId = GuidRestaurant1,
-                    InitialDate = DateTime.Now,
-                    Status = Status.Active
+                    InitialDate = DateOnly.FromDateTime(DateTime.Now),
+                    Status = Status.Active,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -237,8 +243,8 @@ namespace FoodInLoco.Application.Data
                 {
                     MenuId = GuidMenu2,
                     Value = true,
-                    StartAt = "16:30",
-                    EndAt = "20:00"
+                    StartAt = TimeOnly.Parse("16:30"),
+                    EndAt = TimeOnly.Parse("20:00")
                 });
             });
 
@@ -248,8 +254,9 @@ namespace FoodInLoco.Application.Data
                 {
                     Id = GuidMenu3,
                     RestaurantId = GuidRestaurant2,
-                    InitialDate = DateTime.Now,
-                    Status = Status.Active
+                    InitialDate = DateOnly.FromDateTime(DateTime.Now),
+                    Status = Status.Active,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -263,8 +270,8 @@ namespace FoodInLoco.Application.Data
                 {
                     MenuId = GuidMenu3,
                     Value = true,
-                    StartAt = "16:30",
-                    EndAt = "20:00"
+                    StartAt = TimeOnly.Parse("16:30"),
+                    EndAt = TimeOnly.Parse("20:00")
                 });
             });
         }
@@ -279,7 +286,8 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu1,
                     Quantity = 1,
                     Value = 90.00,
-                    Status = Status.Active
+                    Status = Status.Active,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -298,7 +306,8 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu2,
                     Quantity = 1,
                     Value = 4.90,
-                    Status = Status.Active
+                    Status = Status.Active,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -317,7 +326,8 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu3,
                     Quantity = 1,
                     Value = 5.40,
-                    Status = Status.Active
+                    Status = Status.Active,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -336,7 +346,8 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu3,
                     Quantity = 1,
                     Value = 22.00,
-                    Status = Status.Active
+                    Status = Status.Active,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -355,7 +366,8 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu3,
                     Quantity = 1,
                     Value = 11.00,
-                    Status = Status.Active
+                    Status = Status.Active,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new
@@ -374,7 +386,8 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu2,
                     Quantity = 6,
                     Value = 14.00,
-                    Status = Status.Active
+                    Status = Status.Active,
+                    CreatedAt = DateOnly.FromDateTime(DateTime.Now)
                 });
 
                 obj.OwnsOne(_ => _.NameDescription).HasData(new

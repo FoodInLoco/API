@@ -15,20 +15,19 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Photo() => RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
 
-        public void InitialDate() => RuleFor(_ => _.InitialDate.Date).GreaterThanOrEqualTo(DateTime.Now.Date).NotEmpty();
+        public void InitialDate() => RuleFor(_ => _.InitialDate).GreaterThanOrEqualTo(DateOnly.FromDateTime(DateTime.Now)).NotEmpty();
 
-        public void ExpirationDate() => RuleFor(_ => _.ExpirationDate).NotEmpty();
+        public void ExpirationDate() => RuleFor(_ => _.ExpirationDate).GreaterThanOrEqualTo(_ => _.InitialDate).NotEmpty();
 
         public void HappyHour() => RuleFor(_ => _.HappyHour).NotEmpty().DependentRules(() =>
         {
             When(_ => _.HappyHour == true, () => 
             {
                 RuleFor(_ => _.StartAt)
-                    .Matches(new Regex(@"^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")).WithMessage("Formato de horário preenchido é inválido.")
-                    .NotEmpty();
+                    .NotEmpty().WithMessage("Horário de início não pode ser vazio, visto que é um cardápio de Happy Hour.");
                 RuleFor(_ => _.EndAt)
-                    .Matches(new Regex(@"^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")).WithMessage("Formato de horário preenchido é inválido.")
-                    .NotEmpty();
+                    .GreaterThan(_ => _.StartAt).WithMessage("O horário de finalização do Happy Hour não pode ser anterior ao horário de início.")
+                    .NotEmpty().WithMessage("Horário de finalização não pode ser vazio, visto que é um cardápio de Happy Hour.");
             });
         });
 

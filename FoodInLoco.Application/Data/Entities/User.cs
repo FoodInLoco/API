@@ -19,6 +19,7 @@ namespace FoodInLoco.Application.Data.Entities
             CellPhone = phone;
             Roles = roles;
             Salt = Guid.NewGuid().ToString();
+            CreatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
             Activate();
         }
 
@@ -43,11 +44,13 @@ namespace FoodInLoco.Application.Data.Entities
         public void Activate()
         {
             Status = Status.Active;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public void Inactivate()
         {
             Status = Status.Inactive;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public void Update(string firstName, string lastName, string email, string ddd, string number, string photo)
@@ -56,11 +59,13 @@ namespace FoodInLoco.Application.Data.Entities
             Email = new Email(email);
             CellPhone = new Phone(ddd, number);
             Photo = photo;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public void UpdatePassword(string password)
         {
             Password = password;
+            LastUpdatedAt = DateOnly.FromDateTime(DateTime.UtcNow);
         }
 
         public static implicit operator UserModel(User user)

@@ -13,11 +13,11 @@ public sealed class ReservationConfiguration : IEntityTypeConfiguration<Reservat
 
         builder.HasKey(obj => obj.Id);
 
-        builder.Property(obj => obj.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(obj => obj.Id).HasDefaultValueSql("NEWID()").IsRequired();
 
-        builder.Property(obj => obj.CreatedAt).ValueGeneratedOnAdd().HasDefaultValueSql("GETUTCDATE()").IsRequired();
+        builder.Property(obj => obj.CreatedAt).HasDefaultValueSql("GETUTCDATE()").IsRequired();
 
-        builder.Property(obj => obj.LastUpdatedAt).ValueGeneratedOnAddOrUpdate().HasDefaultValueSql("GETUTCDATE()");
+        builder.Property(obj => obj.LastUpdatedAt).IsRequired(false);
 
         builder.Property(obj => obj.Description).HasMaxLength(300).IsRequired();
 

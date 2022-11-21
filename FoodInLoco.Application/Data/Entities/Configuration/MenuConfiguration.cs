@@ -13,15 +13,15 @@ public sealed class MenuConfiguration : IEntityTypeConfiguration<Menu>
 
         builder.HasKey(obj => obj.Id);
 
-        builder.Property(obj => obj.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(obj => obj.Id).HasDefaultValueSql("NEWID()").IsRequired();
 
-        builder.Property(obj => obj.CreatedAt).ValueGeneratedOnAdd().HasDefaultValueSql("GETUTCDATE()").IsRequired();
+        builder.Property(obj => obj.CreatedAt).HasDefaultValueSql("GETUTCDATE()").IsRequired();
 
-        builder.Property(obj => obj.LastUpdatedAt).ValueGeneratedOnAddOrUpdate().HasDefaultValueSql("GETUTCDATE()");
+        builder.Property(obj => obj.LastUpdatedAt).IsRequired(false);
 
-        builder.Property(obj => obj.InitialDate).HasDefaultValue(DateTime.Now).IsRequired();
+        builder.Property(obj => obj.InitialDate).HasDefaultValueSql("GETUTCDATE()").IsRequired();
 
-        builder.Property(obj => obj.ExpirationDate);
+        builder.Property(obj => obj.ExpirationDate).IsRequired(false);
 
         builder.Property(obj => obj.Photo).HasMaxLength(10000).HasDefaultValue("https://menubrands.com.br/wp-content/uploads/2020/04/Menu-300x300.png").IsRequired(false);
 

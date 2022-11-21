@@ -24,5 +24,10 @@ namespace FoodInLoco.Application.Data.Expressions
         {
             return _ => _.Id == id;
         }
+
+        public static Expression<Func<Reservation, bool>> FromRestaurantByDate(Guid id, DateTime? date)
+        {
+            return _ => _.Id == id && date.HasValue ? date.Value.Date == _.Date.Date : true;
+        }
     }
 }

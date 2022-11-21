@@ -9,6 +9,8 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 
         Task<IEnumerable<ReservationModel>> ListModelAsync();
 
+        Task<IEnumerable<ReservationModel>> ListModelByDateFromRestaurantAsync(Guid id, DateTime? date);
+
         Task UpdateStatusAsync(Reservation obj);
     }
 }
