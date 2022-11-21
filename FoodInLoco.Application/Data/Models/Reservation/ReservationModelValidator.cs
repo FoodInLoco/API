@@ -15,7 +15,7 @@ namespace FoodInLoco.Application.Data.Models
 
         public void SeatQuantity() => RuleFor(_ => _.SeatQuantity).GreaterThan((short)0).NotEmpty();
 
-        public void Date() => RuleFor(_ => _.Date.Date).GreaterThanOrEqualTo(DateTime.UtcNow.Date).NotEmpty();
+        public void Date() => RuleFor(_ => _.Date.Date).GreaterThanOrEqualTo(DateTime.Now.Date).NotEmpty();
 
         public void Status() => RuleFor(_ => _.Status).NotEmpty();
 

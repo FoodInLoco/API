@@ -15,11 +15,11 @@ public sealed class MenuConfiguration : IEntityTypeConfiguration<Menu>
 
         builder.Property(obj => obj.Id).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.InsertDate).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(obj => obj.CreatedAt).ValueGeneratedOnAdd().HasDefaultValueSql("GETUTCDATE()").IsRequired();
 
-        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnAddOrUpdate();
+        builder.Property(obj => obj.LastUpdatedAt).ValueGeneratedOnAddOrUpdate();
 
-        builder.Property(obj => obj.InitialDate).HasDefaultValue(DateTime.UtcNow).IsRequired();
+        builder.Property(obj => obj.InitialDate).HasDefaultValue(DateTime.Now).IsRequired();
 
         builder.Property(obj => obj.ExpirationDate);
 

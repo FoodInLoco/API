@@ -9,8 +9,8 @@ namespace FoodInLoco.Application.Data.Expressions
         public static Expression<Func<MenuItem, MenuItemModel>> Model => _ => new MenuItemModel
         {
             Id = _.Id,
-            InsertDate = _.InsertDate,
-            UpdateDate = _.UpdateDate,
+            CreatedAt = _.CreatedAt,
+            LastUpdatedAt = _.LastUpdatedAt,
             MenuId = _.MenuId,
             Name = _.NameDescription.Name,
             Description = _.NameDescription.Description,

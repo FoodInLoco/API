@@ -9,8 +9,8 @@ namespace FoodInLoco.Application.Data.Expressions
         public static Expression<Func<User, UserModel>> Model => _ => new UserModel
         {
             Id = _.Id,
-            InsertDate = _.InsertDate,
-            UpdateDate = _.UpdateDate,
+            CreatedAt = _.CreatedAt,
+            LastUpdatedAt = _.LastUpdatedAt,
             FirstName = _.Name.FirstName,
             LastName = _.Name.LastName,
             Email = _.Email.Value,

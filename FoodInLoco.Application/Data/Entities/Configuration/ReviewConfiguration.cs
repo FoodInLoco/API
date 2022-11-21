@@ -15,9 +15,9 @@ public sealed class ReviewConfiguration : IEntityTypeConfiguration<Review>
 
         builder.Property(obj => obj.Id).ValueGeneratedOnAdd().IsRequired();
 
-        builder.Property(obj => obj.InsertDate).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(obj => obj.CreatedAt).ValueGeneratedOnAdd().HasDefaultValueSql("GETUTCDATE()").IsRequired();
 
-        builder.Property(obj => obj.UpdateDate).ValueGeneratedOnAddOrUpdate();
+        builder.Property(obj => obj.LastUpdatedAt).ValueGeneratedOnAddOrUpdate();
 
         builder.Property(obj => obj.Rate).IsRequired();
 
