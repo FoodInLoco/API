@@ -1,5 +1,4 @@
 using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Services;
 using FoodInLoco.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,16 +22,14 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByRestaurantAsync(Guid id)
         {
             var result = await _menuService.ListByRestaurantAsync(id);
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("get-by-id")]
+        [HttpGet("get-by-id")]
         public async Task<IActionResult> GetById(Guid id)
         {
             var result = await _menuService.GetAsync(id);
@@ -59,8 +56,7 @@ namespace FoodInLoco.API.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet]
-        [Route("activate")]
+        [HttpGet("activate")]
         public async Task<IActionResult> ActivateById(Guid id)
         {
             var result = await _menuService.ActivateAsync(id);
@@ -69,8 +65,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("inactivate")]
+        [HttpGet("inactivate")]
         public async Task<IActionResult> InactivateById(Guid id)
         {
             var result = await _menuService.InactivateAsync(id);
@@ -79,8 +74,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
-        [Route("{id}")]
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             var result = await _menuService.DeleteAsync(id);

@@ -41,6 +41,8 @@ namespace FoodInLoco.Application.Data.Entities
 
         public string? Photo { get; private set; }
 
+        public ICollection<Restaurant> Restaurants { get; private set; }
+
         public ICollection<Review> Reviews { get; private set; }
 
         public ICollection<Reservation> Reservations { get; private set; }

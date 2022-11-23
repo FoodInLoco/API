@@ -50,6 +50,8 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
             objPhone.Property(phone => phone.PhoneNumber).HasColumnName(nameof(Phone.PhoneNumber)).HasMaxLength(9).IsRequired();
         });
 
+        builder.HasMany(obj => obj.Restaurants).WithOne(obj => obj.User).HasForeignKey("UserId");
+
         builder.HasMany(obj => obj.Reservations).WithOne(obj => obj.User).HasForeignKey("UserId");
 
         builder.HasMany(obj => obj.Reviews).WithOne(obj => obj.User).HasForeignKey("UserId");

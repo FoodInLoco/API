@@ -4,7 +4,6 @@ using FoodInLoco.Application.Data.Expressions;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace FoodInLoco.Application.Repositories
 {
