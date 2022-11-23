@@ -69,10 +69,7 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
-        public bool IsActive()
-        {
-            return Status == Status.Active && Confirmation == Status.Active;
-        }
+        public bool IsActive() => Status == Status.Active && Confirmation == Status.Active;
 
         public void Update(string description, short seatQuantity, DateTime date)
         {

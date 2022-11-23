@@ -51,7 +51,9 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
-        public void Update(string name, string description, string photo, int quantity, double value)
+        public bool IsActive() => Status == Status.Active;
+
+        public void Update(string name, string description, string? photo, int quantity, double value)
         {
             NameDescription = new NameDescription(name, description);
             Photo = photo;

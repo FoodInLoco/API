@@ -24,6 +24,14 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetByMenuAsync(Guid id)
+        {
+            var result = await _menuItemService.ListByMenuAsync(id);
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("grid")]
         public async Task<IActionResult> GetGridAsync(GridParameters parameters)

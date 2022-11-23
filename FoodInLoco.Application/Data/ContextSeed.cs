@@ -3,7 +3,6 @@ using FoodInLoco.Application.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
-using static System.Net.WebRequestMethods;
 
 namespace FoodInLoco.Application.Data
 {
@@ -50,7 +49,7 @@ namespace FoodInLoco.Application.Data
                     Status = Status.Active,
                     Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid1.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
                     Salt = SaltGuid1.ToString(),
-                    Roles = Roles.User | Roles.Admin,
+                    Roles = Roles.User | Roles.Admin | Roles.Restaurant,
                     CreatedAt = DateTime.UtcNow
                 });
 
@@ -116,6 +115,7 @@ namespace FoodInLoco.Application.Data
                 obj.HasData(new
                 {
                     Id = GuidRestaurant1,
+                    UserId = GuidUser1,
                     Status = Status.Active,
                     Kids = false,
                     Photo = "https://www.mcdonalds.com.br/images/layout/mcdonalds-logo-footer-bg-white.png",
@@ -159,6 +159,7 @@ namespace FoodInLoco.Application.Data
                 obj.HasData(new
                 {
                     Id = GuidRestaurant2,
+                    UserId = GuidUser1,
                     Status = Status.Active,
                     Kids = true,
                     Photo = "https://d3sn2rlrwxy0ce.cloudfront.net/_800x600_crop_center-center_none/Burger-King-Novo-logo.png?mtime=20210125152539&focal=none&tmtime=20210726130340",

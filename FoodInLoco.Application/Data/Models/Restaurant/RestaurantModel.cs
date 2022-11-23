@@ -10,6 +10,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public DateTime? LastUpdatedAt { get; init; }
 
+        public Guid UserId { get; init; }
+
         public string CompanyName { get; init; }
 
         public string TradingName { get; init; }
@@ -32,10 +34,18 @@ namespace FoodInLoco.Application.Data.Models
 
         public string? Complement { get; init; }
 
-        public bool Kids { get; set; }
+        public bool Kids { get; init; }
 
-        public string? Photo { get; set; }
+        public string? Photo { get; init; }
 
-        public Status Status { get; set; }
+        public Status Status { get; init; }
+
+        public List<MenuModel> Menus { get; init; }
+
+        public List<ReservationModel> Reservations { get; init; }
+
+        public List<ReviewModel> Reviews { get; init; }
+
+        public List<AttractionModel> Attractions { get; init; }
     }
 }

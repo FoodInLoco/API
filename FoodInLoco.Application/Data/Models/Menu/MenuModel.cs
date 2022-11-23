@@ -31,5 +31,7 @@ namespace FoodInLoco.Application.Data.Models
         public string? EndAt { get; init; }
 
         public Status Status { get; init; }
+
+        public IList<MenuItemModel> Items { get; init; }
     }
 }

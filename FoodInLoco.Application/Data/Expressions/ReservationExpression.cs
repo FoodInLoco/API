@@ -27,12 +27,12 @@ namespace FoodInLoco.Application.Data.Expressions
 
         public static Expression<Func<Reservation, bool>> FromRestaurantByDate(Guid id, DateTime? date)
         {
-            return _ => _.RestaurantId == id && date.HasValue ? date.Value.Date == _.Date.Date : true;
+            return _ => _.RestaurantId == id && _.IsActive() && date.HasValue ? date.Value.Date == _.Date.Date : true;
         }
 
         public static Expression<Func<Reservation, bool>> FromUserByDate(Guid id, DateTime? date)
         {
-            return _ => _.UserId == id && date.HasValue ? date.Value.Date == _.Date.Date : true;
+            return _ => _.UserId == id && _.IsActive() && date.HasValue ? date.Value.Date == _.Date.Date : true;
         }
     }
 }

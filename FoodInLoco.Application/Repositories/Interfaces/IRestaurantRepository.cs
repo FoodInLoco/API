@@ -7,6 +7,8 @@ namespace FoodInLoco.Application.Repositories.Interfaces
     public interface IRestaurantRepository : IRepository<Restaurant>
     {
         Task<RestaurantModel> GetModelByIdAsync(Guid id);
+        
+        Task<RestaurantModel> GetModelByIdWithRelationsAsync(Guid id);
 
         Task<Grid<RestaurantModel>> GridAsync(GridParameters parameters);
 

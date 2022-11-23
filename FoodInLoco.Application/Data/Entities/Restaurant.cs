@@ -28,6 +28,8 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Restaurant(Guid id) => Id = id;
 
+        public Guid UserId { get; private set; }
+
         public Company Company { get; private set; }
 
         public Email Email { get; private set; }
@@ -41,6 +43,8 @@ namespace FoodInLoco.Application.Data.Entities
         public string? Photo { get; private set; }
 
         public Status Status { get; private set; }
+
+        public User? User { get; private set; }
 
         public ICollection<Menu> Menus { get; private set; }
 
@@ -62,8 +66,10 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
+        public bool IsActive() => Status == Status.Active;
+
         public void Update(string companyName, string tradingName, string email, string ddd, string phoneNumber, 
-            string state, string city, string zipCode, string street, long? addressNumber, string? complement, bool kids, string photo)
+            string state, string city, string zipCode, string street, long? addressNumber, string? complement, bool kids, string? photo)
         {
             Company = new Company(companyName, tradingName);
             Email = new Email(email);

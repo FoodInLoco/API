@@ -55,7 +55,7 @@ namespace FoodInLoco.Application.Services
 
         public Task<RestaurantModel> GetAsync(Guid id)
         {
-            return _restaurantRepository.GetModelByIdAsync(id);
+            return _restaurantRepository.GetModelByIdWithRelationsAsync(id);
         }
 
         public Task<Grid<RestaurantModel>> GridAsync(GridParameters parameters)
