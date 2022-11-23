@@ -7,6 +7,8 @@ namespace FoodInLoco.Application.Repositories.Interfaces
     {
         Task<ReviewModel> GetModelByIdAsync(Guid id);
 
+        Task<ReviewModel> GetModelByIdWithRelationsAsync(Guid id);
+
         Task<IEnumerable<ReviewModel>> ListModelAsync();
 
         Task UpdateStatusAsync(Review obj);

@@ -1,3 +1,4 @@
+using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.ValueObjects;
 using FoodInLoco.Application.Enums;
 
@@ -65,6 +66,30 @@ namespace FoodInLoco.Application.Data.Entities
             ExpirationDate = expirationDate;
             HappyHour = new HappyHour(happyHour, startAt, endAt);
             LastUpdatedAt = DateTime.UtcNow;
+        }
+
+        public static implicit operator MenuModel(Menu menu)
+        {
+            if (menu is null)
+                return null;
+
+            return new MenuModel()
+            {
+                Id = menu.Id,
+                CreatedAt = menu.CreatedAt,
+                LastUpdatedAt = menu.LastUpdatedAt,
+                RestaurantId = menu.RestaurantId,
+                Name = menu.NameDescription.Name,
+                Description = menu.NameDescription.Description,
+                Photo = menu.Photo,
+                InitialDate = menu.InitialDate,
+                ExpirationDate = menu.ExpirationDate,
+                HappyHour = menu.HappyHour.Value,
+                StartAt = menu.HappyHour.StartAt.ToString(),
+                EndAt = menu.HappyHour.EndAt.ToString(),
+                Status = menu.Status,
+                Items = menu.Items?.Select(_ => (MenuItemModel)_).ToList()
+            };
         }
     }
 }

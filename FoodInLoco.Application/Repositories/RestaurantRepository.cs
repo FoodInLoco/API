@@ -25,7 +25,13 @@ namespace FoodInLoco.Application.Repositories
         
         public Task<RestaurantModel> GetModelByIdWithRelationsAsync(Guid id)
         {
-            return Queryable.Where(RestaurantExpression.Id(id)).Select(RestaurantExpression.Model).SingleOrDefaultAsync();
+            return Queryable.Where(RestaurantExpression.Id(id))
+                .Include(_ => _.User)
+                .Include(_ => _.Attractions)
+                .Include(_ => _.Menus).ThenInclude(_ => _.Items)
+                .Include(_ => _.Reservations).ThenInclude(_ => _.User)
+                .Include(_ => _.Reviews).ThenInclude(_ => _.User)
+                .Select(RestaurantExpression.Model).SingleOrDefaultAsync();
         }
 
         public Task<Grid<RestaurantModel>> GridAsync(GridParameters parameters)

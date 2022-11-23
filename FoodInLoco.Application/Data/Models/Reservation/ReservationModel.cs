@@ -25,5 +25,7 @@ namespace FoodInLoco.Application.Data.Models
         public Status Status { get; init; }
 
         public Status Confirmation { get; init; }
+
+        public UserModel? User { get; init; }
     }
 }

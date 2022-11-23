@@ -78,16 +78,23 @@ namespace FoodInLoco.Application.Data.Entities
 
         public static implicit operator UserModel(User user)
         {
+            if (user is null)
+                return null;
+
             return new UserModel()
             {
                 Id = user.Id,
+                CreatedAt = user.CreatedAt,
+                LastUpdatedAt = user.LastUpdatedAt,
                 FirstName = user.Name.FirstName,
                 LastName = user.Name.LastName,
                 Email = user.Email.Value,
                 DDD = user.CellPhone.DDD,
                 PhoneNumber = user.CellPhone.PhoneNumber,
                 Roles = user.Roles,
-                Photo = user.Photo
+                Photo = user.Photo,
+                Restaurants = user.Restaurants?.Select(_ => (RestaurantModel)_).ToList(),
+                Reservations = user.Reservations?.Select(_ => (ReservationModel)_).ToList()
             };
         }
     }

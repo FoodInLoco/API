@@ -44,7 +44,7 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Status Status { get; private set; }
 
-        public User? User { get; private set; }
+        public User User { get; private set; }
 
         public ICollection<Menu> Menus { get; private set; }
 
@@ -82,9 +82,15 @@ namespace FoodInLoco.Application.Data.Entities
 
         public static implicit operator RestaurantModel(Restaurant restaurant)
         {
+            if (restaurant is null)
+                return null;
+
             return new RestaurantModel()
             {
                 Id = restaurant.Id,
+                UserId = restaurant.UserId,
+                CreatedAt = restaurant.CreatedAt,
+                LastUpdatedAt = restaurant.LastUpdatedAt,
                 CompanyName = restaurant.Company.CompanyName,
                 TradingName = restaurant.Company.TradingName,
                 Email = restaurant.Email.Value,
@@ -96,8 +102,14 @@ namespace FoodInLoco.Application.Data.Entities
                 Street = restaurant.Address.Street,
                 Number = restaurant.Address.Number,
                 Complement = restaurant.Address.Complement,
+                Status = restaurant.Status,
                 Kids = restaurant.Kids,
-                Photo = restaurant.Photo
+                Photo = restaurant.Photo,
+                User = restaurant.User,
+                Menus = restaurant.Menus?.Select(_ => (MenuModel)_).ToList(),
+                Reservations = restaurant.Reservations?.Select(_ => (ReservationModel)_).ToList(),
+                Attractions = restaurant.Attractions?.Select(_ => (AttractionModel)_).ToList(),
+                Reviews = restaurant.Reviews?.Select(_ => (ReviewModel)_).ToList(),
             };
         }
     }

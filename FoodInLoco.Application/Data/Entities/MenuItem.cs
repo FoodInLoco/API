@@ -1,4 +1,5 @@
-﻿using FoodInLoco.Application.Data.ValueObjects;
+﻿using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Data.ValueObjects;
 using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Entities
@@ -60,6 +61,26 @@ namespace FoodInLoco.Application.Data.Entities
             Quantity = quantity;
             Value = value;
             LastUpdatedAt = DateTime.UtcNow;
+        }
+
+        public static implicit operator MenuItemModel(MenuItem menuItem)
+        {
+            if (menuItem is null)
+                return null;
+
+            return new MenuItemModel()
+            {
+                Id = menuItem.Id,
+                CreatedAt = menuItem.CreatedAt,
+                LastUpdatedAt = menuItem.LastUpdatedAt,
+                MenuId = menuItem.MenuId,
+                Name = menuItem.NameDescription.Name,
+                Description = menuItem.NameDescription.Description,
+                Quantity = menuItem.Quantity,
+                Value = menuItem.Value,
+                Photo = menuItem.Photo,
+                Status = menuItem.Status
+            };
         }
     }
 }

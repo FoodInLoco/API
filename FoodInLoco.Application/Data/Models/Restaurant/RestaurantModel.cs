@@ -40,12 +40,14 @@ namespace FoodInLoco.Application.Data.Models
 
         public Status Status { get; init; }
 
-        public List<MenuModel> Menus { get; init; }
+        public UserModel? User { get; init; }
 
-        public List<ReservationModel> Reservations { get; init; }
+        public List<MenuModel>? Menus { get; init; }
 
-        public List<ReviewModel> Reviews { get; init; }
+        public List<ReservationModel>? Reservations { get; init; }
 
-        public List<AttractionModel> Attractions { get; init; }
+        public List<ReviewModel>? Reviews { get; init; }
+
+        public List<AttractionModel>? Attractions { get; init; }
     }
 }

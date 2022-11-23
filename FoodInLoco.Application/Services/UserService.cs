@@ -69,7 +69,7 @@ namespace FoodInLoco.Application.Services
 
         public Task<UserModel> GetAsync(Guid id)
         {
-            return _userRepository.GetModelByIdAsync(id);
+            return _userRepository.GetModelByIdWithRelationsAsync(id);
         }
 
         public Task<UserModel> GetByEmail(string email)

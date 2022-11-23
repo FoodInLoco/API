@@ -32,6 +32,6 @@ namespace FoodInLoco.Application.Data.Models
 
         public Status Status { get; init; }
 
-        public IList<MenuItemModel> Items { get; init; }
+        public List<MenuItemModel>? Items { get; init; }
     }
 }

@@ -1,3 +1,4 @@
+using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.ValueObjects;
 using FoodInLoco.Application.Enums;
 
@@ -78,6 +79,27 @@ namespace FoodInLoco.Application.Data.Entities
             Date = date;
             Confirmation = Status.None;
             LastUpdatedAt = DateTime.UtcNow;
+        }
+
+        public static implicit operator ReservationModel(Reservation reservation)
+        {
+            if (reservation is null)
+                return null;
+
+            return new ReservationModel()
+            {
+                Id = reservation.Id,
+                CreatedAt = reservation.CreatedAt,
+                LastUpdatedAt = reservation.LastUpdatedAt,
+                RestaurantId = reservation.RestaurantId,
+                UserId = reservation.UserId,
+                Description = reservation.Description,
+                SeatQuantity = reservation.SeatQuantity,
+                Date = reservation.Date,
+                Status = reservation.Status,
+                Confirmation = reservation.Confirmation,
+                User = reservation.User
+            };
         }
     }
 }

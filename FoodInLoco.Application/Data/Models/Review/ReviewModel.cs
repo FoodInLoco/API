@@ -23,5 +23,7 @@ namespace FoodInLoco.Application.Data.Models
         public Rate Rate { get; init; }
 
         public Status Status { get; init; }
+
+        public UserModel? User { get; init; }
     }
 }

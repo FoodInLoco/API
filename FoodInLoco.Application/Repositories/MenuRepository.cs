@@ -22,6 +22,13 @@ namespace FoodInLoco.Application.Repositories
             return Queryable.Where(MenuExpression.Id(id)).Select(MenuExpression.Model).SingleOrDefaultAsync();
         }
 
+        public Task<MenuModel> GetModelByIdWithRelationsAsync(Guid id)
+        {
+            return Queryable.Where(MenuExpression.Id(id))
+                .Include(_ => _.Items)
+                .Select(MenuExpression.Model).SingleOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<MenuModel>> ListModelAsync()
         {
             return await Queryable.Select(MenuExpression.Model).ToListAsync();

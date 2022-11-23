@@ -22,6 +22,13 @@ namespace FoodInLoco.Application.Repositories
             return Queryable.Where(ReviewExpression.Id(id)).Select(ReviewExpression.Model).SingleOrDefaultAsync();
         }
 
+        public Task<ReviewModel> GetModelByIdWithRelationsAsync(Guid id)
+        {
+            return Queryable.Where(ReviewExpression.Id(id))
+                .Include(_ => _.User)
+                .Select(ReviewExpression.Model).SingleOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<ReviewModel>> ListModelAsync()
         {
             return await Queryable.Select(ReviewExpression.Model).ToListAsync();

@@ -17,7 +17,9 @@ namespace FoodInLoco.Application.Data.Expressions
             DDD = _.CellPhone.DDD,
             PhoneNumber = _.CellPhone.PhoneNumber,
             Roles = _.Roles,
-            Photo = _.Photo
+            Photo = _.Photo,
+            Restaurants = _.Restaurants.Select(_ => (RestaurantModel)_).ToList(),
+            Reservations = _.Reservations.Select(_ => (ReservationModel)_).ToList()
         };
 
         public static Expression<Func<User, bool>> Id(Guid id)

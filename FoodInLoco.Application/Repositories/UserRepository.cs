@@ -23,6 +23,14 @@ namespace FoodInLoco.Application.Repositories
             return Queryable.Where(UserExpression.Id(id)).Select(UserExpression.Model).SingleOrDefaultAsync();
         }
 
+        public Task<UserModel> GetModelByIdWithRelationsAsync(Guid id)
+        {
+            return Queryable.Where(UserExpression.Id(id))
+                .Include(_ => _.Restaurants)
+                .Include(_ => _.Reservations).ThenInclude(_ => _.Restaurant)
+                .Select(UserExpression.Model).SingleOrDefaultAsync();
+        }
+
         public Task<UserModel> GetModelByEmailAsync(string email)
         {
             return Queryable.Where(UserExpression.Email(email)).Select(UserExpression.Model).SingleOrDefaultAsync();

@@ -54,7 +54,7 @@ namespace FoodInLoco.Application.Services
 
         public Task<ReservationModel> GetAsync(Guid id)
         {
-            return _reservationRepository.GetModelByIdAsync(id);
+            return _reservationRepository.GetModelByIdWithRelationsAsync(id);
         }
 
         public async Task<IEnumerable<ReservationModel>> ListAsync()

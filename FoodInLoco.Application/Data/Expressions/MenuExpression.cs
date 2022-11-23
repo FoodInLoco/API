@@ -20,7 +20,8 @@ namespace FoodInLoco.Application.Data.Expressions
             HappyHour = _.HappyHour.Value,
             StartAt = _.HappyHour.StartAt.ToString(),
             EndAt = _.HappyHour.EndAt.ToString(),
-            Status = _.Status
+            Status = _.Status,
+            Items = _.Items.Select(_ => (MenuItemModel)_).ToList()
         };
 
         public static Expression<Func<Menu, bool>> Id(Guid id)

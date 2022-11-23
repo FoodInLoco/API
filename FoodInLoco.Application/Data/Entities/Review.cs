@@ -1,3 +1,4 @@
+using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.ValueObjects;
 using FoodInLoco.Application.Enums;
 
@@ -62,6 +63,27 @@ namespace FoodInLoco.Application.Data.Entities
             NameDescription = new NameDescription(name, description);
             Rate = rate;
             LastUpdatedAt = DateTime.UtcNow;
+        }
+
+        public static implicit operator ReviewModel(Review review)
+        {
+            if (review is null)
+                return null;
+
+            return new ReviewModel()
+            {
+                Id = review.Id,
+                CreatedAt = review.CreatedAt,
+                LastUpdatedAt = review.LastUpdatedAt,
+                RestaurantId = review.RestaurantId,
+                ReservationId = review.ReservationId,
+                UserId = review.UserId,
+                Name = review.NameDescription.Name,
+                Description = review.NameDescription.Description,
+                Rate = review.Rate,
+                Status = review.Status,
+                User = review.User
+            };
         }
     }
 }

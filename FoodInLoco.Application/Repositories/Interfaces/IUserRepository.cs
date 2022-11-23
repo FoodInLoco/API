@@ -8,6 +8,8 @@ namespace FoodInLoco.Application.Repositories.Interfaces
     {
         Task<UserModel> GetModelByIdAsync(Guid id);
 
+        Task<UserModel> GetModelByIdWithRelationsAsync(Guid id);
+
         Task<UserModel> GetModelByEmailAsync(string email);
 
         Task<Grid<UserModel>> GridAsync(GridParameters parameters);

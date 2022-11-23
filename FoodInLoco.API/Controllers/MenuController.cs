@@ -22,7 +22,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("get-by-restaurant")]
         public async Task<IActionResult> GetByRestaurantAsync(Guid id)
         {
             var result = await _menuService.ListByRestaurantAsync(id);

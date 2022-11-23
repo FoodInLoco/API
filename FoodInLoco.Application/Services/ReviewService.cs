@@ -54,7 +54,7 @@ namespace FoodInLoco.Application.Services
 
         public Task<ReviewModel> GetAsync(Guid id)
         {
-            return _reviewRepository.GetModelByIdAsync(id);
+            return _reviewRepository.GetModelByIdWithRelationsAsync(id);
         }
 
         public async Task<IEnumerable<ReviewModel>> ListAsync()

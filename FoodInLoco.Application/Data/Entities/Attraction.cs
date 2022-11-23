@@ -1,3 +1,4 @@
+using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.ValueObjects;
 using FoodInLoco.Application.Enums;
 
@@ -60,6 +61,26 @@ namespace FoodInLoco.Application.Data.Entities
             Date = date;
             CoverTax = coverTax;
             LastUpdatedAt = DateTime.UtcNow;
+        }
+
+        public static implicit operator AttractionModel(Attraction attraction)
+        {
+            if (attraction is null)
+                return null;
+
+            return new AttractionModel()
+            {
+                Id = attraction.Id,
+                CreatedAt = attraction.CreatedAt,
+                LastUpdatedAt = attraction.LastUpdatedAt,
+                RestaurantId = attraction.RestaurantId,
+                Name = attraction.NameDescription.Name,
+                Description = attraction.NameDescription.Description,
+                Photo = attraction.Photo,
+                CoverTax = attraction.CoverTax,
+                Date = attraction.Date,
+                Status = attraction.Status
+            };
         }
     }
 }
