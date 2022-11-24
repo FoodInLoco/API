@@ -18,22 +18,22 @@ namespace FoodInLoco.Application.Repositories
             _dbContext = context;
         }
 
-        public Task<MenuItemModel> GetModelByIdAsync(Guid id)
+        public Task<MenuItemModelResponse> GetModelByIdAsync(Guid id)
         {
             return Queryable.Where(MenuItemExpression.Id(id)).Select(MenuItemExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<Grid<MenuItemModel>> GridAsync(GridParameters parameters)
+        public Task<Grid<MenuItemModelResponse>> GridAsync(GridParameters parameters)
         {
             return Queryable.Select(MenuItemExpression.Model).GridAsync(parameters);
         }
 
-        public async Task<IEnumerable<MenuItemModel>> ListModelAsync()
+        public async Task<IEnumerable<MenuItemModelResponse>> ListModelAsync()
         {
             return await Queryable.Select(MenuItemExpression.Model).ToListAsync();
         }
         
-        public async Task<IEnumerable<MenuItemModel>> ListModelByMenuAsync(Guid id)
+        public async Task<IEnumerable<MenuItemModelResponse>> ListModelByMenuAsync(Guid id)
         {
             return await Queryable.Select(MenuItemExpression.Model).ToListAsync();
         }

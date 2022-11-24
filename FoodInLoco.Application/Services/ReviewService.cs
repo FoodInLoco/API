@@ -27,7 +27,7 @@ namespace FoodInLoco.Application.Services
             _reviewFactory = reviewFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(ReviewModel model)
+        public async Task<IResult<Guid>> AddAsync(ReviewModelRequest model)
         {
             var validation = new AddReviewModelValidator().Validation(model);
 
@@ -52,17 +52,17 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<ReviewModel> GetAsync(Guid id)
+        public Task<ReviewModelResponse> GetAsync(Guid id)
         {
             return _reviewRepository.GetModelByIdWithRelationsAsync(id);
         }
 
-        public async Task<IEnumerable<ReviewModel>> ListAsync()
+        public async Task<IEnumerable<ReviewModelResponse>> ListAsync()
         {
             return await _reviewRepository.ListModelAsync();
         }
 
-        public async Task<IResult> UpdateAsync(ReviewModel model)
+        public async Task<IResult> UpdateAsync(ReviewModelRequest model)
         {
             var validation = new UpdateReviewModelValidator().Validation(model);
 

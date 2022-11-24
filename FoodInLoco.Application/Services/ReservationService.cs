@@ -27,7 +27,7 @@ namespace FoodInLoco.Application.Services
             _reservationFactory = reservationFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(ReservationModel model)
+        public async Task<IResult<Guid>> AddAsync(ReservationModelRequest model)
         {
             var validation = new AddReservationModelValidator().Validation(model);
 
@@ -52,27 +52,27 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<ReservationModel> GetAsync(Guid id)
+        public Task<ReservationModelResponse> GetAsync(Guid id)
         {
             return _reservationRepository.GetModelByIdWithRelationsAsync(id);
         }
 
-        public async Task<IEnumerable<ReservationModel>> ListAsync()
+        public async Task<IEnumerable<ReservationModelResponse>> ListAsync()
         {
             return await _reservationRepository.ListModelAsync();
         }
 
-        public async Task<IEnumerable<ReservationModel>> ListByDateFromRestaurantAsync(Guid id, DateTime? date)
+        public async Task<IEnumerable<ReservationModelResponse>> ListByDateFromRestaurantAsync(Guid id, DateTime? date)
         {
             return await _reservationRepository.ListModelByDateFromRestaurantAsync(id, date);
         }
         
-        public async Task<IEnumerable<ReservationModel>> ListByDateFromUserAsync(Guid id, DateTime? date)
+        public async Task<IEnumerable<ReservationModelResponse>> ListByDateFromUserAsync(Guid id, DateTime? date)
         {
             return await _reservationRepository.ListModelByDateFromUserAsync(id, date);
         }
 
-        public async Task<IResult> UpdateAsync(ReservationModel model)
+        public async Task<IResult> UpdateAsync(ReservationModelRequest model)
         {
             var validation = new UpdateReservationModelValidator().Validation(model);
 

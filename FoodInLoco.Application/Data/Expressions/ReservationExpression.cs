@@ -6,7 +6,7 @@ namespace FoodInLoco.Application.Data.Expressions
 {
     public static class ReservationExpression
     {
-        public static Expression<Func<Reservation, ReservationModel>> Model => _ => new ReservationModel
+        public static Expression<Func<Reservation, ReservationModelResponse>> Model => _ => new ReservationModelResponse
         {
             Id = _.Id,
             CreatedAt = _.CreatedAt,

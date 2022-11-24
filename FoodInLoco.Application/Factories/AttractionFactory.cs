@@ -7,7 +7,7 @@ namespace FoodInLoco.Application.Factories
 {
     public sealed class AttractionFactory : IAttractionFactory
     {
-        public Attraction Create(AttractionModel model)
+        public Attraction Create(AttractionModelRequest model)
         {
             return new Attraction
             (

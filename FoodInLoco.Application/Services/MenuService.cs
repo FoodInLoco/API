@@ -27,7 +27,7 @@ namespace FoodInLoco.Application.Services
             _menuFactory = menuFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(MenuModel model)
+        public async Task<IResult<Guid>> AddAsync(MenuModelRequest model)
         {
             var validation = new AddMenuModelValidator().Validation(model);
 
@@ -52,22 +52,22 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<MenuModel> GetAsync(Guid id)
+        public Task<MenuModelResponse> GetAsync(Guid id)
         {
             return _menuRepository.GetModelByIdWithRelationsAsync(id);
         }
         
-        public async Task<IEnumerable<MenuModel>> ListAsync()
+        public async Task<IEnumerable<MenuModelResponse>> ListAsync()
         {
             return await _menuRepository.ListModelAsync();
         }
 
-        public async Task<IEnumerable<MenuModel>> ListByRestaurantAsync(Guid id)
+        public async Task<IEnumerable<MenuModelResponse>> ListByRestaurantAsync(Guid id)
         {
             return await _menuRepository.ListModelByRestaurantAsync(id);
         }
 
-        public async Task<IResult> UpdateAsync(MenuModel model)
+        public async Task<IResult> UpdateAsync(MenuModelRequest model)
         {
             var validation = new UpdateMenuModelValidator().Validation(model);
 

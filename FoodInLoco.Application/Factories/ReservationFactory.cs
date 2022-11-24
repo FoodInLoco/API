@@ -8,7 +8,7 @@ namespace FoodInLoco.Application.Factories
 {
     public sealed class ReservationFactory : IReservationFactory
     {
-        public Reservation Create(ReservationModel model)
+        public Reservation Create(ReservationModelRequest model)
         {
             return new Reservation
             (

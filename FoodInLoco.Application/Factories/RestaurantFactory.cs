@@ -7,7 +7,7 @@ namespace FoodInLoco.Application.Factories
 {
     public sealed class RestaurantFactory : IRestaurantFactory
     {
-        public Restaurant Create(RestaurantModel model)
+        public Restaurant Create(RestaurantModelRequest model)
         {
             return new Restaurant
             (

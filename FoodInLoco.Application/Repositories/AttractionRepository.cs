@@ -16,12 +16,12 @@ namespace FoodInLoco.Application.Repositories
             _dbContext = context;
         }
 
-        public Task<AttractionModel> GetModelByIdAsync(Guid id)
+        public Task<AttractionModelResponse> GetModelByIdAsync(Guid id)
         {
             return Queryable.Where(AttractionExpression.Id(id)).Select(AttractionExpression.Model).SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<AttractionModel>> ListModelAsync()
+        public async Task<IEnumerable<AttractionModelResponse>> ListModelAsync()
         {
             return await Queryable.Select(AttractionExpression.Model).ToListAsync();
         }

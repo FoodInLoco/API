@@ -46,7 +46,7 @@ namespace FoodInLoco.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync(ReservationModel obj)
+        public async Task<IActionResult> PostAsync(ReservationModelRequest obj)
         {
             var result = await _reservationService.AddAsync(obj);
             if (result.Succeeded)
@@ -55,7 +55,7 @@ namespace FoodInLoco.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutAsync(ReservationModel objToUpdate)
+        public async Task<IActionResult> PutAsync(ReservationModelRequest objToUpdate)
         {
             var result = await _reservationService.UpdateAsync(objToUpdate);
             if (result.Succeeded)

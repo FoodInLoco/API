@@ -80,12 +80,12 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
-        public static implicit operator RestaurantModel(Restaurant restaurant)
+        public static implicit operator RestaurantModelResponse(Restaurant restaurant)
         {
             if (restaurant is null)
                 return null;
 
-            return new RestaurantModel()
+            return new RestaurantModelResponse()
             {
                 Id = restaurant.Id,
                 UserId = restaurant.UserId,
@@ -106,10 +106,10 @@ namespace FoodInLoco.Application.Data.Entities
                 Kids = restaurant.Kids,
                 Photo = restaurant.Photo,
                 User = restaurant.User,
-                Menus = restaurant.Menus?.Select(_ => (MenuModel)_).ToList(),
-                Reservations = restaurant.Reservations?.Select(_ => (ReservationModel)_).ToList(),
-                Attractions = restaurant.Attractions?.Select(_ => (AttractionModel)_).ToList(),
-                Reviews = restaurant.Reviews?.Select(_ => (ReviewModel)_).ToList(),
+                Menus = restaurant.Menus?.Select(_ => (MenuModelResponse)_).ToList(),
+                Reservations = restaurant.Reservations?.Select(_ => (ReservationModelResponse)_).ToList(),
+                Attractions = restaurant.Attractions?.Select(_ => (AttractionModelResponse)_).ToList(),
+                Reviews = restaurant.Reviews?.Select(_ => (ReviewModelResponse)_).ToList(),
             };
         }
     }

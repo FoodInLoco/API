@@ -5,6 +5,6 @@ namespace FoodInLoco.Application.Factories.Interfaces
 {
     public interface IAttractionFactory
     {
-        Attraction Create(AttractionModel model);
+        Attraction Create(AttractionModelRequest model);
     }
 }

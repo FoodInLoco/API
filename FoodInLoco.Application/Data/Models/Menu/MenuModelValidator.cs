@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public abstract class MenuModelValidator : AbstractValidator<MenuModel>
+    public abstract class MenuModelValidator : AbstractValidator<MenuModelRequest>
     {
         public void Id() => RuleFor(_ => _.Id).NotEmpty();
 
@@ -13,11 +13,17 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Description() => RuleFor(_ => _.Description).MaximumLength(300).NotEmpty();
 
-        public void Photo() => RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
+        public void Photo() => When(_ => !String.IsNullOrEmpty(_.Photo), () =>
+        {
+            RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
+        });
 
         public void InitialDate() => RuleFor(_ => _.InitialDate.Date).GreaterThanOrEqualTo(DateTime.Now.Date).NotEmpty();
 
-        public void ExpirationDate() => RuleFor(_ => _.ExpirationDate).GreaterThanOrEqualTo(_ => _.InitialDate.Date).NotEmpty();
+        public void ExpirationDate() => When(_ => _.ExpirationDate.HasValue, () =>
+        {
+            RuleFor(_ => _.ExpirationDate).GreaterThanOrEqualTo(_ => _.InitialDate.Date).NotEmpty();
+        });
 
         public void HappyHour() => RuleFor(_ => _.HappyHour).NotEmpty().DependentRules(() =>
         {
@@ -30,7 +36,5 @@ namespace FoodInLoco.Application.Data.Models
                     .NotEmpty().WithMessage("Horário de finalização não pode ser vazio, visto que é um cardápio de Happy Hour.");
             });
         });
-
-        public void Status() => RuleFor(_ => _.Status).NotEmpty();
     }
 }

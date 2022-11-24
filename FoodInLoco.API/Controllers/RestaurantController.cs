@@ -40,7 +40,7 @@ namespace FoodInLoco.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync(RestaurantModel restaurant)
+        public async Task<IActionResult> PostAsync(RestaurantModelRequest restaurant)
         {
             var result = await _restaurantService.AddAsync(restaurant);
             if (result.Succeeded)
@@ -49,7 +49,7 @@ namespace FoodInLoco.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutAsync(RestaurantModel restaurantToUpdate)
+        public async Task<IActionResult> PutAsync(RestaurantModelRequest restaurantToUpdate)
         {
             var result = await _restaurantService.UpdateAsync(restaurantToUpdate);
             if (result.Succeeded)

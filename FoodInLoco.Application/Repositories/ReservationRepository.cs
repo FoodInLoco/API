@@ -16,29 +16,29 @@ namespace FoodInLoco.Application.Repositories
             _dbContext = context;
         }
 
-        public Task<ReservationModel> GetModelByIdAsync(Guid id)
+        public Task<ReservationModelResponse> GetModelByIdAsync(Guid id)
         {
             return Queryable.Where(ReservationExpression.Id(id)).Select(ReservationExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<ReservationModel> GetModelByIdWithRelationsAsync(Guid id)
+        public Task<ReservationModelResponse> GetModelByIdWithRelationsAsync(Guid id)
         {
             return Queryable.Where(ReservationExpression.Id(id))
                 .Include(_ => _.User)
                 .Select(ReservationExpression.Model).SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<ReservationModel>> ListModelAsync()
+        public async Task<IEnumerable<ReservationModelResponse>> ListModelAsync()
         {
             return await Queryable.Select(ReservationExpression.Model).ToListAsync();
         }
 
-        public async Task<IEnumerable<ReservationModel>> ListModelByDateFromRestaurantAsync(Guid id, DateTime? date)
+        public async Task<IEnumerable<ReservationModelResponse>> ListModelByDateFromRestaurantAsync(Guid id, DateTime? date)
         {
             return await Queryable.Where(ReservationExpression.FromRestaurantByDate(id, date)).Select(ReservationExpression.Model).ToListAsync();
         }
 
-        public async Task<IEnumerable<ReservationModel>> ListModelByDateFromUserAsync(Guid id, DateTime? date)
+        public async Task<IEnumerable<ReservationModelResponse>> ListModelByDateFromUserAsync(Guid id, DateTime? date)
         {
             return await Queryable.Where(ReservationExpression.FromUserByDate(id, date)).Select(ReservationExpression.Model).ToListAsync();
         }

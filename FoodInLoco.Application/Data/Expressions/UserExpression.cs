@@ -6,7 +6,7 @@ namespace FoodInLoco.Application.Data.Expressions
 {
     public static class UserExpression
     {
-        public static Expression<Func<User, UserModel>> Model => _ => new UserModel
+        public static Expression<Func<User, UserModelResponse>> Model => _ => new UserModelResponse
         {
             Id = _.Id,
             CreatedAt = _.CreatedAt,
@@ -18,8 +18,8 @@ namespace FoodInLoco.Application.Data.Expressions
             PhoneNumber = _.CellPhone.PhoneNumber,
             Roles = _.Roles,
             Photo = _.Photo,
-            Restaurants = _.Restaurants.Select(_ => (RestaurantModel)_).ToList(),
-            Reservations = _.Reservations.Select(_ => (ReservationModel)_).ToList()
+            Restaurants = _.Restaurants.Select(_ => (RestaurantModelResponse)_).ToList(),
+            Reservations = _.Reservations.Select(_ => (ReservationModelResponse)_).ToList()
         };
 
         public static Expression<Func<User, bool>> Id(Guid id)

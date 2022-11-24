@@ -33,7 +33,7 @@ namespace FoodInLoco.Application.Services
             _hashService = hashService;
         }
 
-        public async Task<IResult<Guid>> AddAsync(UserModel model)
+        public async Task<IResult<Guid>> AddAsync(UserModelRequest model)
         {
             var validation = new AddUserModelValidator().Validation(model);
 
@@ -67,17 +67,17 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<UserModel> GetAsync(Guid id)
+        public Task<UserModelResponse> GetAsync(Guid id)
         {
             return _userRepository.GetModelByIdWithRelationsAsync(id);
         }
 
-        public Task<UserModel> GetByEmail(string email)
+        public Task<UserModelResponse> GetByEmail(string email)
         {
             return _userRepository.GetModelByEmailAsync(email);
         }
 
-        public Task<Grid<UserModel>> GridAsync(GridParameters parameters)
+        public Task<Grid<UserModelResponse>> GridAsync(GridParameters parameters)
         {
             return _userRepository.GridAsync(parameters);
         }
@@ -108,12 +108,12 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public async Task<IEnumerable<UserModel>> ListAsync()
+        public async Task<IEnumerable<UserModelResponse>> ListAsync()
         {
             return await _userRepository.ListModelAsync();
         }
 
-        public async Task<IResult> UpdateAsync(UserModel model)
+        public async Task<IResult> UpdateAsync(UserModelRequest model)
         {
             var validation = new UpdateUserModelValidator().Validation(model);
 

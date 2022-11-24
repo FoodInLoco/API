@@ -12,7 +12,7 @@ namespace FoodInLoco.Application.Data.Entities
             NameDescription nameDescription,
             string photo,
             DateTime date,
-            double coverTax
+            double? coverTax
         )
         {
             RestaurantId = restaurantId;
@@ -34,7 +34,7 @@ namespace FoodInLoco.Application.Data.Entities
 
         public DateTime Date { get; private set; }
 
-        public double CoverTax { get; private set; }
+        public double? CoverTax { get; private set; }
 
         public Status Status { get; private set; }
 
@@ -54,7 +54,7 @@ namespace FoodInLoco.Application.Data.Entities
 
         public bool IsActive() => Status == Status.Active;
 
-        public void Update(string name, string description, string? photo, DateTime date, double coverTax)
+        public void Update(string name, string description, string? photo, DateTime date, double? coverTax)
         {
             NameDescription = new NameDescription(name, description);
             Photo = photo;
@@ -63,12 +63,12 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
-        public static implicit operator AttractionModel(Attraction attraction)
+        public static implicit operator AttractionModelResponse(Attraction attraction)
         {
             if (attraction is null)
                 return null;
 
-            return new AttractionModel()
+            return new AttractionModelResponse()
             {
                 Id = attraction.Id,
                 CreatedAt = attraction.CreatedAt,

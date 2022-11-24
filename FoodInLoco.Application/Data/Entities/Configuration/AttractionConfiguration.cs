@@ -25,7 +25,7 @@ public sealed class AttractionConfiguration : IEntityTypeConfiguration<Attractio
 
         builder.Property(obj => obj.Photo).HasMaxLength(10000).IsRequired(false);
 
-        builder.Property(obj => obj.CoverTax).IsRequired();
+        builder.Property(obj => obj.CoverTax).IsRequired(false);
 
         builder.OwnsOne(obj => obj.NameDescription, obj =>
         {

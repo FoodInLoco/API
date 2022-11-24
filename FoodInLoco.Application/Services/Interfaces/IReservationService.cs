@@ -5,19 +5,19 @@ namespace FoodInLoco.Application.Services.Interfaces
 {
     public interface IReservationService
     {
-        Task<IResult<Guid>> AddAsync(ReservationModel model);
+        Task<IResult<Guid>> AddAsync(ReservationModelRequest model);
 
         Task<IResult> DeleteAsync(Guid id);
 
-        Task<ReservationModel> GetAsync(Guid id);
+        Task<ReservationModelResponse> GetAsync(Guid id);
         
-        Task<IEnumerable<ReservationModel>> ListAsync();
+        Task<IEnumerable<ReservationModelResponse>> ListAsync();
 
-        Task<IEnumerable<ReservationModel>> ListByDateFromRestaurantAsync(Guid id, DateTime? date);
+        Task<IEnumerable<ReservationModelResponse>> ListByDateFromRestaurantAsync(Guid id, DateTime? date);
 
-        Task<IEnumerable<ReservationModel>> ListByDateFromUserAsync(Guid id, DateTime? date);
+        Task<IEnumerable<ReservationModelResponse>> ListByDateFromUserAsync(Guid id, DateTime? date);
 
-        Task<IResult> UpdateAsync(ReservationModel model);
+        Task<IResult> UpdateAsync(ReservationModelRequest model);
 
         Task<IResult> InactivateAsync(Guid id);
 

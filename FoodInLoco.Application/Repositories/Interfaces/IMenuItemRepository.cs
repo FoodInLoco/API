@@ -6,13 +6,13 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface IMenuItemRepository : IRepository<MenuItem>
     {
-        Task<MenuItemModel> GetModelByIdAsync(Guid id);
+        Task<MenuItemModelResponse> GetModelByIdAsync(Guid id);
 
-        Task<Grid<MenuItemModel>> GridAsync(GridParameters parameters);
+        Task<Grid<MenuItemModelResponse>> GridAsync(GridParameters parameters);
 
-        Task<IEnumerable<MenuItemModel>> ListModelAsync();
+        Task<IEnumerable<MenuItemModelResponse>> ListModelAsync();
 
-        Task<IEnumerable<MenuItemModel>> ListModelByMenuAsync(Guid id);
+        Task<IEnumerable<MenuItemModelResponse>> ListModelByMenuAsync(Guid id);
 
         Task UpdateStatusAsync(MenuItem obj);
     }

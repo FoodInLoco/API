@@ -5,15 +5,15 @@ namespace FoodInLoco.Application.Services.Interfaces
 {
     public interface IReviewService
     {
-        Task<IResult<Guid>> AddAsync(ReviewModel model);
+        Task<IResult<Guid>> AddAsync(ReviewModelRequest model);
 
         Task<IResult> DeleteAsync(Guid id);
 
-        Task<ReviewModel> GetAsync(Guid id);
+        Task<ReviewModelResponse> GetAsync(Guid id);
         
-        Task<IEnumerable<ReviewModel>> ListAsync();
+        Task<IEnumerable<ReviewModelResponse>> ListAsync();
 
-        Task<IResult> UpdateAsync(ReviewModel model);
+        Task<IResult> UpdateAsync(ReviewModelRequest model);
 
         Task<IResult> InactivateAsync(Guid id);
 

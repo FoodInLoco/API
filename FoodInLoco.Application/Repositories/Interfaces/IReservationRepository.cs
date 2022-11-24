@@ -5,15 +5,15 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface IReservationRepository : IRepository<Reservation>
     {
-        Task<ReservationModel> GetModelByIdAsync(Guid id);
+        Task<ReservationModelResponse> GetModelByIdAsync(Guid id);
 
-        Task<ReservationModel> GetModelByIdWithRelationsAsync(Guid id);
+        Task<ReservationModelResponse> GetModelByIdWithRelationsAsync(Guid id);
 
-        Task<IEnumerable<ReservationModel>> ListModelAsync();
+        Task<IEnumerable<ReservationModelResponse>> ListModelAsync();
 
-        Task<IEnumerable<ReservationModel>> ListModelByDateFromRestaurantAsync(Guid id, DateTime? date);
+        Task<IEnumerable<ReservationModelResponse>> ListModelByDateFromRestaurantAsync(Guid id, DateTime? date);
 
-        Task<IEnumerable<ReservationModel>> ListModelByDateFromUserAsync(Guid id, DateTime? date);
+        Task<IEnumerable<ReservationModelResponse>> ListModelByDateFromUserAsync(Guid id, DateTime? date);
 
         Task UpdateStatusAsync(Reservation obj);
     }

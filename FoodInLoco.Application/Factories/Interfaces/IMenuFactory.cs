@@ -5,6 +5,6 @@ namespace FoodInLoco.Application.Factories.Interfaces
 {
     public interface IMenuFactory
     {
-        Menu Create(MenuModel model);
+        Menu Create(MenuModelRequest model);
     }
 }

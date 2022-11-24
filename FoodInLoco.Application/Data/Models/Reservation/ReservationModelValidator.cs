@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public abstract class ReservationModelValidator : AbstractValidator<ReservationModel>
+    public abstract class ReservationModelValidator : AbstractValidator<ReservationModelRequest>
     {
         public void Id() => RuleFor(_ => _.Id).NotEmpty();
 
@@ -16,9 +16,5 @@ namespace FoodInLoco.Application.Data.Models
         public void SeatQuantity() => RuleFor(_ => _.SeatQuantity).GreaterThan((short)0).NotEmpty();
 
         public void Date() => RuleFor(_ => _.Date.Date).GreaterThanOrEqualTo(DateTime.Now.Date).NotEmpty();
-
-        public void Status() => RuleFor(_ => _.Status).NotEmpty();
-
-        public void Confirmation() => RuleFor(_ => _.Confirmation).NotEmpty();
     }
 }

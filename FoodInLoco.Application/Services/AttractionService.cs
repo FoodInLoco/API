@@ -27,7 +27,7 @@ namespace FoodInLoco.Application.Services
             _attractionFactory = attractionFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(AttractionModel model)
+        public async Task<IResult<Guid>> AddAsync(AttractionModelRequest model)
         {
             var validation = new AddAttractionModelValidator().Validation(model);
 
@@ -52,17 +52,17 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<AttractionModel> GetAsync(Guid id)
+        public Task<AttractionModelResponse> GetAsync(Guid id)
         {
             return _attractionRepository.GetModelByIdAsync(id);
         }
         
-        public async Task<IEnumerable<AttractionModel>> ListAsync()
+        public async Task<IEnumerable<AttractionModelResponse>> ListAsync()
         {
             return await _attractionRepository.ListModelAsync();
         }
 
-        public async Task<IResult> UpdateAsync(AttractionModel model)
+        public async Task<IResult> UpdateAsync(AttractionModelRequest model)
         {
             var validation = new UpdateAttractionModelValidator().Validation(model);
 

@@ -2,13 +2,9 @@ using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public sealed record RestaurantModel
+    public sealed record RestaurantModelRequest
     {
         public Guid Id { get; init; }
-
-        public DateTime CreatedAt { get; init; }
-
-        public DateTime? LastUpdatedAt { get; init; }
 
         public Guid UserId { get; init; }
 
@@ -37,17 +33,5 @@ namespace FoodInLoco.Application.Data.Models
         public bool Kids { get; init; }
 
         public string? Photo { get; init; }
-
-        public Status Status { get; init; }
-
-        public UserModel? User { get; init; }
-
-        public List<MenuModel>? Menus { get; init; }
-
-        public List<ReservationModel>? Reservations { get; init; }
-
-        public List<ReviewModel>? Reviews { get; init; }
-
-        public List<AttractionModel>? Attractions { get; init; }
     }
 }

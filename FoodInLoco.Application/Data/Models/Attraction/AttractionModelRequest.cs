@@ -4,13 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public sealed record AttractionModel
+    public sealed record AttractionModelRequest
     {
         public Guid Id { get; init; }
-
-        public DateTime CreatedAt { get; init; }
-
-        public DateTime? LastUpdatedAt { get; init; }
 
         public Guid RestaurantId { get; init; }
 
@@ -22,8 +18,6 @@ namespace FoodInLoco.Application.Data.Models
 
         public DateTime Date { get; init; }
 
-        public double CoverTax { get; init; }
-
-        public Status Status { get; init; }
+        public double? CoverTax { get; init; }
     }
 }

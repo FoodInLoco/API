@@ -8,7 +8,7 @@ namespace FoodInLoco.Application.Factories
 {
     public sealed class ReviewFactory : IReviewFactory
     {
-        public Review Create(ReviewModel model)
+        public Review Create(ReviewModelRequest model)
         {
             return new Review
             (

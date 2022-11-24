@@ -6,19 +6,19 @@ namespace FoodInLoco.Application.Services.Interfaces
 {
     public interface IMenuItemService
     {
-        Task<IResult<Guid>> AddAsync(MenuItemModel model);
+        Task<IResult<Guid>> AddAsync(MenuItemModelRequest model);
 
         Task<IResult> DeleteAsync(Guid id);
 
-        Task<MenuItemModel> GetAsync(Guid id);
+        Task<MenuItemModelResponse> GetAsync(Guid id);
         
-        Task<Grid<MenuItemModel>> GridAsync(GridParameters parameters);
+        Task<Grid<MenuItemModelResponse>> GridAsync(GridParameters parameters);
 
-        Task<IEnumerable<MenuItemModel>> ListAsync();
+        Task<IEnumerable<MenuItemModelResponse>> ListAsync();
 
-        Task<IEnumerable<MenuItemModel>> ListByMenuAsync(Guid id);
+        Task<IEnumerable<MenuItemModelResponse>> ListByMenuAsync(Guid id);
 
-        Task<IResult> UpdateAsync(MenuItemModel model);
+        Task<IResult> UpdateAsync(MenuItemModelRequest model);
 
         Task<IResult> InactivateAsync(Guid id);
 

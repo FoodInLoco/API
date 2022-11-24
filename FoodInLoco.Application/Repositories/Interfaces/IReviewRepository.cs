@@ -5,11 +5,11 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface IReviewRepository : IRepository<Review>
     {
-        Task<ReviewModel> GetModelByIdAsync(Guid id);
+        Task<ReviewModelResponse> GetModelByIdAsync(Guid id);
 
-        Task<ReviewModel> GetModelByIdWithRelationsAsync(Guid id);
+        Task<ReviewModelResponse> GetModelByIdWithRelationsAsync(Guid id);
 
-        Task<IEnumerable<ReviewModel>> ListModelAsync();
+        Task<IEnumerable<ReviewModelResponse>> ListModelAsync();
 
         Task UpdateStatusAsync(Review obj);
     }

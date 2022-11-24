@@ -2,7 +2,7 @@ using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public sealed record UserModel
+    public sealed record UserModelResponse
     {
         public Guid Id { get; init; }
 
@@ -26,8 +26,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public string? Photo { get; set; }
 
-        public List<RestaurantModel>? Restaurants { get; init; }
+        public List<RestaurantModelResponse>? Restaurants { get; init; }
 
-        public List<ReservationModel>? Reservations { get; init; }
+        public List<ReservationModelResponse>? Reservations { get; init; }
     }
 }

@@ -32,7 +32,7 @@ namespace FoodInLoco.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync(ReviewModel obj)
+        public async Task<IActionResult> PostAsync(ReviewModelRequest obj)
         {
             var result = await _reviewService.AddAsync(obj);
             if (result.Succeeded)
@@ -41,7 +41,7 @@ namespace FoodInLoco.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutAsync(ReviewModel objToUpdate)
+        public async Task<IActionResult> PutAsync(ReviewModelRequest objToUpdate)
         {
             var result = await _reviewService.UpdateAsync(objToUpdate);
             if (result.Succeeded)

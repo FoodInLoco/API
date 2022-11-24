@@ -63,12 +63,12 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
-        public static implicit operator MenuItemModel(MenuItem menuItem)
+        public static implicit operator MenuItemModelResponse(MenuItem menuItem)
         {
             if (menuItem is null)
                 return null;
 
-            return new MenuItemModel()
+            return new MenuItemModelResponse()
             {
                 Id = menuItem.Id,
                 CreatedAt = menuItem.CreatedAt,

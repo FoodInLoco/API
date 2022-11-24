@@ -5,9 +5,9 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface IAttractionRepository : IRepository<Attraction>
     {
-        Task<AttractionModel> GetModelByIdAsync(Guid id);
+        Task<AttractionModelResponse> GetModelByIdAsync(Guid id);
 
-        Task<IEnumerable<AttractionModel>> ListModelAsync();
+        Task<IEnumerable<AttractionModelResponse>> ListModelAsync();
 
         Task UpdateStatusAsync(Attraction obj);
     }

@@ -7,7 +7,7 @@ namespace FoodInLoco.Application.Data.Expressions
 {
     public static class RestaurantExpression
     {
-        public static Expression<Func<Restaurant, RestaurantModel>> Model => _ => new RestaurantModel
+        public static Expression<Func<Restaurant, RestaurantModelResponse>> Model => _ => new RestaurantModelResponse
         {
             Id = _.Id,
             UserId = _.UserId,
@@ -28,10 +28,10 @@ namespace FoodInLoco.Application.Data.Expressions
             Kids = _.Kids,
             Photo = _.Photo,
             User = _.User,
-            Menus = _.Menus.Select(_ => (MenuModel)_).ToList(),
-            Reservations = _.Reservations.Select(_ => (ReservationModel)_).ToList(),
-            Attractions = _.Attractions.Select(_ => (AttractionModel)_).ToList(),
-            Reviews = _.Reviews.Select(_ => (ReviewModel)_).ToList()
+            Menus = _.Menus.Select(_ => (MenuModelResponse)_).ToList(),
+            Reservations = _.Reservations.Select(_ => (ReservationModelResponse)_).ToList(),
+            Attractions = _.Attractions.Select(_ => (AttractionModelResponse)_).ToList(),
+            Reviews = _.Reviews.Select(_ => (ReviewModelResponse)_).ToList()
         };
 
         public static Expression<Func<Restaurant, bool>> Id(Guid id)

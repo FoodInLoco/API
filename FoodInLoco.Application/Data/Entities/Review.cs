@@ -65,12 +65,12 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
-        public static implicit operator ReviewModel(Review review)
+        public static implicit operator ReviewModelResponse(Review review)
         {
             if (review is null)
                 return null;
 
-            return new ReviewModel()
+            return new ReviewModelResponse()
             {
                 Id = review.Id,
                 CreatedAt = review.CreatedAt,

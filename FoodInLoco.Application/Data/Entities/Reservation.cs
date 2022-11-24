@@ -81,12 +81,12 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
-        public static implicit operator ReservationModel(Reservation reservation)
+        public static implicit operator ReservationModelResponse(Reservation reservation)
         {
             if (reservation is null)
                 return null;
 
-            return new ReservationModel()
+            return new ReservationModelResponse()
             {
                 Id = reservation.Id,
                 CreatedAt = reservation.CreatedAt,

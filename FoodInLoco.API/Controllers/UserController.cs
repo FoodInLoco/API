@@ -32,7 +32,7 @@ namespace FoodInLoco.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync(UserModel user)
+        public async Task<IActionResult> PostAsync(UserModelRequest user)
         {
             var result = await _userService.AddAsync(user);
             if (result.Succeeded)
@@ -41,7 +41,7 @@ namespace FoodInLoco.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutAsync(UserModel userToUpdate)
+        public async Task<IActionResult> PutAsync(UserModelRequest userToUpdate)
         {
             var result = await _userService.UpdateAsync(userToUpdate);
             if (result.Succeeded)

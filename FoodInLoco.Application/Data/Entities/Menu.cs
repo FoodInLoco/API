@@ -68,12 +68,12 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
-        public static implicit operator MenuModel(Menu menu)
+        public static implicit operator MenuModelResponse(Menu menu)
         {
             if (menu is null)
                 return null;
 
-            return new MenuModel()
+            return new MenuModelResponse()
             {
                 Id = menu.Id,
                 CreatedAt = menu.CreatedAt,
@@ -88,7 +88,7 @@ namespace FoodInLoco.Application.Data.Entities
                 StartAt = menu.HappyHour.StartAt.ToString(),
                 EndAt = menu.HappyHour.EndAt.ToString(),
                 Status = menu.Status,
-                Items = menu.Items?.Select(_ => (MenuItemModel)_).ToList()
+                Items = menu.Items?.Select(_ => (MenuItemModelResponse)_).ToList()
             };
         }
     }

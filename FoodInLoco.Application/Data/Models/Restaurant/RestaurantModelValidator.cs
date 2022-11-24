@@ -3,9 +3,11 @@ using System.Text.RegularExpressions;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public abstract class RestaurantModelValidator : AbstractValidator<RestaurantModel>
+    public abstract class RestaurantModelValidator : AbstractValidator<RestaurantModelRequest>
     {
         public void Id() => RuleFor(_ => _.Id).NotEmpty();
+
+        public void User() => RuleFor(_ => _.UserId).NotEmpty();
 
         public void CompanyName() => RuleFor(_ => _.CompanyName)
             .MaximumLength(200).WithMessage("Razão Social não pode ter mais do que 200 caracteres.")
@@ -19,9 +21,12 @@ namespace FoodInLoco.Application.Data.Models
             .MaximumLength(300).WithMessage("E-mail não pode ter mais do que 300 caracteres.")
             .EmailAddress().WithMessage("Formato de e-mail inválido.");
 
-        public void Photo() => RuleFor(_ => _.Photo)
-            .MaximumLength(10000).WithMessage("Foto não pode ter mais do que 10000 caracteres.")
-            .NotEmpty().WithMessage("É obrigatório preencher Foto.");
+        public void Photo() => When(_ => !String.IsNullOrEmpty(_.Photo), () =>
+        {
+            RuleFor(_ => _.Photo)
+                .MaximumLength(10000).WithMessage("Foto não pode ter mais do que 10000 caracteres.")
+                .NotEmpty().WithMessage("É obrigatório preencher Foto.");
+        });
 
         public void DDD() => RuleFor(_ => _.DDD)
             .Length(2).WithMessage("DDD precisa ter 2 caracteres.")

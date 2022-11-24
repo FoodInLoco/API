@@ -5,6 +5,6 @@ namespace FoodInLoco.Application.Factories.Interfaces
 {
     public interface IReviewFactory
     {
-        Review Create(ReviewModel model);
+        Review Create(ReviewModelRequest model);
     }
 }

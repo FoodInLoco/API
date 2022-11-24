@@ -6,15 +6,15 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<UserModel> GetModelByIdAsync(Guid id);
+        Task<UserModelResponse> GetModelByIdAsync(Guid id);
 
-        Task<UserModel> GetModelByIdWithRelationsAsync(Guid id);
+        Task<UserModelResponse> GetModelByIdWithRelationsAsync(Guid id);
 
-        Task<UserModel> GetModelByEmailAsync(string email);
+        Task<UserModelResponse> GetModelByEmailAsync(string email);
 
-        Task<Grid<UserModel>> GridAsync(GridParameters parameters);
+        Task<Grid<UserModelResponse>> GridAsync(GridParameters parameters);
 
-        Task<IEnumerable<UserModel>> ListModelAsync();
+        Task<IEnumerable<UserModelResponse>> ListModelAsync();
 
         Task UpdateStatusAsync(User obj);
 

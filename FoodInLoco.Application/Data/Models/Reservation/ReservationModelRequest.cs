@@ -4,13 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public sealed record ReservationModel
+    public sealed record ReservationModelRequest
     {
         public Guid Id { get; init; }
-
-        public DateTime CreatedAt { get; init; }
-
-        public DateTime? LastUpdatedAt { get; init; }
 
         public Guid RestaurantId { get; init; }
 
@@ -21,11 +17,5 @@ namespace FoodInLoco.Application.Data.Models
         public short SeatQuantity { get; init; }
 
         public DateTime Date { get; init; }
-
-        public Status Status { get; init; }
-
-        public Status Confirmation { get; init; }
-
-        public UserModel? User { get; init; }
     }
 }

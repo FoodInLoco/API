@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public sealed record MenuItemModel
+    public sealed record MenuItemModelResponse
     {
         public Guid Id { get; init; }
 

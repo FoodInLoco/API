@@ -28,7 +28,7 @@ namespace FoodInLoco.Application.Services
             _menuItemFactory = menuItemFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(MenuItemModel model)
+        public async Task<IResult<Guid>> AddAsync(MenuItemModelRequest model)
         {
             var validation = new AddMenuItemModelValidator().Validation(model);
 
@@ -53,27 +53,27 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<MenuItemModel> GetAsync(Guid id)
+        public Task<MenuItemModelResponse> GetAsync(Guid id)
         {
             return _menuItemRepository.GetModelByIdAsync(id);
         }
         
-        public Task<Grid<MenuItemModel>> GridAsync(GridParameters parameters)
+        public Task<Grid<MenuItemModelResponse>> GridAsync(GridParameters parameters)
         {
             return _menuItemRepository.GridAsync(parameters);
         }
 
-        public async Task<IEnumerable<MenuItemModel>> ListAsync()
+        public async Task<IEnumerable<MenuItemModelResponse>> ListAsync()
         {
             return await _menuItemRepository.ListModelAsync();
         }
         
-        public async Task<IEnumerable<MenuItemModel>> ListByMenuAsync(Guid id)
+        public async Task<IEnumerable<MenuItemModelResponse>> ListByMenuAsync(Guid id)
         {
             return await _menuItemRepository.ListModelByMenuAsync(id);
         }
 
-        public async Task<IResult> UpdateAsync(MenuItemModel model)
+        public async Task<IResult> UpdateAsync(MenuItemModelRequest model)
         {
             var validation = new UpdateMenuItemModelValidator().Validation(model);
 

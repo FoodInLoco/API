@@ -5,6 +5,6 @@ namespace FoodInLoco.Application.Factories.Interfaces
 {
     public interface IRestaurantFactory
     {
-        Restaurant Create(RestaurantModel model);
+        Restaurant Create(RestaurantModelRequest model);
     }
 }

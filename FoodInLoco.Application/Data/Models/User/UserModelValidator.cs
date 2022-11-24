@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public abstract class UserModelValidator : AbstractValidator<UserModel>
+    public abstract class UserModelValidator : AbstractValidator<UserModelRequest>
     {
         public void Id() => RuleFor(_ => _.Id).NotEmpty();
 
@@ -12,8 +12,6 @@ namespace FoodInLoco.Application.Data.Models
         public void LastName() => RuleFor(_ => _.LastName).MaximumLength(200).NotEmpty();
 
         public void Email() => RuleFor(_ => _.Email).MaximumLength(300).EmailAddress();
-
-        public void Photo() => RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
 
         public void DDD() => RuleFor(_ => _.DDD)
             .Length(2).WithMessage("DDD precisa ter 2 caracteres.")
@@ -29,5 +27,10 @@ namespace FoodInLoco.Application.Data.Models
         public void Roles() => RuleFor(_ => _.Roles).NotEmpty();
 
         public void Password() => RuleFor(_ => _.Password).NotEmpty();
+
+        public void Photo() => When(_ => !String.IsNullOrEmpty(_.Photo), () =>
+        {
+            RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
+        });
     }
 }

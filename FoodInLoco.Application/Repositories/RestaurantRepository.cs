@@ -18,12 +18,12 @@ namespace FoodInLoco.Application.Repositories
             _dbContext = context;
         }
 
-        public Task<RestaurantModel> GetModelByIdAsync(Guid id)
+        public Task<RestaurantModelResponse> GetModelByIdAsync(Guid id)
         {
             return Queryable.Where(RestaurantExpression.Id(id)).Select(RestaurantExpression.Model).SingleOrDefaultAsync();
         }
         
-        public Task<RestaurantModel> GetModelByIdWithRelationsAsync(Guid id)
+        public Task<RestaurantModelResponse> GetModelByIdWithRelationsAsync(Guid id)
         {
             return Queryable.Where(RestaurantExpression.Id(id))
                 .Include(_ => _.User)
@@ -34,12 +34,12 @@ namespace FoodInLoco.Application.Repositories
                 .Select(RestaurantExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<Grid<RestaurantModel>> GridAsync(GridParameters parameters)
+        public Task<Grid<RestaurantModelResponse>> GridAsync(GridParameters parameters)
         {
             return Queryable.Select(RestaurantExpression.Model).GridAsync(parameters);
         }
 
-        public async Task<IEnumerable<RestaurantModel>> ListModelAsync()
+        public async Task<IEnumerable<RestaurantModelResponse>> ListModelAsync()
         {
             return await Queryable.Select(RestaurantExpression.Model).ToListAsync();
         }

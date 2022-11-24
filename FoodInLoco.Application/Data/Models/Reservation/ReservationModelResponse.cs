@@ -1,8 +1,10 @@
+using FoodInLoco.Application.Converters;
 using FoodInLoco.Application.Enums;
+using System.Text.Json.Serialization;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public sealed record ReviewModel
+    public sealed record ReservationModelResponse
     {
         public Guid Id { get; init; }
 
@@ -12,18 +14,18 @@ namespace FoodInLoco.Application.Data.Models
 
         public Guid RestaurantId { get; init; }
 
-        public Guid ReservationId { get; init; }
-
         public Guid UserId { get; init; }
-
-        public string Name { get; init; }
 
         public string Description { get; init; }
 
-        public Rate Rate { get; init; }
+        public short SeatQuantity { get; init; }
+
+        public DateTime Date { get; init; }
 
         public Status Status { get; init; }
 
-        public UserModel? User { get; init; }
+        public Status Confirmation { get; init; }
+
+        public UserModelResponse? User { get; init; }
     }
 }

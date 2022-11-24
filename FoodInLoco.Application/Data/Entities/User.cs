@@ -76,12 +76,12 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
-        public static implicit operator UserModel(User user)
+        public static implicit operator UserModelResponse(User user)
         {
             if (user is null)
                 return null;
 
-            return new UserModel()
+            return new UserModelResponse()
             {
                 Id = user.Id,
                 CreatedAt = user.CreatedAt,
@@ -93,8 +93,8 @@ namespace FoodInLoco.Application.Data.Entities
                 PhoneNumber = user.CellPhone.PhoneNumber,
                 Roles = user.Roles,
                 Photo = user.Photo,
-                Restaurants = user.Restaurants?.Select(_ => (RestaurantModel)_).ToList(),
-                Reservations = user.Reservations?.Select(_ => (ReservationModel)_).ToList()
+                Restaurants = user.Restaurants?.Select(_ => (RestaurantModelResponse)_).ToList(),
+                Reservations = user.Reservations?.Select(_ => (ReservationModelResponse)_).ToList()
             };
         }
     }

@@ -8,7 +8,7 @@ namespace FoodInLoco.Application.Factories
 {
     public sealed class UserFactory : IUserFactory
     {
-        public User Create(UserModel model)
+        public User Create(UserModelRequest model)
         {
             return new User
             (

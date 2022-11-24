@@ -6,7 +6,7 @@ namespace FoodInLoco.Application.Data.Expressions
 {
     public static class MenuExpression
     {
-        public static Expression<Func<Menu, MenuModel>> Model => _ => new MenuModel
+        public static Expression<Func<Menu, MenuModelResponse>> Model => _ => new MenuModelResponse
         {
             Id = _.Id,
             CreatedAt = _.CreatedAt,
@@ -21,7 +21,7 @@ namespace FoodInLoco.Application.Data.Expressions
             StartAt = _.HappyHour.StartAt.ToString(),
             EndAt = _.HappyHour.EndAt.ToString(),
             Status = _.Status,
-            Items = _.Items.Select(_ => (MenuItemModel)_).ToList()
+            Items = _.Items.Select(_ => (MenuItemModelResponse)_).ToList()
         };
 
         public static Expression<Func<Menu, bool>> Id(Guid id)

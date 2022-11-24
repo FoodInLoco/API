@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace FoodInLoco.Application.Data.Models
 {
-    public abstract class MenuItemModelValidator : AbstractValidator<MenuItemModel>
+    public abstract class MenuItemModelValidator : AbstractValidator<MenuItemModelRequest>
     {
         public void Id() => RuleFor(_ => _.Id).NotEmpty();
 
@@ -13,12 +13,13 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Description() => RuleFor(_ => _.Description).MaximumLength(300).NotEmpty();
 
-        public void Photo() => RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
+        public void Photo() => When(_ => String.IsNullOrEmpty(_.Photo), () =>
+        {
+            RuleFor(_ => _.Photo).MaximumLength(10000).NotEmpty();
+        });
 
         public void Quantity() => RuleFor(_ => _.Quantity).NotEmpty();
 
         public void Value() => RuleFor(_ => _.Value).NotEmpty();
-
-        public void Status() => RuleFor(_ => _.Status).NotEmpty();
     }
 }

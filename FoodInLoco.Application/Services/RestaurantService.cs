@@ -28,7 +28,7 @@ namespace FoodInLoco.Application.Services
             _restaurantFactory = restaurantFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(RestaurantModel model)
+        public async Task<IResult<Guid>> AddAsync(RestaurantModelRequest model)
         {
             var validation = new AddRestaurantModelValidator().Validation(model);
 
@@ -53,12 +53,12 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<RestaurantModel> GetAsync(Guid id)
+        public Task<RestaurantModelResponse> GetAsync(Guid id)
         {
             return _restaurantRepository.GetModelByIdWithRelationsAsync(id);
         }
 
-        public Task<Grid<RestaurantModel>> GridAsync(GridParameters parameters)
+        public Task<Grid<RestaurantModelResponse>> GridAsync(GridParameters parameters)
         {
             return _restaurantRepository.GridAsync(parameters);
         }
@@ -89,12 +89,12 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public async Task<IEnumerable<RestaurantModel>> ListAsync()
+        public async Task<IEnumerable<RestaurantModelResponse>> ListAsync()
         {
             return await _restaurantRepository.ListModelAsync();
         }
 
-        public async Task<IResult> UpdateAsync(RestaurantModel model)
+        public async Task<IResult> UpdateAsync(RestaurantModelRequest model)
         {
             var validation = new UpdateRestaurantModelValidator().Validation(model);
 
