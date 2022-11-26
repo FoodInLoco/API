@@ -27,14 +27,21 @@ namespace FoodInLoco.Application.Services
             _reservationFactory = reservationFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(ReservationModelRequest model)
+        public async Task<bool> CheckUser(Guid reservationId, Guid userId)
+        {
+            var reservation = await _reservationRepository.GetAsync(reservationId);
+
+            return reservation.UserId == userId;
+        }
+
+        public async Task<IResult<Guid>> AddAsync(Guid userId, ReservationModelRequest model)
         {
             var validation = new AddReservationModelValidator().Validation(model);
 
             if (validation.Failed)
                 return validation.Fail<Guid>();
 
-            var restaurant = _reservationFactory.Create(model);
+            var restaurant = _reservationFactory.Create(userId, model);
 
             await _reservationRepository.AddAsync(restaurant);
 
@@ -62,14 +69,14 @@ namespace FoodInLoco.Application.Services
             return await _reservationRepository.ListModelAsync();
         }
 
-        public async Task<IEnumerable<ReservationModelResponse>> ListByDateFromRestaurantAsync(Guid id, DateTime? date)
+        public async Task<IEnumerable<ReservationModelResponse>> ListByDateFromRestaurantAsync(Guid restaurantId, DateTime? date)
         {
-            return await _reservationRepository.ListModelByDateFromRestaurantAsync(id, date);
+            return await _reservationRepository.ListModelByDateFromRestaurantAsync(restaurantId, date);
         }
         
-        public async Task<IEnumerable<ReservationModelResponse>> ListByDateFromUserAsync(Guid id, DateTime? date)
+        public async Task<IEnumerable<ReservationModelResponse>> ListByDateFromUserAsync(Guid userId, DateTime? date)
         {
-            return await _reservationRepository.ListModelByDateFromUserAsync(id, date);
+            return await _reservationRepository.ListModelByDateFromUserAsync(userId, date);
         }
 
         public async Task<IResult> UpdateAsync(ReservationModelRequest model)

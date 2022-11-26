@@ -1,5 +1,6 @@
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodInLoco.API.Controllers
@@ -15,6 +16,7 @@ namespace FoodInLoco.API.Controllers
             _userService = userService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
@@ -22,6 +24,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("get-by-id")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -31,6 +34,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> PostAsync(UserModelRequest user)
         {
@@ -40,6 +44,7 @@ namespace FoodInLoco.API.Controllers
             return BadRequest(result);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> PutAsync(UserModelRequest userToUpdate)
         {
@@ -49,6 +54,7 @@ namespace FoodInLoco.API.Controllers
             return BadRequest(result);
         }
 
+        [Authorize]
         [HttpGet("activate")]
         public async Task<IActionResult> ActivateById(Guid id)
         {
@@ -58,6 +64,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("inactivate")]
         public async Task<IActionResult> InactivateById(Guid id)
         {
@@ -67,6 +74,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {

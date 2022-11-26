@@ -10,7 +10,7 @@ namespace FoodInLoco.Application.Data.Entities
         (
             Guid restaurantId,
             NameDescription nameDescription,
-            string photo,
+            string? photo,
             DateTime date,
             double? coverTax
         )

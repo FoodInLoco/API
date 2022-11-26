@@ -33,14 +33,14 @@ namespace FoodInLoco.Application.Repositories
             return await Queryable.Select(ReservationExpression.Model).ToListAsync();
         }
 
-        public async Task<IEnumerable<ReservationModelResponse>> ListModelByDateFromRestaurantAsync(Guid id, DateTime? date)
+        public async Task<IEnumerable<ReservationModelResponse>> ListModelByDateFromRestaurantAsync(Guid restaurantId, DateTime? date)
         {
-            return await Queryable.Where(ReservationExpression.FromRestaurantByDate(id, date)).Select(ReservationExpression.Model).ToListAsync();
+            return await Queryable.Where(ReservationExpression.FromRestaurantByDate(restaurantId, date)).Select(ReservationExpression.Model).ToListAsync();
         }
 
-        public async Task<IEnumerable<ReservationModelResponse>> ListModelByDateFromUserAsync(Guid id, DateTime? date)
+        public async Task<IEnumerable<ReservationModelResponse>> ListModelByDateFromUserAsync(Guid userId, DateTime? date)
         {
-            return await Queryable.Where(ReservationExpression.FromUserByDate(id, date)).Select(ReservationExpression.Model).ToListAsync();
+            return await Queryable.Where(ReservationExpression.FromUserByDate(userId, date)).Select(ReservationExpression.Model).ToListAsync();
         }
 
         public Task UpdateStatusAsync(Reservation obj)

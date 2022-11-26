@@ -1,5 +1,6 @@
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodInLoco.API.Controllers
@@ -15,6 +16,7 @@ namespace FoodInLoco.API.Controllers
             _menuService = menuService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
@@ -22,13 +24,15 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("get-by-restaurant")]
-        public async Task<IActionResult> GetByRestaurantAsync(Guid id)
+        public async Task<IActionResult> GetByRestaurantAsync(Guid restaurantId)
         {
-            var result = await _menuService.ListByRestaurantAsync(id);
+            var result = await _menuService.ListByRestaurantAsync(restaurantId);
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("get-by-id")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -38,6 +42,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostAsync(MenuModelRequest menu)
         {
@@ -47,6 +52,7 @@ namespace FoodInLoco.API.Controllers
             return BadRequest(result);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> PutAsync(MenuModelRequest menuToUpdate)
         {
@@ -56,6 +62,7 @@ namespace FoodInLoco.API.Controllers
             return BadRequest(result);
         }
 
+        [Authorize]
         [HttpGet("activate")]
         public async Task<IActionResult> ActivateById(Guid id)
         {
@@ -65,6 +72,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("inactivate")]
         public async Task<IActionResult> InactivateById(Guid id)
         {
@@ -74,6 +82,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {

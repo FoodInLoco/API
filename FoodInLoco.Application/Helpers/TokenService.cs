@@ -16,6 +16,7 @@ namespace FoodInLoco.Application.Helpers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
+                    new Claim(ClaimTypes.Name, user.Name.FirstName),
                     new Claim(ClaimTypes.Email, user.Email.Value),
                     new Claim(ClaimTypes.Role, user.Roles.ToString()),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())

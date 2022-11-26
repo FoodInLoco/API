@@ -11,8 +11,6 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Reservation() => RuleFor(_ => _.ReservationId).NotEmpty();
 
-        public void User() => RuleFor(_ => _.UserId).NotEmpty();
-
         public void Name() => RuleFor(_ => _.Name).MaximumLength(100).NotEmpty();
 
         public void Description() => RuleFor(_ => _.Description).MaximumLength(300).NotEmpty();

@@ -7,8 +7,6 @@ namespace FoodInLoco.Application.Data.Models
     {
         public void Id() => RuleFor(_ => _.Id).NotEmpty();
 
-        public void User() => RuleFor(_ => _.UserId).NotEmpty();
-
         public void CompanyName() => RuleFor(_ => _.CompanyName)
             .MaximumLength(200).WithMessage("Razão Social não pode ter mais do que 200 caracteres.")
             .NotEmpty().WithMessage("É obrigatório preencher Razão Social.");

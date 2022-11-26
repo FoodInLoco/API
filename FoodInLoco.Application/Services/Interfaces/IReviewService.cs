@@ -5,7 +5,9 @@ namespace FoodInLoco.Application.Services.Interfaces
 {
     public interface IReviewService
     {
-        Task<IResult<Guid>> AddAsync(ReviewModelRequest model);
+        Task<bool> CheckUser(Guid reviewId, Guid userId);
+
+        Task<IResult<Guid>> AddAsync(Guid userId, ReviewModelRequest model);
 
         Task<IResult> DeleteAsync(Guid id);
 

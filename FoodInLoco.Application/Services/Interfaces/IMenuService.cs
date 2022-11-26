@@ -13,7 +13,7 @@ namespace FoodInLoco.Application.Services.Interfaces
         
         Task<IEnumerable<MenuModelResponse>> ListAsync();
 
-        Task<IEnumerable<MenuModelResponse>> ListByRestaurantAsync(Guid id);
+        Task<IEnumerable<MenuModelResponse>> ListByRestaurantAsync(Guid restaurantId);
 
         Task<IResult> UpdateAsync(MenuModelRequest model);
 

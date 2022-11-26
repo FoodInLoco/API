@@ -8,6 +8,7 @@ namespace FoodInLoco.Application.Data.Entities
     {
         public Restaurant
         (
+            Guid userId,
             Company company,
             Email email,
             Phone phone,
@@ -16,6 +17,7 @@ namespace FoodInLoco.Application.Data.Entities
             string? photo
         )
         {
+            UserId = userId;
             Company = company;
             Email = email;
             CellPhone = phone;

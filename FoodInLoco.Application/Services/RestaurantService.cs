@@ -28,14 +28,21 @@ namespace FoodInLoco.Application.Services
             _restaurantFactory = restaurantFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(RestaurantModelRequest model)
+        public async Task<bool> CheckUser(Guid reservationId, Guid userId)
+        {
+            var restaurant = await _restaurantRepository.GetAsync(reservationId);
+
+            return restaurant.UserId == userId;
+        }
+
+        public async Task<IResult<Guid>> AddAsync(Guid userId, RestaurantModelRequest model)
         {
             var validation = new AddRestaurantModelValidator().Validation(model);
 
             if (validation.Failed)
                 return validation.Fail<Guid>();
 
-            var restaurant = _restaurantFactory.Create(model);
+            var restaurant = _restaurantFactory.Create(userId, model);
 
             await _restaurantRepository.AddAsync(restaurant);
 

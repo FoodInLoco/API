@@ -68,9 +68,9 @@ namespace FoodInLoco.Application.Services
             return await _menuItemRepository.ListModelAsync();
         }
         
-        public async Task<IEnumerable<MenuItemModelResponse>> ListByMenuAsync(Guid id)
+        public async Task<IEnumerable<MenuItemModelResponse>> ListByMenuAsync(Guid menuId)
         {
-            return await _menuItemRepository.ListModelByMenuAsync(id);
+            return await _menuItemRepository.ListModelByMenuAsync(menuId);
         }
 
         public async Task<IResult> UpdateAsync(MenuItemModelRequest model)

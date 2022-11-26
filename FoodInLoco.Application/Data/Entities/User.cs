@@ -11,12 +11,14 @@ namespace FoodInLoco.Application.Data.Entities
             Name name,
             Email email,
             Phone phone,
+            string? photo,
             Roles roles
         )
         {
             Name = name;
             Email = email;
             CellPhone = phone;
+            Photo = photo;
             Roles = roles;
             Salt = Guid.NewGuid().ToString();
             CreatedAt = DateTime.UtcNow;

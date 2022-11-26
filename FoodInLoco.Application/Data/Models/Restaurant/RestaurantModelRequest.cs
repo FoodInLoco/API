@@ -6,8 +6,6 @@ namespace FoodInLoco.Application.Data.Models
     {
         public Guid Id { get; init; }
 
-        public Guid UserId { get; init; }
-
         public string CompanyName { get; init; }
 
         public string TradingName { get; init; }

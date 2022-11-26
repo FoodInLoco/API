@@ -10,8 +10,6 @@ namespace FoodInLoco.Application.Data.Models
 
         public Guid RestaurantId { get; init; }
 
-        public Guid UserId { get; init; }
-
         public string Description { get; init; }
 
         public short SeatQuantity { get; init; }

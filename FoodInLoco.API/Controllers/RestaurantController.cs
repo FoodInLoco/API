@@ -1,6 +1,8 @@
 using DotNetCore.Objects;
 using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Extensions;
 using FoodInLoco.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodInLoco.API.Controllers
@@ -16,6 +18,7 @@ namespace FoodInLoco.API.Controllers
             _restaurantService = restaurantService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
@@ -23,6 +26,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpPost("grid")]
         public async Task<IActionResult> GetGridAsync(GridParameters parameters)
         {
@@ -30,6 +34,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("get-by-id")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -39,24 +44,35 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> PostAsync(RestaurantModelRequest restaurant)
+        public async Task<IActionResult> PostAsync(RestaurantModelRequest obj)
         {
-            var result = await _restaurantService.AddAsync(restaurant);
+            Guid userId;
+            var parsed = Guid.TryParse(User.GetUserId(), out userId);
+            if (!parsed)
+                return Unauthorized();
+            var result = await _restaurantService.AddAsync(userId, obj);
             if (result.Succeeded)
-                return Created($"/get-by-id?id={result.Data}", restaurant);
+                return Created($"/get-by-id?id={result.Data}", obj);
             return BadRequest(result);
         }
 
+        [Authorize]
         [HttpPut]
-        public async Task<IActionResult> PutAsync(RestaurantModelRequest restaurantToUpdate)
+        public async Task<IActionResult> PutAsync(RestaurantModelRequest objToUpdate)
         {
-            var result = await _restaurantService.UpdateAsync(restaurantToUpdate);
+            Guid userId;
+            var parsed = Guid.TryParse(User.GetUserId(), out userId);
+            if (!parsed || !await _restaurantService.CheckUser(objToUpdate.Id, userId))
+                return Unauthorized();
+            var result = await _restaurantService.UpdateAsync(objToUpdate);
             if (result.Succeeded)
                 return NoContent();
             return BadRequest(result);
         }
 
+        [Authorize]
         [HttpGet("activate")]
         public async Task<IActionResult> ActivateById(Guid id)
         {
@@ -66,6 +82,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("inactivate")]
         public async Task<IActionResult> InactivateById(Guid id)
         {
@@ -75,6 +92,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {

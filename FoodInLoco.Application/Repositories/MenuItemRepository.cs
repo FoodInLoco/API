@@ -33,9 +33,9 @@ namespace FoodInLoco.Application.Repositories
             return await Queryable.Select(MenuItemExpression.Model).ToListAsync();
         }
         
-        public async Task<IEnumerable<MenuItemModelResponse>> ListModelByMenuAsync(Guid id)
+        public async Task<IEnumerable<MenuItemModelResponse>> ListModelByMenuAsync(Guid menuId)
         {
-            return await Queryable.Select(MenuItemExpression.Model).ToListAsync();
+            return await Queryable.Where(MenuItemExpression.ItemsByMenu(menuId)).Select(MenuItemExpression.Model).ToListAsync();
         }
 
         public Task UpdateStatusAsync(MenuItem obj)
