@@ -36,5 +36,10 @@ namespace FoodInLoco.Application.Data.Expressions
         {
             return _ => _.UserId == userId && (!date.HasValue || (date.Value.Day == _.Date.Day && date.Value.Month == _.Date.Month && date.Value.Year == _.Date.Year)); //&& _.Status == Status.Active && _.Confirmation == Status.Active;
         }
+
+        public static Expression<Func<Reservation, bool>> PendingConfirmation()
+        {
+            return _ => _.Status == Status.Active && _.Confirmation == Status.None;
+        }
     }
 }

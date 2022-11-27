@@ -52,6 +52,14 @@ namespace FoodInLoco.API.Controllers
         }
 
         [Authorize]
+        [HttpGet("get-pending-confirmation")]
+        public async Task<IActionResult> GetPendingConfirmation()
+        {
+            var result = await _reservationService.ListPendingConfirmationAsync();
+            return Ok(result);
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostAsync(ReservationModelRequest obj)
         {
