@@ -1,6 +1,7 @@
 ﻿using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.Entities;
 using System.Linq.Expressions;
+using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Expressions
 {
@@ -31,7 +32,7 @@ namespace FoodInLoco.Application.Data.Expressions
 
         public static Expression<Func<Menu, bool>> FromRestaurant(Guid restaurantId)
         {
-            return _ => _.RestaurantId == restaurantId && _.IsActive();
+            return _ => _.RestaurantId == restaurantId; //&& _.Status == Status.Active && !(!_.ExpirationDate.HasValue || _.ExpirationDate.Value.CompareTo(DateTime.Now) <= 0);
         }
     }
 }

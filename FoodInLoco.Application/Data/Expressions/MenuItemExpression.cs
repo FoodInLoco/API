@@ -1,6 +1,7 @@
 ﻿using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.Entities;
 using System.Linq.Expressions;
+using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Expressions
 {
@@ -27,7 +28,7 @@ namespace FoodInLoco.Application.Data.Expressions
 
         public static Expression<Func<MenuItem, bool>> ItemsByMenu(Guid menuId)
         {
-            return _ => _.MenuId == menuId && _.IsActive();
+            return _ => _.MenuId == menuId; //&& _.Status == Status.Active;
         }
     }
 }

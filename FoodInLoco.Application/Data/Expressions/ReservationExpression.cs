@@ -1,6 +1,7 @@
 ﻿using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.Entities;
 using System.Linq.Expressions;
+using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Expressions
 {
@@ -28,12 +29,12 @@ namespace FoodInLoco.Application.Data.Expressions
 
         public static Expression<Func<Reservation, bool>> FromRestaurantByDate(Guid restaurantId, DateTime? date)
         {
-            return _ => _.RestaurantId == restaurantId && _.IsActive() && date.HasValue ? date.Value.Date == _.Date.Date : true;
+            return _ => _.RestaurantId == restaurantId && (!date.HasValue || (date.Value.Day == _.Date.Day && date.Value.Month == _.Date.Month && date.Value.Year == _.Date.Year)); //&& _.Status == Status.Active && _.Confirmation == Status.Active;
         }
 
         public static Expression<Func<Reservation, bool>> FromUserByDate(Guid userId, DateTime? date)
         {
-            return _ => _.UserId == userId && _.IsActive() && date.HasValue ? date.Value.Date == _.Date.Date : true;
+            return _ => _.UserId == userId && (!date.HasValue || (date.Value.Day == _.Date.Day && date.Value.Month == _.Date.Month && date.Value.Year == _.Date.Year)); //&& _.Status == Status.Active && _.Confirmation == Status.Active;
         }
     }
 }
