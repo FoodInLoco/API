@@ -22,6 +22,7 @@ namespace FoodInLoco.Application.Data.Expressions
             StartAt = _.HappyHour.StartAt.ToString(),
             EndAt = _.HappyHour.EndAt.ToString(),
             Status = _.Status,
+            Restaurant = _.Restaurant,
             Items = _.Items.Select(_ => (MenuItemModelResponse)_).ToList()
         };
 

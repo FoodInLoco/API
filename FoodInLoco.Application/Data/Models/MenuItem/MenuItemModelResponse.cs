@@ -25,5 +25,7 @@ namespace FoodInLoco.Application.Data.Models
         public double Value { get; init; }
 
         public Status Status { get; init; }
+
+        public MenuModelResponse? Menu { get; set; }
     }
 }

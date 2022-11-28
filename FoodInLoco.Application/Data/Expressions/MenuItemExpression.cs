@@ -1,7 +1,6 @@
-﻿using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Data.Entities;
+﻿using FoodInLoco.Application.Data.Entities;
+using FoodInLoco.Application.Data.Models;
 using System.Linq.Expressions;
-using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Expressions
 {
@@ -18,7 +17,8 @@ namespace FoodInLoco.Application.Data.Expressions
             Quantity = _.Quantity,
             Value = _.Value,
             Photo = _.Photo,
-            Status = _.Status
+            Status = _.Status,
+            Menu = _.Menu
         };
 
         public static Expression<Func<MenuItem, bool>> Id(Guid id)

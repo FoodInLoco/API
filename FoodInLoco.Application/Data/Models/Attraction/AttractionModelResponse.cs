@@ -25,5 +25,7 @@ namespace FoodInLoco.Application.Data.Models
         public double? CoverTax { get; init; }
 
         public Status Status { get; init; }
+
+        public RestaurantModelResponse? Restaurant { get; init; }
     }
 }

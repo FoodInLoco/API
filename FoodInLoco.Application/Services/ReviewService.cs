@@ -59,7 +59,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<ReviewModelResponse> GetAsync(Guid id)
+        public Task<ReviewModelResponse?> GetAsync(Guid id)
         {
             return _reviewRepository.GetModelByIdWithRelationsAsync(id);
         }

@@ -52,7 +52,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<AttractionModelResponse> GetAsync(Guid id)
+        public Task<AttractionModelResponse?> GetAsync(Guid id)
         {
             return _attractionRepository.GetModelByIdAsync(id);
         }

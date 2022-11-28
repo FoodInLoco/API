@@ -59,7 +59,7 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<ReservationModelResponse> GetAsync(Guid id)
+        public Task<ReservationModelResponse?> GetAsync(Guid id)
         {
             return _reservationRepository.GetModelByIdWithRelationsAsync(id);
         }
@@ -134,7 +134,7 @@ namespace FoodInLoco.Application.Services
             var obj = new Reservation(id);
             obj.Disconfirm();
 
-            await _reservationRepository.UpdateStatusAsync(obj);
+            await _reservationRepository.UpdateConfirmationAsync(obj);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -146,7 +146,7 @@ namespace FoodInLoco.Application.Services
             var obj = new Reservation(id);
             obj.Confirm();
 
-            await _reservationRepository.UpdateStatusAsync(obj);
+            await _reservationRepository.UpdateConfirmationAsync(obj);
 
             await _unitOfWork.SaveChangesAsync();
 

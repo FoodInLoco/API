@@ -12,7 +12,7 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<IEnumerable<RestaurantModelResponse>> ListAsync();
 
-        Task<RestaurantModelResponse> GetAsync(Guid id);
+        Task<RestaurantModelResponse?> GetAsync(Guid id);
         
         Task<Grid<RestaurantModelResponse>> GridAsync(GridParameters parameters);
 

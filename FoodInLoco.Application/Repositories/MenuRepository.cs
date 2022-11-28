@@ -4,7 +4,6 @@ using FoodInLoco.Application.Data.Expressions;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace FoodInLoco.Application.Repositories
 {
@@ -17,15 +16,16 @@ namespace FoodInLoco.Application.Repositories
             _dbContext = context;
         }
 
-        public Task<MenuModelResponse> GetModelByIdAsync(Guid id)
+        public Task<MenuModelResponse?> GetModelByIdAsync(Guid id)
         {
             return Queryable.Where(MenuExpression.Id(id)).Select(MenuExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<MenuModelResponse> GetModelByIdWithRelationsAsync(Guid id)
+        public Task<MenuModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
             return Queryable.Where(MenuExpression.Id(id))
                 .Include(_ => _.Items)
+                .Include(_ => _.Restaurant)
                 .Select(MenuExpression.Model).SingleOrDefaultAsync();
         }
 

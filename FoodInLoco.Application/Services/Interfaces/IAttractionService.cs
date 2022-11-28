@@ -9,7 +9,7 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<IResult> DeleteAsync(Guid id);
 
-        Task<AttractionModelResponse> GetAsync(Guid id);
+        Task<AttractionModelResponse?> GetAsync(Guid id);
         
         Task<IEnumerable<AttractionModelResponse>> ListAsync();
 

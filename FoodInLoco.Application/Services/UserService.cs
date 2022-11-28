@@ -60,19 +60,17 @@ namespace FoodInLoco.Application.Services
         {
             await _userRepository.DeleteAsync(id);
 
-            // adicionar deleção de restaurantes do usuário
-
             await _unitOfWork.SaveChangesAsync();
 
             return Result.Success();
         }
 
-        public Task<UserModelResponse> GetAsync(Guid id)
+        public Task<UserModelResponse?> GetAsync(Guid id)
         {
             return _userRepository.GetModelByIdWithRelationsAsync(id);
         }
 
-        public Task<UserModelResponse> GetByEmail(string email)
+        public Task<UserModelResponse?> GetByEmail(string email)
         {
             return _userRepository.GetModelByEmailAsync(email);
         }

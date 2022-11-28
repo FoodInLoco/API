@@ -32,6 +32,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public Status Status { get; init; }
 
+        public RestaurantModelResponse? Restaurant { get; init; }
+
         public List<MenuItemModelResponse>? Items { get; init; }
     }
 }

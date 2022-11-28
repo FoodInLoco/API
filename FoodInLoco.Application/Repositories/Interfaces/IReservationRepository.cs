@@ -5,9 +5,9 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface IReservationRepository : IRepository<Reservation>
     {
-        Task<ReservationModelResponse> GetModelByIdAsync(Guid id);
+        Task<ReservationModelResponse?> GetModelByIdAsync(Guid id);
 
-        Task<ReservationModelResponse> GetModelByIdWithRelationsAsync(Guid id);
+        Task<ReservationModelResponse?> GetModelByIdWithRelationsAsync(Guid id);
 
         Task<IEnumerable<ReservationModelResponse>> ListModelAsync();
 
@@ -18,5 +18,7 @@ namespace FoodInLoco.Application.Repositories.Interfaces
         Task<IEnumerable<ReservationModelResponse>> ListModelPendingConfirmationAsync();
 
         Task UpdateStatusAsync(Reservation obj);
+
+        Task UpdateConfirmationAsync(Reservation obj);
     }
 }

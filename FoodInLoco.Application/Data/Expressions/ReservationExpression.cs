@@ -19,7 +19,8 @@ namespace FoodInLoco.Application.Data.Expressions
             Date = _.Date,
             Status = _.Status,
             Confirmation = _.Confirmation,
-            User = _.User
+            User = _.User,
+            Restaurant = _.Restaurant
         };
 
         public static Expression<Func<Reservation, bool>> Id(Guid id)

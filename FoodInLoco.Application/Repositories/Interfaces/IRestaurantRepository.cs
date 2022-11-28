@@ -6,9 +6,9 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface IRestaurantRepository : IRepository<Restaurant>
     {
-        Task<RestaurantModelResponse> GetModelByIdAsync(Guid id);
+        Task<RestaurantModelResponse?> GetModelByIdAsync(Guid id);
         
-        Task<RestaurantModelResponse> GetModelByIdWithRelationsAsync(Guid id);
+        Task<RestaurantModelResponse?> GetModelByIdWithRelationsAsync(Guid id);
 
         Task<Grid<RestaurantModelResponse>> GridAsync(GridParameters parameters);
 

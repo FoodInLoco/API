@@ -6,7 +6,7 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface IMenuItemRepository : IRepository<MenuItem>
     {
-        Task<MenuItemModelResponse> GetModelByIdAsync(Guid id);
+        Task<MenuItemModelResponse?> GetModelByIdAsync(Guid id);
 
         Task<Grid<MenuItemModelResponse>> GridAsync(GridParameters parameters);
 

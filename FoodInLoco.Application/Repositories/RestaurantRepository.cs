@@ -18,12 +18,12 @@ namespace FoodInLoco.Application.Repositories
             _dbContext = context;
         }
 
-        public Task<RestaurantModelResponse> GetModelByIdAsync(Guid id)
+        public Task<RestaurantModelResponse?> GetModelByIdAsync(Guid id)
         {
             return Queryable.Where(RestaurantExpression.Id(id)).Select(RestaurantExpression.Model).SingleOrDefaultAsync();
         }
         
-        public Task<RestaurantModelResponse> GetModelByIdWithRelationsAsync(Guid id)
+        public Task<RestaurantModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
             return Queryable.Where(RestaurantExpression.Id(id))
                 .Include(_ => _.User)
