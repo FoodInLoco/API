@@ -82,7 +82,9 @@ namespace FoodInLoco.Application.Data.Entities
                 Description = review.NameDescription.Description,
                 Rate = review.Rate,
                 Status = review.Status,
-                User = review.User
+                UserName = review.User?.Name.FirstName,
+                UserEmail = review.User?.Email.Value,
+                RestaurantName = review.Restaurant?.Company.CompanyName
             };
         }
     }

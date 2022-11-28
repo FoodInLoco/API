@@ -98,7 +98,9 @@ namespace FoodInLoco.Application.Data.Entities
                 Date = reservation.Date,
                 Status = reservation.Status,
                 Confirmation = reservation.Confirmation,
-                User = reservation.User
+                UserName = reservation.User?.Name.FirstName,
+                UserEmail = reservation.User?.Email.Value,
+                RestaurantName = reservation.Restaurant?.Company.CompanyName
             };
         }
     }

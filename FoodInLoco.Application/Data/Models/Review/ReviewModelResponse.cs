@@ -24,8 +24,10 @@ namespace FoodInLoco.Application.Data.Models
 
         public Status Status { get; init; }
 
-        public UserModelResponse? User { get; init; }
+        public string? UserName { get; init; }
 
-        public RestaurantModelResponse? Restaurant { get; init; }
+        public string? UserEmail { get; init; }
+
+        public string? RestaurantName { get; init; }
     }
 }

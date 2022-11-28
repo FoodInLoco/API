@@ -79,7 +79,8 @@ namespace FoodInLoco.Application.Data.Entities
                 Quantity = menuItem.Quantity,
                 Value = menuItem.Value,
                 Photo = menuItem.Photo,
-                Status = menuItem.Status
+                Status = menuItem.Status,
+                MenuName = menuItem.Menu?.NameDescription.Name
             };
         }
     }

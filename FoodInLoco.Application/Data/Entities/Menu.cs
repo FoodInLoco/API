@@ -88,6 +88,7 @@ namespace FoodInLoco.Application.Data.Entities
                 StartAt = menu.HappyHour.StartAt.ToString(),
                 EndAt = menu.HappyHour.EndAt.ToString(),
                 Status = menu.Status,
+                RestaurantName = menu.Restaurant?.Company.CompanyName,
                 Items = menu.Items?.Select(_ => (MenuItemModelResponse)_).ToList()
             };
         }

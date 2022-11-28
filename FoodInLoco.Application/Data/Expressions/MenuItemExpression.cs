@@ -18,7 +18,7 @@ namespace FoodInLoco.Application.Data.Expressions
             Value = _.Value,
             Photo = _.Photo,
             Status = _.Status,
-            Menu = _.Menu
+            MenuName = _.Menu.NameDescription.Name
         };
 
         public static Expression<Func<MenuItem, bool>> Id(Guid id)

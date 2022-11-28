@@ -18,8 +18,9 @@ namespace FoodInLoco.Application.Data.Expressions
             Description = _.NameDescription.Description,
             Rate = _.Rate,
             Status = _.Status,
-            User = _.User,
-            Restaurant = _.Restaurant
+            UserName = _.User.Name.FirstName,
+            UserEmail = _.User.Email.Value,
+            RestaurantName = _.Restaurant.Company.CompanyName
         };
 
         public static Expression<Func<Review, bool>> Id(Guid id)

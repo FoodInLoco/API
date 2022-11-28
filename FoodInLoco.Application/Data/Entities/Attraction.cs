@@ -79,7 +79,8 @@ namespace FoodInLoco.Application.Data.Entities
                 Photo = attraction.Photo,
                 CoverTax = attraction.CoverTax,
                 Date = attraction.Date,
-                Status = attraction.Status
+                Status = attraction.Status,
+                RestaurantName = attraction.Restaurant?.Company.CompanyName
             };
         }
     }
