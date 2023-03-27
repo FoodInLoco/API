@@ -10,17 +10,17 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<IResult> DeleteAsync(Guid id);
 
-        Task<UserModelResponse?> GetAsync(Guid id);
+        Task<IResult> GetAsync(Guid id);
         
-        Task<UserModelResponse?> GetByEmail(string email);
+        Task<IResult> GetByEmail(string email);
 
-        Task<Grid<UserModelResponse>> GridAsync(GridParameters parameters);
+        Task<IResult<Grid<UserModelResponse>>> GridAsync(GridParameters parameters);
 
         Task<IResult> InactivateAsync(Guid id);
 
         Task<IResult> ActivateAsync(Guid id);
 
-        Task<IEnumerable<UserModelResponse>> ListAsync();
+        Task<IResult<IEnumerable<UserModelResponse>>> ListAsync();
 
         Task<IResult> UpdateAsync(UserModelRequest model);
 

@@ -21,20 +21,20 @@ namespace FoodInLoco.API.Controllers
         [HttpPost]
         public async Task<IActionResult> SignInAsync(SignInModel signIn)
         {
-            var tokenResult = await _userService.SignInAsync(signIn);
-            if (tokenResult.Failed)
-                return Unauthorized(tokenResult.Message);
-            return Ok(tokenResult.Data);
+            var result = await _userService.SignInAsync(signIn);
+            if (result.Failed)
+                return Unauthorized(result);
+            return Ok(result);
         }
 
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> LoggedUser()
         {
-            var userResult = await _userService.GetByEmail(User.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault()?.Value);
-            if (userResult == null)
+            var result = await _userService.GetByEmail(User.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault()?.Value);
+            if (result == null)
                 return Unauthorized();
-            return Ok(userResult);
+            return Ok(result);
         }
     }
 }

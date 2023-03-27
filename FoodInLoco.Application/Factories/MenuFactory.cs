@@ -16,7 +16,7 @@ namespace FoodInLoco.Application.Factories
                 model.Photo,
                 model.InitialDate,
                 model.ExpirationDate,
-                new HappyHour(model.HappyHour, !String.IsNullOrEmpty(model.StartAt) ? TimeOnly.Parse(model.StartAt) : null, !String.IsNullOrEmpty(model.EndAt) ? TimeOnly.Parse(model.EndAt) : null)
+                new HappyHour(model.HappyHour, model.StartAt, model.EndAt)
             );
         }
     }

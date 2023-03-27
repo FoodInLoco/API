@@ -65,19 +65,26 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<UserModelResponse?> GetAsync(Guid id)
+        public async Task<IResult> GetAsync(Guid id)
         {
-            return _userRepository.GetModelByIdWithRelationsAsync(id);
+            var user = await _userRepository.GetModelByIdWithRelationsAsync(id);
+            if (user != null)
+                return user.Success();
+            return Result.Fail("Nenhum dado encontrado");
         }
 
-        public Task<UserModelResponse?> GetByEmail(string email)
+        public async Task<IResult> GetByEmail(string email)
         {
-            return _userRepository.GetModelByEmailAsync(email);
+            var user = _userRepository.GetModelByEmailAsync(email);
+            if (user != null)
+                return user.Success();
+            return Result.Fail("Nenhum dado encontrado");
         }
 
-        public Task<Grid<UserModelResponse>> GridAsync(GridParameters parameters)
+        public async Task<IResult<Grid<UserModelResponse>>> GridAsync(GridParameters parameters)
         {
-            return _userRepository.GridAsync(parameters);
+            var result = await _userRepository.GridAsync(parameters);
+            return result.Success();
         }
 
         public async Task<IResult> InactivateAsync(Guid id)
@@ -106,9 +113,10 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public async Task<IEnumerable<UserModelResponse>> ListAsync()
+        public async Task<IResult<IEnumerable<UserModelResponse>>> ListAsync()
         {
-            return await _userRepository.ListModelAsync();
+            var result = await _userRepository.ListModelAsync();
+            return result.Success();
         }
 
         public async Task<IResult> UpdateAsync(UserModelRequest model)

@@ -22,8 +22,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public bool HappyHour { get; init; }
 
-        public string? StartAt { get; init; }
+        public TimeOnly? StartAt { get; init; }
 
-        public string? EndAt { get; init; }
+        public TimeOnly? EndAt { get; init; }
     }
 }
