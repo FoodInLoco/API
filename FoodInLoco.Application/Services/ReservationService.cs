@@ -91,14 +91,14 @@ namespace FoodInLoco.Application.Services
             if (validation.Failed)
                 return validation;
 
-            var attraction = await _reservationRepository.GetAsync(model.Id);
+            var reservation = await _reservationRepository.GetAsync(model.Id);
 
-            if (attraction is null)
+            if (reservation is null)
                 return Result.Success();
 
-            attraction.Update(model.Description, model.SeatQuantity, model.Date);
+            reservation.Update(model.Description, model.SeatQuantity, model.Date);
 
-            await _reservationRepository.UpdateAsync(attraction);
+            await _reservationRepository.UpdateAsync(reservation);
 
             await _unitOfWork.SaveChangesAsync();
 
