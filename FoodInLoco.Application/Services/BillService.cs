@@ -4,79 +4,80 @@ using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Factories.Interfaces;
+using FoodInLoco.Application.Repositories;
 using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
 
 namespace FoodInLoco.Application.Services
 {
-    public sealed class TableService : ITableService
+    public sealed class BillService : IBillService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ITableRepository _tableRepository;
-        private readonly ITableFactory _tableFactory;
+        private readonly IBillRepository _billRepository;
+        private readonly IBillFactory _billFactory;
 
-        public TableService
+        public BillService
         (
             IUnitOfWork unitOfWork,
-            ITableRepository tableRepository,
-            ITableFactory tableFactory
+            IBillRepository billRepository,
+            IBillFactory billFactory
         )
         {
             _unitOfWork = unitOfWork;
-            _tableRepository = tableRepository;
-            _tableFactory = tableFactory;
+            _billRepository = billRepository;
+            _billFactory = billFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(TableModelRequest model)
+        public async Task<IResult<Guid>> AddAsync(BillModelRequest model)
         {
-            var validation = new AddTableModelValidator().Validation(model);
+            var validation = new AddBillModelValidator().Validation(model);
 
             if (validation.Failed)
                 return validation.Fail<Guid>();
 
-            var table = _tableFactory.Create(model);
+            var bill = _billFactory.Create(model);
 
-            await _tableRepository.AddAsync(table);
+            await _billRepository.AddAsync(bill);
 
             await _unitOfWork.SaveChangesAsync();
 
-            return table.Id.Success();
+            return bill.Id.Success();
         }
 
         public async Task<IResult> DeleteAsync(Guid id)
         {
-            await _tableRepository.DeleteAsync(id);
+            await _billRepository.DeleteAsync(id);
 
             await _unitOfWork.SaveChangesAsync();
 
             return Result.Success();
         }
 
-        public Task<TableModelResponse?> GetAsync(Guid id)
+        public Task<BillModelResponse?> GetAsync(Guid id)
         {
-            return _tableRepository.GetModelByIdWithRelationsAsync(id);
+            return _billRepository.GetModelByIdWithRelationsAsync(id);
         }
 
-        public async Task<IEnumerable<TableModelResponse>> ListAsync()
+        public async Task<IEnumerable<BillModelResponse>> ListAsync()
         {
-            return await _tableRepository.ListModelAsync();
+            return await _billRepository.ListModelAsync();
         }
 
-        public async Task<IResult> UpdateAsync(TableModelRequest model)
+        public async Task<IResult> UpdateAsync(BillModelRequest model)
         {
-            var validation = new UpdateTableModelValidator().Validation(model);
+            var validation = new UpdateBillModelValidator().Validation(model);
 
             if (validation.Failed)
                 return validation;
 
-            var table = await _tableRepository.GetAsync(model.Id);
+            var bill = await _billRepository.GetAsync(model.Id);
 
-            if (table is null)
+            if (bill is null)
                 return Result.Success();
 
-            table.Update(model.Number);
+            bill.Update(model.BillingStatus);
 
-            await _tableRepository.UpdateAsync(table);
+            await _billRepository.UpdateAsync(bill);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -85,10 +86,10 @@ namespace FoodInLoco.Application.Services
 
         public async Task<IResult> InactivateAsync(Guid id)
         {
-            var obj = new Table(id);
+            var obj = new Bill(id);
             obj.Inactivate();
 
-            await _tableRepository.UpdateStatusAsync(obj);
+            await _billRepository.UpdateStatusAsync(obj);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -97,10 +98,10 @@ namespace FoodInLoco.Application.Services
 
         public async Task<IResult> ActivateAsync(Guid id)
         {
-            var obj = new Table(id);
+            var obj = new Bill(id);
             obj.Activate();
 
-            await _tableRepository.UpdateStatusAsync(obj);
+            await _billRepository.UpdateStatusAsync(obj);
 
             await _unitOfWork.SaveChangesAsync();
 
