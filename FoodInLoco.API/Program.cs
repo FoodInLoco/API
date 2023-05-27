@@ -88,6 +88,9 @@ builder.Services.AddScoped<IMenuItemService, MenuItemService>();
 builder.Services.AddScoped<IAttractionService, AttractionService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<ITableService, TableService>();
+builder.Services.AddScoped<IBillService, BillService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
@@ -96,6 +99,9 @@ builder.Services.AddScoped<IMenuItemRepository, MenuItemRepository>();
 builder.Services.AddScoped<IAttractionRepository, AttractionRepository>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<ITableRepository, TableRepository>();
+builder.Services.AddScoped<IBillRepository, BillRepository>();
 
 builder.Services.AddScoped<IUserFactory, UserFactory>();
 builder.Services.AddScoped<IRestaurantFactory, RestaurantFactory>();
@@ -104,6 +110,9 @@ builder.Services.AddScoped<IMenuItemFactory, MenuItemFactory>();
 builder.Services.AddScoped<IAttractionFactory, AttractionFactory>();
 builder.Services.AddScoped<IReservationFactory, ReservationFactory>();
 builder.Services.AddScoped<IReviewFactory, ReviewFactory>();
+builder.Services.AddScoped<IOrderFactory, OrderFactory>();
+builder.Services.AddScoped<ITableFactory, TableFactory>();
+builder.Services.AddScoped<IBillFactory, BillFactory>();
 
 builder.Services.AddSingleton<IHashService, HashService>();
 var app = builder.Build();

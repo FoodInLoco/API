@@ -28,7 +28,7 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Table Table { get; private set; }
 
-        public ICollection<User> Users { get; private set; }
+        public ICollection<BillUser> BillUsers { get; private set; }
 
         public ICollection<Order> Orders { get; private set; }
 

@@ -22,5 +22,10 @@ namespace FoodInLoco.Application.Data.Expressions
         {
             return _ => _.Id == id;
         }
+
+        public static Expression<Func<Table, bool>> RestaurantId(Guid id)
+        {
+            return _ => _.RestaurantId == id;
+        }
     }
 }

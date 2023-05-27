@@ -1,5 +1,5 @@
-﻿using System.Linq.Expressions;
-using FoodInLoco.Application.Repositories.Interfaces;
+﻿using FoodInLoco.Application.Repositories.Interfaces;
+using System.Linq.Expressions;
 
 namespace FoodInLoco.Application.Repositories
 {

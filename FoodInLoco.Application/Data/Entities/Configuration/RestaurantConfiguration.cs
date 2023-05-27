@@ -68,5 +68,7 @@ public sealed class RestaurantConfiguration : IEntityTypeConfiguration<Restauran
         builder.HasMany(obj => obj.Reservations).WithOne(obj => obj.Restaurant).HasForeignKey("RestaurantId");
 
         builder.HasMany(obj => obj.Reviews).WithOne(obj => obj.Restaurant).HasForeignKey("RestaurantId");
+
+        builder.HasMany(obj => obj.Tables).WithOne(obj => obj.Restaurant).HasForeignKey("RestaurantId");
     }
 }

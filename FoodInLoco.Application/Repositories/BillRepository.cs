@@ -4,37 +4,42 @@ using FoodInLoco.Application.Data.Expressions;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using System.Linq;
 
 namespace FoodInLoco.Application.Repositories
 {
     public sealed class BillRepository : EFRepository<Bill>, IBillRepository
     {
-        private readonly Context _dbContext;
+        public BillRepository(Context context) : base(context) { }
 
-        public BillRepository(Context context) : base(context)
+        public async Task<BillModelResponse?> GetModelByIdAsync(Guid id)
         {
-            _dbContext = context;
+            return await Queryable.Where(BillExpression.Id(id)).Select(BillExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<BillModelResponse?> GetModelByIdAsync(Guid id)
+        public async Task<BillModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
-            return Queryable.Where(BillExpression.Id(id)).Select(BillExpression.Model).SingleOrDefaultAsync();
-        }
-
-        public Task<BillModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
-        {
-            return Queryable.Where(BillExpression.Id(id))
-                //TODO: fazer ligação com entidade da conta
+            return await Queryable.Where(BillExpression.Id(id))
                 .Include(_ => _.Table)
                 .Select(BillExpression.Model).SingleOrDefaultAsync();
+        }
+
+        public async Task<BillModelResponse?> GetActiveBillByTableAsync(Guid id)
+        {
+            return await Queryable.Where(BillExpression.ActiveByTableId(id))
+                .Include(_ => _.Table)
+                .Select(BillExpression.Model).SingleOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<BillModelResponse>> GetActiveBillsByUserAsync(Guid id)
+        {
+            return await Queryable.Where(BillExpression.ActiveByUserId(id))
+                .Include(_ => _.Table)
+                .Select(BillExpression.Model).ToListAsync();
         }
 
         public async Task<IEnumerable<BillModelResponse>> ListModelAsync()
         {
             return await Queryable
-                //TODO: fazer ligação com entidade da conta
                 .Include(_ => _.Table)
                 .Select(BillExpression.Model).ToListAsync();
         }

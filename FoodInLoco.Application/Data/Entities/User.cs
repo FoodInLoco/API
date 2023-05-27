@@ -49,6 +49,10 @@ namespace FoodInLoco.Application.Data.Entities
 
         public ICollection<Reservation> Reservations { get; private set; }
 
+        public ICollection<BillUser> BillUsers { get; private set; }
+
+        public ICollection<Order> Orders { get; private set; }
+
         public void Activate()
         {
             Status = Status.Active;

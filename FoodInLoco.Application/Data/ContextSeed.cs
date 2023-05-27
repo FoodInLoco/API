@@ -12,6 +12,11 @@ namespace FoodInLoco.Application.Data
         internal static Guid GuidUser2 = Guid.NewGuid();
         internal static Guid GuidRestaurant1 = Guid.NewGuid();
         internal static Guid GuidRestaurant2 = Guid.NewGuid();
+        internal static Guid GuidTable1 = Guid.NewGuid();
+        internal static Guid GuidTable2 = Guid.NewGuid();
+        internal static Guid GuidTable3 = Guid.NewGuid();
+        internal static Guid GuidTable4 = Guid.NewGuid();
+        internal static Guid GuidTable5 = Guid.NewGuid();
         internal static Guid GuidMenu1 = Guid.NewGuid();
         internal static Guid GuidMenu2 = Guid.NewGuid();
         internal static Guid GuidMenu3 = Guid.NewGuid();
@@ -21,6 +26,12 @@ namespace FoodInLoco.Application.Data
         internal static Guid GuidMenuItem4 = Guid.NewGuid();
         internal static Guid GuidMenuItem5 = Guid.NewGuid();
         internal static Guid GuidMenuItem6 = Guid.NewGuid();
+        internal static Guid GuidBill1 = Guid.NewGuid();
+        internal static Guid GuidBill2 = Guid.NewGuid();
+        internal static Guid GuidOrder1 = Guid.NewGuid();
+        internal static Guid GuidOrder2 = Guid.NewGuid();
+        internal static Guid GuidOrder3 = Guid.NewGuid();
+        internal static Guid GuidOrder4 = Guid.NewGuid();
         internal static Guid GuidAttraction1 = Guid.NewGuid();
         internal static Guid GuidAttraction2 = Guid.NewGuid();
         internal static Guid GuidAttraction3 = Guid.NewGuid();
@@ -35,6 +46,9 @@ namespace FoodInLoco.Application.Data
             builder.SeedMenus();
             builder.SeedMenuItems();
             builder.SeedAttractions();
+            builder.SeedTables();
+            builder.SeedBills();
+            builder.SeedOrders();
             //builder.SeedReservation();
             //builder.SeedReview();
         }
@@ -466,6 +480,132 @@ namespace FoodInLoco.Application.Data
                     AttractionId = GuidAttraction3,
                     Name = "Fets Domino",
                     Description = "Excelente banda."
+                });
+            });
+        }
+
+        private static void SeedTables(this ModelBuilder builder)
+        {
+            builder.Entity<Table>(obj =>
+            {
+                obj.HasData(new
+                {
+                    Id = GuidTable1,
+                    RestaurantId = GuidRestaurant1,
+                    Number = 1,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.HasData(new
+                {
+                    Id = GuidTable2,
+                    RestaurantId = GuidRestaurant1,
+                    Number = 2,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.HasData(new
+                {
+                    Id = GuidTable3,
+                    RestaurantId = GuidRestaurant1,
+                    Number = 3,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.HasData(new
+                {
+                    Id = GuidTable4,
+                    RestaurantId = GuidRestaurant2,
+                    Number = 1,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.HasData(new
+                {
+                    Id = GuidTable5,
+                    RestaurantId = GuidRestaurant2,
+                    Number = 2,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+            });
+        }
+
+        private static void SeedBills(this ModelBuilder builder)
+        {
+            builder.Entity<Bill>(obj =>
+            {
+                obj.HasData(new
+                {
+                    Id = GuidBill1,
+                    TableId = GuidTable1,
+                    BillingStatus = BillingStatus.Pending,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.HasData(new
+                {
+                    Id = GuidBill2,
+                    TableId = GuidTable4,
+                    BillingStatus = BillingStatus.Pending,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+            });
+        }
+
+        private static void SeedOrders(this ModelBuilder builder)
+        {
+            builder.Entity<Order>(obj =>
+            {
+                obj.HasData(new
+                {
+                    Id = GuidOrder1,
+                    BillId = GuidBill1,
+                    UserId = GuidUser2,
+                    ItemId = GuidMenuItem1,
+                    Quantity = 1,
+                    Message = "Completo",
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.HasData(new
+                {
+                    Id = GuidOrder2,
+                    BillId = GuidBill1,
+                    UserId = GuidUser2,
+                    ItemId = GuidMenuItem2,
+                    Quantity = 1,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.HasData(new
+                {
+                    Id = GuidOrder3,
+                    BillId = GuidBill2,
+                    UserId = GuidUser2,
+                    ItemId = GuidMenuItem3,
+                    Quantity = 2,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.HasData(new
+                {
+                    Id = GuidOrder4,
+                    BillId = GuidBill2,
+                    UserId = GuidUser2,
+                    ItemId = GuidMenuItem5,
+                    Quantity = 1,
+                    Status = Status.Active,
+                    CreatedAt = DateTime.UtcNow
                 });
             });
         }

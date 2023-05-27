@@ -35,5 +35,8 @@ public sealed class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
         });
 
         builder.HasIndex("MenuId");
+
+        builder.HasMany(obj => obj.Orders).WithOne(obj => obj.Item).HasForeignKey("ItemId");
+
     }
 }

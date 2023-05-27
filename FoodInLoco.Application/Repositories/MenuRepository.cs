@@ -9,21 +9,16 @@ namespace FoodInLoco.Application.Repositories
 {
     public sealed class MenuRepository : EFRepository<Menu>, IMenuRepository
     {
-        private readonly Context _dbContext;
+        public MenuRepository(Context context) : base(context) { }
 
-        public MenuRepository(Context context) : base(context)
+        public async Task<MenuModelResponse?> GetModelByIdAsync(Guid id)
         {
-            _dbContext = context;
+            return await Queryable.Where(MenuExpression.Id(id)).Select(MenuExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<MenuModelResponse?> GetModelByIdAsync(Guid id)
+        public async Task<MenuModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
-            return Queryable.Where(MenuExpression.Id(id)).Select(MenuExpression.Model).SingleOrDefaultAsync();
-        }
-
-        public Task<MenuModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
-        {
-            return Queryable.Where(MenuExpression.Id(id))
+            return await Queryable.Where(MenuExpression.Id(id))
                 .Include(_ => _.Items)
                 .Include(_ => _.Restaurant)
                 .Select(MenuExpression.Model).SingleOrDefaultAsync();

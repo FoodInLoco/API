@@ -27,6 +27,8 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Restaurant Restaurant { get; private set; }
 
+        public ICollection<Bill> Bills { get; private set; }
+
         public void Activate()
         {
             Status = Status.Active;

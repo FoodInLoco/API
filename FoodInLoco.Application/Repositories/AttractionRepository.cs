@@ -9,16 +9,11 @@ namespace FoodInLoco.Application.Repositories
 {
     public sealed class AttractionRepository : EFRepository<Attraction>, IAttractionRepository
     {
-        private readonly Context _dbContext;
+        public AttractionRepository(Context context) : base(context) { }
 
-        public AttractionRepository(Context context) : base(context)
+        public async Task<AttractionModelResponse?> GetModelByIdAsync(Guid id)
         {
-            _dbContext = context;
-        }
-
-        public Task<AttractionModelResponse?> GetModelByIdAsync(Guid id)
-        {
-            return Queryable.Where(AttractionExpression.Id(id))
+            return await Queryable.Where(AttractionExpression.Id(id))
                 .Include(_ => _.Restaurant)
                 .Select(AttractionExpression.Model).SingleOrDefaultAsync();
         }

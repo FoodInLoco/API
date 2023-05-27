@@ -9,6 +9,8 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 
         Task<TableModelResponse?> GetModelByIdWithRelationsAsync(Guid id);
 
+        Task<IEnumerable<TableModelResponse>> GetTablesFromRestaurantAsync(Guid id);
+
         Task<IEnumerable<TableModelResponse>> ListModelAsync();
 
         Task UpdateStatusAsync(Table obj);

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
+﻿using FoodInLoco.Application.Extensions;
 using FoodInLoco.Application.Repositories.Interfaces;
-using FoodInLoco.Application.Extensions;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace FoodInLoco.Application.Repositories
 {

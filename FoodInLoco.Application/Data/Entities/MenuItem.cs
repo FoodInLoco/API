@@ -40,6 +40,8 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Menu Menu { get; private set; }
 
+        public ICollection<Order> Orders { get; private set; }
+
         public void Activate()
         {
             Status = Status.Active;

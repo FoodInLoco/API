@@ -5,40 +5,34 @@ using FoodInLoco.Application.Data.Expressions;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace FoodInLoco.Application.Repositories
 {
     public sealed class UserRepository : EFRepository<User>, IUserRepository
     {
-        private readonly Context _dbContext;
+        public UserRepository(Context dbContext) : base(dbContext) { }
 
-        public UserRepository(Context dbContext) : base(dbContext)
+        public async Task<UserModelResponse?> GetModelByIdAsync(Guid id)
         {
-            _dbContext = dbContext;
+            return await Queryable.Where(UserExpression.Id(id)).Select(UserExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<UserModelResponse?> GetModelByIdAsync(Guid id)
+        public async Task<UserModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
-            return Queryable.Where(UserExpression.Id(id)).Select(UserExpression.Model).SingleOrDefaultAsync();
-        }
-
-        public Task<UserModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
-        {
-            return Queryable.Where(UserExpression.Id(id))
+            return await Queryable.Where(UserExpression.Id(id))
                 .Include(_ => _.Restaurants)
                 .Include(_ => _.Reservations).ThenInclude(_ => _.Restaurant)
                 .Select(UserExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<UserModelResponse?> GetModelByEmailAsync(string email)
+        public async Task<UserModelResponse?> GetModelByEmailAsync(string email)
         {
-            return Queryable.Where(UserExpression.Email(email)).Select(UserExpression.Model).SingleOrDefaultAsync();
+            return await Queryable.Where(UserExpression.Email(email)).Select(UserExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<Grid<UserModelResponse>> GridAsync(GridParameters parameters)
+        public async Task<Grid<UserModelResponse>> GridAsync(GridParameters parameters)
         {
-            return Queryable.Select(UserExpression.Model).GridAsync(parameters);
+            return await Queryable.Select(UserExpression.Model).GridAsync(parameters);
         }
 
         public async Task<IEnumerable<UserModelResponse>> ListModelAsync()
@@ -51,14 +45,14 @@ namespace FoodInLoco.Application.Repositories
             return UpdatePartialAsync(new { obj.Id, obj.Status, LastUpdatedAt = DateTime.UtcNow });
         }
 
-        public Task<bool> AnyByEmailAsync(string email)
+        public async Task<bool> AnyByEmailAsync(string email)
         {
-            return Queryable.AnyAsync(UserExpression.Email(email));
+            return await Queryable.AnyAsync(UserExpression.Email(email));
         }
 
-        public Task<User> GetByEmailAsync(string email)
+        public async Task<User?> GetByEmailAsync(string email)
         {
-            return Queryable.SingleOrDefaultAsync(UserExpression.Email(email));
+            return await Queryable.SingleOrDefaultAsync(UserExpression.Email(email));
         }
 
     }

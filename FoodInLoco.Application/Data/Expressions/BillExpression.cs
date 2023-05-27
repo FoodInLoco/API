@@ -1,5 +1,6 @@
 ﻿using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Enums;
 using System.Linq.Expressions;
 
 namespace FoodInLoco.Application.Data.Expressions
@@ -20,6 +21,16 @@ namespace FoodInLoco.Application.Data.Expressions
         public static Expression<Func<Bill, bool>> Id(Guid id)
         {
             return _ => _.Id == id;
+        }
+
+        public static Expression<Func<Bill, bool>> ActiveByTableId(Guid id)
+        {
+            return _ => _.TableId == id && _.BillingStatus == BillingStatus.Pending;
+        }
+
+        public static Expression<Func<Bill, bool>> ActiveByUserId(Guid id)
+        {
+            return _ => _.BillUsers.Any(_ => _.UserId == id) && _.BillingStatus == BillingStatus.Pending;
         }
     }
 }

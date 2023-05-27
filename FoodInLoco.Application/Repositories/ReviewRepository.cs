@@ -9,21 +9,16 @@ namespace FoodInLoco.Application.Repositories
 {
     public sealed class ReviewRepository : EFRepository<Review>, IReviewRepository
     {
-        private readonly Context _dbContext;
+        public ReviewRepository(Context context) : base(context) { }
 
-        public ReviewRepository(Context context) : base(context)
+        public async Task<ReviewModelResponse?> GetModelByIdAsync(Guid id)
         {
-            _dbContext = context;
+            return await Queryable.Where(ReviewExpression.Id(id)).Select(ReviewExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<ReviewModelResponse?> GetModelByIdAsync(Guid id)
+        public async Task<ReviewModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
-            return Queryable.Where(ReviewExpression.Id(id)).Select(ReviewExpression.Model).SingleOrDefaultAsync();
-        }
-
-        public Task<ReviewModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
-        {
-            return Queryable.Where(ReviewExpression.Id(id))
+            return await Queryable.Where(ReviewExpression.Id(id))
                 .Include(_ => _.User)
                 .Include(_ => _.Restaurant)
                 .Select(ReviewExpression.Model).SingleOrDefaultAsync();

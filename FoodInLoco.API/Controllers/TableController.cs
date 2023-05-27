@@ -35,6 +35,16 @@ namespace FoodInLoco.API.Controllers
         }
 
         [Authorize]
+        [HttpGet("get-by-restaurant-id")]
+        public async Task<IActionResult> GetByRestaurantId(Guid id)
+        {
+            var result = await _tableService.GetFromRestaurantAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostAsync(TableModelRequest obj)
         {

@@ -5,27 +5,21 @@ using FoodInLoco.Application.Data.Expressions;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace FoodInLoco.Application.Repositories
 {
     public sealed class RestaurantRepository : EFRepository<Restaurant>, IRestaurantRepository
     {
-        private readonly Context _dbContext;
+        public RestaurantRepository(Context context) : base(context) { }
 
-        public RestaurantRepository(Context context) : base(context)
+        public async Task<RestaurantModelResponse?> GetModelByIdAsync(Guid id)
         {
-            _dbContext = context;
-        }
-
-        public Task<RestaurantModelResponse?> GetModelByIdAsync(Guid id)
-        {
-            return Queryable.Where(RestaurantExpression.Id(id)).Select(RestaurantExpression.Model).SingleOrDefaultAsync();
+            return await Queryable.Where(RestaurantExpression.Id(id)).Select(RestaurantExpression.Model).SingleOrDefaultAsync();
         }
         
-        public Task<RestaurantModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
+        public async Task<RestaurantModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
-            return Queryable.Where(RestaurantExpression.Id(id))
+            return await Queryable.Where(RestaurantExpression.Id(id))
                 .Include(_ => _.User)
                 .Include(_ => _.Attractions)
                 .Include(_ => _.Menus).ThenInclude(_ => _.Items)
@@ -34,9 +28,9 @@ namespace FoodInLoco.Application.Repositories
                 .Select(RestaurantExpression.Model).SingleOrDefaultAsync();
         }
 
-        public Task<Grid<RestaurantModelResponse>> GridAsync(GridParameters parameters)
+        public async Task<Grid<RestaurantModelResponse>> GridAsync(GridParameters parameters)
         {
-            return Queryable.Select(RestaurantExpression.Model).GridAsync(parameters);
+            return await Queryable.Select(RestaurantExpression.Model).GridAsync(parameters);
         }
 
         public async Task<IEnumerable<RestaurantModelResponse>> ListModelAsync()

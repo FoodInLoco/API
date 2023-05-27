@@ -55,5 +55,9 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasMany(obj => obj.Reservations).WithOne(obj => obj.User).HasForeignKey("UserId");
 
         builder.HasMany(obj => obj.Reviews).WithOne(obj => obj.User).HasForeignKey("UserId");
+
+        builder.HasMany(obj => obj.BillUsers).WithOne(obj => obj.User).HasForeignKey("UserId");
+
+        builder.HasMany(obj => obj.Orders).WithOne(obj => obj.User).HasForeignKey("UserId");
     }
 }

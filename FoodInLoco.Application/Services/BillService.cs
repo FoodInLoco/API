@@ -57,6 +57,16 @@ namespace FoodInLoco.Application.Services
         {
             return _billRepository.GetModelByIdWithRelationsAsync(id);
         }
+        
+        public Task<BillModelResponse?> GetActiveByTableAsync(Guid id)
+        {
+            return _billRepository.GetActiveBillByTableAsync(id);
+        }
+        
+        public Task<IEnumerable<BillModelResponse>> GetActiveByUserAsync(Guid id)
+        {
+            return _billRepository.GetActiveBillsByUserAsync(id);
+        }
 
         public async Task<IEnumerable<BillModelResponse>> ListAsync()
         {

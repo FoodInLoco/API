@@ -1,4 +1,6 @@
 ﻿using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Extensions;
+using FoodInLoco.Application.Services;
 using FoodInLoco.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +31,26 @@ namespace FoodInLoco.API.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var result = await _billService.GetAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("get-active-bill-by-table-id")]
+        public async Task<IActionResult> GetActiveBillByTableId(Guid id)
+        {
+            var result = await _billService.GetActiveByTableAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("get-active-bills")]
+        public async Task<IActionResult> GetActiveBills()
+        {
+            var result = await _billService.GetActiveByUserAsync(Guid.Parse(User.GetUserId()));
             if (result == null)
                 return NotFound();
             return Ok(result);

@@ -56,6 +56,8 @@ namespace FoodInLoco.Application.Data.Entities
 
         public ICollection<Review> Reviews { get; private set; }
 
+        public ICollection<Table> Tables { get; private set; }
+
         public void Activate()
         {
             Status = Status.Active;

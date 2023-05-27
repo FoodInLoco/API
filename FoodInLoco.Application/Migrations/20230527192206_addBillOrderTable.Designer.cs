@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FoodInLoco.Application.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230509002547_AddBill-Order-Table")]
-    partial class AddBillOrderTable
+    [Migration("20230527192206_addBillOrderTable")]
+    partial class addBillOrderTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,34 +68,104 @@ namespace FoodInLoco.Application.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6ee13407-f63c-4f78-919c-5324469f0695"),
+                            Id = new Guid("18e899c2-9adb-495e-b148-769198414d88"),
                             CoverTax = 20.0,
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5703),
-                            Date = new DateTime(2023, 5, 10, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5700),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3279),
+                            Date = new DateTime(2023, 5, 28, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3274),
                             Photo = "https://scontent.fjdo1-1.fna.fbcdn.net/v/t39.30808-6/292709447_483405863791805_379209062390556101_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGjo-OBezYn3E16VwXa7mkQ6JZ7t6ANUJbolnu3oA1Qlg3ohBa-81hGAF7BKDuc7tzeYDnnYjaFTra0RtF1YD7d&_nc_ohc=cq57dZpXtzcAX_RAgvH&_nc_ht=scontent.fjdo1-1.fna&oh=00_AfCxsShn3s5eflRMUoUlKFMJbrzj_PU5tNfuDHGVeRlJ0Q&oe=63811EEA",
-                            RestaurantId = new Guid("4ccc9ba0-4e0f-4378-be09-77f739fb982b"),
+                            RestaurantId = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
                             Status = 1
                         },
                         new
                         {
-                            Id = new Guid("273f1a42-0b90-4b52-b637-ef04840bf46f"),
+                            Id = new Guid("301a6d9d-5359-441a-8478-0d55c4b64975"),
                             CoverTax = 20.0,
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5793),
-                            Date = new DateTime(2023, 5, 11, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5792),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3405),
+                            Date = new DateTime(2023, 5, 29, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3404),
                             Photo = "https://scontent.fjdo1-1.fna.fbcdn.net/v/t39.30808-6/292709447_483405863791805_379209062390556101_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGjo-OBezYn3E16VwXa7mkQ6JZ7t6ANUJbolnu3oA1Qlg3ohBa-81hGAF7BKDuc7tzeYDnnYjaFTra0RtF1YD7d&_nc_ohc=cq57dZpXtzcAX_RAgvH&_nc_ht=scontent.fjdo1-1.fna&oh=00_AfCxsShn3s5eflRMUoUlKFMJbrzj_PU5tNfuDHGVeRlJ0Q&oe=63811EEA",
-                            RestaurantId = new Guid("ec1743b8-eced-4095-a040-1ccab368814e"),
+                            RestaurantId = new Guid("35ff541d-8213-4afe-ade1-8fbee8aa995f"),
                             Status = 1
                         },
                         new
                         {
-                            Id = new Guid("d6648068-bda5-4430-a166-91e8d0cd0fb9"),
+                            Id = new Guid("b2a1a328-09a0-40ef-abf7-ea62dc1a4793"),
                             CoverTax = 20.0,
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5848),
-                            Date = new DateTime(2023, 5, 16, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5848),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3475),
+                            Date = new DateTime(2023, 6, 3, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3474),
                             Photo = "https://scontent.fjdo1-1.fna.fbcdn.net/v/t39.30808-6/292709447_483405863791805_379209062390556101_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGjo-OBezYn3E16VwXa7mkQ6JZ7t6ANUJbolnu3oA1Qlg3ohBa-81hGAF7BKDuc7tzeYDnnYjaFTra0RtF1YD7d&_nc_ohc=cq57dZpXtzcAX_RAgvH&_nc_ht=scontent.fjdo1-1.fna&oh=00_AfCxsShn3s5eflRMUoUlKFMJbrzj_PU5tNfuDHGVeRlJ0Q&oe=63811EEA",
-                            RestaurantId = new Guid("ec1743b8-eced-4095-a040-1ccab368814e"),
+                            RestaurantId = new Guid("35ff541d-8213-4afe-ade1-8fbee8aa995f"),
                             Status = 1
                         });
+                });
+
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Bill", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<int>("BillingStatus")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<DateTime?>("LastUpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1);
+
+                    b.Property<Guid>("TableId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TableId");
+
+                    b.ToTable("Bill", "Bill");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("93eed682-c432-447b-affd-e8f056ddad54"),
+                            BillingStatus = 0,
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3595),
+                            Status = 1,
+                            TableId = new Guid("c4cf867d-1610-4c8d-a150-503b5a7ccdb2")
+                        },
+                        new
+                        {
+                            Id = new Guid("594764a7-b065-4cb5-b40c-bb1734b6cacf"),
+                            BillingStatus = 0,
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3599),
+                            Status = 1,
+                            TableId = new Guid("386098c7-7f8f-461c-b18c-c4f004c9295a")
+                        });
+                });
+
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.BillUser", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("BillId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("BillId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("BillUser", "BillUser");
                 });
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Menu", b =>
@@ -144,26 +214,26 @@ namespace FoodInLoco.Application.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8fe41af8-db79-4fd7-a780-38601f433a9e"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(4793),
-                            InitialDate = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(4792),
-                            RestaurantId = new Guid("4ccc9ba0-4e0f-4378-be09-77f739fb982b"),
+                            Id = new Guid("62d34834-8e42-44cd-b531-33230a5f7692"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 89, DateTimeKind.Utc).AddTicks(9504),
+                            InitialDate = new DateTime(2023, 5, 27, 19, 22, 6, 89, DateTimeKind.Utc).AddTicks(9504),
+                            RestaurantId = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
                             Status = 1
                         },
                         new
                         {
-                            Id = new Guid("1f031df8-bc44-4977-a013-1f755c7c0e23"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(4975),
-                            InitialDate = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(4974),
-                            RestaurantId = new Guid("4ccc9ba0-4e0f-4378-be09-77f739fb982b"),
+                            Id = new Guid("51e1fddf-4bd1-46ef-8c6c-8caa48254e14"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 89, DateTimeKind.Utc).AddTicks(9797),
+                            InitialDate = new DateTime(2023, 5, 27, 19, 22, 6, 89, DateTimeKind.Utc).AddTicks(9797),
+                            RestaurantId = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
                             Status = 1
                         },
                         new
                         {
-                            Id = new Guid("5295fdc5-ca0b-4530-96bd-809ab3489d82"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5167),
-                            InitialDate = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5166),
-                            RestaurantId = new Guid("ec1743b8-eced-4095-a040-1ccab368814e"),
+                            Id = new Guid("60c4fd70-2126-40be-a957-304154ae9a45"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(2158),
+                            InitialDate = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(2156),
+                            RestaurantId = new Guid("35ff541d-8213-4afe-ade1-8fbee8aa995f"),
                             Status = 1
                         });
                 });
@@ -210,57 +280,147 @@ namespace FoodInLoco.Application.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cf1e5f05-a5ee-4a5c-bcc0-bac8e986576b"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5315),
-                            MenuId = new Guid("8fe41af8-db79-4fd7-a780-38601f433a9e"),
+                            Id = new Guid("84f783cb-ede7-499c-94f7-dc53426a5693"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(2671),
+                            MenuId = new Guid("62d34834-8e42-44cd-b531-33230a5f7692"),
                             Quantity = 1,
                             Status = 1,
                             Value = 90.0
                         },
                         new
                         {
-                            Id = new Guid("00a923d0-1bc7-4a1d-a890-4317a727890c"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5403),
-                            MenuId = new Guid("1f031df8-bc44-4977-a013-1f755c7c0e23"),
+                            Id = new Guid("a9ebef60-80c9-45a3-b05d-e3f303ed7ce3"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(2824),
+                            MenuId = new Guid("51e1fddf-4bd1-46ef-8c6c-8caa48254e14"),
                             Quantity = 1,
                             Status = 1,
                             Value = 4.9000000000000004
                         },
                         new
                         {
-                            Id = new Guid("1d7c5fce-2508-4092-b4b5-089fbb13f040"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5456),
-                            MenuId = new Guid("5295fdc5-ca0b-4530-96bd-809ab3489d82"),
+                            Id = new Guid("7b8273d9-ea58-477b-a5e9-ba9b18fb6ab2"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(2906),
+                            MenuId = new Guid("60c4fd70-2126-40be-a957-304154ae9a45"),
                             Quantity = 1,
                             Status = 1,
                             Value = 5.4000000000000004
                         },
                         new
                         {
-                            Id = new Guid("59a763ca-a8ff-422d-b1e3-d7523b1b6002"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5509),
-                            MenuId = new Guid("5295fdc5-ca0b-4530-96bd-809ab3489d82"),
+                            Id = new Guid("4d9f3e42-7338-4c6f-9c06-ed65d25bcbeb"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(2986),
+                            MenuId = new Guid("60c4fd70-2126-40be-a957-304154ae9a45"),
                             Quantity = 1,
                             Status = 1,
                             Value = 22.0
                         },
                         new
                         {
-                            Id = new Guid("46fee5d2-543c-450a-82e4-42019e3360dd"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5582),
-                            MenuId = new Guid("5295fdc5-ca0b-4530-96bd-809ab3489d82"),
+                            Id = new Guid("994b74af-1368-4eae-b5dd-78715a729f0d"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3113),
+                            MenuId = new Guid("60c4fd70-2126-40be-a957-304154ae9a45"),
                             Quantity = 1,
                             Status = 1,
                             Value = 11.0
                         },
                         new
                         {
-                            Id = new Guid("538b40bc-2ee0-4000-a165-530fa76202a4"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(5637),
-                            MenuId = new Guid("1f031df8-bc44-4977-a013-1f755c7c0e23"),
+                            Id = new Guid("b7620156-6d24-43ae-927c-1a9a8dd50fd9"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3193),
+                            MenuId = new Guid("51e1fddf-4bd1-46ef-8c6c-8caa48254e14"),
                             Quantity = 6,
                             Status = 1,
                             Value = 14.0
+                        });
+                });
+
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<Guid>("BillId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("LastUpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Message")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1);
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BillId");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Order", "Order");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4bb3637b-ad5d-4e3a-9849-9c6db5e4b69b"),
+                            BillId = new Guid("93eed682-c432-447b-affd-e8f056ddad54"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3614),
+                            ItemId = new Guid("84f783cb-ede7-499c-94f7-dc53426a5693"),
+                            Message = "Completo",
+                            Quantity = 1,
+                            Status = 1,
+                            UserId = new Guid("b0f6eb83-46e3-41d8-a82b-a8a41298e035")
+                        },
+                        new
+                        {
+                            Id = new Guid("7b74726b-c3db-4685-9e46-4f6358241b50"),
+                            BillId = new Guid("93eed682-c432-447b-affd-e8f056ddad54"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3619),
+                            ItemId = new Guid("a9ebef60-80c9-45a3-b05d-e3f303ed7ce3"),
+                            Quantity = 1,
+                            Status = 1,
+                            UserId = new Guid("b0f6eb83-46e3-41d8-a82b-a8a41298e035")
+                        },
+                        new
+                        {
+                            Id = new Guid("8e6fb407-c85f-425b-b01e-7d174ec838e1"),
+                            BillId = new Guid("594764a7-b065-4cb5-b40c-bb1734b6cacf"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3622),
+                            ItemId = new Guid("7b8273d9-ea58-477b-a5e9-ba9b18fb6ab2"),
+                            Quantity = 2,
+                            Status = 1,
+                            UserId = new Guid("b0f6eb83-46e3-41d8-a82b-a8a41298e035")
+                        },
+                        new
+                        {
+                            Id = new Guid("46bf1865-5f23-47cb-b11d-f32b0512ac1b"),
+                            BillId = new Guid("594764a7-b065-4cb5-b40c-bb1734b6cacf"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3624),
+                            ItemId = new Guid("994b74af-1368-4eae-b5dd-78715a729f0d"),
+                            Quantity = 1,
+                            Status = 1,
+                            UserId = new Guid("b0f6eb83-46e3-41d8-a82b-a8a41298e035")
                         });
                 });
 
@@ -358,21 +518,21 @@ namespace FoodInLoco.Application.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4ccc9ba0-4e0f-4378-be09-77f739fb982b"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(4139),
+                            Id = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 89, DateTimeKind.Utc).AddTicks(8341),
                             Kids = false,
                             Photo = "https://www.mcdonalds.com.br/images/layout/mcdonalds-logo-footer-bg-white.png",
                             Status = 1,
-                            UserId = new Guid("631f4a7e-e4c4-4d4f-9eb1-8e32c9e4b5f2")
+                            UserId = new Guid("cc8f093a-9bc9-4272-8cdf-d03edc641124")
                         },
                         new
                         {
-                            Id = new Guid("ec1743b8-eced-4095-a040-1ccab368814e"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(4525),
+                            Id = new Guid("35ff541d-8213-4afe-ade1-8fbee8aa995f"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 89, DateTimeKind.Utc).AddTicks(8900),
                             Kids = true,
                             Photo = "https://d3sn2rlrwxy0ce.cloudfront.net/_800x600_crop_center-center_none/Burger-King-Novo-logo.png?mtime=20210125152539&focal=none&tmtime=20210726130340",
                             Status = 1,
-                            UserId = new Guid("631f4a7e-e4c4-4d4f-9eb1-8e32c9e4b5f2")
+                            UserId = new Guid("cc8f093a-9bc9-4272-8cdf-d03edc641124")
                         });
                 });
 
@@ -420,6 +580,81 @@ namespace FoodInLoco.Application.Migrations
                     b.ToTable("Review", "Review");
                 });
 
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Table", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<DateTime?>("LastUpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("RestaurantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.ToTable("Table", "Table");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c4cf867d-1610-4c8d-a150-503b5a7ccdb2"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3559),
+                            Number = 1,
+                            RestaurantId = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("c7a6dadb-8907-47d6-af23-5e04a5dfb086"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3567),
+                            Number = 2,
+                            RestaurantId = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("7d7b9291-d973-4d84-9e6e-6610e6680692"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3569),
+                            Number = 3,
+                            RestaurantId = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("386098c7-7f8f-461c-b18c-c4f004c9295a"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3571),
+                            Number = 1,
+                            RestaurantId = new Guid("35ff541d-8213-4afe-ade1-8fbee8aa995f"),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("5465368d-8190-4bc6-a7b6-1ca62dca4a7f"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 90, DateTimeKind.Utc).AddTicks(3576),
+                            Number = 2,
+                            RestaurantId = new Guid("35ff541d-8213-4afe-ade1-8fbee8aa995f"),
+                            Status = 1
+                        });
+                });
+
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -464,20 +699,20 @@ namespace FoodInLoco.Application.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("631f4a7e-e4c4-4d4f-9eb1-8e32c9e4b5f2"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 837, DateTimeKind.Utc).AddTicks(5595),
-                            Password = "4tmeXhJC7d6p6xh4CkzTvOPCq87eoNWlQX8Ndvqr0/10kxd1bCWEbTO50vdt2/TaY1JVYgpV9eaXZ2WL7xVTKwIw/5Z37cTSZdum3Z7sdnA5J++st4AbY6BkA11iggKVNt24H+XH6UUuAKnNENnLNqMaPLVPjLhbRj+/81rPXNlT2Ekdjmo4eRsgMwuJnfFCR8QjYd0LzGTHMdjSxvKYupkBmF803mYtoHjhEVy/7x8tk5XZx1/ezJcXO3gGY6QP+pIsmbeq7ywaJg+aImdVxWpg97/Mn90Cl+y7yYALG9KG7vtG/8iF3CO5OJHcrsQ9+eUdZHRzoaAGy520i06MRK6udshNX9QB2SwyOunuPTln2DWxGYWCh7iZqJREFTmEWc+NR9gL/cuy5zq8zelrooyacL1aBd+LmBxHOjIAwASvCdyOc1XREtwo30bdNzMk2UVVFLhXfvleX5idK8akNGyz6BsLX+Iq+oAvhq3fSGkain+P+M8xxQZGOHrc22aQhDXQBB8JGQYlv09yir22sTLOjH9sAgov6GT3m9o4o5Gn8aY+av+RBqtZs9Lq8B75UPz2wtDLlVwE3pL2Q1tnmkh9NvnQASxk4keM2k/m8U8lUN+SXfZIdPYnGgHIbboGoItrHxpBejtWmUJT4GmMC9jhRjK6QQBloECuYX/d7dw=",
+                            Id = new Guid("cc8f093a-9bc9-4272-8cdf-d03edc641124"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 17, DateTimeKind.Utc).AddTicks(6414),
+                            Password = "u9uJZwKsGC9udmXefeXtLxJS1NdZSNWLjBj0HWuzocx4CFCcnQ2PKJuYJNM7m9HDJvuBDX8yLxvqqJb3UYHzo/eyRDx+rLJr9cUWBBV7Ps/11hctSPEXetddzNCzGQ6z/LFn7Rm31/nV9tI7buCXjA1Q/Xk0b1KGRgAcJPfl5GXt3x86gPEawo9Jtnb0fmeX2C5fqOE653M7TiE/IWq67CBdewz3HOQc5N24MEh1aRng6iA2TDn2JgNMTex7AUZBN/ZCPWF87fcBEk0b2t1K/W2CuMj5QDqKaqHSMlvnKAP6+xJNsukj922ma3ayViTUPGX3/fbpk1TFk6Hw+Obn8OaYC/7fYkibouLwqpYeo/O01WhA7xgQEIa8gQlCD83Q6scUKCPNZo/XhADzUbbWpzhF9q7X4riPNPS6KAZCOJcJjairvpNRbesDaEAxwj0seEM1IsQ7e56jtyDbWJt0INtGZY3XOBYPKdn/EnKGtyZO0hfc1JhVYQbcIMm1PSxs/QHGLb7eTYPR/LsV8Poiu4Q4H22mFTmMT38IV3ueM2RTJ1LSlBfOylArTSlhO7WnQSV6N0/WESpmBXMWWUqgcgCRNqlX5IM0I4OYmHga6uTSH+mh2kwPxc/6jdCYcMVUcy/wlAaVoGFKdknSw3nHsxU/+xL14UrMh33gHnrRXMI=",
                             Roles = 7,
-                            Salt = "86c44c70-f217-40b5-ada5-531ee492ad26",
+                            Salt = "b3b21bed-5289-41fa-96a9-0bfc1b47ea7a",
                             Status = 1
                         },
                         new
                         {
-                            Id = new Guid("62fcb6f2-7ac0-4bf2-8ca6-f999861fe263"),
-                            CreatedAt = new DateTime(2023, 5, 9, 0, 25, 46, 900, DateTimeKind.Utc).AddTicks(3002),
-                            Password = "wTRKiya8vjeT5Sc1WtEjot+oubXcQvUO+1zJtd0vcMuN+hP6uzGGEKT1xw6+6kQGfe9aFeodzSvp79PrmdT0VOVrvTtbz0zPW/vESwr9iO9uOC2YT/I2EghNrABUOWBmFgBsA022D+aT3Y+dHGga6aJE+G8HouftCqm0tsGWZxTZjjsVdEWQutTNwfVbvxg7k7v1qtjecgGBDv866ogRruf+bhvoH/vPGeW8sA9wuV9OQ9OdL86gYx+syosdaitATj5toOSweQachUF/2NMLhyOFrqImP2t5gAzhN5i4odOIXRAPLHsCGhs1BUYXZ3dWlYbAbJ5siHBMfQnyzadNkquK7WQ2YZ2YDOAaWXoXcEFkpmI+Hp6PivOaJv8u8QyKcvRZbSiT284eH1hQU3vHd5Apbw58zi0EQNmxWpwKFg3M1iOxHK6SK9HAzzxXamqr0bQPZtZ+xDKedApBDztfyXk2Dv0kM6FtJgjWMcqQZSrkJIAWFZHjxhTxlN+89HV/1rUkfOh9giAmELuZL9vAYMoCR4QQWQAea2jDfarY51062as3dIxk5eUUyWtz1QnqAquJ7ULEcA+3qPtf51+eT3pd6SHKCuwjyTPdNweF+1boCrtuHOSvmixVdYvyD7S75dI8MX1duS9dEJQV8yGXpb9lgxceBpva5zjWdx78IpY=",
+                            Id = new Guid("b0f6eb83-46e3-41d8-a82b-a8a41298e035"),
+                            CreatedAt = new DateTime(2023, 5, 27, 19, 22, 6, 89, DateTimeKind.Utc).AddTicks(7030),
+                            Password = "Ztb1gqtAubIBR192bSo335ZW3BV82hQKbgZRZT16bwY9dlol3d/upyXRyrhVnBeakGuzlPsdzdbW130g5hjGS/LyBsvfrZ7c2db9idJ3W2CpXbOtx3BhlY/A88zhTXPFQ5yk3w522JTbIiWZNJB8x+k0Cu5Z9Od4emcOH51QXZsydSEePI5FO08Xr8TIUB0hL4hYXXvAs5dKDtjGisZJFpzONC0uv1fYSESuckmkn6oNpJ86wBFzmY7IZj2vfD3/06BjeI+oJOFhIcPQ//weY2vKQauCDW+Gi7AHe+zxk73mktMbCSbXQVu8wgV1wat01ZLA1HuAvJUuSyNm4QTCnZwDczoPR/PMitYT51erXFTBfeXUp+Bz2r9+9Go/7LVi9k8xIJzDe1BqzojMN5kmtSwIPftUhZNDzPi68hLAqtSVr318owzGZxUGAHEtNa5FO31Yst1yZNvQ770p79G+5KokBeUjn8NUz5kgnWyDPI+6AHk8Gl1lMRohZEJu4+oG54ssSTAEN/25SYPqC18rLc02kE6op6n+fboSGGfWWB7g6BcTLouN+Vtyo4mPj17by2tRnmBEvD2n13o+J0AB6n8xsjmjpRqp/WFNqMBOiVtM6LOHk2SmNVIfLGWPad9lOwrSjfRmPD3okvLr0UYVZwjFboP/dIpp0AfRdlN6mWU=",
                             Roles = 1,
-                            Salt = "584ee01e-37c5-4b51-8262-ae3ea550e1a5",
+                            Salt = "bf40edfd-ce10-44c6-b2e2-d620653ad6a5",
                             Status = 1
                         });
                 });
@@ -518,19 +753,19 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    AttractionId = new Guid("6ee13407-f63c-4f78-919c-5324469f0695"),
+                                    AttractionId = new Guid("18e899c2-9adb-495e-b148-769198414d88"),
                                     Description = "Excelente banda.",
                                     Name = "Fets Domino"
                                 },
                                 new
                                 {
-                                    AttractionId = new Guid("273f1a42-0b90-4b52-b637-ef04840bf46f"),
+                                    AttractionId = new Guid("301a6d9d-5359-441a-8478-0d55c4b64975"),
                                     Description = "Excelente banda.",
                                     Name = "Fets Domino"
                                 },
                                 new
                                 {
-                                    AttractionId = new Guid("d6648068-bda5-4430-a166-91e8d0cd0fb9"),
+                                    AttractionId = new Guid("b2a1a328-09a0-40ef-abf7-ea62dc1a4793"),
                                     Description = "Excelente banda.",
                                     Name = "Fets Domino"
                                 });
@@ -540,6 +775,36 @@ namespace FoodInLoco.Application.Migrations
                         .IsRequired();
 
                     b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Bill", b =>
+                {
+                    b.HasOne("FoodInLoco.Application.Data.Entities.Table", "Table")
+                        .WithMany("Bills")
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Table");
+                });
+
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.BillUser", b =>
+                {
+                    b.HasOne("FoodInLoco.Application.Data.Entities.Bill", "Bill")
+                        .WithMany("BillUsers")
+                        .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodInLoco.Application.Data.Entities.User", "User")
+                        .WithMany("BillUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bill");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Menu", b =>
@@ -578,19 +843,19 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    MenuId = new Guid("8fe41af8-db79-4fd7-a780-38601f433a9e"),
+                                    MenuId = new Guid("62d34834-8e42-44cd-b531-33230a5f7692"),
                                     Description = "Cardápio de vinhos.",
                                     Name = "Wine"
                                 },
                                 new
                                 {
-                                    MenuId = new Guid("1f031df8-bc44-4977-a013-1f755c7c0e23"),
+                                    MenuId = new Guid("51e1fddf-4bd1-46ef-8c6c-8caa48254e14"),
                                     Description = "Cardápio de Happy Hour.",
                                     Name = "Happy Hour"
                                 },
                                 new
                                 {
-                                    MenuId = new Guid("5295fdc5-ca0b-4530-96bd-809ab3489d82"),
+                                    MenuId = new Guid("60c4fd70-2126-40be-a957-304154ae9a45"),
                                     Description = "Cardápio de Happy Hour.",
                                     Name = "Happy Hour"
                                 });
@@ -624,19 +889,19 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    MenuId = new Guid("8fe41af8-db79-4fd7-a780-38601f433a9e"),
+                                    MenuId = new Guid("62d34834-8e42-44cd-b531-33230a5f7692"),
                                     Value = false
                                 },
                                 new
                                 {
-                                    MenuId = new Guid("1f031df8-bc44-4977-a013-1f755c7c0e23"),
+                                    MenuId = new Guid("51e1fddf-4bd1-46ef-8c6c-8caa48254e14"),
                                     EndAt = new TimeOnly(20, 0, 0),
                                     StartAt = new TimeOnly(16, 30, 0),
                                     Value = true
                                 },
                                 new
                                 {
-                                    MenuId = new Guid("5295fdc5-ca0b-4530-96bd-809ab3489d82"),
+                                    MenuId = new Guid("60c4fd70-2126-40be-a957-304154ae9a45"),
                                     EndAt = new TimeOnly(20, 0, 0),
                                     StartAt = new TimeOnly(16, 30, 0),
                                     Value = true
@@ -688,37 +953,37 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    MenuItemId = new Guid("cf1e5f05-a5ee-4a5c-bcc0-bac8e986576b"),
+                                    MenuItemId = new Guid("84f783cb-ede7-499c-94f7-dc53426a5693"),
                                     Description = "Vinho de uva.",
                                     Name = "Vinho Quinta do Morgado"
                                 },
                                 new
                                 {
-                                    MenuItemId = new Guid("00a923d0-1bc7-4a1d-a890-4317a727890c"),
+                                    MenuItemId = new Guid("a9ebef60-80c9-45a3-b05d-e3f303ed7ce3"),
                                     Description = "Chopp de Brahma.",
                                     Name = "Chopp"
                                 },
                                 new
                                 {
-                                    MenuItemId = new Guid("1d7c5fce-2508-4092-b4b5-089fbb13f040"),
+                                    MenuItemId = new Guid("7b8273d9-ea58-477b-a5e9-ba9b18fb6ab2"),
                                     Description = "Chopp de Brahma.",
                                     Name = "Chopp"
                                 },
                                 new
                                 {
-                                    MenuItemId = new Guid("59a763ca-a8ff-422d-b1e3-d7523b1b6002"),
+                                    MenuItemId = new Guid("4d9f3e42-7338-4c6f-9c06-ed65d25bcbeb"),
                                     Description = "Hamburguer feito com pão brioche (homemade), 90g de blend, queijo cheddar, cebola caramelizada, picles e molho da casa.",
                                     Name = "Hamburguer"
                                 },
                                 new
                                 {
-                                    MenuItemId = new Guid("46fee5d2-543c-450a-82e4-42019e3360dd"),
+                                    MenuItemId = new Guid("994b74af-1368-4eae-b5dd-78715a729f0d"),
                                     Description = "Porção de batata feita com a melhor batata que existe (Burger King).",
                                     Name = "Porção de batata"
                                 },
                                 new
                                 {
-                                    MenuItemId = new Guid("538b40bc-2ee0-4000-a165-530fa76202a4"),
+                                    MenuItemId = new Guid("b7620156-6d24-43ae-927c-1a9a8dd50fd9"),
                                     Description = "Empanados de frango recheados com queijo.",
                                     Name = "Chicken Nuggets"
                                 });
@@ -728,6 +993,33 @@ namespace FoodInLoco.Application.Migrations
 
                     b.Navigation("NameDescription")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Order", b =>
+                {
+                    b.HasOne("FoodInLoco.Application.Data.Entities.Bill", "Bill")
+                        .WithMany("Orders")
+                        .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodInLoco.Application.Data.Entities.MenuItem", "Item")
+                        .WithMany("Orders")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodInLoco.Application.Data.Entities.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bill");
+
+                    b.Navigation("Item");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Reservation", b =>
@@ -785,13 +1077,13 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    RestaurantId = new Guid("4ccc9ba0-4e0f-4378-be09-77f739fb982b"),
+                                    RestaurantId = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
                                     DDD = "85",
                                     PhoneNumber = "998888888"
                                 },
                                 new
                                 {
-                                    RestaurantId = new Guid("ec1743b8-eced-4095-a040-1ccab368814e"),
+                                    RestaurantId = new Guid("35ff541d-8213-4afe-ade1-8fbee8aa995f"),
                                     DDD = "85",
                                     PhoneNumber = "997777777"
                                 });
@@ -822,12 +1114,12 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    RestaurantId = new Guid("4ccc9ba0-4e0f-4378-be09-77f739fb982b"),
+                                    RestaurantId = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
                                     Value = "mcdonalds@foodinloco.com"
                                 },
                                 new
                                 {
-                                    RestaurantId = new Guid("ec1743b8-eced-4095-a040-1ccab368814e"),
+                                    RestaurantId = new Guid("35ff541d-8213-4afe-ade1-8fbee8aa995f"),
                                     Value = "burgerking@foodinloco.com"
                                 });
                         });
@@ -882,7 +1174,7 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    RestaurantId = new Guid("4ccc9ba0-4e0f-4378-be09-77f739fb982b"),
+                                    RestaurantId = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
                                     City = "Fortaleza",
                                     Complement = "Apto 004, Bloco D",
                                     Number = 150L,
@@ -892,7 +1184,7 @@ namespace FoodInLoco.Application.Migrations
                                 },
                                 new
                                 {
-                                    RestaurantId = new Guid("ec1743b8-eced-4095-a040-1ccab368814e"),
+                                    RestaurantId = new Guid("35ff541d-8213-4afe-ade1-8fbee8aa995f"),
                                     City = "Fortaleza",
                                     Complement = "Apto 001, Bloco D",
                                     Number = 150L,
@@ -930,13 +1222,13 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    RestaurantId = new Guid("4ccc9ba0-4e0f-4378-be09-77f739fb982b"),
+                                    RestaurantId = new Guid("f8b15bcb-51aa-4f02-af83-a2cba043de6f"),
                                     CompanyName = "Mc Donalds",
                                     TradingName = "Méqui"
                                 },
                                 new
                                 {
-                                    RestaurantId = new Guid("ec1743b8-eced-4095-a040-1ccab368814e"),
+                                    RestaurantId = new Guid("35ff541d-8213-4afe-ade1-8fbee8aa995f"),
                                     CompanyName = "Burger King",
                                     TradingName = "BK"
                                 });
@@ -1013,6 +1305,17 @@ namespace FoodInLoco.Application.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Table", b =>
+                {
+                    b.HasOne("FoodInLoco.Application.Data.Entities.Restaurant", "Restaurant")
+                        .WithMany("Tables")
+                        .HasForeignKey("RestaurantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Restaurant");
+                });
+
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.User", b =>
                 {
                     b.OwnsOne("FoodInLoco.Application.Data.ValueObjects.Phone", "CellPhone", b1 =>
@@ -1043,13 +1346,13 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    UserId = new Guid("631f4a7e-e4c4-4d4f-9eb1-8e32c9e4b5f2"),
+                                    UserId = new Guid("cc8f093a-9bc9-4272-8cdf-d03edc641124"),
                                     DDD = "85",
                                     PhoneNumber = "999999999"
                                 },
                                 new
                                 {
-                                    UserId = new Guid("62fcb6f2-7ac0-4bf2-8ca6-f999861fe263"),
+                                    UserId = new Guid("b0f6eb83-46e3-41d8-a82b-a8a41298e035"),
                                     DDD = "85",
                                     PhoneNumber = "997851936"
                                 });
@@ -1080,12 +1383,12 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    UserId = new Guid("631f4a7e-e4c4-4d4f-9eb1-8e32c9e4b5f2"),
+                                    UserId = new Guid("cc8f093a-9bc9-4272-8cdf-d03edc641124"),
                                     Value = "admin@foodinloco.com"
                                 },
                                 new
                                 {
-                                    UserId = new Guid("62fcb6f2-7ac0-4bf2-8ca6-f999861fe263"),
+                                    UserId = new Guid("b0f6eb83-46e3-41d8-a82b-a8a41298e035"),
                                     Value = "letter.pedro@gmail.com"
                                 });
                         });
@@ -1118,13 +1421,13 @@ namespace FoodInLoco.Application.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    UserId = new Guid("631f4a7e-e4c4-4d4f-9eb1-8e32c9e4b5f2"),
+                                    UserId = new Guid("cc8f093a-9bc9-4272-8cdf-d03edc641124"),
                                     FirstName = "Admin",
                                     LastName = "FoodInLoco"
                                 },
                                 new
                                 {
-                                    UserId = new Guid("62fcb6f2-7ac0-4bf2-8ca6-f999861fe263"),
+                                    UserId = new Guid("b0f6eb83-46e3-41d8-a82b-a8a41298e035"),
                                     FirstName = "Pedro",
                                     LastName = "Lopes de Oliveira"
                                 });
@@ -1140,9 +1443,21 @@ namespace FoodInLoco.Application.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Bill", b =>
+                {
+                    b.Navigation("BillUsers");
+
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Menu", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.MenuItem", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Reservation", b =>
@@ -1160,10 +1475,21 @@ namespace FoodInLoco.Application.Migrations
                     b.Navigation("Reservations");
 
                     b.Navigation("Reviews");
+
+                    b.Navigation("Tables");
+                });
+
+            modelBuilder.Entity("FoodInLoco.Application.Data.Entities.Table", b =>
+                {
+                    b.Navigation("Bills");
                 });
 
             modelBuilder.Entity("FoodInLoco.Application.Data.Entities.User", b =>
                 {
+                    b.Navigation("BillUsers");
+
+                    b.Navigation("Orders");
+
                     b.Navigation("Reservations");
 
                     b.Navigation("Restaurants");

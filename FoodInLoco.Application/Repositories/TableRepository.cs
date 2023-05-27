@@ -1,41 +1,38 @@
 using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
-using FoodInLoco.Application.Data.Expressions;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using System.Linq;
 using ExpressionTable = FoodInLoco.Application.Data.Expressions.TableExpression;
 
 namespace FoodInLoco.Application.Repositories
 {
     public sealed class TableRepository : EFRepository<Table>, ITableRepository
     {
-        private readonly Context _dbContext;
+        public TableRepository(Context context) : base(context) { }
 
-        public TableRepository(Context context) : base(context)
+        public async Task<TableModelResponse?> GetModelByIdAsync(Guid id)
         {
-            _dbContext = context;
+            return await Queryable.Where(ExpressionTable.Id(id)).Select(ExpressionTable.Model).SingleOrDefaultAsync();
         }
 
-        public Task<TableModelResponse?> GetModelByIdAsync(Guid id)
+        public async Task<TableModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
-            return Queryable.Where(ExpressionTable.Id(id)).Select(ExpressionTable.Model).SingleOrDefaultAsync();
-        }
-
-        public Task<TableModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
-        {
-            return Queryable.Where(ExpressionTable.Id(id))
-                //TODO: fazer ligação com entidade da conta
+            return await Queryable.Where(ExpressionTable.Id(id))
                 .Include(_ => _.Restaurant)
                 .Select(ExpressionTable.Model).SingleOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<TableModelResponse>> GetTablesFromRestaurantAsync(Guid id)
+        {
+            return await Queryable.Where(ExpressionTable.RestaurantId(id))
+                .Include(_ => _.Restaurant)
+                .Select(ExpressionTable.Model).ToListAsync();
+        }
+        
         public async Task<IEnumerable<TableModelResponse>> ListModelAsync()
         {
             return await Queryable
-                //TODO: fazer ligação com entidade da conta
                 .Include(_ => _.Restaurant)
                 .Select(ExpressionTable.Model).ToListAsync();
         }
