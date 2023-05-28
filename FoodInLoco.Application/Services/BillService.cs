@@ -4,7 +4,6 @@ using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Factories.Interfaces;
-using FoodInLoco.Application.Repositories;
 using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
 
@@ -15,20 +14,26 @@ namespace FoodInLoco.Application.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IBillRepository _billRepository;
         private readonly IBillFactory _billFactory;
+        private readonly IBillUserRepository _billUserRepository;
+        private readonly IBillUserFactory _billUserFactory;
 
         public BillService
         (
             IUnitOfWork unitOfWork,
             IBillRepository billRepository,
-            IBillFactory billFactory
+            IBillFactory billFactory,
+            IBillUserRepository billUserRepository,
+            IBillUserFactory billUserFactory
         )
         {
             _unitOfWork = unitOfWork;
             _billRepository = billRepository;
             _billFactory = billFactory;
+            _billUserRepository = billUserRepository;
+            _billUserFactory = billUserFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(BillModelRequest model)
+        public async Task<IResult<Guid>> AddAsync(BillModelRequest model, Guid userId)
         {
             var validation = new AddBillModelValidator().Validation(model);
 
@@ -39,9 +44,29 @@ namespace FoodInLoco.Application.Services
 
             await _billRepository.AddAsync(bill);
 
+            var billUser = _billUserFactory.Create(new BillUserModelRequest() { BillId = bill.Id, UserId = userId });
+
+            await _billUserRepository.AddAsync(billUser);
+
             await _unitOfWork.SaveChangesAsync();
 
             return bill.Id.Success();
+        }
+
+        public async Task<IResult<Guid>> AddUserAsync(BillUserModelRequest model)
+        {
+            var validation = new AddBillUserModelValidator().Validation(model);
+
+            if (validation.Failed)
+                return validation.Fail<Guid>();
+
+            var billUser = _billUserFactory.Create(model);
+
+            await _billUserRepository.AddAsync(billUser);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return billUser.BillId.Success();
         }
 
         public async Task<IResult> DeleteAsync(Guid id)
@@ -53,24 +78,34 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<BillModelResponse?> GetAsync(Guid id)
+        public async Task<IResult<BillModelResponse?>> GetAsync(Guid id)
         {
-            return _billRepository.GetModelByIdWithRelationsAsync(id);
+            var response = await _billRepository.GetModelByIdWithRelationsAsync(id);
+            return response.Success();
         }
         
-        public Task<BillModelResponse?> GetActiveByTableAsync(Guid id)
+        public async Task<IResult<BillModelResponse?>> GetActiveByTableAsync(Guid id)
         {
-            return _billRepository.GetActiveBillByTableAsync(id);
+            var response = await _billRepository.GetActiveBillByTableAsync(id);
+            return response.Success();
         }
         
-        public Task<IEnumerable<BillModelResponse>> GetActiveByUserAsync(Guid id)
+        public async Task<IResult<IEnumerable<BillModelResponse>>> GetActiveByUserAsync(Guid id)
         {
-            return _billRepository.GetActiveBillsByUserAsync(id);
+            var response = await _billRepository.GetActiveBillsByUserAsync(id);
+            return response.Success();
         }
 
-        public async Task<IEnumerable<BillModelResponse>> ListAsync()
+        public async Task<IResult<IEnumerable<UserModelResponse>?>> GetUserPendingAsync(Guid id)
         {
-            return await _billRepository.ListModelAsync();
+            var response = await _billRepository.GetUserModelPendingAsync(id);
+            return response.Success();
+        }
+
+        public async Task<IResult<IEnumerable<BillModelResponse>>> ListAsync()
+        {
+            var response = await _billRepository.ListModelAsync();
+            return response.Success();
         }
 
         public async Task<IResult> UpdateAsync(BillModelRequest model)
@@ -112,6 +147,30 @@ namespace FoodInLoco.Application.Services
             obj.Activate();
 
             await _billRepository.UpdateStatusAsync(obj);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+
+        public async Task<IResult> DeclineUserAsync(BillUserModelRequest model)
+        {
+            var obj = _billUserFactory.Create(model);
+            obj.Inactivate();
+
+            await _billUserRepository.UpdateStatusAsync(obj);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+
+        public async Task<IResult> AcceptUserAsync(BillUserModelRequest model)
+        {
+            var obj = _billUserFactory.Create(model);
+            obj.Activate();
+
+            await _billUserRepository.UpdateStatusAsync(obj);
 
             await _unitOfWork.SaveChangesAsync();
 

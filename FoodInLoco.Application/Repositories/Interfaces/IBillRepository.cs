@@ -13,6 +13,8 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 
         Task<IEnumerable<BillModelResponse>> GetActiveBillsByUserAsync(Guid id);
 
+        Task<IEnumerable<UserModelResponse>?> GetUserModelPendingAsync(Guid id);
+
         Task<IEnumerable<BillModelResponse>> ListModelAsync();
 
         Task UpdateStatusAsync(Bill obj);

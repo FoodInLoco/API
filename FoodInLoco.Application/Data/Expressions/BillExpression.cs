@@ -15,8 +15,12 @@ namespace FoodInLoco.Application.Data.Expressions
             TableId = _.TableId,
             BillingStatus = _.BillingStatus,
             Status = _.Status,
-            ValueAmount = _.Orders.Sum(_ => _.Quantity * _.Item.Value)
+            ValueAmount = _.Orders.Sum(_ => _.Quantity * _.Item.Value),
+            Users = _.BillUsers.Where(_ => _.Status == Status.Active).Select(_ => (UserModelResponse)_.User).ToList(),
+            PendingUsers = _.BillUsers.Where(_ => _.Status == Status.None).Select(_ => (UserModelResponse)_.User).ToList()
         };
+
+        public static Expression<Func<Bill, IEnumerable<UserModelResponse>>> UserModelPending => _ => _.BillUsers.Where(_ => _.Status == Status.None).Select(_ => (UserModelResponse)_.User);
 
         public static Expression<Func<Bill, bool>> Id(Guid id)
         {
@@ -30,7 +34,7 @@ namespace FoodInLoco.Application.Data.Expressions
 
         public static Expression<Func<Bill, bool>> ActiveByUserId(Guid id)
         {
-            return _ => _.BillUsers.Any(_ => _.UserId == id) && _.BillingStatus == BillingStatus.Pending;
+            return _ => _.BillUsers.Any(_ => _.UserId == id && _.Status == Status.Active) && _.BillingStatus == BillingStatus.Pending;
         }
     }
 }

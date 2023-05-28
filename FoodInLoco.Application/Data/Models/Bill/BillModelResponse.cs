@@ -17,5 +17,9 @@ namespace FoodInLoco.Application.Data.Models
         public Status Status { get; init; }
 
         public double? ValueAmount { get; init; }
+
+        public List<UserModelResponse>? Users { get; init; }
+
+        public List<UserModelResponse>? PendingUsers { get; init; }
     }
 }

@@ -16,8 +16,20 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Guid UserId { get; private set; }
 
+        public Status Status { get; private set; }
+
         public Bill Bill { get; private set; }
 
         public User User { get; private set; }
+
+        public void Activate()
+        {
+            Status = Status.Active;
+        }
+
+        public void Inactivate()
+        {
+            Status = Status.Inactive;
+        }
     }
 }

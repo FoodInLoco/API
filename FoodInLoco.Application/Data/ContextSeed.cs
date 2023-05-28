@@ -10,6 +10,7 @@ namespace FoodInLoco.Application.Data
     {
         internal static Guid GuidUser1 = Guid.NewGuid();
         internal static Guid GuidUser2 = Guid.NewGuid();
+        internal static Guid GuidUser3 = Guid.NewGuid();
         internal static Guid GuidRestaurant1 = Guid.NewGuid();
         internal static Guid GuidRestaurant2 = Guid.NewGuid();
         internal static Guid GuidTable1 = Guid.NewGuid();
@@ -38,6 +39,7 @@ namespace FoodInLoco.Application.Data
         
         internal static Guid SaltGuid1 = Guid.NewGuid();
         internal static Guid SaltGuid2 = Guid.NewGuid();
+        internal static Guid SaltGuid3 = Guid.NewGuid();
 
         public static void Seed(this ModelBuilder builder)
         {
@@ -48,6 +50,7 @@ namespace FoodInLoco.Application.Data
             builder.SeedAttractions();
             builder.SeedTables();
             builder.SeedBills();
+            builder.SeedBillUsers();
             builder.SeedOrders();
             //builder.SeedReservation();
             //builder.SeedReview();
@@ -118,6 +121,39 @@ namespace FoodInLoco.Application.Data
                     UserId = GuidUser2,
                     DDD = "85",
                     PhoneNumber = "997851936"
+                });
+            });
+
+            builder.Entity<User>(obj =>
+            {
+                obj.HasData(new
+                {
+                    Id = GuidUser3,
+                    Status = Status.Active,
+                    Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid3.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
+                    Salt = SaltGuid3.ToString(),
+                    Roles = Roles.User,
+                    CreatedAt = DateTime.UtcNow
+                });
+
+                obj.OwnsOne(_ => _.Name).HasData(new
+                {
+                    UserId = GuidUser3,
+                    FirstName = "Gabriel",
+                    LastName = "Evaristo"
+                });
+
+                obj.OwnsOne(_ => _.Email).HasData(new
+                {
+                    UserId = GuidUser3,
+                    Value = "gabrielevaristovcp@gmail.com"
+                });
+
+                obj.OwnsOne(_ => _.CellPhone).HasData(new
+                {
+                    UserId = GuidUser3,
+                    DDD = "85",
+                    PhoneNumber = "999174742"
                 });
             });
         }
@@ -555,6 +591,40 @@ namespace FoodInLoco.Application.Data
                     BillingStatus = BillingStatus.Pending,
                     Status = Status.Active,
                     CreatedAt = DateTime.UtcNow
+                });
+            });
+        }
+
+        private static void SeedBillUsers(this ModelBuilder builder)
+        {
+            builder.Entity<BillUser>(obj =>
+            {
+                obj.HasData(new
+                {
+                    BillId = GuidBill1,
+                    UserId = GuidUser2,
+                    Status = Status.Active,
+                });
+
+                obj.HasData(new
+                {
+                    BillId = GuidBill1,
+                    UserId = GuidUser3,
+                    Status = Status.None,
+                });
+
+                obj.HasData(new
+                {
+                    BillId = GuidBill2,
+                    UserId = GuidUser2,
+                    Status = Status.Active
+                });
+
+                obj.HasData(new
+                {
+                    BillId = GuidBill2,
+                    UserId = GuidUser3,
+                    Status = Status.None,
                 });
             });
         }

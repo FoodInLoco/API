@@ -37,6 +37,16 @@ namespace FoodInLoco.API.Controllers
         }
 
         [Authorize]
+        [HttpGet("get-pending-users-by-id")]
+        public async Task<IActionResult> GetPendingUsersById(Guid id)
+        {
+            var result = await _billService.GetUserPendingAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
+        [Authorize]
         [HttpGet("get-active-bill-by-table-id")]
         public async Task<IActionResult> GetActiveBillByTableId(Guid id)
         {
@@ -60,7 +70,17 @@ namespace FoodInLoco.API.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync(BillModelRequest obj)
         {
-            var result = await _billService.AddAsync(obj);
+            var result = await _billService.AddAsync(obj, Guid.Parse(User.GetUserId()));
+            if (result.Succeeded)
+                return Created($"/get-by-id?id={result.Data}", obj);
+            return BadRequest(result);
+        }
+
+        [Authorize]
+        [HttpPost("post-user-bill")]
+        public async Task<IActionResult> PostUserAsync(BillUserModelRequest obj)
+        {
+            var result = await _billService.AddUserAsync(obj);
             if (result.Succeeded)
                 return Created($"/get-by-id?id={result.Data}", obj);
             return BadRequest(result);
@@ -91,6 +111,26 @@ namespace FoodInLoco.API.Controllers
         public async Task<IActionResult> InactivateById(Guid id)
         {
             var result = await _billService.InactivateAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPost("accept-user")]
+        public async Task<IActionResult> AcceptUserById(BillUserModelRequest model)
+        {
+            var result = await _billService.AcceptUserAsync(model);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPost("decline-user")]
+        public async Task<IActionResult> DeclineUserById(BillUserModelRequest model)
+        {
+            var result = await _billService.DeclineUserAsync(model);
             if (result == null)
                 return NotFound();
             return Ok(result);

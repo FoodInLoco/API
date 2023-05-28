@@ -1,5 +1,4 @@
 using FoodInLoco.Application.Data.Models;
-using FoodInLoco.Application.Data.ValueObjects;
 using FoodInLoco.Application.Enums;
 
 namespace FoodInLoco.Application.Data.Entities
@@ -65,7 +64,9 @@ namespace FoodInLoco.Application.Data.Entities
                 TableId = bill.TableId,
                 BillingStatus = bill.BillingStatus,
                 Status = bill.Status,
-                ValueAmount = bill.Orders.Sum(_ => _.Quantity * _.Item.Value)
+                ValueAmount = bill.Orders.Sum(_ => _.Quantity * _.Item.Value),
+                Users = bill.BillUsers.Where(_ => _.Status == Status.Active).Select(_ => (UserModelResponse)_.User).ToList(),
+                PendingUsers = bill.BillUsers.Where(_ => _.Status == Status.None).Select(_ => (UserModelResponse)_.User).ToList()
             };
         }
     }

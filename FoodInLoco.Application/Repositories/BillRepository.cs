@@ -37,6 +37,11 @@ namespace FoodInLoco.Application.Repositories
                 .Select(BillExpression.Model).ToListAsync();
         }
 
+        public async Task<IEnumerable<UserModelResponse>?> GetUserModelPendingAsync(Guid id)
+        {
+            return await Queryable.Where(BillExpression.Id(id)).Select(BillExpression.UserModelPending).SingleOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<BillModelResponse>> ListModelAsync()
         {
             return await Queryable
