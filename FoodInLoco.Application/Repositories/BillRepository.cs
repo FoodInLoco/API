@@ -20,6 +20,7 @@ namespace FoodInLoco.Application.Repositories
         {
             return await Queryable.Where(BillExpression.Id(id))
                 .Include(_ => _.Table)
+                .Include(_ => _.Orders)
                 .Select(BillExpression.Model).SingleOrDefaultAsync();
         }
 
@@ -27,6 +28,7 @@ namespace FoodInLoco.Application.Repositories
         {
             return await Queryable.Where(BillExpression.ActiveByTableId(id))
                 .Include(_ => _.Table)
+                .Include(_ => _.Orders)
                 .Select(BillExpression.Model).SingleOrDefaultAsync();
         }
 
@@ -34,6 +36,7 @@ namespace FoodInLoco.Application.Repositories
         {
             return await Queryable.Where(BillExpression.ActiveByUserId(id))
                 .Include(_ => _.Table)
+                .Include(_ => _.Orders)
                 .Select(BillExpression.Model).ToListAsync();
         }
 
@@ -46,6 +49,7 @@ namespace FoodInLoco.Application.Repositories
         {
             return await Queryable
                 .Include(_ => _.Table)
+                .Include(_ => _.Orders)
                 .Select(BillExpression.Model).ToListAsync();
         }
 

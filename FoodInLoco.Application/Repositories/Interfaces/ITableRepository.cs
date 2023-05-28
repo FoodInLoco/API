@@ -5,6 +5,8 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 {
     public interface ITableRepository : IRepository<Table>
     {
+        Task<bool?> IsOccupied(Guid id);
+
         Task<TableModelResponse?> GetModelByIdAsync(Guid id);
 
         Task<TableModelResponse?> GetModelByIdWithRelationsAsync(Guid id);

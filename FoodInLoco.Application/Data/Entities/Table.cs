@@ -43,7 +43,7 @@ namespace FoodInLoco.Application.Data.Entities
 
         public bool IsActive() => Status == Status.Active;
 
-        public bool IsOccupied() => true; //consulta na entidade se há alguma mesa ativa apontando para essa table;
+        public bool IsOccupied() => Bills.Any(_ => _.BillingStatus == BillingStatus.Pending);
 
         public void Update(int number)
         {

@@ -11,15 +11,24 @@ namespace FoodInLoco.Application.Repositories
     {
         public TableRepository(Context context) : base(context) { }
 
+        public async Task<bool?> IsOccupied(Guid id)
+        {
+            return await Queryable.Where(ExpressionTable.Id(id))
+                .Include(_ => _.Bills)
+                .Select(ExpressionTable.IsOccupied).SingleOrDefaultAsync();
+        }
+        
         public async Task<TableModelResponse?> GetModelByIdAsync(Guid id)
         {
-            return await Queryable.Where(ExpressionTable.Id(id)).Select(ExpressionTable.Model).SingleOrDefaultAsync();
+            return await Queryable.Where(ExpressionTable.Id(id))
+                .Select(ExpressionTable.Model).SingleOrDefaultAsync();
         }
 
         public async Task<TableModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
             return await Queryable.Where(ExpressionTable.Id(id))
                 .Include(_ => _.Restaurant)
+                .Include(_ => _.Bills)
                 .Select(ExpressionTable.Model).SingleOrDefaultAsync();
         }
 
@@ -27,6 +36,7 @@ namespace FoodInLoco.Application.Repositories
         {
             return await Queryable.Where(ExpressionTable.RestaurantId(id))
                 .Include(_ => _.Restaurant)
+                .Include(_ => _.Bills)
                 .Select(ExpressionTable.Model).ToListAsync();
         }
         
@@ -34,6 +44,7 @@ namespace FoodInLoco.Application.Repositories
         {
             return await Queryable
                 .Include(_ => _.Restaurant)
+                .Include(_ => _.Bills)
                 .Select(ExpressionTable.Model).ToListAsync();
         }
 

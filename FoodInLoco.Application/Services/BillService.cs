@@ -6,6 +6,7 @@ using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Factories.Interfaces;
 using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace FoodInLoco.Application.Services
 {
@@ -16,6 +17,7 @@ namespace FoodInLoco.Application.Services
         private readonly IBillFactory _billFactory;
         private readonly IBillUserRepository _billUserRepository;
         private readonly IBillUserFactory _billUserFactory;
+        private readonly ITableRepository _tableRepository;
 
         public BillService
         (
@@ -23,7 +25,8 @@ namespace FoodInLoco.Application.Services
             IBillRepository billRepository,
             IBillFactory billFactory,
             IBillUserRepository billUserRepository,
-            IBillUserFactory billUserFactory
+            IBillUserFactory billUserFactory,
+            ITableRepository tableRepository
         )
         {
             _unitOfWork = unitOfWork;
@@ -31,6 +34,7 @@ namespace FoodInLoco.Application.Services
             _billFactory = billFactory;
             _billUserRepository = billUserRepository;
             _billUserFactory = billUserFactory;
+            _tableRepository = tableRepository;
         }
 
         public async Task<IResult<Guid>> AddAsync(BillModelRequest model, Guid userId)
@@ -40,11 +44,22 @@ namespace FoodInLoco.Application.Services
             if (validation.Failed)
                 return validation.Fail<Guid>();
 
+            var isOccupied = await _tableRepository.IsOccupied(model.TableId);
+            if (isOccupied.HasValue && isOccupied.Value is true)
+            {
+                var obj = await _billRepository.GetActiveBillByTableAsync(model.TableId);
+                var request = new BillUserModelRequest() { BillId = obj.Id, UserId = userId };
+                return await AddUserAsync(request);
+            }
+
             var bill = _billFactory.Create(model);
 
             await _billRepository.AddAsync(bill);
 
+            await _unitOfWork.SaveChangesAsync();
+
             var billUser = _billUserFactory.Create(new BillUserModelRequest() { BillId = bill.Id, UserId = userId });
+            billUser.Activate();
 
             await _billUserRepository.AddAsync(billUser);
 

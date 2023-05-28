@@ -18,6 +18,8 @@ namespace FoodInLoco.Application.Data.Expressions
             RestaurantName = _.Restaurant.Company.CompanyName
         };
 
+        public static Expression<Func<Table, bool>> IsOccupied => _ => _.IsOccupied();
+
         public static Expression<Func<Table, bool>> Id(Guid id)
         {
             return _ => _.Id == id;
