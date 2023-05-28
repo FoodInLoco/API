@@ -22,8 +22,6 @@ namespace FoodInLoco.Application.Data.Models
 
         public string Password { get; set; }
         
-        public Roles Roles { get; init; }
-
         public string? Photo { get; set; }
 
         public List<RestaurantModelResponse>? Restaurants { get; init; }

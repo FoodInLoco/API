@@ -24,8 +24,6 @@ namespace FoodInLoco.Application.Data.Models
             .MaximumLength(9).WithMessage("Telefone não pode ter mais de 9 caracteres.")
             .Matches(new Regex(@"(?:[1-9]|9[1-9])[0-9]{3}\-?[0-9]{4}$")).WithMessage("Telefone inválido.");
 
-        public void Roles() => RuleFor(_ => _.Roles).NotEmpty();
-
         public void Password() => RuleFor(_ => _.Password).NotEmpty();
 
         public void Photo() => When(_ => !String.IsNullOrEmpty(_.Photo), () =>

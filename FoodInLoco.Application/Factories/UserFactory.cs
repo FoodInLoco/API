@@ -15,8 +15,7 @@ namespace FoodInLoco.Application.Factories
                 new Name(model.FirstName, model.LastName),
                 new Email(model.Email),
                 new Phone(model.DDD, model.PhoneNumber),
-                model.Photo,
-                (Roles)model.Roles
+                model.Photo
             );
         }
     }

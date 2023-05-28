@@ -66,7 +66,6 @@ namespace FoodInLoco.Application.Data
                     Status = Status.Active,
                     Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid1.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
                     Salt = SaltGuid1.ToString(),
-                    Roles = Roles.User | Roles.Admin | Roles.Restaurant,
                     CreatedAt = DateTime.UtcNow
                 });
 
@@ -99,7 +98,6 @@ namespace FoodInLoco.Application.Data
                     Status = Status.Active,
                     Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid2.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
                     Salt = SaltGuid2.ToString(),
-                    Roles = Roles.User,
                     CreatedAt = DateTime.UtcNow
                 });
 
@@ -132,7 +130,6 @@ namespace FoodInLoco.Application.Data
                     Status = Status.Active,
                     Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid3.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
                     Salt = SaltGuid3.ToString(),
-                    Roles = Roles.User,
                     CreatedAt = DateTime.UtcNow
                 });
 

@@ -27,8 +27,6 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(obj => obj.Salt).HasMaxLength(1000).IsRequired();
 
-        builder.Property(obj => obj.Roles).IsRequired();
-
         builder.OwnsOne(obj => obj.Name, objName =>
         {
             objName.Property(name => name.FirstName).HasColumnName(nameof(Name.FirstName)).HasMaxLength(100).IsRequired();

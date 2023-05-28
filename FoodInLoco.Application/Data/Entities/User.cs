@@ -11,15 +11,13 @@ namespace FoodInLoco.Application.Data.Entities
             Name name,
             Email email,
             Phone phone,
-            string? photo,
-            Roles roles
+            string? photo
         )
         {
             Name = name;
             Email = email;
             CellPhone = phone;
             Photo = photo;
-            Roles = roles;
             Salt = Guid.NewGuid().ToString();
             CreatedAt = DateTime.UtcNow;
             Activate();
@@ -34,8 +32,6 @@ namespace FoodInLoco.Application.Data.Entities
         public Phone CellPhone { get; private set; }
 
         public Status Status { get; private set; }
-
-        public Roles Roles { get; private set; }
 
         public string Password { get; private set; }
 
@@ -97,7 +93,6 @@ namespace FoodInLoco.Application.Data.Entities
                 Email = user.Email.Value,
                 DDD = user.CellPhone.DDD,
                 PhoneNumber = user.CellPhone.PhoneNumber,
-                Roles = user.Roles,
                 Photo = user.Photo,
                 Restaurants = user.Restaurants?.Select(_ => (RestaurantModelResponse)_).ToList(),
                 Reservations = user.Reservations?.Select(_ => (ReservationModelResponse)_).ToList()
