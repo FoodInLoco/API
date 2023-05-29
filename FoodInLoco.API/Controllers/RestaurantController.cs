@@ -1,5 +1,7 @@
+using DotNetCore.Extensions;
 using DotNetCore.Objects;
 using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Enums;
 using FoodInLoco.Application.Extensions;
 using FoodInLoco.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -44,31 +46,29 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> PostAsync(RestaurantModelRequest obj)
         {
-            Guid userId;
-            var parsed = Guid.TryParse(User.GetUserId(), out userId);
-            if (!parsed)
-                return Unauthorized();
-            var result = await _restaurantService.AddAsync(userId, obj);
+            var result = await _restaurantService.AddAsync(obj);
             if (result.Succeeded)
                 return Created($"/get-by-id?id={result.Data}", obj);
+
             return BadRequest(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Restaurant")]
         [HttpPut]
         public async Task<IActionResult> PutAsync(RestaurantModelRequest objToUpdate)
         {
-            Guid userId;
-            var parsed = Guid.TryParse(User.GetUserId(), out userId);
-            if (!parsed || !await _restaurantService.CheckUser(objToUpdate.Id, userId))
+            Guid restaurantId = Guid.Parse(User.GetUserId());
+            if (!await _restaurantService.CheckUser(objToUpdate.Id, restaurantId))
                 return Unauthorized();
+
             var result = await _restaurantService.UpdateAsync(objToUpdate);
             if (result.Succeeded)
                 return NoContent();
+
             return BadRequest(result);
         }
 

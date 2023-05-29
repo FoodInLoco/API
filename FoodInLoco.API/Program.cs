@@ -16,6 +16,8 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.AspNetCore.Http.Json;
 using FoodInLoco.Application.Converters;
+using FoodInLoco.Application.Enums;
+using DotNetCore.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,6 +69,15 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false
     };
 });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RestaurantOnly", policy =>
+        policy.RequireRole(Roles.Restaurant.GetDescription()));
+    options.AddPolicy("UserOnly", policy =>
+        policy.RequireRole(Roles.User.GetDescription()));
+});
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();

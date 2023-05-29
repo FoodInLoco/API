@@ -10,7 +10,6 @@ namespace FoodInLoco.Application.Data.Expressions
         public static Expression<Func<Restaurant, RestaurantModelResponse>> Model => _ => new RestaurantModelResponse
         {
             Id = _.Id,
-            UserId = _.UserId,
             CreatedAt = _.CreatedAt,
             LastUpdatedAt = _.LastUpdatedAt,
             CompanyName = _.Company.CompanyName,
@@ -27,8 +26,6 @@ namespace FoodInLoco.Application.Data.Expressions
             Status = _.Status,
             Kids = _.Kids,
             Photo = _.Photo,
-            UserName = _.User.Name.FirstName,
-            UserEmail = _.User.Email.Value,
             Menus = _.Menus.Select(_ => (MenuModelResponse)_).ToList(),
             Reservations = _.Reservations.Select(_ => (ReservationModelResponse)_).ToList(),
             Attractions = _.Attractions.Select(_ => (AttractionModelResponse)_).ToList(),

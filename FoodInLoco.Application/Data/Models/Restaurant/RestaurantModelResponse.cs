@@ -10,8 +10,6 @@ namespace FoodInLoco.Application.Data.Models
 
         public DateTime? LastUpdatedAt { get; init; }
 
-        public Guid UserId { get; init; }
-
         public string CompanyName { get; init; }
 
         public string TradingName { get; init; }
@@ -39,10 +37,6 @@ namespace FoodInLoco.Application.Data.Models
         public string? Photo { get; init; }
 
         public Status Status { get; init; }
-
-        public string? UserName { get; init; }
-
-        public string? UserEmail { get; init; }
 
         public List<MenuModelResponse>? Menus { get; init; }
 

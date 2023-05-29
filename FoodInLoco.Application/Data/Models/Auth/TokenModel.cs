@@ -1,4 +1,4 @@
 namespace FoodInLoco.Application.Data.Models
 {
-    public sealed record TokenModel(string Token, UserTokenModel User);
+    public sealed record TokenModel<T>(string Token, T Login);
 }

@@ -4,7 +4,11 @@ using DotNetCore.Validation;
 using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Factories;
 using FoodInLoco.Application.Factories.Interfaces;
+using FoodInLoco.Application.Helpers;
+using FoodInLoco.Application.Helpers.Interfaces;
+using FoodInLoco.Application.Repositories;
 using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
 
@@ -15,34 +19,44 @@ namespace FoodInLoco.Application.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRestaurantRepository _restaurantRepository;
         private readonly IRestaurantFactory _restaurantFactory;
+        private readonly IHashService _hashService;
 
         public RestaurantService
         (
             IUnitOfWork unitOfWork,
             IRestaurantRepository restaurantRepository,
-            IRestaurantFactory restaurantFactory
+            IRestaurantFactory restaurantFactory,
+            IHashService hashService
         )
         {
             _unitOfWork = unitOfWork;
             _restaurantRepository = restaurantRepository;
             _restaurantFactory = restaurantFactory;
+            _hashService = hashService;
         }
 
-        public async Task<bool> CheckUser(Guid reservationId, Guid userId)
+        public async Task<bool> CheckUser(Guid restaurantId, Guid loggedRestaurantId)
         {
-            var restaurant = await _restaurantRepository.GetAsync(reservationId);
+            var restaurant = await _restaurantRepository.GetAsync(restaurantId);
 
-            return restaurant.UserId == userId;
+            return restaurant.Id == loggedRestaurantId;
         }
 
-        public async Task<IResult<Guid>> AddAsync(Guid userId, RestaurantModelRequest model)
+        public async Task<IResult<Guid>> AddAsync(RestaurantModelRequest model)
         {
             var validation = new AddRestaurantModelValidator().Validation(model);
 
             if (validation.Failed)
                 return validation.Fail<Guid>();
 
-            var restaurant = _restaurantFactory.Create(userId, model);
+            if (await _restaurantRepository.AnyByEmailAsync(model.Email))
+                return Result<Guid>.Fail("Login já existe!");
+
+            var restaurant = _restaurantFactory.Create(model);
+
+            var password = _hashService.Create(model.Password, restaurant.Salt);
+
+            restaurant.UpdatePassword(password);
 
             await _restaurantRepository.AddAsync(restaurant);
 
@@ -63,6 +77,14 @@ namespace FoodInLoco.Application.Services
         public Task<RestaurantModelResponse?> GetAsync(Guid id)
         {
             return _restaurantRepository.GetModelByIdWithRelationsAsync(id);
+        }
+
+        public async Task<IResult> GetByEmail(string email)
+        {
+            var user = await _restaurantRepository.GetModelByEmailAsync(email);
+            if (user != null)
+                return user.Success();
+            return Result.Fail("Nenhum dado encontrado");
         }
 
         public Task<Grid<RestaurantModelResponse>> GridAsync(GridParameters parameters)
@@ -121,6 +143,35 @@ namespace FoodInLoco.Application.Services
             await _unitOfWork.SaveChangesAsync();
 
             return Result.Success();
+        }
+
+        public async Task<IResult<TokenModel<RestaurantTokenModel>>> SignInAsync(SignInModel model)
+        {
+            var failResult = Result<TokenModel<RestaurantTokenModel>>.Fail("Email ou senha inválidos!");
+
+            var validation = new SignInModelValidator().Validation(model);
+
+            if (validation.Failed)
+                return failResult;
+
+            var restaurant = await _restaurantRepository.GetByEmailAsync(model.Email);
+
+            if (restaurant is null)
+                return failResult;
+
+            var password = _hashService.Create(model.Password, restaurant.Salt);
+
+            if (restaurant.Password != password)
+                return failResult;
+
+            return CreateToken(restaurant);
+        }
+
+        private static IResult<TokenModel<RestaurantTokenModel>> CreateToken(Restaurant restaurant)
+        {
+            var token = TokenService.GenerateToken(restaurant);
+
+            return new TokenModel<RestaurantTokenModel>(token, new RestaurantTokenModel(restaurant.Id, restaurant.Company.CompanyName, restaurant.Company.TradingName, restaurant.Email.Value)).Success();
         }
     }
 }

@@ -25,6 +25,10 @@ public sealed class RestaurantConfiguration : IEntityTypeConfiguration<Restauran
 
         builder.Property(obj => obj.Kids).IsRequired();
 
+        builder.Property(obj => obj.Password).HasMaxLength(1000).IsRequired();
+
+        builder.Property(obj => obj.Salt).HasMaxLength(1000).IsRequired();
+
         builder.OwnsOne(obj => obj.Company, companyName =>
         {
             companyName.Property(name => name.CompanyName).HasColumnName(nameof(Company.CompanyName)).HasMaxLength(200).IsRequired();

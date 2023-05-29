@@ -14,6 +14,12 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 
         Task<IEnumerable<RestaurantModelResponse>> ListModelAsync();
 
+        Task<RestaurantModelResponse?> GetModelByEmailAsync(string email);
+
         Task UpdateStatusAsync(Restaurant obj);
+
+        Task<bool> AnyByEmailAsync(string email);
+
+        Task<Restaurant?> GetByEmailAsync(string email);
     }
 }

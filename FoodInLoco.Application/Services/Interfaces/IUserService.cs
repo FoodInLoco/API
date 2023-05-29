@@ -24,6 +24,6 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<IResult> UpdateAsync(UserModelRequest model);
 
-        Task<IResult<TokenModel>> SignInAsync(SignInModel model);
+        Task<IResult<TokenModel<UserTokenModel>>> SignInAsync(SignInModel model);
     }
 }

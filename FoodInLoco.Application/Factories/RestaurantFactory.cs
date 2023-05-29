@@ -7,11 +7,10 @@ namespace FoodInLoco.Application.Factories
 {
     public sealed class RestaurantFactory : IRestaurantFactory
     {
-        public Restaurant Create(Guid userId, RestaurantModelRequest model)
+        public Restaurant Create(RestaurantModelRequest model)
         {
             return new Restaurant
             (
-                userId,
                 new Company(model.CompanyName, model.TradingName),
                 new Email(model.Email),
                 new Phone(model.DDD, model.PhoneNumber),

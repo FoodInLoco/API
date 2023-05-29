@@ -7,6 +7,7 @@ using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Factories.Interfaces;
 using FoodInLoco.Application.Helpers;
 using FoodInLoco.Application.Helpers.Interfaces;
+using FoodInLoco.Application.Repositories;
 using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
 
@@ -31,6 +32,13 @@ namespace FoodInLoco.Application.Services
             _userRepository = userRepository;
             _userFactory = userFactory;
             _hashService = hashService;
+        }
+
+        public async Task<bool> CheckUser(Guid userId, Guid loggedUserId)
+        {
+            var restaurant = await _userRepository.GetAsync(userId);
+
+            return restaurant.Id == loggedUserId;
         }
 
         public async Task<IResult<Guid>> AddAsync(UserModelRequest model)
@@ -75,7 +83,7 @@ namespace FoodInLoco.Application.Services
 
         public async Task<IResult> GetByEmail(string email)
         {
-            var user = _userRepository.GetModelByEmailAsync(email);
+            var user = await _userRepository.GetModelByEmailAsync(email);
             if (user != null)
                 return user.Success();
             return Result.Fail("Nenhum dado encontrado");
@@ -140,9 +148,9 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public async Task<IResult<TokenModel>> SignInAsync(SignInModel model)
+        public async Task<IResult<TokenModel<UserTokenModel>>> SignInAsync(SignInModel model)
         {
-            var failResult = Result<TokenModel>.Fail("Usuário ou senha inválidos!");
+            var failResult = Result<TokenModel<UserTokenModel>>.Fail("Usuário ou senha inválidos!");
 
             var validation = new SignInModelValidator().Validation(model);
 
@@ -162,11 +170,11 @@ namespace FoodInLoco.Application.Services
             return CreateToken(user);
         }
 
-        private static IResult<TokenModel> CreateToken(User user)
+        private static IResult<TokenModel<UserTokenModel>> CreateToken(User user)
         {
             var token = TokenService.GenerateToken(user);
 
-            return new TokenModel(token, new UserTokenModel(user.Id, user.Name.FirstName, user.Name.LastName, user.Email.Value)).Success();
+            return new TokenModel<UserTokenModel>(token, new UserTokenModel(user.Id, user.Name.FirstName, user.Name.LastName, user.Email.Value)).Success();
         }
     }
 }

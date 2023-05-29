@@ -8,12 +8,14 @@ namespace FoodInLoco.Application.Services.Interfaces
     {
         Task<bool> CheckUser(Guid restaurantId, Guid userId);
 
-        Task<IResult<Guid>> AddAsync(Guid userId, RestaurantModelRequest model);
+        Task<IResult<Guid>> AddAsync(RestaurantModelRequest model);
 
         Task<IEnumerable<RestaurantModelResponse>> ListAsync();
 
         Task<RestaurantModelResponse?> GetAsync(Guid id);
-        
+
+        Task<IResult> GetByEmail(string email);
+
         Task<Grid<RestaurantModelResponse>> GridAsync(GridParameters parameters);
 
         Task<IResult> UpdateAsync(RestaurantModelRequest model);
@@ -23,5 +25,7 @@ namespace FoodInLoco.Application.Services.Interfaces
         Task<IResult> ActivateAsync(Guid id);
 
         Task<IResult> DeleteAsync(Guid id);
+
+        Task<IResult<TokenModel<RestaurantTokenModel>>> SignInAsync(SignInModel model);
     }
 }

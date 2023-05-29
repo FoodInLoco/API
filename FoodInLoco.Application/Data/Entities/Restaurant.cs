@@ -8,7 +8,6 @@ namespace FoodInLoco.Application.Data.Entities
     {
         public Restaurant
         (
-            Guid userId,
             Company company,
             Email email,
             Phone phone,
@@ -17,20 +16,18 @@ namespace FoodInLoco.Application.Data.Entities
             string? photo
         )
         {
-            UserId = userId;
             Company = company;
             Email = email;
             CellPhone = phone;
             Address = address;
             Kids = kids;
             Photo = photo;
+            Salt = Guid.NewGuid().ToString();
             CreatedAt = DateTime.UtcNow;
             Activate();
         }
 
         public Restaurant(Guid id) => Id = id;
-
-        public Guid UserId { get; private set; }
 
         public Company Company { get; private set; }
 
@@ -46,7 +43,9 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Status Status { get; private set; }
 
-        public User User { get; private set; }
+        public string Password { get; private set; }
+
+        public string Salt { get; private set; }
 
         public ICollection<Menu> Menus { get; private set; }
 
@@ -84,6 +83,12 @@ namespace FoodInLoco.Application.Data.Entities
             LastUpdatedAt = DateTime.UtcNow;
         }
 
+        public void UpdatePassword(string password)
+        {
+            Password = password;
+            LastUpdatedAt = DateTime.UtcNow;
+        }
+
         public static implicit operator RestaurantModelResponse(Restaurant restaurant)
         {
             if (restaurant is null)
@@ -92,7 +97,6 @@ namespace FoodInLoco.Application.Data.Entities
             return new RestaurantModelResponse()
             {
                 Id = restaurant.Id,
-                UserId = restaurant.UserId,
                 CreatedAt = restaurant.CreatedAt,
                 LastUpdatedAt = restaurant.LastUpdatedAt,
                 CompanyName = restaurant.Company.CompanyName,
@@ -109,8 +113,6 @@ namespace FoodInLoco.Application.Data.Entities
                 Status = restaurant.Status,
                 Kids = restaurant.Kids,
                 Photo = restaurant.Photo,
-                UserName = restaurant.User?.Name.FirstName,
-                UserEmail = restaurant.User?.Email.Value,
                 Menus = restaurant.Menus?.Select(_ => (MenuModelResponse)_).ToList(),
                 Reservations = restaurant.Reservations?.Select(_ => (ReservationModelResponse)_).ToList(),
                 Attractions = restaurant.Attractions?.Select(_ => (AttractionModelResponse)_).ToList(),

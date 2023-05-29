@@ -20,8 +20,6 @@ namespace FoodInLoco.Application.Data.Models
 
         public string PhoneNumber { get; init; }
 
-        public string Password { get; set; }
-        
         public string? Photo { get; set; }
 
         public List<RestaurantModelResponse>? Restaurants { get; init; }

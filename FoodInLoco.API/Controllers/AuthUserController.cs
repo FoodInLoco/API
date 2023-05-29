@@ -8,11 +8,11 @@ namespace FoodInLoco.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthUserController : ControllerBase
     {
         private readonly IUserService _userService;
 
-        public AuthController(IUserService userService)
+        public AuthUserController(IUserService userService)
         {
             _userService = userService;
         }

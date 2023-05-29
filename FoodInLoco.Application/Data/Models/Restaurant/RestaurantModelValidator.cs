@@ -39,5 +39,7 @@ namespace FoodInLoco.Application.Data.Models
 
         public void Kids() => RuleFor(_ => _.Kids)
             .NotNull().WithMessage("É obrigatório preencher espaço para criança.");
+
+        public void Password() => RuleFor(_ => _.Password).NotEmpty();
     }
 }

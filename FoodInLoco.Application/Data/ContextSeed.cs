@@ -40,6 +40,8 @@ namespace FoodInLoco.Application.Data
         internal static Guid SaltGuid1 = Guid.NewGuid();
         internal static Guid SaltGuid2 = Guid.NewGuid();
         internal static Guid SaltGuid3 = Guid.NewGuid();
+        internal static Guid SaltGuid4 = Guid.NewGuid();
+        internal static Guid SaltGuid5 = Guid.NewGuid();
 
         public static void Seed(this ModelBuilder builder)
         {
@@ -162,9 +164,10 @@ namespace FoodInLoco.Application.Data
                 obj.HasData(new
                 {
                     Id = GuidRestaurant1,
-                    UserId = GuidUser1,
                     Status = Status.Active,
                     Kids = false,
+                    Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid4.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
+                    Salt = SaltGuid4.ToString(),
                     Photo = "https://www.mcdonalds.com.br/images/layout/mcdonalds-logo-footer-bg-white.png",
                     CreatedAt = DateTime.UtcNow
                 });
@@ -206,9 +209,10 @@ namespace FoodInLoco.Application.Data
                 obj.HasData(new
                 {
                     Id = GuidRestaurant2,
-                    UserId = GuidUser1,
                     Status = Status.Active,
                     Kids = true,
+                    Password = Convert.ToBase64String(new Rfc2898DeriveBytes(Encoding.Default.GetBytes("123456"), Encoding.Default.GetBytes(SaltGuid5.ToString()), 10000, HashAlgorithmName.SHA512).GetBytes(512)),
+                    Salt = SaltGuid5.ToString(),
                     Photo = "https://d3sn2rlrwxy0ce.cloudfront.net/_800x600_crop_center-center_none/Burger-King-Novo-logo.png?mtime=20210125152539&focal=none&tmtime=20210726130340",
                     CreatedAt = DateTime.UtcNow
                 });

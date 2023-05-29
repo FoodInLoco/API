@@ -31,5 +31,8 @@ namespace FoodInLoco.Application.Data.Models
         public bool Kids { get; init; }
 
         public string? Photo { get; init; }
+
+        public string Password { get; set; }
+
     }
 }
