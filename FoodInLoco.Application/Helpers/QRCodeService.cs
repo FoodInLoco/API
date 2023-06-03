@@ -10,7 +10,7 @@ namespace FoodInLoco.Application.Helpers
 {
     public static class QRCodeService
     {
-        public static byte[] GenerateQRCodeBytes(string content)
+        public static string GenerateQRCodeBytes(string content)
         {
             var qrGenerator = new QRCodeGenerator();
             var qrCodeData = qrGenerator.CreateQrCode(content, QRCodeGenerator.ECCLevel.Q);
@@ -21,8 +21,9 @@ namespace FoodInLoco.Application.Helpers
             MemoryStream ms = new MemoryStream();
             qrCodeImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             byte[] qrCodeBytes = ms.ToArray();
+            string base64String = Convert.ToBase64String(qrCodeBytes);
 
-            return qrCodeBytes;
+            return base64String;
         }
     }
 }
