@@ -12,6 +12,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public Guid TableId { get; init; }
 
+        public string RestaurantName { get; init; }
+
         public int TableNumber { get; init; }
 
         public BillingStatus BillingStatus { get; init; }

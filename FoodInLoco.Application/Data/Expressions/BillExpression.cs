@@ -13,6 +13,7 @@ namespace FoodInLoco.Application.Data.Expressions
             CreatedAt = _.CreatedAt,
             LastUpdatedAt = _.LastUpdatedAt,
             TableId = _.TableId,
+            RestaurantName = _.Table.Restaurant.Company.TradingName,
             TableNumber = _.Table.Number,
             BillingStatus = _.BillingStatus,
             Status = _.Status,
