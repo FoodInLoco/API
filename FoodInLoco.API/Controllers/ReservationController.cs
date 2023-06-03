@@ -63,8 +63,7 @@ namespace FoodInLoco.API.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync(ReservationModelRequest obj)
         {
-            var userId = Guid.Parse(User.GetUserId());
-            var result = await _reservationService.AddAsync(userId, obj);
+            var result = await _reservationService.AddAsync(Guid.Parse(User.GetUserId()), obj);
             if (result.Succeeded)
                 return Created($"/get-by-id?id={result.Data}", obj);
             return BadRequest(result);
@@ -74,8 +73,7 @@ namespace FoodInLoco.API.Controllers
         [HttpPut]
         public async Task<IActionResult> PutAsync(ReservationModelRequest objToUpdate)
         {
-            var userId = Guid.Parse(User.GetUserId());
-            if (!await _reservationService.CheckUser(objToUpdate.Id, userId))
+            if (!await _reservationService.CheckUser(objToUpdate.Id, Guid.Parse(User.GetUserId())))
                 return Unauthorized();
             var result = await _reservationService.UpdateAsync(objToUpdate);
             if (result.Succeeded)

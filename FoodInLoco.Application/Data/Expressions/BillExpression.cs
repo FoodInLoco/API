@@ -13,6 +13,7 @@ namespace FoodInLoco.Application.Data.Expressions
             CreatedAt = _.CreatedAt,
             LastUpdatedAt = _.LastUpdatedAt,
             TableId = _.TableId,
+            TableNumber = _.Table.Number,
             BillingStatus = _.BillingStatus,
             Status = _.Status,
             ValueAmount = _.Orders.Sum(_ => _.Quantity * _.Item.Value),

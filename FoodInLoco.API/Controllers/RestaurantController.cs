@@ -61,8 +61,7 @@ namespace FoodInLoco.API.Controllers
         [HttpPut]
         public async Task<IActionResult> PutAsync(RestaurantModelRequest objToUpdate)
         {
-            Guid restaurantId = Guid.Parse(User.GetUserId());
-            if (!await _restaurantService.CheckUser(objToUpdate.Id, restaurantId))
+            if (!await _restaurantService.CheckUser(objToUpdate.Id, Guid.Parse(User.GetUserId())))
                 return Unauthorized();
 
             var result = await _restaurantService.UpdateAsync(objToUpdate);

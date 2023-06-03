@@ -62,6 +62,7 @@ namespace FoodInLoco.Application.Data.Entities
                 CreatedAt = bill.CreatedAt,
                 LastUpdatedAt = bill.LastUpdatedAt,
                 TableId = bill.TableId,
+                TableNumber = bill.Table.Number,
                 BillingStatus = bill.BillingStatus,
                 Status = bill.Status,
                 ValueAmount = bill.Orders.Sum(_ => _.Quantity * _.Item.Value),
