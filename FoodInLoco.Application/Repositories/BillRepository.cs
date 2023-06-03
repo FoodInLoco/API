@@ -19,7 +19,7 @@ namespace FoodInLoco.Application.Repositories
         public async Task<BillModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
             return await Queryable.Where(BillExpression.Id(id))
-                .Include(_ => _.Table)
+                .Include(_ => _.Table).ThenInclude(_ => _.Restaurant)
                 .Include(_ => _.Orders)
                 .Select(BillExpression.Model).SingleOrDefaultAsync();
         }
@@ -27,7 +27,7 @@ namespace FoodInLoco.Application.Repositories
         public async Task<BillModelResponse?> GetActiveBillByTableAsync(Guid id)
         {
             return await Queryable.Where(BillExpression.ActiveByTableId(id))
-                .Include(_ => _.Table)
+                .Include(_ => _.Table).ThenInclude(_ => _.Restaurant)
                 .Include(_ => _.Orders)
                 .Select(BillExpression.Model).SingleOrDefaultAsync();
         }
@@ -35,7 +35,7 @@ namespace FoodInLoco.Application.Repositories
         public async Task<IEnumerable<BillModelResponse>> GetActiveBillsByUserAsync(Guid id)
         {
             return await Queryable.Where(BillExpression.ActiveByUserId(id))
-                .Include(_ => _.Table)
+                .Include(_ => _.Table).ThenInclude(_ => _.Restaurant)
                 .Include(_ => _.Orders)
                 .Select(BillExpression.Model).ToListAsync();
         }
@@ -48,7 +48,7 @@ namespace FoodInLoco.Application.Repositories
         public async Task<IEnumerable<BillModelResponse>> ListModelAsync()
         {
             return await Queryable
-                .Include(_ => _.Table)
+                .Include(_ => _.Table).ThenInclude(_ => _.Restaurant)
                 .Include(_ => _.Orders)
                 .Select(BillExpression.Model).ToListAsync();
         }
