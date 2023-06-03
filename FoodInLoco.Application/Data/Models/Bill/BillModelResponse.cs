@@ -12,6 +12,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public Guid TableId { get; init; }
 
+        public Guid RestaurantId { get; init; }
+
         public string RestaurantName { get; init; }
 
         public int TableNumber { get; init; }
@@ -21,6 +23,8 @@ namespace FoodInLoco.Application.Data.Models
         public Status Status { get; init; }
 
         public double? ValueAmount { get; init; }
+
+        public List<OrderModelResponse>? Orders { get; init; }
 
         public List<UserModelResponse>? Users { get; init; }
 

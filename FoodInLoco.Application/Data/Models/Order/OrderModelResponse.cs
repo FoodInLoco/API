@@ -16,6 +16,14 @@ namespace FoodInLoco.Application.Data.Models
 
         public Guid MenuItemId { get; init; }
 
+        public string ProductName { get; init; }
+
+        public string ProductDescription { get; init; }
+
+        public int ProductQuantity { get; init; }
+
+        public string ProductPhoto { get; init; }
+
         public int Quantity { get; init; }
         
         public string? Message { get; init; }

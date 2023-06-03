@@ -62,6 +62,7 @@ namespace FoodInLoco.Application.Data.Entities
                 CreatedAt = bill.CreatedAt,
                 LastUpdatedAt = bill.LastUpdatedAt,
                 TableId = bill.TableId,
+                RestaurantId = bill.Table.RestaurantId,
                 RestaurantName = bill.Table.Restaurant.Company.TradingName,
                 TableNumber = bill.Table.Number,
                 BillingStatus = bill.BillingStatus,

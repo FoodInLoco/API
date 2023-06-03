@@ -20,7 +20,7 @@ namespace FoodInLoco.Application.Repositories
         {
             return await Queryable.Where(BillExpression.Id(id))
                 .Include(_ => _.Table).ThenInclude(_ => _.Restaurant)
-                .Include(_ => _.Orders)
+                .Include(_ => _.Orders).ThenInclude(_ => _.Item)
                 .Select(BillExpression.Model).SingleOrDefaultAsync();
         }
 

@@ -79,6 +79,10 @@ namespace FoodInLoco.Application.Data.Entities
                 UserId = order.UserId,
                 MenuItemId = order.ItemId,
                 Status = order.Status,
+                ProductName = order.Item.NameDescription.Name,
+                ProductDescription = order.Item.NameDescription.Description,
+                ProductQuantity = order.Item.Quantity,
+                ProductPhoto = order.Item.Photo,
                 Quantity = order.Quantity,
                 Message = order.Message,
                 ValueAmount = order.Quantity * order.Item.Value

@@ -13,11 +13,13 @@ namespace FoodInLoco.Application.Data.Expressions
             CreatedAt = _.CreatedAt,
             LastUpdatedAt = _.LastUpdatedAt,
             TableId = _.TableId,
+            RestaurantId = _.Table.RestaurantId,
             RestaurantName = _.Table.Restaurant.Company.TradingName,
             TableNumber = _.Table.Number,
             BillingStatus = _.BillingStatus,
             Status = _.Status,
             ValueAmount = _.Orders.Sum(_ => _.Quantity * _.Item.Value),
+            Orders = _.Orders.Where(_ => _.Status == Status.Active).Select(_ => (OrderModelResponse)_).ToList(),
             Users = _.BillUsers.Where(_ => _.Status == Status.Active).Select(_ => (UserModelResponse)_.User).ToList(),
             PendingUsers = _.BillUsers.Where(_ => _.Status == Status.None).Select(_ => (UserModelResponse)_.User).ToList()
         };
