@@ -56,7 +56,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         [HttpGet("get-active-bills")]
         public async Task<IActionResult> GetActiveBills()
         {
@@ -66,7 +66,7 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> PostAsync(BillModelRequest obj)
         {

@@ -59,27 +59,23 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> PostAsync(ReservationModelRequest obj)
         {
-            Guid userId;
-            var parsed = Guid.TryParse(User.GetUserId(), out userId);
-            if (!parsed)
-                return Unauthorized();
+            var userId = Guid.Parse(User.GetUserId());
             var result = await _reservationService.AddAsync(userId, obj);
             if (result.Succeeded)
                 return Created($"/get-by-id?id={result.Data}", obj);
             return BadRequest(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         [HttpPut]
         public async Task<IActionResult> PutAsync(ReservationModelRequest objToUpdate)
         {
-            Guid userId;
-            var parsed = Guid.TryParse(User.GetUserId(), out userId);
-            if (!parsed || !await _reservationService.CheckUser(objToUpdate.Id, userId))
+            var userId = Guid.Parse(User.GetUserId());
+            if (!await _reservationService.CheckUser(objToUpdate.Id, userId))
                 return Unauthorized();
             var result = await _reservationService.UpdateAsync(objToUpdate);
             if (result.Succeeded)
