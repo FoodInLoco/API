@@ -15,6 +15,7 @@ namespace FoodInLoco.Application.Data.Entities
             BillingStatus = billingStatus;
             CreatedAt = DateTime.UtcNow;
             Activate();
+            ActivateWaiter();
         }
 
         public Bill(Guid id) => Id = id;
@@ -24,6 +25,8 @@ namespace FoodInLoco.Application.Data.Entities
         public Status Status { get; private set; }
 
         public BillingStatus BillingStatus { get; private set; }
+
+        public bool WaiterRequested { get; private set; }
 
         public Table Table { get; private set; }
 
@@ -40,6 +43,18 @@ namespace FoodInLoco.Application.Data.Entities
         public void Inactivate()
         {
             Status = Status.Inactive;
+            LastUpdatedAt = DateTime.UtcNow;
+        }
+
+        public void ActivateWaiter()
+        {
+            WaiterRequested = true;
+            LastUpdatedAt = DateTime.UtcNow;
+        }
+
+        public void InactivateWaiter()
+        {
+            WaiterRequested = false;
             LastUpdatedAt = DateTime.UtcNow;
         }
 
@@ -67,7 +82,9 @@ namespace FoodInLoco.Application.Data.Entities
                 TableNumber = bill.Table.Number,
                 BillingStatus = bill.BillingStatus,
                 Status = bill.Status,
+                WaiterRequested = bill.WaiterRequested,
                 ValueAmount = bill.Orders.Sum(_ => _.Quantity * _.Item.Value),
+                Orders = bill.Orders.Where(_ => _.Status == Status.Active).Select(_ => (OrderModelResponse)_).ToList(),
                 Users = bill.BillUsers.Where(_ => _.Status == Status.Active).Select(_ => (UserModelResponse)_.User).ToList(),
                 PendingUsers = bill.BillUsers.Where(_ => _.Status == Status.None).Select(_ => (UserModelResponse)_.User).ToList()
             };

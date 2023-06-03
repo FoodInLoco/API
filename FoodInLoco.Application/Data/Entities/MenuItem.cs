@@ -76,13 +76,13 @@ namespace FoodInLoco.Application.Data.Entities
                 CreatedAt = menuItem.CreatedAt,
                 LastUpdatedAt = menuItem.LastUpdatedAt,
                 MenuId = menuItem.MenuId,
+                MenuName = menuItem.Menu?.NameDescription.Name,
                 Name = menuItem.NameDescription.Name,
                 Description = menuItem.NameDescription.Description,
                 Quantity = menuItem.Quantity,
                 Value = menuItem.Value,
                 Photo = menuItem.Photo,
-                Status = menuItem.Status,
-                MenuName = menuItem.Menu?.NameDescription.Name
+                Status = menuItem.Status
             };
         }
     }

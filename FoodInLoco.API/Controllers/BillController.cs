@@ -136,6 +136,30 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "User")]
+        [HttpGet("request-waiter")]
+        public async Task<IActionResult> RequestWaiterById(Guid id)
+        {
+            if (await _billService.CheckUser(id, Guid.Parse(User.GetUserId())))
+                return Unauthorized();
+            var result = await _billService.WaiterActivateAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "Restaurant")]
+        [HttpGet("waiter-served")]
+        public async Task<IActionResult> WaiterServedById(Guid id)
+        {
+            if (await _billService.CheckRestaurant(id, Guid.Parse(User.GetUserId())))
+                return Unauthorized();
+            var result = await _billService.WaiterInactivateAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)

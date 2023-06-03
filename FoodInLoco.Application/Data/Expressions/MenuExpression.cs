@@ -13,6 +13,7 @@ namespace FoodInLoco.Application.Data.Expressions
             CreatedAt = _.CreatedAt,
             LastUpdatedAt = _.LastUpdatedAt,
             RestaurantId = _.RestaurantId,
+            RestaurantName = _.Restaurant.Company.CompanyName,
             Name = _.NameDescription.Name,
             Description = _.NameDescription.Description,
             Photo = _.Photo,
@@ -22,7 +23,6 @@ namespace FoodInLoco.Application.Data.Expressions
             StartAt = _.HappyHour.StartAt.ToString(),
             EndAt = _.HappyHour.EndAt.ToString(),
             Status = _.Status,
-            RestaurantName = _.Restaurant.Company.CompanyName,
             Items = _.Items.Select(_ => (MenuItemModelResponse)_).ToList()
         };
 

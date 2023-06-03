@@ -22,6 +22,8 @@ namespace FoodInLoco.Application.Data.Models
         
         public Status Status { get; init; }
 
+        public bool WaiterRequested { get; init; }
+
         public double? ValueAmount { get; init; }
 
         public List<OrderModelResponse>? Orders { get; init; }

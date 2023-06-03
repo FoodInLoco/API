@@ -5,6 +5,10 @@ namespace FoodInLoco.Application.Services.Interfaces
 {
     public interface IBillService
     {
+        Task<bool> CheckUser(Guid billId, Guid loggedUserId);
+
+        Task<bool> CheckRestaurant(Guid billId, Guid loggedRestaurantId);
+
         Task<IResult<Guid>> AddAsync(BillModelRequest model, Guid userId);
 
         Task<IResult<Guid>> AddUserAsync(BillUserModelRequest model);
@@ -30,5 +34,9 @@ namespace FoodInLoco.Application.Services.Interfaces
         Task<IResult> DeclineUserAsync(BillUserModelRequest model);
 
         Task<IResult> AcceptUserAsync(BillUserModelRequest model);
+
+        Task<IResult> WaiterActivateAsync(Guid id);
+
+        Task<IResult> WaiterInactivateAsync(Guid id);
     }
 }

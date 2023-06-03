@@ -12,6 +12,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public Guid MenuId { get; init; }
 
+        public string? MenuName { get; set; }
+
         public string Name { get; init; }
 
         public string Description { get; init; }
@@ -23,7 +25,5 @@ namespace FoodInLoco.Application.Data.Models
         public double Value { get; init; }
 
         public Status Status { get; init; }
-
-        public string? MenuName { get; set; }
     }
 }

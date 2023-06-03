@@ -18,6 +18,7 @@ namespace FoodInLoco.Application.Data.Expressions
             TableNumber = _.Table.Number,
             BillingStatus = _.BillingStatus,
             Status = _.Status,
+            WaiterRequested = _.WaiterRequested,
             ValueAmount = _.Orders.Sum(_ => _.Quantity * _.Item.Value),
             Orders = _.Orders.Where(_ => _.Status == Status.Active).Select(_ => (OrderModelResponse)_).ToList(),
             Users = _.BillUsers.Where(_ => _.Status == Status.Active).Select(_ => (UserModelResponse)_.User).ToList(),

@@ -79,6 +79,7 @@ namespace FoodInLoco.Application.Data.Entities
                 CreatedAt = menu.CreatedAt,
                 LastUpdatedAt = menu.LastUpdatedAt,
                 RestaurantId = menu.RestaurantId,
+                RestaurantName = menu.Restaurant?.Company.CompanyName,
                 Name = menu.NameDescription.Name,
                 Description = menu.NameDescription.Description,
                 Photo = menu.Photo,
@@ -88,7 +89,6 @@ namespace FoodInLoco.Application.Data.Entities
                 StartAt = menu.HappyHour.StartAt.ToString(),
                 EndAt = menu.HappyHour.EndAt.ToString(),
                 Status = menu.Status,
-                RestaurantName = menu.Restaurant?.Company.CompanyName,
                 Items = menu.Items?.Select(_ => (MenuItemModelResponse)_).ToList()
             };
         }

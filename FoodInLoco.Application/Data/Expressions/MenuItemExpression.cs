@@ -12,13 +12,13 @@ namespace FoodInLoco.Application.Data.Expressions
             CreatedAt = _.CreatedAt,
             LastUpdatedAt = _.LastUpdatedAt,
             MenuId = _.MenuId,
+            MenuName = _.Menu.NameDescription.Name,
             Name = _.NameDescription.Name,
             Description = _.NameDescription.Description,
             Quantity = _.Quantity,
             Value = _.Value,
             Photo = _.Photo,
-            Status = _.Status,
-            MenuName = _.Menu.NameDescription.Name
+            Status = _.Status
         };
 
         public static Expression<Func<MenuItem, bool>> Id(Guid id)

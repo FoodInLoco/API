@@ -3,7 +3,9 @@ using DotNetCore.Validation;
 using FoodInLoco.Application.Data;
 using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Enums;
 using FoodInLoco.Application.Factories.Interfaces;
+using FoodInLoco.Application.Repositories;
 using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -35,6 +37,20 @@ namespace FoodInLoco.Application.Services
             _billUserRepository = billUserRepository;
             _billUserFactory = billUserFactory;
             _tableRepository = tableRepository;
+        }
+
+        public async Task<bool> CheckUser(Guid billId, Guid loggedUserId)
+        {
+            var bill = await _billRepository.GetAsync(billId);
+
+            return bill.BillUsers.Any(_ => _.UserId == loggedUserId && _.Status == Status.Active);
+        }
+
+        public async Task<bool> CheckRestaurant(Guid billId, Guid loggedRestaurantId)
+        {
+            var bill = await _billRepository.GetAsync(billId);
+
+            return bill.Table.Restaurant.Id == loggedRestaurantId;
         }
 
         public async Task<IResult<Guid>> AddAsync(BillModelRequest model, Guid userId)
@@ -186,6 +202,30 @@ namespace FoodInLoco.Application.Services
             obj.Activate();
 
             await _billUserRepository.UpdateStatusAsync(obj);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+
+        public async Task<IResult> WaiterActivateAsync(Guid id)
+        {
+            var obj = new Bill(id);
+            obj.ActivateWaiter();
+
+            await _billRepository.UpdateStatusAsync(obj);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
+
+        public async Task<IResult> WaiterInactivateAsync(Guid id)
+        {
+            var obj = new Bill(id);
+            obj.InactivateWaiter();
+
+            await _billRepository.UpdateStatusAsync(obj);
 
             await _unitOfWork.SaveChangesAsync();
 

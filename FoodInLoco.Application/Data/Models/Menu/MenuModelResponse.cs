@@ -12,6 +12,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public Guid RestaurantId { get; init; }
 
+        public string? RestaurantName { get; init; }
+
         public string Name { get; init; }
 
         public string Description { get; init; }
@@ -29,8 +31,6 @@ namespace FoodInLoco.Application.Data.Models
         public string? EndAt { get; init; }
 
         public Status Status { get; init; }
-
-        public string? RestaurantName { get; init; }
 
         public List<MenuItemModelResponse>? Items { get; init; }
     }

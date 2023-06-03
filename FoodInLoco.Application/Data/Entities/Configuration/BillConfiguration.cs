@@ -22,6 +22,8 @@ public sealed class BillConfiguration : IEntityTypeConfiguration<Bill>
 
         builder.Property(obj => obj.BillingStatus).HasDefaultValue(BillingStatus.Pending).IsRequired();
 
+        builder.Property(obj => obj.WaiterRequested).HasDefaultValue(true).IsRequired();
+
         builder.HasMany(obj => obj.BillUsers).WithOne(obj => obj.Bill).HasForeignKey("BillId");
 
         builder.HasMany(obj => obj.Orders).WithOne(obj => obj.Bill).HasForeignKey("BillId");
