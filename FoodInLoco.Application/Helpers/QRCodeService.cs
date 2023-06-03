@@ -1,18 +1,18 @@
-﻿using QRCoder;
-
-namespace FoodInLoco.Application.Helpers
+﻿namespace FoodInLoco.Application.Helpers
 {
     public static class QRCodeService
     {
         public static string GenerateQRCodeBytes(string content)
         {
-            var qrGenerator = new QRCodeGenerator();
-            var qrCodeData = qrGenerator.CreateQrCode(content, QRCodeGenerator.ECCLevel.Q);
-            var qrCode = new Base64QRCode(qrCodeData);
+            string apiUrl = $"https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl={content}";
 
-            string base64String = qrCode.GetGraphic(20);
+            using (var httpClient = new HttpClient())
+            {
+                byte[] imageData = httpClient.GetAsync(new Uri(apiUrl)).Result.Content.ReadAsByteArrayAsync().Result;
+                string base64String = Convert.ToBase64String(imageData);
 
-            return base64String;
+                return base64String;
+            }
         }
     }
 }
