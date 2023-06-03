@@ -1,23 +1,23 @@
+using DotNetCore.Extensions;
 using FoodInLoco.Application;
+using FoodInLoco.Application.Converters;
 using FoodInLoco.Application.Data;
-using FoodInLoco.Application.Repositories;
-using FoodInLoco.Application.Repositories.Interfaces;
+using FoodInLoco.Application.Enums;
 using FoodInLoco.Application.Extensions;
 using FoodInLoco.Application.Factories;
 using FoodInLoco.Application.Factories.Interfaces;
 using FoodInLoco.Application.Helpers;
 using FoodInLoco.Application.Helpers.Interfaces;
+using FoodInLoco.Application.Repositories;
+using FoodInLoco.Application.Repositories.Interfaces;
 using FoodInLoco.Application.Services;
 using FoodInLoco.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using Microsoft.AspNetCore.Http.Json;
-using FoodInLoco.Application.Converters;
-using FoodInLoco.Application.Enums;
-using DotNetCore.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

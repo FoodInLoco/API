@@ -1,7 +1,3 @@
-using FoodInLoco.Application.Converters;
-using FoodInLoco.Application.Enums;
-using System.Text.Json.Serialization;
-
 namespace FoodInLoco.Application.Data.Models
 {
     public sealed record MenuModelRequest

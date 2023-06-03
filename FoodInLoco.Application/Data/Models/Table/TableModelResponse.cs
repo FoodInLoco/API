@@ -12,6 +12,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public Guid RestaurantId { get; init; }
 
+        public byte[] QrCode { get; init; }
+
         public int Number { get; init; }
         
         public bool Occupied { get; init; }

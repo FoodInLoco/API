@@ -1,5 +1,7 @@
 ﻿using FoodInLoco.Application.Data.Entities;
 using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Helpers;
+using Newtonsoft.Json;
 using System.Linq.Expressions;
 
 namespace FoodInLoco.Application.Data.Expressions
@@ -12,6 +14,7 @@ namespace FoodInLoco.Application.Data.Expressions
             CreatedAt = _.CreatedAt,
             LastUpdatedAt = _.LastUpdatedAt,
             RestaurantId = _.RestaurantId,
+            QrCode = QRCodeService.GenerateQRCodeBytes(JsonConvert.SerializeObject(new { tableId = _.Id })),
             Number = _.Number,
             Status = _.Status,
             Occupied = _.IsOccupied(),
