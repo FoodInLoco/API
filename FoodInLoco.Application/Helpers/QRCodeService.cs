@@ -1,10 +1,4 @@
 ﻿using QRCoder;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodInLoco.Application.Helpers
 {
@@ -14,14 +8,9 @@ namespace FoodInLoco.Application.Helpers
         {
             var qrGenerator = new QRCodeGenerator();
             var qrCodeData = qrGenerator.CreateQrCode(content, QRCodeGenerator.ECCLevel.Q);
-            var qrCode = new QRCode(qrCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            var qrCode = new Base64QRCode(qrCodeData);
 
-            // Converter a imagem do QR Code para um fluxo de bytes
-            MemoryStream ms = new MemoryStream();
-            qrCodeImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            byte[] qrCodeBytes = ms.ToArray();
-            string base64String = Convert.ToBase64String(qrCodeBytes);
+            string base64String = qrCode.GetGraphic(20);
 
             return base64String;
         }
