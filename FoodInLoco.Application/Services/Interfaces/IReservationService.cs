@@ -11,15 +11,15 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<IResult> DeleteAsync(Guid id);
 
-        Task<ReservationModelResponse?> GetAsync(Guid id);
+        Task<IResult<ReservationModelResponse?>> GetAsync(Guid id);
         
-        Task<IEnumerable<ReservationModelResponse>> ListAsync();
+        Task<IResult<IEnumerable<ReservationModelResponse>>> ListAsync();
 
-        Task<IEnumerable<ReservationModelResponse>> ListByDateFromRestaurantAsync(Guid restaurantId, DateTime? date);
+        Task<IResult<IEnumerable<ReservationModelResponse>>> ListByDateFromRestaurantAsync(Guid restaurantId, DateTime? date);
 
-        Task<IEnumerable<ReservationModelResponse>> ListByDateFromUserAsync(Guid userId, DateTime? date);
+        Task<IResult<IEnumerable<ReservationModelResponse>>> ListByDateFromUserAsync(Guid userId, DateTime? date);
 
-        Task<IEnumerable<ReservationModelResponse>> ListPendingConfirmationAsync();
+        Task<IResult<IEnumerable<ReservationModelResponse>>> ListPendingConfirmationAsync();
 
         Task<IResult> UpdateAsync(ReservationModelRequest model);
 

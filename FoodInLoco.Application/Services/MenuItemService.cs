@@ -53,24 +53,28 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<MenuItemModelResponse?> GetAsync(Guid id)
+        public async Task<IResult<MenuItemModelResponse?>> GetAsync(Guid id)
         {
-            return _menuItemRepository.GetModelByIdAsync(id);
+            var response = await _menuItemRepository.GetModelByIdAsync(id);
+            return response.Success();
         }
         
-        public Task<Grid<MenuItemModelResponse>> GridAsync(GridParameters parameters)
+        public async Task<IResult<Grid<MenuItemModelResponse>>> GridAsync(GridParameters parameters)
         {
-            return _menuItemRepository.GridAsync(parameters);
+            var response = await _menuItemRepository.GridAsync(parameters);
+            return response.Success();
         }
 
-        public async Task<IEnumerable<MenuItemModelResponse>> ListAsync()
+        public async Task<IResult<IEnumerable<MenuItemModelResponse>>> ListAsync()
         {
-            return await _menuItemRepository.ListModelAsync();
-        }
+            var response = await _menuItemRepository.ListModelAsync();
+            return response.Success();
+         }
         
-        public async Task<IEnumerable<MenuItemModelResponse>> ListByMenuAsync(Guid menuId)
+        public async Task<IResult<IEnumerable<MenuItemModelResponse>>> ListByMenuAsync(Guid menuId)
         {
-            return await _menuItemRepository.ListModelByMenuAsync(menuId);
+            var response = await _menuItemRepository.ListModelByMenuAsync(menuId);
+            return response.Success();
         }
 
         public async Task<IResult> UpdateAsync(MenuItemModelRequest model)

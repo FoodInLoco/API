@@ -52,14 +52,16 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<AttractionModelResponse?> GetAsync(Guid id)
+        public async Task<IResult<AttractionModelResponse?>> GetAsync(Guid id)
         {
-            return _attractionRepository.GetModelByIdAsync(id);
+            var response = await _attractionRepository.GetModelByIdAsync(id);
+            return response.Success();
         }
         
-        public async Task<IEnumerable<AttractionModelResponse>> ListAsync()
+        public async Task<IResult<IEnumerable<AttractionModelResponse>>> ListAsync()
         {
-            return await _attractionRepository.ListModelAsync();
+            var response = await _attractionRepository.ListModelAsync();
+            return response.Success();
         }
 
         public async Task<IResult> UpdateAsync(AttractionModelRequest model)

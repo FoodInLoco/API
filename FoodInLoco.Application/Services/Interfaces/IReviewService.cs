@@ -11,9 +11,9 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<IResult> DeleteAsync(Guid id);
 
-        Task<ReviewModelResponse?> GetAsync(Guid id);
+        Task<IResult<ReviewModelResponse?>> GetAsync(Guid id);
         
-        Task<IEnumerable<ReviewModelResponse>> ListAsync();
+        Task<IResult<IEnumerable<ReviewModelResponse>>> ListAsync();
 
         Task<IResult> UpdateAsync(ReviewModelRequest model);
 

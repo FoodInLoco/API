@@ -59,29 +59,34 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<ReservationModelResponse?> GetAsync(Guid id)
+        public async Task<IResult<ReservationModelResponse?>> GetAsync(Guid id)
         {
-            return _reservationRepository.GetModelByIdWithRelationsAsync(id);
+            var response = await _reservationRepository.GetModelByIdWithRelationsAsync(id);
+            return response.Success();
         }
 
-        public async Task<IEnumerable<ReservationModelResponse>> ListAsync()
+        public async Task<IResult<IEnumerable<ReservationModelResponse>>> ListAsync()
         {
-            return await _reservationRepository.ListModelAsync();
+            var response = await _reservationRepository.ListModelAsync();
+            return response.Success();
         }
 
-        public async Task<IEnumerable<ReservationModelResponse>> ListByDateFromRestaurantAsync(Guid restaurantId, DateTime? date)
+        public async Task<IResult<IEnumerable<ReservationModelResponse>>> ListByDateFromRestaurantAsync(Guid restaurantId, DateTime? date)
         {
-            return await _reservationRepository.ListModelByDateFromRestaurantAsync(restaurantId, date);
+            var response = await _reservationRepository.ListModelByDateFromRestaurantAsync(restaurantId, date);
+            return response.Success();
         }
         
-        public async Task<IEnumerable<ReservationModelResponse>> ListByDateFromUserAsync(Guid userId, DateTime? date)
+        public async Task<IResult<IEnumerable<ReservationModelResponse>>> ListByDateFromUserAsync(Guid userId, DateTime? date)
         {
-            return await _reservationRepository.ListModelByDateFromUserAsync(userId, date);
+            var response = await _reservationRepository.ListModelByDateFromUserAsync(userId, date);
+            return response.Success();
         }
         
-        public async Task<IEnumerable<ReservationModelResponse>> ListPendingConfirmationAsync()
+        public async Task<IResult<IEnumerable<ReservationModelResponse>>> ListPendingConfirmationAsync()
         {
-            return await _reservationRepository.ListModelPendingConfirmationAsync();
+            var response = await _reservationRepository.ListModelPendingConfirmationAsync();
+            return response.Success();
         }
 
         public async Task<IResult> UpdateAsync(ReservationModelRequest model)

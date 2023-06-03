@@ -10,13 +10,13 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<IResult<Guid>> AddAsync(RestaurantModelRequest model);
 
-        Task<IEnumerable<RestaurantModelResponse>> ListAsync();
+        Task<IResult<IEnumerable<RestaurantModelResponse>>> ListAsync();
 
-        Task<RestaurantModelResponse?> GetAsync(Guid id);
+        Task<IResult<RestaurantModelResponse?>> GetAsync(Guid id);
 
         Task<IResult> GetByEmail(string email);
 
-        Task<Grid<RestaurantModelResponse>> GridAsync(GridParameters parameters);
+        Task<IResult<Grid<RestaurantModelResponse>>> GridAsync(GridParameters parameters);
 
         Task<IResult> UpdateAsync(RestaurantModelRequest model);
 

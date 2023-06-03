@@ -74,9 +74,10 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public Task<RestaurantModelResponse?> GetAsync(Guid id)
+        public async Task<IResult<RestaurantModelResponse?>> GetAsync(Guid id)
         {
-            return _restaurantRepository.GetModelByIdWithRelationsAsync(id);
+            var response = await _restaurantRepository.GetModelByIdWithRelationsAsync(id);
+            return response.Success();
         }
 
         public async Task<IResult> GetByEmail(string email)
@@ -87,9 +88,10 @@ namespace FoodInLoco.Application.Services
             return Result.Fail("Nenhum dado encontrado");
         }
 
-        public Task<Grid<RestaurantModelResponse>> GridAsync(GridParameters parameters)
+        public async Task<IResult<Grid<RestaurantModelResponse>>> GridAsync(GridParameters parameters)
         {
-            return _restaurantRepository.GridAsync(parameters);
+            var response = await _restaurantRepository.GridAsync(parameters);
+            return response.Success();
         }
 
         public async Task<IResult> InactivateAsync(Guid id)
@@ -118,9 +120,10 @@ namespace FoodInLoco.Application.Services
             return Result.Success();
         }
 
-        public async Task<IEnumerable<RestaurantModelResponse>> ListAsync()
+        public async Task<IResult<IEnumerable<RestaurantModelResponse>>> ListAsync()
         {
-            return await _restaurantRepository.ListModelAsync();
+            var response = await _restaurantRepository.ListModelAsync();
+            return response.Success();
         }
 
         public async Task<IResult> UpdateAsync(RestaurantModelRequest model)
