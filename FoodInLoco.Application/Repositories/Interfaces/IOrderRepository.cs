@@ -9,6 +9,8 @@ namespace FoodInLoco.Application.Repositories.Interfaces
 
         Task<OrderModelResponse?> GetModelByIdWithRelationsAsync(Guid id);
 
+        Task<IEnumerable<OrderModelResponse>> ListByBillIdModelAsync(Guid id);
+        
         Task<IEnumerable<OrderModelResponse>> ListModelAsync();
 
         Task UpdateStatusAsync(Order obj);

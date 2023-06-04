@@ -33,6 +33,15 @@ namespace FoodInLoco.Application.Repositories
                 .Include(_ => _.Item)
                 .Select(OrderExpression.Model).ToListAsync();
         }
+        
+        public async Task<IEnumerable<OrderModelResponse>> ListByBillIdModelAsync(Guid id)
+        {
+            return await Queryable.Where(OrderExpression.BillId(id))
+                .Include(_ => _.Bill)
+                .Include(_ => _.User)
+                .Include(_ => _.Item)
+                .Select(OrderExpression.Model).ToListAsync();
+        }
 
         public Task UpdateStatusAsync(Order obj)
         {

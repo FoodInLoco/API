@@ -58,6 +58,12 @@ namespace FoodInLoco.Application.Services
             var response = await _orderRepository.GetModelByIdWithRelationsAsync(id);
             return response.Success();
         }
+        
+        public async Task<IResult<IEnumerable<OrderModelResponse>>> GetByBillIdAsync(Guid id)
+        {
+            var response = await _orderRepository.ListByBillIdModelAsync(id);
+            return response.Success();
+        }
 
         public async Task<IResult<IEnumerable<OrderModelResponse>>> ListAsync()
         {

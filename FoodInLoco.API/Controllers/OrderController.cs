@@ -34,6 +34,16 @@ namespace FoodInLoco.API.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
+        [HttpGet("get-by-bill-id")]
+        public async Task<IActionResult> GetByBillId(Guid id)
+        {
+            var result = await _orderService.GetByBillIdAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostAsync(OrderModelRequest obj)
