@@ -65,7 +65,7 @@ namespace FoodInLoco.Application.Services
             {
                 var obj = await _billRepository.GetActiveBillByTableAsync(model.TableId);
                 var request = new BillUserModelRequest() { BillId = obj.Id, UserId = userId };
-                return await AddUserAsync(request);
+                return await AddUserAsync(request, userId);
             }
 
             var bill = _billFactory.Create(model);
@@ -74,7 +74,7 @@ namespace FoodInLoco.Application.Services
 
             await _unitOfWork.SaveChangesAsync();
 
-            var billUser = _billUserFactory.Create(new BillUserModelRequest() { BillId = bill.Id, UserId = userId });
+            var billUser = _billUserFactory.Create(new BillUserModelRequest() { BillId = bill.Id, UserId = userId }, userId);
             billUser.Activate();
 
             await _billUserRepository.AddAsync(billUser);
@@ -84,14 +84,14 @@ namespace FoodInLoco.Application.Services
             return bill.Id.Success();
         }
 
-        public async Task<IResult<Guid>> AddUserAsync(BillUserModelRequest model)
+        public async Task<IResult<Guid>> AddUserAsync(BillUserModelRequest model, Guid userId)
         {
             var validation = new AddBillUserModelValidator().Validation(model);
 
             if (validation.Failed)
                 return validation.Fail<Guid>();
 
-            var billUser = _billUserFactory.Create(model);
+            var billUser = _billUserFactory.Create(model, userId);
 
             await _billUserRepository.AddAsync(billUser);
 
@@ -190,7 +190,7 @@ namespace FoodInLoco.Application.Services
 
         public async Task<IResult> DeclineUserAsync(BillUserModelRequest model)
         {
-            var obj = _billUserFactory.Create(model);
+            var obj = _billUserFactory.Create(model, model.UserId);
             obj.Inactivate();
 
             await _billUserRepository.UpdateStatusAsync(obj);
@@ -202,7 +202,7 @@ namespace FoodInLoco.Application.Services
 
         public async Task<IResult> AcceptUserAsync(BillUserModelRequest model)
         {
-            var obj = _billUserFactory.Create(model);
+            var obj = _billUserFactory.Create(model, model.UserId);
             obj.Activate();
 
             await _billUserRepository.UpdateStatusAsync(obj);

@@ -5,6 +5,6 @@ namespace FoodInLoco.Application.Factories.Interfaces
 {
     public interface IBillUserFactory
     {
-        BillUser Create(BillUserModelRequest model);
+        BillUser Create(BillUserModelRequest model, Guid userId);
     }
 }

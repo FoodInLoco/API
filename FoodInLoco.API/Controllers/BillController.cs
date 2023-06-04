@@ -76,11 +76,11 @@ namespace FoodInLoco.API.Controllers
             return BadRequest(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         [HttpPost("post-user-bill")]
         public async Task<IActionResult> PostUserAsync(BillUserModelRequest obj)
         {
-            var result = await _billService.AddUserAsync(obj);
+            var result = await _billService.AddUserAsync(obj, Guid.Parse(User.GetUserId()));
             if (result.Succeeded)
                 return Created($"/get-by-id?id={result.Data}", obj);
             return BadRequest(result);

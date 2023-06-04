@@ -5,7 +5,7 @@ namespace FoodInLoco.Application.Services.Interfaces
 {
     public interface IOrderService
     {
-        Task<IResult<Guid>> AddAsync(OrderModelRequest model);
+        Task<IResult<Guid>> AddAsync(OrderModelRequest model, Guid userId);
 
         Task<IResult> DeleteAsync(Guid id);
 

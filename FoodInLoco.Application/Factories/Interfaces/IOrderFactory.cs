@@ -5,6 +5,6 @@ namespace FoodInLoco.Application.Factories.Interfaces
 {
     public interface IOrderFactory
     {
-        Order Create(OrderModelRequest model);
+        Order Create(OrderModelRequest model, Guid userId);
     }
 }

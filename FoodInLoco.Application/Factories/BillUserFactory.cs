@@ -6,12 +6,12 @@ namespace FoodInLoco.Application.Factories
 {
     public sealed class BillUserFactory : IBillUserFactory
     {
-        public BillUser Create(BillUserModelRequest model)
+        public BillUser Create(BillUserModelRequest model, Guid userId)
         {
             return new BillUser
             (
                 model.BillId,
-                model.UserId
+                userId
             );
         }
     }

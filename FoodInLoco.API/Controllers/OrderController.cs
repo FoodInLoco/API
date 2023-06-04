@@ -1,4 +1,5 @@
 ﻿using FoodInLoco.Application.Data.Models;
+using FoodInLoco.Application.Extensions;
 using FoodInLoco.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,12 +44,12 @@ namespace FoodInLoco.API.Controllers
                 return NotFound();
             return Ok(result);
         }
-
-        [Authorize]
+        
+        [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> PostAsync(OrderModelRequest obj)
         {
-            var result = await _orderService.AddAsync(obj);
+            var result = await _orderService.AddAsync(obj, Guid.Parse(User.GetUserId()));
             if (result.Succeeded)
                 return Created($"/get-by-id?id={result.Data}", obj);
             return BadRequest(result);

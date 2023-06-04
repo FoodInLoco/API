@@ -11,7 +11,7 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<IResult<Guid>> AddAsync(BillModelRequest model, Guid userId);
 
-        Task<IResult<Guid>> AddUserAsync(BillUserModelRequest model);
+        Task<IResult<Guid>> AddUserAsync(BillUserModelRequest model, Guid userId);
 
         Task<IResult> DeleteAsync(Guid id);
 

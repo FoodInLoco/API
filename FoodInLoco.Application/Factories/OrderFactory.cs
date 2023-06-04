@@ -6,12 +6,12 @@ namespace FoodInLoco.Application.Factories
 {
     public sealed class OrderFactory : IOrderFactory
     {
-        public Order Create(OrderModelRequest model)
+        public Order Create(OrderModelRequest model, Guid userId)
         {
             return new Order
             (
                 model.BillId,
-                model.UserId,
+                userId,
                 model.MenuItemId,
                 model.Quantity,
                 model.Message

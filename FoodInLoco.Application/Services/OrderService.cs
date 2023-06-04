@@ -28,14 +28,14 @@ namespace FoodInLoco.Application.Services
             _orderFactory = orderFactory;
         }
 
-        public async Task<IResult<Guid>> AddAsync(OrderModelRequest model)
+        public async Task<IResult<Guid>> AddAsync(OrderModelRequest model, Guid userId)
         {
             var validation = new AddOrderModelValidator().Validation(model);
 
             if (validation.Failed)
                 return validation.Fail<Guid>();
 
-            var order = _orderFactory.Create(model);
+            var order = _orderFactory.Create(model, userId);
 
             await _orderRepository.AddAsync(order);
 

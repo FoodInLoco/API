@@ -4,7 +4,7 @@ namespace FoodInLoco.Application.Data.Models
     {
         public AddOrderModelValidator()
         {
-            Bill(); User(); MenuItem(); Quantity();
+            Bill(); MenuItem(); Quantity();
         }
     }
 }
