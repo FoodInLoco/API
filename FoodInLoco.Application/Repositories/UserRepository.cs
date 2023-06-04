@@ -20,7 +20,6 @@ namespace FoodInLoco.Application.Repositories
         public async Task<UserModelResponse?> GetModelByIdWithRelationsAsync(Guid id)
         {
             return await Queryable.Where(UserExpression.Id(id))
-                .Include(_ => _.Restaurants)
                 .Include(_ => _.Reservations).ThenInclude(_ => _.Restaurant)
                 .Select(UserExpression.Model).SingleOrDefaultAsync();
         }
