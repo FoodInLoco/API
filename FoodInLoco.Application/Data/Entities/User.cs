@@ -39,8 +39,6 @@ namespace FoodInLoco.Application.Data.Entities
 
         public string? Photo { get; private set; }
 
-        public ICollection<Restaurant> Restaurants { get; private set; }
-
         public ICollection<Review> Reviews { get; private set; }
 
         public ICollection<Reservation> Reservations { get; private set; }
@@ -94,7 +92,6 @@ namespace FoodInLoco.Application.Data.Entities
                 DDD = user.CellPhone.DDD,
                 PhoneNumber = user.CellPhone.PhoneNumber,
                 Photo = user.Photo,
-                Restaurants = user.Restaurants?.Select(_ => (RestaurantModelResponse)_).ToList(),
                 Reservations = user.Reservations?.Select(_ => (ReservationModelResponse)_).ToList()
             };
         }

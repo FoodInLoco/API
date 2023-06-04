@@ -22,8 +22,6 @@ namespace FoodInLoco.Application.Data.Models
 
         public string? Photo { get; set; }
 
-        public List<RestaurantModelResponse>? Restaurants { get; init; }
-
         public List<ReservationModelResponse>? Reservations { get; init; }
     }
 }

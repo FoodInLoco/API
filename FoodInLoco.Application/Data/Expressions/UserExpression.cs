@@ -17,7 +17,6 @@ namespace FoodInLoco.Application.Data.Expressions
             DDD = _.CellPhone.DDD,
             PhoneNumber = _.CellPhone.PhoneNumber,
             Photo = _.Photo,
-            Restaurants = _.Restaurants.Select(_ => (RestaurantModelResponse)_).ToList(),
             Reservations = _.Reservations.Select(_ => (ReservationModelResponse)_).ToList()
         };
 
