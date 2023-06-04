@@ -83,7 +83,7 @@ namespace FoodInLoco.Application.Data.Entities
                 BillingStatus = bill.BillingStatus,
                 Status = bill.Status,
                 WaiterRequested = bill.WaiterRequested,
-                ValueAmount = bill.Orders.Sum(_ => _.Quantity * _.Item.Value),
+                ValueAmount = bill.Orders.Where(_ => _.Confirmed).Sum(_ => _.Quantity * _.Item.Value),
                 Orders = bill.Orders.Where(_ => _.Status == Status.Active).Select(_ => (OrderModelResponse)_).ToList(),
                 Users = bill.BillUsers.Where(_ => _.Status == Status.Active).Select(_ => (UserModelResponse)_.User).ToList(),
                 PendingUsers = bill.BillUsers.Where(_ => _.Status == Status.None).Select(_ => (UserModelResponse)_.User).ToList()

@@ -46,6 +46,10 @@ namespace FoodInLoco.Application.Services
 
         public async Task<IResult> DeleteAsync(Guid id)
         {
+            var obj = await _orderRepository.GetAsync(id);
+            if (obj.Confirmed)
+                return Result.Fail();
+
             await _orderRepository.DeleteAsync(id);
 
             await _unitOfWork.SaveChangesAsync();

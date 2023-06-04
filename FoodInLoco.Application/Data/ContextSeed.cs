@@ -643,6 +643,7 @@ namespace FoodInLoco.Application.Data
                     Quantity = 1,
                     Message = "Completo",
                     Status = Status.Active,
+                    Confirmed = true,
                     CreatedAt = DateTime.UtcNow
                 });
 
@@ -654,6 +655,7 @@ namespace FoodInLoco.Application.Data
                     ItemId = GuidMenuItem2,
                     Quantity = 1,
                     Status = Status.Active,
+                    Confirmed = true,
                     CreatedAt = DateTime.UtcNow
                 });
 
@@ -665,6 +667,7 @@ namespace FoodInLoco.Application.Data
                     ItemId = GuidMenuItem3,
                     Quantity = 2,
                     Status = Status.Active,
+                    Confirmed = true,
                     CreatedAt = DateTime.UtcNow
                 });
 
@@ -676,6 +679,7 @@ namespace FoodInLoco.Application.Data
                     ItemId = GuidMenuItem5,
                     Quantity = 1,
                     Status = Status.Active,
+                    Confirmed = true,
                     CreatedAt = DateTime.UtcNow
                 });
             });
