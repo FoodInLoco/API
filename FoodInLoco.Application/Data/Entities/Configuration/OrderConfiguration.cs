@@ -20,6 +20,8 @@ public sealed class OrderConfiguration : IEntityTypeConfiguration<Order>
 
         builder.Property(obj => obj.Status).HasDefaultValue(Status.Active).IsRequired();
 
+        builder.Property(obj => obj.Confirmed).HasDefaultValue(false).IsRequired();
+
         builder.Property(obj => obj.Quantity).IsRequired();
 
         builder.Property(obj => obj.Message).HasMaxLength(500).IsRequired(false);

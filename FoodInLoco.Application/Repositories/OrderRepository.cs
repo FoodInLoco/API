@@ -47,5 +47,10 @@ namespace FoodInLoco.Application.Repositories
         {
             return UpdatePartialAsync(new { obj.Id, obj.Status, LastUpdatedAt = DateTime.UtcNow });
         }
+
+        public Task UpdateConfirmationAsync(Order obj)
+        {
+            return UpdatePartialAsync(new { obj.Id, obj.Confirmed, LastUpdatedAt = DateTime.UtcNow });
+        }
     }
 }

@@ -213,7 +213,7 @@ namespace FoodInLoco.Application.Services
             var obj = new Bill(id);
             obj.ActivateWaiter();
 
-            await _billRepository.UpdateStatusAsync(obj);
+            await _billRepository.UpdateWaiterAsync(obj);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -225,7 +225,7 @@ namespace FoodInLoco.Application.Services
             var obj = new Bill(id);
             obj.InactivateWaiter();
 
-            await _billRepository.UpdateStatusAsync(obj);
+            await _billRepository.UpdateWaiterAsync(obj);
 
             await _unitOfWork.SaveChangesAsync();
 

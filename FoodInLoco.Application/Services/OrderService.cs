@@ -115,5 +115,17 @@ namespace FoodInLoco.Application.Services
 
             return Result.Success();
         }
+
+        public async Task<IResult> ConfirmAsync(Guid id)
+        {
+            var obj = new Order(id);
+            obj.Confirm();
+
+            await _orderRepository.UpdateConfirmationAsync(obj);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result.Success();
+        }
     }
 }

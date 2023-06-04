@@ -39,6 +39,8 @@ namespace FoodInLoco.Application.Data.Entities
 
         public Status Status { get; private set; }
 
+        public bool Confirmed { get; private set; }
+
         public Bill Bill { get; private set; }
 
         public User User { get; private set; }
@@ -54,6 +56,12 @@ namespace FoodInLoco.Application.Data.Entities
         public void Inactivate()
         {
             Status = Status.Inactive;
+            LastUpdatedAt = DateTime.UtcNow;
+        }
+        
+        public void Confirm()
+        {
+            Confirmed = true;
             LastUpdatedAt = DateTime.UtcNow;
         }
 
@@ -79,6 +87,7 @@ namespace FoodInLoco.Application.Data.Entities
                 UserId = order.UserId,
                 MenuItemId = order.ItemId,
                 Status = order.Status,
+                Confirmed = order.Confirmed,
                 ProductName = order.Item.NameDescription.Name,
                 ProductDescription = order.Item.NameDescription.Description,
                 ProductQuantity = order.Item.Quantity,

@@ -20,5 +20,7 @@ namespace FoodInLoco.Application.Services.Interfaces
         Task<IResult> InactivateAsync(Guid id);
 
         Task<IResult> ActivateAsync(Guid id);
+
+        Task<IResult> ConfirmAsync(Guid id);
     }
 }

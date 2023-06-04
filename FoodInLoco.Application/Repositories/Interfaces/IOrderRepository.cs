@@ -14,5 +14,7 @@ namespace FoodInLoco.Application.Repositories.Interfaces
         Task<IEnumerable<OrderModelResponse>> ListModelAsync();
 
         Task UpdateStatusAsync(Order obj);
+
+        Task UpdateConfirmationAsync(Order obj);
     }
 }

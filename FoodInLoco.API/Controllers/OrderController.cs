@@ -85,6 +85,16 @@ namespace FoodInLoco.API.Controllers
         }
 
         [Authorize]
+        [HttpGet("confirm")]
+        public async Task<IActionResult> ConfirmById(Guid id)
+        {
+            var result = await _orderService.ConfirmAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {

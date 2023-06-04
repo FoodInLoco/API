@@ -30,6 +30,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public Status Status { get; init; }
 
+        public bool Confirmed { get; init; }
+
         public double? ValueAmount { get; init; }
     }
 }

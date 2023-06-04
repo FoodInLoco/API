@@ -15,6 +15,7 @@ namespace FoodInLoco.Application.Data.Expressions
             UserId = _.UserId,
             MenuItemId = _.ItemId,
             Status = _.Status,
+            Confirmed = _.Confirmed,
             ProductName = _.Item.NameDescription.Name,
             ProductDescription = _.Item.NameDescription.Description,
             ProductQuantity = _.Item.Quantity,

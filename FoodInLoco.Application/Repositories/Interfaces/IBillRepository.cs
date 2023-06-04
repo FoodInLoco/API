@@ -18,5 +18,7 @@ namespace FoodInLoco.Application.Repositories.Interfaces
         Task<IEnumerable<BillModelResponse>> ListModelAsync();
 
         Task UpdateStatusAsync(Bill obj);
+
+        Task UpdateWaiterAsync(Bill obj);
     }
 }
