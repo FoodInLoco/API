@@ -140,7 +140,7 @@ namespace FoodInLoco.API.Controllers
         [HttpGet("request-waiter")]
         public async Task<IActionResult> RequestWaiterById(Guid id)
         {
-            if (await _billService.CheckUser(id, Guid.Parse(User.GetUserId())))
+            if (!await _billService.CheckUser(id, Guid.Parse(User.GetUserId())))
                 return Unauthorized();
             var result = await _billService.WaiterActivateAsync(id);
             if (result == null)
@@ -152,7 +152,7 @@ namespace FoodInLoco.API.Controllers
         [HttpGet("waiter-served")]
         public async Task<IActionResult> WaiterServedById(Guid id)
         {
-            if (await _billService.CheckRestaurant(id, Guid.Parse(User.GetUserId())))
+            if (!await _billService.CheckRestaurant(id, Guid.Parse(User.GetUserId())))
                 return Unauthorized();
             var result = await _billService.WaiterInactivateAsync(id);
             if (result == null)

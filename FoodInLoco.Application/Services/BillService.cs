@@ -41,16 +41,16 @@ namespace FoodInLoco.Application.Services
 
         public async Task<bool> CheckUser(Guid billId, Guid loggedUserId)
         {
-            var bill = await _billRepository.GetAsync(billId);
+            var bill = await _billRepository.GetModelByIdWithRelationsAsync(billId);
 
-            return bill.BillUsers.Any(_ => _.UserId == loggedUserId && _.Status == Status.Active);
+            return bill.Users.Any(_ => _.Id == loggedUserId);
         }
 
         public async Task<bool> CheckRestaurant(Guid billId, Guid loggedRestaurantId)
         {
-            var bill = await _billRepository.GetAsync(billId);
+            var bill = await _billRepository.GetModelByIdWithRelationsAsync(billId);
 
-            return bill.Table.Restaurant.Id == loggedRestaurantId;
+            return bill.RestaurantId == loggedRestaurantId;
         }
 
         public async Task<IResult<Guid>> AddAsync(BillModelRequest model, Guid userId)

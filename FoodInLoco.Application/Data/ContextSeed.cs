@@ -581,6 +581,7 @@ namespace FoodInLoco.Application.Data
                     Id = GuidBill1,
                     TableId = GuidTable1,
                     BillingStatus = BillingStatus.Pending,
+                    WaiterRequested = false,
                     Status = Status.Active,
                     CreatedAt = DateTime.UtcNow
                 });
@@ -590,6 +591,7 @@ namespace FoodInLoco.Application.Data
                     Id = GuidBill2,
                     TableId = GuidTable4,
                     BillingStatus = BillingStatus.Pending,
+                    WaiterRequested = false,
                     Status = Status.Active,
                     CreatedAt = DateTime.UtcNow
                 });

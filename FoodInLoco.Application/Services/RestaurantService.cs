@@ -35,7 +35,7 @@ namespace FoodInLoco.Application.Services
             _hashService = hashService;
         }
 
-        public async Task<bool> CheckUser(Guid restaurantId, Guid loggedRestaurantId)
+        public async Task<bool> CheckRestaurant(Guid restaurantId, Guid loggedRestaurantId)
         {
             var restaurant = await _restaurantRepository.GetAsync(restaurantId);
 

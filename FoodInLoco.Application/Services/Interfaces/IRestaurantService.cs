@@ -6,7 +6,7 @@ namespace FoodInLoco.Application.Services.Interfaces
 {
     public interface IRestaurantService
     {
-        Task<bool> CheckUser(Guid restaurantId, Guid userId);
+        Task<bool> CheckRestaurant(Guid restaurantId, Guid userId);
 
         Task<IResult<Guid>> AddAsync(RestaurantModelRequest model);
 
