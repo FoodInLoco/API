@@ -20,6 +20,7 @@ namespace FoodInLoco.Application.Data.Expressions
             ProductDescription = _.Item.NameDescription.Description,
             ProductQuantity = _.Item.Quantity,
             ProductPhoto = _.Item.Photo,
+            UserName = _.User.Name.FirstName,
             Quantity = _.Quantity,
             Message = _.Message,
             ValueAmount = _.Quantity * _.Item.Value

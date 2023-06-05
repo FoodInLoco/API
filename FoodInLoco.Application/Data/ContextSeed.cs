@@ -3,6 +3,7 @@ using FoodInLoco.Application.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using static System.Net.WebRequestMethods;
 
 namespace FoodInLoco.Application.Data
 {
@@ -342,6 +343,7 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu1,
                     Quantity = 1,
                     Value = 90.00,
+                    Photo = "https://unblast.com/wp-content/uploads/2018/10/Restaurant-Stationery-Mockup-2.jpg",
                     Status = Status.Active,
                     CreatedAt = DateTime.UtcNow
                 });
@@ -362,6 +364,7 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu2,
                     Quantity = 1,
                     Value = 4.90,
+                    Photo = "https://unblast.com/wp-content/uploads/2018/10/Restaurant-Stationery-Mockup-2.jpg",
                     Status = Status.Active,
                     CreatedAt = DateTime.UtcNow
                 });
@@ -382,6 +385,7 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu3,
                     Quantity = 1,
                     Value = 5.40,
+                    Photo = "https://unblast.com/wp-content/uploads/2018/10/Restaurant-Stationery-Mockup-2.jpg",
                     Status = Status.Active,
                     CreatedAt = DateTime.UtcNow
                 });
@@ -402,6 +406,7 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu3,
                     Quantity = 1,
                     Value = 22.00,
+                    Photo = "https://unblast.com/wp-content/uploads/2018/10/Restaurant-Stationery-Mockup-2.jpg",
                     Status = Status.Active,
                     CreatedAt = DateTime.UtcNow
                 });
@@ -422,6 +427,7 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu3,
                     Quantity = 1,
                     Value = 11.00,
+                    Photo = "https://unblast.com/wp-content/uploads/2018/10/Restaurant-Stationery-Mockup-2.jpg",
                     Status = Status.Active,
                     CreatedAt = DateTime.UtcNow
                 });
@@ -442,6 +448,7 @@ namespace FoodInLoco.Application.Data
                     MenuId = GuidMenu2,
                     Quantity = 6,
                     Value = 14.00,
+                    Photo = "https://unblast.com/wp-content/uploads/2018/10/Restaurant-Stationery-Mockup-2.jpg",
                     Status = Status.Active,
                     CreatedAt = DateTime.UtcNow
                 });

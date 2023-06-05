@@ -24,6 +24,8 @@ namespace FoodInLoco.Application.Data.Models
 
         public string ProductPhoto { get; init; }
 
+        public string UserName { get; init; }
+
         public int Quantity { get; init; }
         
         public string? Message { get; init; }
