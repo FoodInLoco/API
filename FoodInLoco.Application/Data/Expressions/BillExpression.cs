@@ -39,7 +39,7 @@ namespace FoodInLoco.Application.Data.Expressions
 
         public static Expression<Func<Bill, bool>> ActiveByUserId(Guid id)
         {
-            return _ => _.BillUsers.Any(_ => _.UserId == id && _.Status == Status.Active) && _.BillingStatus == BillingStatus.Pending;
+            return _ => _.BillUsers.Any(_ => _.UserId == id && (_.Status == Status.Active || _.Status == Status.None)) && _.BillingStatus == BillingStatus.Pending;
         }
     }
 }
