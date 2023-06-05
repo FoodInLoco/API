@@ -131,7 +131,7 @@ namespace FoodInLoco.API.Controllers
         public async Task<IActionResult> DeclineUserById(Guid billId, Guid userId)
         {
             var result = await _billService.DeclineUserAsync(billId, userId);
-            if (result == null)
+            if (result == null || result.Failed)
                 return NotFound();
             return Ok(result);
         }

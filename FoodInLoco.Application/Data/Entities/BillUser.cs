@@ -1,6 +1,7 @@
 using FoodInLoco.Application.Data.Models;
 using FoodInLoco.Application.Data.ValueObjects;
 using FoodInLoco.Application.Enums;
+using System.Drawing.Drawing2D;
 
 namespace FoodInLoco.Application.Data.Entities
 {
@@ -11,7 +12,7 @@ namespace FoodInLoco.Application.Data.Entities
             BillId = billId;
             UserId = userId;
         }
-        
+
         public Guid BillId { get; private set; }
 
         public Guid UserId { get; private set; }
@@ -30,6 +31,21 @@ namespace FoodInLoco.Application.Data.Entities
         public void Inactivate()
         {
             Status = Status.Inactive;
+        }
+
+        public static implicit operator BillUserModelResponse(BillUser billUser)
+        {
+            if (billUser is null)
+                return null;
+
+            return new BillUserModelResponse
+            {
+                BillId = billUser.BillId,
+                UserId = billUser.UserId,
+                Status = billUser.Status,
+                UserModel = (UserModelResponse)billUser.User,
+                BillModel = (BillModelResponse)billUser.Bill
+            };
         }
     }
 }

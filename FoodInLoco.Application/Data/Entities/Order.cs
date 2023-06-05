@@ -92,7 +92,7 @@ namespace FoodInLoco.Application.Data.Entities
                 ProductDescription = order.Item.NameDescription.Description,
                 ProductQuantity = order.Item.Quantity,
                 ProductPhoto = order.Item.Photo,
-                UserName = order.User.Name.FirstName,
+                UserName = order.User?.Name.FirstName,
                 Quantity = order.Quantity,
                 Message = order.Message,
                 ValueAmount = order.Quantity * order.Item.Value

@@ -184,6 +184,10 @@ namespace FoodInLoco.Application.Services
 
         public async Task<IResult> DeclineUserAsync(Guid billId, Guid userId)
         {
+            var user = await _billUserRepository.GetFromKeys(billId, userId);
+            if (user.BillModel.Orders.Any(_ => _.Confirmed))
+                return Result.Fail();
+
             var obj = _billUserFactory.Create(billId, userId);
             obj.Inactivate();
 
