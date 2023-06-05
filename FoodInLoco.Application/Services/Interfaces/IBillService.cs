@@ -11,7 +11,7 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<IResult<Guid>> AddAsync(BillModelRequest model, Guid userId);
 
-        Task<IResult<Guid>> AddUserAsync(BillUserModelRequest model, Guid userId);
+        Task<IResult<Guid>> AddUserAsync(Guid billId, Guid userId);
 
         Task<IResult> DeleteAsync(Guid id);
 
@@ -31,9 +31,9 @@ namespace FoodInLoco.Application.Services.Interfaces
 
         Task<IResult> ActivateAsync(Guid id);
 
-        Task<IResult> DeclineUserAsync(BillUserModelRequest model);
+        Task<IResult> DeclineUserAsync(Guid billId, Guid userId);
 
-        Task<IResult> AcceptUserAsync(BillUserModelRequest model);
+        Task<IResult> AcceptUserAsync(Guid billId, Guid userId);
 
         Task<IResult> WaiterActivateAsync(Guid id);
 

@@ -80,7 +80,7 @@ namespace FoodInLoco.API.Controllers
         [HttpPost("post-user-bill")]
         public async Task<IActionResult> PostUserAsync(BillUserModelRequest obj)
         {
-            var result = await _billService.AddUserAsync(obj, Guid.Parse(User.GetUserId()));
+            var result = await _billService.AddUserAsync(obj.BillId, Guid.Parse(User.GetUserId()));
             if (result.Succeeded)
                 return Created($"/get-by-id?id={result.Data}", obj);
             return BadRequest(result);
@@ -117,20 +117,20 @@ namespace FoodInLoco.API.Controllers
         }
 
         [Authorize]
-        [HttpPost("accept-user")]
-        public async Task<IActionResult> AcceptUserById(BillUserModelRequest model)
+        [HttpGet("accept-user")]
+        public async Task<IActionResult> AcceptUserById(Guid billId, Guid userId)
         {
-            var result = await _billService.AcceptUserAsync(model);
+            var result = await _billService.AcceptUserAsync(billId, userId);
             if (result == null)
                 return NotFound();
             return Ok(result);
         }
 
         [Authorize]
-        [HttpPost("decline-user")]
-        public async Task<IActionResult> DeclineUserById(BillUserModelRequest model)
+        [HttpGet("decline-user")]
+        public async Task<IActionResult> DeclineUserById(Guid billId, Guid userId)
         {
-            var result = await _billService.DeclineUserAsync(model);
+            var result = await _billService.DeclineUserAsync(billId, userId);
             if (result == null)
                 return NotFound();
             return Ok(result);
